@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Login } from 'app/login';
 import { LoginService } from 'app/login.service';
+
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   login:Login = new Login();
 
-  constructor(private service:LoginService) {
+  constructor(private service:LoginService, private router:Router) {
 
   }
 
@@ -20,12 +22,17 @@ export class LoginComponent implements OnInit {
   }
 
   userLogin() {
-    console.log(this.login);
-   
-    let resp = this.service.loginUser(this.login);
 
-    console.log(resp);
-    resp.subscribe(data=>alert("Login Successfully"),error=>alert("Login Failed"));
-    console.log(resp.subscribe(data=>this.login));
+    this.service.loginUser(this.login).subscribe(
+      data =>{
+        console.log("response receive");
+        this.router.navigate(['/dashboard']);
+      },
+      error => {
+      
+        alert("Login Failed!")
+        console.log("exception occured");
+      }
+    )
   }
 }
