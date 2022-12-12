@@ -1,9 +1,9 @@
 <div class="logo">
     <a href="https://www.creative-tim.com" class="simple-text">
         <div class="logo-img">
-            <img src="/assets/img/angular2-logo-red.png"/>
+            <img src="/assets/img/datlogo.png"/>
         </div>
-        Creative Tim
+        AS System
     </a>
 </div>
 <div class="sidebar-wrapper">
@@ -22,7 +22,7 @@
     <ul class="nav navbar-nav nav-mobile-menu">
         <li class="nav-item">
             <a class="nav-link" href="javascript:void(0)">
-                <i class="material-icons">home</i>
+                <i class="material-icons">dashboard</i>
                 <p>
                     <span class="d-lg-none d-md-block">Stats</span>
                 </p>
@@ -58,7 +58,7 @@
         <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
             <a class="nav-link" [routerLink]="[menuItem.path]">
                 <i class="material-icons">{{menuItem.icon}}</i>
-                    
+                <p>{{menuItem.title}}</p>
             </a>
         </li>
     </ul>
