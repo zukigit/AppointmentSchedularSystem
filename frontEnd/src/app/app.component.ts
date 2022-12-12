@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
+
+import { UserService } from './user.service';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'frontEnd';
+
+  constructor(private userServices : UserService) {}
+
+  ngOnInit() {
+    this.userServices.getAllData()
+      .subscribe(data => {
+        console.log(data)
+      })
+  }
+
 }
