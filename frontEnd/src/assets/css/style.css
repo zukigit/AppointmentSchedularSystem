@@ -71,6 +71,7 @@ body {
 .sub-main-w3 img {
     border: 2px solid #fff;
     border-radius: 50%;
+    background-color: #fff;
 }
 .sub-main-w3 h2 {
     color: #fff;
@@ -94,6 +95,7 @@ body {
     font-family: 'Open Sans', sans-serif;
     letter-spacing: 1px;
 }
+
 .right-w3l input[type="submit"] {
     color: #fff;
     background: #18ba60;
@@ -341,7 +343,7 @@ span.fa {
     }
     .footer p {
         line-height: 1.9;
-        margin-bottom: 20px;
+        margin-bottom: 0px;
     }
     .right-w3l input[type="submit"] {
         padding: 11px 0;

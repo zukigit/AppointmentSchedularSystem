@@ -11,6 +11,14 @@ import { LoginService } from 'app/login.service';
 })
 export class LoginComponent implements OnInit {
 
+  visible:boolean=true;
+  changetype:boolean=true;
+  viewpass(){
+    this.visible=!this.visible;
+    this.changetype=!this.changetype;
+  }
+
+
   login:Login = new Login();
 
   constructor(private service:LoginService, private router:Router) {
