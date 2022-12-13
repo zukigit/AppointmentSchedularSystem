@@ -1,20 +1,68 @@
-<div class="container">
-    <div class="col-md-6">
+<script>
+	addEventListener("load", function () {
+		setTimeout(hideURLbar, 0);
+	}, false);
 
-        <h1 style="color: red;">Login User</h1>
-        <form (ngSubmit)="userLogin()">
-            <div class="mb-3">
-                <label for="userid">UserId</label>
-                <input type="text" [(ngModel)]="login.userId" class="form-control" name="userid" id="userid" aria-describedby="">
-            </div>
+	function hideURLbar() {
+		window.scrollTo(0, 1);
+	}
+</script>
+<!-- Meta tag Keywords -->
+<!-- css files -->
+<link rel="stylesheet" href="/assets/css/style.css" type="text/css" media="all" />
+<!-- Style-CSS -->
+<link rel="stylesheet" href="/assets/css/font-awesome.css">
+<!-- Font-Awesome-Icons-CSS -->
+<!-- //css files -->
+<!-- online-fonts -->
+<link href="//fonts.googleapis.com/css?family=Tangerine:400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+<!-- //online-fonts -->
 
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" [(ngModel)]="login.password" name="password" class="form-control" id="exampleInputPassword1">
-            </div>
 
-            <button type="submit" class="btn btn-primary"Login></button>
-        </form>
-    </div>
 
+<!--header-->
+<div class="header-w3l">
+	<h1>
+		<span>Appointment Schedular System</span>
+		</h1>
 </div>
+<!--//header-->
+<div class="main-content-agile">
+	<div class="sub-main-w3">
+		<img src="/assets/img/My project.jpg" alt="" />
+		<h2>Log In</h2>
+		<form (ngSubmit)="userLogin()" method="post">
+			<div class="pom-agile">
+				<span class="fa fa-user-o" aria-hidden="true"></span>
+				<input placeholder="User ID" [(ngModel)]="login.userId" name="userid" class="user" type="text" required="">
+			</div>
+			<div class="pom-agile">
+				<span class="fa fa-key" aria-hidden="true"></span>
+				<input placeholder="Password"  [(ngModel)]="login.password" name="password" class="pass" type="password" required="">
+			</div>
+			<div class="sub-w3l">
+				<div class="sub-agile">
+					<input type="checkbox" id="brand1" value="">
+					<label for="brand1">
+						<span></span>Remember me</label>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="right-w3l">
+				<input type="submit" value="Login">
+			</div>
+			<div class="forgot-w3l">
+				<!--<a href="#">Forgot Password?</a>-->
+			</div>
+		</form>
+	</div>
+</div>
+<!--//main-->
+<!--footer-->
+<div class="footer">
+	<p>&copy; Dir Ace Technology Co.,ltd
+		
+	</p>
+</div>
+<!--//footer-->
