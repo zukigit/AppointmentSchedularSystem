@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
 <!DOCTYPE html>
 <html lang="en">
 
@@ -353,7 +354,7 @@
                             <td>
                                 <a href="#editEmployeeModal" (click)="updateUser(user.id)" class="edit"
                                     data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
-                                        title="Edit">&#xE254;</i></a> 
+                                        title="Edit">&#xE254;</i></a>
                                 <a href="#deleteEmployeeModal" (click)="deleteUser(user.id)" class="delete"
                                     data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
                                         title="Delete">&#xE872;</i></a>
@@ -380,14 +381,14 @@
     <div id="addEmployeeModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form >
+                <form (ngSubmit)="doRegisteration()">
                     <div class=" modal-header">
-                    <h4 class="modal-title">Add Employee</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-body">
-                
-                <div class="form-group">
+                        <h4 class="modal-title">Add Employee</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <!-- <div class="form-group">
                     <label>Email</label>
                     <input type="email" class="form-control" required>
                 </div>
@@ -398,56 +399,77 @@
                 <div class="form-group">
                     <label>Phone</label>
                     <input type="text" class="form-control" required>
+                </div> -->
+                        <div class="form-group">
+                            <label for="name"><i class="fa-solid fa-user"></i></label>
+                            <input type="text" [(ngModel)]="users.name" id="name" placeholder="Your Name" />
+                        </div>
+                        <div class="form-group">
+                            <label for="pass"><i class="fa-solid fa-lock"></i></label>
+                            <input type="password" [(ngModel)]="users.password" id="pass" placeholder="Password" />
+                        </div>
+                        <div class="form-group">
+                            <label for="phone"><i class="fa-solid fa-phone"></i></label>
+                            <input type="text" [(ngModel)]="users.phone_number" id="phone"
+                                placeholder="Your Phone Number" />
+                        </div>
+                        <h5 class="genderHead">Select your Gender</h5>
+                        <!-- <div class="form-group">
+                    <label for="male" class="maleRadio"><i class="fa-solid fa-person"></i> Male </label>
+                    <input type="radio" id="male" name="gender" value="Male">
                 </div>
+                <div class="form-group">
+                    <label for="female" class="femaleRadio"> <i class="fa-solid fa-person-dress"></i> Female</label>
+                    <input type="radio" id="female" name="gender" value="Female">
+                </div> -->
+
+                        <label ></label>
+                        <div class="form-group">
+                            Male<input type="radio" class="radioMale" name="gender" [(ngModel)]="users.gender" value="Male">
+                            Female<input type="radio" class="radioFemale" name="gender" [(ngModel)]="users.gender" value="Female">
+                        </div>
+                            <div class="selectContainer">
+                            <div class="selectBoxDept">
+                                <label for="department"><i class="fa-solid fa-building"></i></label>
+                                <select class="selectDept" (change)="onSelect($event)" [(ngModel)]="users.department_id">
+                                    <option selected="true" disabled>Select Department</option>
+                                    <option *ngFor="let departments of department" value="{{departments.department_id}}">{{departments.department_name}}</option>    
+                                </select>
+                            </div>
+                            <div class="selectBoxTeam">
+                                <label for="team"><i class="fa-solid fa-people-group"></i></label>
+                                <select [(ngModel)]="users.team_id" class="selectTeam" placeholder="Select team">
+                                   <option *ngFor="let teams of team" value="{{teams.team_id}}">{{teams.team_name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="selectBox">
+                            <label for="roles"><i class="fa-solid fa-people-roof"></i></label>
+                            <select [(ngModel)]="users.position" class="selectRoles">
+                                <option [ngValue]=null disabled>Select Roles</option>
+                                <option value="Admin">Admin</option>
+                                <option value="User">User</option>
+                                <option value="Trainee">Trainee</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-success" value="Add">
+                    </div>
+                </form>
             </div>
-            <div class="modal-footer">
-                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                <input type="submit" class="btn btn-success" value="Add">
-            </div>
-            </form>
         </div>
-    </div>
     </div>
     <!-- Edit Modal HTML -->
     <div id="editEmployeeModal" class="modal fade">
         <div class="modal-dialog">
-            <div class="modal-content">                                                                      
+            <div class="modal-content">
                 <form #loginForm="ngForm" (ngSubmit)="updateUser(loginForm.value)">
                     <div class="modal-header">
                         <h4 class="modal-title">Detail and Edit Employee</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="bookCode"> Book Code</label>
-                        <input type="text" class="form-control" id="bookCode" [(ngModel)]="users.name"
-                            name="bookCode" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="bookCode"> Book Code</label>
-                        <input type="text" class="form-control" id="bookCode" [(ngModel)]="users.department"
-                            name="bookCode" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="bookCode"> Book Code</label>
-                        <input type="text" class="form-control" id="bookCode" [(ngModel)]="users.team"
-                            name="bookCode" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="bookCode"> Book Code</label>
-                            <input type="text" class="form-control" id="bookCode" [(ngModel)]="users.role"
-                                name="bookCode" readonly>
-                        </div>
-                        <!-- <div class="form-group">
-                            <label for="bookCode"> Book Code</label>
-                            <input type="text" class="form-control" id="bookCode" [(ngModel)]="users.bookCode"
-                                name="bookCode" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="bookCode"> Book Code</label>
-                            <input type="text" class="form-control" id="bookCode" [(ngModel)]="users.bookCode"
-                                name="bookCode" readonly>
-                        </div> -->
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">

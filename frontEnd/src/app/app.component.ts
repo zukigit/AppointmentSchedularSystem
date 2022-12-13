@@ -1,3 +1,4 @@
+import { state } from '@angular/animations';
 import { Component} from '@angular/core';
 
 import { UserService } from './user.service';
@@ -10,13 +11,16 @@ import { UserService } from './user.service';
 })
 export class AppComponent {
 
-  constructor(private userServices : UserService) {}
+  constructor(private userServices : UserService , private list:UserService) {}
 
   ngOnInit() {
     this.userServices.getAllData()
       .subscribe(data => {
         console.log(data)
       })
+
+    
   }
 
+ 
 }

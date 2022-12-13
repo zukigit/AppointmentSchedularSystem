@@ -1,7 +1,11 @@
 export class User {
     userId:string;
-    name:string;
-    department:string;
-    team:string;
-    role:string
+    name:string;  
+    password:string;
+    phone_number:string;
+    gender:string;
+    department_id:string;
+    team_id:string;
+    position:string;
+   
 }
