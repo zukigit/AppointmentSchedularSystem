@@ -442,10 +442,16 @@
                                    <option *ngFor="let teams of team" value="{{teams.team_id}}">{{teams.team_name}}</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="selectBox">
+                            </div>
+                            <div class="form-group">
+                                <label for="position"><i class="fa-regular fa-location-dot"></i></label>
+                                <input type="text" [(ngModel)]="users.position" id="position"
+                                    placeholder="Position of this job" />
+                            </div>
+                            
+                            <div class="selectBox">
                             <label for="roles"><i class="fa-solid fa-people-roof"></i></label>
-                            <select [(ngModel)]="users.position" class="selectRoles">
+                            <select [(ngModel)]="users.role" class="selectRoles">
                                 <option [ngValue]=null disabled>Select Roles</option>
                                 <option value="Admin">Admin</option>
                                 <option value="User">User</option>
