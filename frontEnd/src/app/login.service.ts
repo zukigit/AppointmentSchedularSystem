@@ -19,6 +19,6 @@ export class LoginService {
   }
 
   loginUser(login: Login): Observable<object> {
-    return this.loginService.get(this.baseUrl + '/', this.header);
+    return this.loginService.post(this.baseUrl + '/auth', login);
   }
 }
