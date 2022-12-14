@@ -12,6 +12,7 @@ export class UserService {
 
   department(){
     return [
+      {department_id:"01",department_name:"HR/Finace"},
       {department_id:"02",department_name:"HR/Admin"},
     {department_id:"03",department_name:"PMO"},
     {department_id:"04",department_name:"SDQC"},
@@ -54,7 +55,7 @@ team(){
 }
 
 
-  private baseUrl = `http://localhost:8080/api`;
+  private baseUrl = `http://localhost:8080/api/v1`;
 
   // public doRegisteration(register: User) {
   //   return this.http.post("http://localhost:8080/api", register, { responseType: 'text' as 'json' })
@@ -65,11 +66,11 @@ team(){
   }
 
   createUser(users: User):Observable<Object>{
-    return this.http.post(`${this.baseUrl}`, users);
+    return this.http.post(`${this.baseUrl}/saveUser`, users);
   }
 
-  getStudentId(id: string): Observable<Object> {  
-    return this.http.get(`${this.baseUrl}/student/${id}`);  
+  getUserId(id: string): Observable<Object> {  
+    return this.http.get(`${this.baseUrl}/userId/${id}`);  
   }
 
   updateUser(data: any, id: string): Observable<any> {
