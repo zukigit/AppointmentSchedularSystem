@@ -257,13 +257,23 @@
             padding: 20px 30px;
         }
 
-        .modal .modal-content {
+        .modal {
             border-radius: 3px;
             font-size: 14px;
         }
 
-        .modal .modal-footer {
-            background: #ecf0f1;
+        .modal-content {
+            border-radius: 3px 10%;
+            font-size: 14px;
+        }
+
+        .modal { 
+            border-radius: 0 0 3px 3px;
+
+        }
+
+        .modal-footer {
+            width: fit-content;
             border-radius: 0 0 3px 3px;
         }
 
@@ -282,6 +292,7 @@
         }
 
         .modal .btn {
+            width: 100%;
             border-radius: 2px;
             min-width: 100px;
         }
@@ -422,12 +433,10 @@
                     <label for="female" class="femaleRadio"> <i class="fa-solid fa-person-dress"></i> Female</label>
                     <input type="radio" id="female" name="gender" value="Female">
                 </div> -->
-
-                        <label ></label>
-                        <div class="form-group">
+                        
                             Male<input type="radio" class="radioMale" name="gender" [(ngModel)]="users.gender" value="Male">
                             Female<input type="radio" class="radioFemale" name="gender" [(ngModel)]="users.gender" value="Female">
-                        </div>
+                        
                             <div class="selectContainer">
                             <div class="selectBoxDept">
                                 <label for="department"><i class="fa-solid fa-building"></i></label>
@@ -453,9 +462,9 @@
                             <label for="roles"><i class="fa-solid fa-people-roof"></i></label>
                             <select [(ngModel)]="users.role" class="selectRoles">
                                 <option [ngValue]=null disabled>Select Roles</option>
-                                <option value="Admin">Admin</option>
-                                <option value="User">User</option>
-                                <option value="Trainee">Trainee</option>
+                                <option value="ADMIN">Admin</option>
+                                <option value="USER">User</option>
+                                <option value="TRAINEE">Trainee</option>
                             </select>
                         </div>
 
