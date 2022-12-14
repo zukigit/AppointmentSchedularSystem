@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { JwtResponse } from 'app/jwt-response';
 import { Login } from 'app/login';
 import { LoginService } from 'app/login.service';
+import { UserService } from 'app/user.service';
 
 
 @Component({
@@ -13,6 +15,7 @@ export class LoginComponent implements OnInit {
 
   visible:boolean=true;
   changetype:boolean=true;
+  jwtResponse:JwtResponse = new JwtResponse();
   viewpass(){
     this.visible=!this.visible;
     this.changetype=!this.changetype;
@@ -21,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   login:Login = new Login();
 
-  constructor(private service:LoginService, private router:Router) {
+  constructor(private service:LoginService, private router:Router,private userS:UserService) {
 
   }
 
@@ -33,11 +36,12 @@ export class LoginComponent implements OnInit {
 
     this.service.loginUser(this.login).subscribe(
       data =>{
-        console.log("response receive");
+        this.jwtResponse = data;
+        localStorage.setItem("jwtToken", this.jwtResponse.token)
+        console.log("token is: " + this.jwtResponse.token)
         this.router.navigate(['/dashboard']);
       },
       error => {
-      
         alert("Login Failed!")
         console.log("exception occured");
       }
