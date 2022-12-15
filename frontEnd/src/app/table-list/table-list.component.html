@@ -275,6 +275,7 @@
         .modal-footer {
             width: fit-content;
             border-radius: 0 0 3px 3px;
+            
         }
 
         .modal .modal-title {
@@ -357,11 +358,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let user of users">
-                            <td> {{ user.name }} </td>
-                            <td> {{ user.department }} </td>
-                            <td> {{ user.team}} </td>
-                            <td> {{ user.role}} </td>
+                        <tr *ngFor="let users of userlist" >
+                            <td>lee</td>
+                            <td> {{ users.employee_id }} </td>
+                            <td> {{ users.name }} </td>
+                            <td> {{ departments.department_name }} </td>
+                            <td> {{ teamss.team_name}} </td>
+                            <td> {{ users.role}} </td>
                             <td>
                                 <a href="#editEmployeeModal" (click)="updateUser(user.id)" class="edit"
                                     data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
@@ -411,17 +414,21 @@
                     <label>Phone</label>
                     <input type="text" class="form-control" required>
                 </div> -->
+                    <div class="form-group">
+                    <label for="employee_id"><i class="fa-solid fa-id-card"></i></label>
+                    <input type="text" [(ngModel)]="user.employee_id" id="employee_id" placeholder="Employee ID" />
+                        </div>
                         <div class="form-group">
                             <label for="name"><i class="fa-solid fa-user"></i></label>
-                            <input type="text" [(ngModel)]="users.name" id="name" placeholder="Your Name" />
+                            <input type="text" [(ngModel)]="user.name" id="name" placeholder="Your Name" />
                         </div>
                         <div class="form-group">
                             <label for="pass"><i class="fa-solid fa-lock"></i></label>
-                            <input type="password" [(ngModel)]="users.password" id="pass" placeholder="Password" />
+                            <input type="password" [(ngModel)]="user.password" id="pass" placeholder="Password" />
                         </div>
                         <div class="form-group">
                             <label for="phone"><i class="fa-solid fa-phone"></i></label>
-                            <input type="text" [(ngModel)]="users.phone_number" id="phone"
+                            <input type="text" [(ngModel)]="user.phone_number" id="phone"
                                 placeholder="Your Phone Number" />
                         </div>
                         <h5 class="genderHead">Select your Gender</h5>
@@ -434,33 +441,33 @@
                     <input type="radio" id="female" name="gender" value="Female">
                 </div> -->
                         
-                            Male<input type="radio" class="radioMale" name="gender" [(ngModel)]="users.gender" value="Male">
-                            Female<input type="radio" class="radioFemale" name="gender" [(ngModel)]="users.gender" value="Female">
+                            Male<input type="radio" class="radioMale" name="gender" [(ngModel)]="user.gender" value="Male">
+                            Female<input type="radio" class="radioFemale" name="gender" [(ngModel)]="user.gender" value="Female">
                         
                             <div class="selectContainer">
                             <div class="selectBoxDept">
                                 <label for="department"><i class="fa-solid fa-building"></i></label>
-                                <select class="selectDept" (change)="onSelect($event)" [(ngModel)]="users.department_id">
+                                <select class="selectDept" (change)="onSelect($event)" >
                                     <option selected="true" disabled>Select Department</option>
                                     <option *ngFor="let departments of department" value="{{departments.department_id}}">{{departments.department_name}}</option>    
                                 </select>
                             </div>
                             <div class="selectBoxTeam">
                                 <label for="team"><i class="fa-solid fa-people-group"></i></label>
-                                <select [(ngModel)]="users.team_id" class="selectTeam" placeholder="Select team">
+                                <select [(ngModel)]="user.team_id" class="selectTeam" placeholder="Select team">
                                    <option *ngFor="let teams of team" value="{{teams.team_id}}">{{teams.team_name}}</option>
                                 </select>
                             </div>
                             </div>
                             <div class="form-group">
                                 <label for="position"><i class="fa-regular fa-location-dot"></i></label>
-                                <input type="text" [(ngModel)]="users.position" id="position"
+                                <input type="text" [(ngModel)]="user.position" id="position"
                                     placeholder="Position of this job" />
                             </div>
                             
                             <div class="selectBox">
                             <label for="roles"><i class="fa-solid fa-people-roof"></i></label>
-                            <select [(ngModel)]="users.role" class="selectRoles">
+                            <select [(ngModel)]="user.role" class="selectRoles">
                                 <option [ngValue]=null disabled>Select Roles</option>
                                 <option value="ADMIN">Admin</option>
                                 <option value="USER">User</option>
@@ -472,7 +479,8 @@
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
                         <input type="submit" class="btn btn-success" value="Add">
-                    </div>
+                    </div> 
+                    
                 </form>
             </div>
         </div>

@@ -4,6 +4,9 @@ import { UserService } from 'app/user.service';
 import { error } from 'console';
 import { HttpClient } from '@angular/common/http';
 import { Route, Router } from '@angular/router';
+import { data } from 'jquery';
+import * as e from 'express';
+import { departmentList } from 'app/lists/departmentList';
 
 @Component({
   selector: 'app-table-list',
@@ -11,25 +14,35 @@ import { Route, Router } from '@angular/router';
   styleUrls: ['./table-list.component.css']
 })
 export class TableListComponent implements OnInit {
-  userlist: any;
+  
+   userlist: any=[];
+   department:any=[];
+   team:any=[];
 
-  users:User = new User();
+  user:User = new User();
 
   constructor(private userServices: UserService, private http:HttpClient,
-    private router:Router, private list:UserService) { }
+    private router:Router) { }
 
   ngOnInit() {
-    this.department = this.list.department();
-    console.log(this.department);
+    
+    this.department=this.userServices.getDepartment().subscribe(data=>this.department=data);
+    this.department = this.userlist.getDepartment();
+ 
+     this.userServices.getAllData();
   }
-  department:any[];
-  team:any[];
 
-   onSelect(department){
-  //   console.log(department.target.value);
-    this.team = this.list.team().filter(e=>e.department_id == department.target.value);
-    console.log(this.team);
-  }
+    private getUsers() {
+      this.userServices.getAllData().subscribe({
+        data=>{this.}
+      })
+    }
+
+
+    onSelect(department){ 
+      this.team=this.userServices.getTeam().subscribe(data=>this.team=data); 
+      this.team = this.userlist.getTeam().filter(e=> e.department_id == department.target.value);
+    }
 
 
   updateUser(id: string) {
@@ -42,13 +55,9 @@ export class TableListComponent implements OnInit {
   }
 
 
- doRegisteration() {
-  console.log(this.users);
-  this.userServices.createUser(this.users).subscribe(
-    data => {this.router.navigate(['/user-details'])},
-    error => alert("something wrong")
-  )
-
+       doRegisteration() {
+        this.userServices.createUser(this.user).subscribe(data => {this.router.navigate(['/user-details/'])}
+  );
 
  } 
 

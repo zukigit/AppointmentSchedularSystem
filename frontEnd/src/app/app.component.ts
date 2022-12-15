@@ -11,7 +11,7 @@ import { UserService } from './user.service';
 })
 export class AppComponent {
 
-  constructor(private userServices : UserService , private list:UserService) {}
+  constructor(private userServices : UserService , private userList:UserService) {}
 
   ngOnInit() {
     this.userServices.getAllData()

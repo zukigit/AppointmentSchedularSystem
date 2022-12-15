@@ -8,6 +8,7 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import {MatRadioModule} from '@angular/material/radio';
+import { filter } from 'rxjs/operators';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import {MatRadioModule} from '@angular/material/radio';
     ComponentsModule,
     RouterModule,
     AppRoutingModule,
-    MatRadioModule
+    MatRadioModule,
   ],
   declarations: [
     AppComponent,
