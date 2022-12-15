@@ -252,11 +252,10 @@ label.valid:after {
   }
   
   .radioMale{
-
-    width: 50%;
+    width: auto;
+    
   }
 
   .radioFemale{
-    width: 50%;
-    display: block;
+    width: auto;
   }

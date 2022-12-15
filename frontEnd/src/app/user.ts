@@ -6,6 +6,7 @@ export class User {
     gender:string;
     department_id:string;
     team_id:string;
+    role:string;
     position:string;
    
 }

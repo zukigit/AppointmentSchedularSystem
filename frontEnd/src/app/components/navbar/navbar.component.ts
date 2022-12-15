@@ -1,14 +1,29 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { ROUTES } from '../sidebar/sidebar.component';
+// import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
 
+
+declare interface RouteInfo {
+    path: string;
+    title: string;
+    icon: string;
+    class: string;
+}
+export const ROUTES: RouteInfo[] = [
+    { path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
+{ path: '#', title: 'Log Out',  icon: 'logout', class: '' },
+    
+    
+    
+];
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+    menuItems: any[];
     private listTitles: any[];
     location: Location;
       mobile_menu_visible: any = 0;
@@ -21,6 +36,7 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit(){
+        this.menuItems = ROUTES.filter(menuItem => menuItem);
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
