@@ -8,10 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import lombok.NoArgsConstructor;
-
 @Entity
-@NoArgsConstructor
 public class Team implements Serializable{
 	private static final long serialVersionUID = 1L;
 	

@@ -1,36 +1,43 @@
 package com.ai.backEnd.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.Serializable;
+import java.sql.Blob;
+import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-
+import javax.persistence.*;
 
 
 @Entity
 public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+
 	@Id
 	private String employee_id;
 	private String name;
 	private String password;
+	private String photo;
 	private String phone_number;
 	private String gender;
-	private String photo;
 	private String position;
 	@Enumerated(EnumType.STRING)
 	private UserRole role;
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "team_id",nullable = false)
-	private Team team;
-	
-	
+	private Team team_id;
+	@Transient
+	MultipartFile file;
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
 	public String getEmployee_id() {
 		return employee_id;
 	}
@@ -73,6 +80,19 @@ public class User implements Serializable{
 
 
 
+
+	public String getPhoto() {
+		return photo;
+	}
+
+
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+
+
 	public void setPhone_number(String phone_number) {
 		this.phone_number = phone_number;
 	}
@@ -87,18 +107,6 @@ public class User implements Serializable{
 
 	public void setGender(String gender) {
 		this.gender = gender;
-	}
-
-
-
-	public String getPhoto() {
-		return photo;
-	}
-
-
-
-	public void setPhoto(String photo) {
-		this.photo = photo;
 	}
 
 
@@ -120,29 +128,19 @@ public class User implements Serializable{
 	}
 
 
-
 	public void setRole(UserRole role) {
 		this.role = role;
 	}
 
 
-
-	public Team getTeam() {
-		return team;
+	public Team getTeam_id() {
+		return team_id;
 	}
 
 
-
-	public void setTeam(Team team) {
-		this.team = team;
+	public void setTeam_id(Team team_id) {
+		this.team_id = team_id;
 	}
 
-	@Override
-	public String toString() {
-		return "User [employee_id=" + employee_id + ", name=" + name + ", password=" + password + ", phone_number="
-				+ phone_number + ", gender=" + gender + ", photo=" + photo + ", position=" + position + ", role=" + role
-				+ ", team_id=" + team + "]";
-	}
-	
 
 }

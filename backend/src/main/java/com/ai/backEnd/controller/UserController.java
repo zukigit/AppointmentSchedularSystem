@@ -17,14 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ai.backEnd.model.Team;
 import com.ai.backEnd.model.User;
-import com.ai.backEnd.model.UserRegistrationModel;
 import com.ai.backEnd.service.UserService;
 
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@CrossOrigin(origins = "*" , allowedHeaders = "*")
 @RequestMapping("/api/v1/")
 public class UserController {
 	
@@ -33,28 +30,22 @@ public class UserController {
 	
 	@GetMapping("/getUser")
 	public List<User> getUser(ModelMap model){
-		
-		System.out.println(service.getAllUser());	
-		
 		return service.getAllUser();
 	}
 	
 	//AddUser
-	@PostMapping("/saveUser")
-	public User saveUser(@RequestBody UserRegistrationModel dto) {
-		User user = new User();
-		Team team = new Team();
-		team.setTeam_id(dto.getTeam_id());
-		user.setEmployee_id(dto.getEmployee_id());
-		user.setName(dto.getName());
-		user.setPassword(dto.getPassword());
-		user.setPhone_number(dto.getPhone_number());
-		user.setGender(dto.getGender());
-		user.setPhoto(dto.getPhoto());
-		user.setPosition(dto.getPosition());
-		user.setRole(dto.getRole());
-		user.setTeam(team);
-		return service.saveUser(user);
+	@PostMapping("/saveUser" )
+	public User saveUser(@RequestBody User user) {
+		User dto = new User();
+		dto.setEmployee_id(user.getEmployee_id());
+		dto.setName(user.getName());
+		dto.setPassword(user.getPassword());
+		dto.setPhone_number(user.getPhone_number());
+		dto.setGender(user.getGender());
+		dto.setPosition(user.getPosition());
+		dto.setRole(user.getRole());
+		dto.setTeam_id(user.getTeam_id());
+		return service.saveUser(dto);
 	}
 	
 	//Delete User
@@ -82,10 +73,9 @@ public class UserController {
 		dto.setPassword(user.getPassword());
 		dto.setPhone_number(user.getPhone_number());
 		dto.setGender(user.getGender());
-		dto.setPhoto(user.getPhoto());
 		dto.setPosition(user.getPosition());
 		dto.setRole(user.getRole());
-		dto.setTeam(user.getTeam());
+		dto.setTeam_id(user.getTeam_id());
 		User updateUser = service.updateUser(dto);
 		return ResponseEntity.ok(updateUser);
 	}

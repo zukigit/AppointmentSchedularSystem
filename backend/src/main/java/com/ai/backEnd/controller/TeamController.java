@@ -30,7 +30,6 @@ public class TeamController {
 	@GetMapping("/getTeam")
 	public List<Team> getTeam(){
 		return service.getTeam();
-		
 	}
 	
 	
