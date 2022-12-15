@@ -31,7 +31,10 @@ public class UserController {
 	private UserService service;
 	
 	@GetMapping("/getUser")
-	public List<User> getUser(ModelMap model){
+	public List<User> getUser(ModelMap model,User employee){
+
+		System.out.println( employee.getEmployee_id());
+		System.out.println(employee.getName());
 		return service.getAllUser();
 	}
 	

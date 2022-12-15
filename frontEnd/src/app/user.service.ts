@@ -3,6 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './user';
 import { JwtResponse } from './jwt-response';
+import { teamList } from './lists/teamList';
+import { departmentList } from './lists/departmentList';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,21 +13,18 @@ import { JwtResponse } from './jwt-response';
 export class UserService {
 
   constructor(private http: HttpClient) { }
+  private baseUrl = `http://localhost:8080/api/v1/`;
 
-  getDepartment() : Observable<any>{
+  getDepartment(){
    return this.http.get("http://localhost:8080/api/v1/getDepartment");
 }
 
- getTeam() : Observable<any>{
+ getTeam() {
    return this.http.get("http://localhost:8080/api/v1/getTeam");
 }
-  private baseUrl = `http://localhost:8080/api/v1/`;
 
-  // public doRegisteration(register: User) {
-  //   return this.http.post("http://localhost:8080/api", register, { responseType: 'text' as 'json' })
-  // }
-  getAllData(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.baseUrl}`);
+  getUserList(){
+    return this.http.get("http://localhost:8080/api/v1/getUser/");
   }
 
   createUser(users: User):Observable<Object>{

@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'app/user';
 import { UserService } from 'app/user.service';
-import { error } from 'console';
 import { HttpClient } from '@angular/common/http';
 import { Route, Router } from '@angular/router';
 import { data } from 'jquery';
 import * as e from 'express';
-import { departmentList } from 'app/lists/departmentList';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-table-list',
@@ -15,7 +14,8 @@ import { departmentList } from 'app/lists/departmentList';
 })
 export class TableListComponent implements OnInit {
   
-  userData: User[];
+   userData: any=[];
+   userDetails : any=[];
    userlist: any=[];
    department:any=[];
    team:any=[];
@@ -26,25 +26,20 @@ export class TableListComponent implements OnInit {
     private router:Router) { }
 
   ngOnInit() {
-    this.getUsers();
-    this.department=this.userServices.getDepartment().subscribe(data=>this.department=data);
-    this.department = this.userlist.getDepartment();
- 
-     
+
+     this.department = this.userServices.getDepartment().subscribe(data=>this.department=data);
+ //    this.department = this.userServices.getDepartment();    
+    
+     this.team = this.userServices.getTeam().subscribe(data=>this.team=data); 
+
+     this.userDetails= this.userServices.getUserList();
+
   }
 
-    private getUsers() {
-      this.userServices.getAllData().subscribe(
-        data=>{
-        console.log(data),
-        this.userData=data}
-      )
-    }
-
-
     onSelect(department){ 
-      this.team=this.userServices.getTeam().subscribe(data=>this.team=data); 
-      this.team = this.userlist.getTeam().filter(e=> e.department_id == department.target.value);
+
+ //     this.team=this.userServices.getTeam().filter(e=> e.department_id = department.target.value);
+      
     }
 
 
@@ -64,20 +59,10 @@ export class TableListComponent implements OnInit {
 
  } 
 
-  // onSubmit( user:User ){
-  //   this.userServices.doRegisteration(this.userlist).subscribe
-  //   (
-  //     data=>{
-  //       this.userlist=data
-  //     },
-  //     error => console.log(error));
-  // }
+//  getUsers() {
+//   this.userData = this.userlist.getDepartment().subscribe(data=>this.department=data);
+//   this.userData = this.userlist.getTeam().subscribe(data=> this.team=data);
+//   this.userData = this.userlist.getUserList(this.userServices);
+// }
 
-  // public doRegisteration(user: User) {
-  //   console.log(this.users);
-    
-  //   return this.http.post("http://localhost:8080/api/register", user, { responseType: 'text' as 'json' })
-  // }
-
- 
 }
