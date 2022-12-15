@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         this.jwtResponse = data;
         localStorage.setItem("jwtToken", this.jwtResponse.token)
         console.log("token is: " + this.jwtResponse.token)
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/admin/dashboard']);
       },
       error => {
         alert("Login Failed!")
