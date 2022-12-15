@@ -14,12 +14,11 @@ export class AppComponent {
   constructor(private userServices : UserService , private list:UserService) {}
 
   ngOnInit() {
-    this.userServices.getAllData()
-      .subscribe(data => {
-        console.log(data)
-      })
 
-    
+    // this.userServices.getAllData()
+    //   .subscribe(data => {
+    //     console.log(data)
+    //   })
   }
 
  
