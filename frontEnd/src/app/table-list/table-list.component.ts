@@ -15,27 +15,30 @@ import { departmentList } from 'app/lists/departmentList';
 })
 export class TableListComponent implements OnInit {
   
+  userData: User[];
    userlist: any=[];
    department:any=[];
    team:any=[];
 
   user:User = new User();
 
-  constructor(private userServices: UserService, private http:HttpClient,
+  constructor(private userServices: UserService, private http:HttpClient,private userList : UserService,
     private router:Router) { }
 
   ngOnInit() {
-    
+    this.getUsers();
     this.department=this.userServices.getDepartment().subscribe(data=>this.department=data);
     this.department = this.userlist.getDepartment();
  
-     this.userServices.getAllData();
+     
   }
 
     private getUsers() {
-      this.userServices.getAllData().subscribe({
-        data=>{this.}
-      })
+      this.userServices.getAllData().subscribe(
+        data=>{
+        console.log(data),
+        this.userData=data}
+      )
     }
 
 
