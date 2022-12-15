@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ai.backEnd.model.Team;
 import com.ai.backEnd.model.User;
+import com.ai.backEnd.model.UserRegisterationRequestModel;
 import com.ai.backEnd.service.UserService;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -35,17 +37,19 @@ public class UserController {
 	
 	//AddUser
 	@PostMapping("/saveUser" )
-	public User saveUser(@RequestBody User user) {
-		User dto = new User();
-		dto.setEmployee_id(user.getEmployee_id());
-		dto.setName(user.getName());
-		dto.setPassword(user.getPassword());
-		dto.setPhone_number(user.getPhone_number());
-		dto.setGender(user.getGender());
-		dto.setPosition(user.getPosition());
-		dto.setRole(user.getRole());
-		dto.setTeam_id(user.getTeam_id());
-		return service.saveUser(dto);
+	public User saveUser(@RequestBody UserRegisterationRequestModel dto) {
+		User user = new User();
+		Team team = new Team();
+		team.setTeam_id(dto.getTeam_id());
+		user.setEmployee_id(dto.getEmployee_id());
+		user.setName(dto.getName());
+		user.setPassword(dto.getPassword());
+		user.setPhone_number(dto.getPhone_number());
+		user.setGender(dto.getGender());
+		user.setPosition(dto.getPosition());
+		user.setRole(dto.getRole());
+		user.setTeam(team);
+		return service.saveUser(user);
 	}
 	
 	//Delete User
@@ -75,7 +79,7 @@ public class UserController {
 		dto.setGender(user.getGender());
 		dto.setPosition(user.getPosition());
 		dto.setRole(user.getRole());
-		dto.setTeam_id(user.getTeam_id());
+		dto.setTeam(user.getTeam());
 		User updateUser = service.updateUser(dto);
 		return ResponseEntity.ok(updateUser);
 	}

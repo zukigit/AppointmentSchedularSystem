@@ -34,7 +34,7 @@ public class UserUpdateController {
         dto.setGender(user.getGender());
         dto.setPosition(user.getPosition());
         dto.setRole(user.getRole());
-        dto.setTeam_id(user.getTeam_id());
+        dto.setTeam(user.getTeam());
         return service.saveUser(dto);
     }
 
