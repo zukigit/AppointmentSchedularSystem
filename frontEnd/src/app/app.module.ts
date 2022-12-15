@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import {MatRadioModule} from '@angular/material/radio';
 import { LoginComponent } from './login/login.component';
+import { UserComponent } from './user/user.component';
+import { TraineeComponent } from './trainee/trainee.component';
 
 @NgModule({
   imports: [
@@ -25,6 +27,8 @@ import { LoginComponent } from './login/login.component';
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
+    UserComponent,
+    TraineeComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
