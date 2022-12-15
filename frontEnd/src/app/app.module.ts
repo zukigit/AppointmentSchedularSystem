@@ -8,13 +8,10 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import {MatRadioModule} from '@angular/material/radio';
-<<<<<<< HEAD
 import { filter } from 'rxjs/operators';
-=======
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { TraineeComponent } from './trainee/trainee.component';
->>>>>>> a28421a15d3785aef087bc57366bdcdbf40386df
 
 @NgModule({
   imports: [
