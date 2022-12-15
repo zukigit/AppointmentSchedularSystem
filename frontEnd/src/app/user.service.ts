@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './user';
+import { JwtResponse } from './jwt-response';
 
 @Injectable({
   providedIn: 'root'
@@ -17,14 +18,11 @@ export class UserService {
  getTeam() : Observable<any>{
    return this.http.get("http://localhost:8080/api/v1/getTeam");
 }
-
-
   private baseUrl = `http://localhost:8080/api/v1/`;
 
   // public doRegisteration(register: User) {
   //   return this.http.post("http://localhost:8080/api", register, { responseType: 'text' as 'json' })
   // }
-
   getAllData(): Observable<User[]> {
     return this.http.get<User[]>(`${this.baseUrl}`);
   }
@@ -33,8 +31,8 @@ export class UserService {
     return this.http.post("http://localhost:8080/api/v1/saveUser/", users);
   }
 
-  getStudentId(id: string): Observable<Object> {  
-    return this.http.get(`${this.baseUrl}/student/${id}`);  
+  getUserId(id: string): Observable<Object> {  
+    return this.http.get(`${this.baseUrl}/userId/${id}`);  
   }
 
   updateUser(data: any, id: string): Observable<any> {

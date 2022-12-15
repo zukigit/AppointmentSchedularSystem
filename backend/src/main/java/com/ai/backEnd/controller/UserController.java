@@ -22,8 +22,9 @@ import com.ai.backEnd.model.User;
 import com.ai.backEnd.model.UserRegistrationModel;
 import com.ai.backEnd.service.UserService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+
 @RestController
+@CrossOrigin(origins = "*" , allowedHeaders = "*")
 @RequestMapping("/api/v1/")
 public class UserController {
 	

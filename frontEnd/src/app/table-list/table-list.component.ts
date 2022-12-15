@@ -49,7 +49,7 @@ export class TableListComponent implements OnInit {
 
 
   updateUser(id: string) {
-    this.userServices.getStudentId(id)
+    this.userServices.getUserId(id)
       .subscribe(
         data => {
           this.userlist = data

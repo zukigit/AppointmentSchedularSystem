@@ -8,6 +8,9 @@ import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
+import { LoginComponent } from 'app/login/login.component';
+import { UserComponent } from 'app/user/user.component';
+import { TraineeComponent } from 'app/trainee/trainee.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -52,12 +55,15 @@ export const AdminLayoutRoutes: Routes = [
     //         component: UpgradeComponent
     //     }]
     // }
-    { path: 'dashboard',      component: DashboardComponent },
-    { path: 'user-profile',   component: UserProfileComponent },
-    { path: 'user-details',   component: TableListComponent },
-    { path: 'typography',     component: TypographyComponent },
-    { path: 'icons',          component: IconsComponent },
-    { path: 'maps',           component: MapsComponent },
-    { path: 'notifications',  component: NotificationsComponent },
-    { path: 'upgrade',        component: UpgradeComponent },
+    
+    { path: 'admin/dashboard', component: DashboardComponent },
+    { path: 'admin/user-profile', component: UserProfileComponent },
+    { path: 'admin/user-details', component: TableListComponent },
+    { path: 'typography', component: TypographyComponent },
+    { path: 'icons', component: IconsComponent },
+    { path: 'maps', component: MapsComponent },
+    { path: 'notifications', component: NotificationsComponent },
+    { path: 'upgrade', component: UpgradeComponent },
+    { path: 'user/test', component: UserComponent},
+    { path: 'trainee/test', component: TraineeComponent}
 ];
