@@ -37,9 +37,22 @@ export class LoginComponent implements OnInit {
     this.service.loginUser(this.login).subscribe(
       data =>{
         this.jwtResponse = data;
-        localStorage.setItem("jwtToken", this.jwtResponse.token)
-        console.log("token is: " + this.jwtResponse.token)
-        this.router.navigate(['/admin/dashboard']);
+        localStorage.setItem("jwtToken", this.jwtResponse.token);
+        localStorage.setItem("loggedInUserId", this.jwtResponse.userId)
+
+        console.log("token is: " + this.jwtResponse.token);
+        console.log("role is: " + this.jwtResponse.role);
+        console.log("userId is: " + this.jwtResponse.userId);
+
+        if(this.jwtResponse.role == "ROLE_ADMIN"){
+          this.router.navigate(['/admin/dashboard']);
+        } else if(this.jwtResponse.role == "ROLE_USER") {
+          this.router.navigate(['/user/test']);
+        } else if(this.jwtResponse.role == "ROLE_TRAINEE") {
+          this.router.navigate(['/trainee/test']);
+        } else {
+          this.router.navigate(['/login']);
+        }
       },
       error => {
         alert("Login Failed!")
