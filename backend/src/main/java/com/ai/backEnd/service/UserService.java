@@ -3,12 +3,13 @@ package com.ai.backEnd.service;
 import java.util.List;
 
 import com.ai.backEnd.model.User;
+import com.ai.backEnd.model.UserRegistrationModel;
 
 public interface UserService {
 	
 	List<User> getAllUser();
 	
-	User saveUser(User employee);
+	User saveUser(User u);
 	
 	User getUserById(String employee_id);
 	

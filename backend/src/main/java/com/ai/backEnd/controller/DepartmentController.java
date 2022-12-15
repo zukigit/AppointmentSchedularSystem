@@ -25,7 +25,7 @@ public class DepartmentController {
 		return service.saveDepartment(department);
 	}
 	
-	@GetMapping("getDe")
+	@GetMapping("/getDepartment")
 	public List<Department> getDepartment(){
 		return service.getDepartment();
 	}
