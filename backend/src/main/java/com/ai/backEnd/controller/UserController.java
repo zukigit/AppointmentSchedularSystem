@@ -40,18 +40,7 @@ public class UserController {
 	
 	//AddUser
 	@PostMapping("/saveUser" )
-	public User saveUser(@RequestBody UserRegisterationRequestModel dto) {
-		User user = new User();
-		Team team = new Team();
-		team.setTeam_id(dto.getTeam_id());
-		user.setEmployee_id(dto.getEmployee_id());
-		user.setName(dto.getName());
-		user.setPassword(dto.getPassword());
-		user.setPhone_number(dto.getPhone_number());
-		user.setGender(dto.getGender());
-		user.setPosition(dto.getPosition());
-		user.setRole(dto.getRole());
-		user.setTeam(team);
+	public User saveUser(@RequestBody User user) {
 		return service.saveUser(user);
 	}
 	

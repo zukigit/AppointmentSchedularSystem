@@ -1,12 +1,12 @@
 import { Team } from "./team";
 
-export class User {
+export class RegisterationRequestModel {
     employee_id:string;
     name:string;  
     password:string;
     phone_number:string;
     gender:string;
-    team_id:string;
+    team:Team;
     role:string;
     position:string;
 }
