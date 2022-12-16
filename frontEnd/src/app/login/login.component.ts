@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { JwtResponse } from 'app/jwt-response';
-import { Login } from 'app/login';
-import { LoginService } from 'app/login.service';
-import { UserService } from 'app/user.service';
+import { JwtResponse } from 'app/model/jwt-response';
+import { Login } from 'app/model/login';
+import { LoginService } from 'app/services/login.service';
+import { UserService } from 'app/services/user.service';
 
 
 @Component({

@@ -1,7 +1,7 @@
 import { state } from '@angular/animations';
 import { Component} from '@angular/core';
 
-import { UserService } from './user.service';
+
 
 
 @Component({
@@ -11,7 +11,7 @@ import { UserService } from './user.service';
 })
 export class AppComponent {
 
-  constructor(private userServices : UserService , private userList:UserService) {}
+  // constructor(private userServices : UserService , private userList:UserService) {}
 
   ngOnInit() {
 

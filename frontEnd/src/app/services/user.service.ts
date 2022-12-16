@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from './user';
-import { JwtResponse } from './jwt-response';
-import { teamList } from './lists/teamList';
-import { departmentList } from './lists/departmentList';
-import { Team } from './team';
+import { User } from '../model/user';
+import { JwtResponse } from '../model/jwt-response';
+import { teamList } from '../lists/teamList';
+import { departmentList } from '../lists/departmentList';
+import { Team } from '../model/team';
 import { map } from 'jquery';
-import { RegisterationRequestModel } from './registeration-request-model';
+import { RegisterationRequestModel } from '../model/registeration-request-model';
 
 @Injectable({
   providedIn: 'root'

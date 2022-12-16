@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Login } from './login';
+import { Login } from '../model/login';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { JwtResponse } from './jwt-response';
+import { JwtResponse } from '../model/jwt-response';
 
 @Injectable({
   providedIn: 'root'

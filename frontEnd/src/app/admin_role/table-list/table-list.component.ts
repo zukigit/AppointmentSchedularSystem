@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'app/user';
-import { UserService } from 'app/user.service';
+import { User } from 'app/model/user';
+import { UserService } from 'app/services/user.service';
 import { HttpClient } from '@angular/common/http';
 import { Route, Router } from '@angular/router';
 import { data } from 'jquery';
 import * as e from 'express';
 import { filter } from 'rxjs';
-import { RegisterationRequestModel } from 'app/registeration-request-model';
-import { Team } from 'app/team';
+import { RegisterationRequestModel } from 'app/model/registeration-request-model';
+import { Team } from 'app/model/team';
 
 @Component({
   selector: 'app-table-list',
