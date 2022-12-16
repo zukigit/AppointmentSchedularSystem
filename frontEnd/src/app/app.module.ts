@@ -10,8 +10,8 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import {MatRadioModule} from '@angular/material/radio';
 import { filter } from 'rxjs/operators';
 import { LoginComponent } from './login/login.component';
-import { UserComponent } from './user/user.component';
-import { TraineeComponent } from './trainee/trainee.component';
+import { UserComponent } from './user_role/user/user.component';
+import { TraineeComponent } from './trainee_role/trainee/trainee.component';
 
 @NgModule({
   imports: [

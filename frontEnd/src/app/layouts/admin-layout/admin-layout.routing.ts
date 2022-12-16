@@ -1,16 +1,16 @@
 import { Routes } from '@angular/router';
 
-import { DashboardComponent } from '../../dashboard/dashboard.component';
-import { UserProfileComponent } from '../../user-profile/user-profile.component';
-import { TableListComponent } from '../../table-list/table-list.component';
+import { DashboardComponent } from '../../admin_role/dashboard/dashboard.component';
+import { UserProfileComponent } from '../../admin_role/user-profile/user-profile.component';
+import { TableListComponent } from '../../admin_role/table-list/table-list.component';
 import { TypographyComponent } from '../../typography/typography.component';
 import { IconsComponent } from '../../icons/icons.component';
 import { MapsComponent } from '../../maps/maps.component';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { LoginComponent } from 'app/login/login.component';
-import { UserComponent } from 'app/user/user.component';
-import { TraineeComponent } from 'app/trainee/trainee.component';
+import { UserComponent } from 'app/user_role/user/user.component';
+import { TraineeComponent } from 'app/trainee_role/trainee/trainee.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
