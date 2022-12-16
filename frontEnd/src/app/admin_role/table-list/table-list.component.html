@@ -160,7 +160,8 @@
                             <div class="selectBoxTeam">
                                 <label for="team"><i class="fa-solid fa-people-group"></i></label>
                                 <select [(ngModel)]="user.team_id" class="selectTeam" placeholder="Select team">
-                                   <option *ngFor="let teams of team" value="{{teams.team_id}}">{{teams.team_name}}</option>
+                                    <option selected="true" disabled>Select Team</option>
+                                   <option *ngFor="let teams of tempTeam" value="{{teams.team_id}}">{{teams.team_name}}</option>
                                 </select>
                             </div>
                             </div>
@@ -185,7 +186,6 @@
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
                         <input type="submit" class="btn btn-success" value="Add">
                     </div> 
-                    
                 </form>
             </div>
         </div>

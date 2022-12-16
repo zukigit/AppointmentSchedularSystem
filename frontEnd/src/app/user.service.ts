@@ -5,7 +5,9 @@ import { User } from './user';
 import { JwtResponse } from './jwt-response';
 import { teamList } from './lists/teamList';
 import { departmentList } from './lists/departmentList';
-
+import { Team } from './team';
+import { map } from 'jquery';
+import { RegisterationRequestModel } from './registeration-request-model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,14 +22,15 @@ export class UserService {
 }
 
  getTeam() {
-   return this.http.get("http://localhost:8080/api/v1/getTeam");
+  console.log("get team is called");
+  return this.http.get<Team[]>("http://localhost:8080/api/v1/getTeam");
 }
 
   getUserList(){
     return this.http.get("http://localhost:8080/api/v1/getUser/");
   }
 
-  createUser(users: User):Observable<Object>{
+  createUser(users: RegisterationRequestModel):Observable<Object>{
     return this.http.post("http://localhost:8080/api/v1/saveUser/", users);
   }
 
