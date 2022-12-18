@@ -12,6 +12,7 @@ import { filter } from 'rxjs/operators';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user_role/user/user.component';
 import { TraineeComponent } from './trainee_role/trainee/trainee.component';
+import { AdminAuthGuard } from './admin-auth.guard';
 
 @NgModule({
   imports: [
@@ -31,7 +32,7 @@ import { TraineeComponent } from './trainee_role/trainee/trainee.component';
     UserComponent,
     TraineeComponent,
   ],
-  providers: [],
+  providers: [AdminAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

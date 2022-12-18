@@ -11,6 +11,7 @@ import { UpgradeComponent } from '../../upgrade/upgrade.component';
 import { LoginComponent } from 'app/login/login.component';
 import { UserComponent } from 'app/user_role/user/user.component';
 import { TraineeComponent } from 'app/trainee_role/trainee/trainee.component';
+import { AdminAuthGuard } from 'app/admin-auth.guard';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -56,9 +57,9 @@ export const AdminLayoutRoutes: Routes = [
     //     }]
     // }
     
-    { path: 'admin/dashboard', component: DashboardComponent },
-    { path: 'admin/user-profile', component: UserProfileComponent },
-    { path: 'admin/user-details', component: TableListComponent },
+    { path: 'admin/dashboard', component: DashboardComponent, canActivate:[AdminAuthGuard]},
+    { path: 'admin/user-profile', component: UserProfileComponent, canActivate:[AdminAuthGuard]},
+    { path: 'admin/user-details', component: TableListComponent, canActivate:[AdminAuthGuard]},
     { path: 'typography', component: TypographyComponent },
     { path: 'icons', component: IconsComponent },
     { path: 'maps', component: MapsComponent },

@@ -35,14 +35,14 @@ export class LoginComponent implements OnInit {
   userLogin() {
     localStorage.removeItem("jwtToken");
     localStorage.removeItem("loggedInUserId");
-    localStorage.removeItem("loggedInUserId");
+    localStorage.removeItem("loggedInUserRole");
 
     this.service.loginUser(this.login).subscribe(
       data =>{
         this.jwtResponse = data;
         localStorage.setItem("jwtToken", this.jwtResponse.token);
         localStorage.setItem("loggedInUserId", this.jwtResponse.userId);
-        localStorage.setItem("loggedInUserId", this.jwtResponse.userId);
+        localStorage.setItem("loggedInUserRole", this.jwtResponse.role);
 
         console.log("token is: " + this.jwtResponse.token);
         console.log("role is: " + this.jwtResponse.role);
