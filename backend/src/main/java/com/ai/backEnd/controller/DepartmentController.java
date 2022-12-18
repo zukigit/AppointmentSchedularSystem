@@ -27,7 +27,6 @@ public class DepartmentController {
 	
 	@GetMapping("/getDepartment")
 	public List<Department> getDepartment(){
-		System.out.println("department is called");
 		return service.getDepartment();
 	}
 	
