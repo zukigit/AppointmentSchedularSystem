@@ -33,7 +33,7 @@ export class UserService {
 }
 
 getUserDetails(){
-  return this.http.get("http://localhost:8080/api/v1/userDetails",this.header);
+  return this.http.get("http://localhost:8080/api/v1/userDetail", this.header);
 }
 
   createUser(users: RegisterationRequestModel):Observable<Object>{

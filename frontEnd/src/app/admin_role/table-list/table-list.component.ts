@@ -15,27 +15,31 @@ import { Team } from 'app/model/team';
   styleUrls: ['./table-list.component.css']
 })
 export class TableListComponent implements OnInit {
-  
-   userData: any=[];
-   userDetails : any=[];
-   userlist: any=[];
-   department:any=[];
-   teamArray:Team[];
-   tempTeam:Team[];
-   test = ['a', 'b', 'c'];
-   team:Team = new Team();
 
-  user:User = new User();
-  registerModel:RegisterationRequestModel = new RegisterationRequestModel();
+  userData: any = [];
+  userDetails: any = [];
 
-  constructor(private userServices: UserService, private http:HttpClient,private userList : UserService,
-    private router:Router) {
+  userDataDetails: any = [];
+  userlist: any = [];
+  department: any = [];
+  teamArray: Team[];
+  tempTeam: Team[];
+  test = ['a', 'b', 'c'];
+  team: Team = new Team();
+
+  user: User = new User();
+  registerModel: RegisterationRequestModel = new RegisterationRequestModel();
+
+  constructor(private userServices: UserService, private http: HttpClient, private userList: UserService,
+    private router: Router) {
   }
 
   ngOnInit() {
 
-     this.department = this.userServices.getDepartment().subscribe(data=>this.department=data);
- //    this.department = this.userServices.getDepartment(); 
+    this.userDataDetails = this.userServices.getUserDetails().subscribe(data => this.userDataDetails = data);
+
+    this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
+    //    this.department = this.userServices.getDepartment(); 
     this.userServices.getTeam().subscribe(
       {
         next: (data) => {
@@ -43,16 +47,20 @@ export class TableListComponent implements OnInit {
         }
       }
     )
-     this.userDetails= this.userServices.getUserList();
 
   }
 
-    onSelect(department){ 
-      this.tempTeam = this.teamArray.filter(e=> {
-        return e.department.department_id == department.target.value
-      });
-      console.log("teams length is" + this.teamArray.length);
-    }
+  dataOfUser() {
+    this.userDataDetails = this.userServices.getUserDetails().subscribe(data => this.userDataDetails = data);
+    console.log("user data is called" + this.userDataDetails);
+  }
+
+  onSelect(department) {
+    this.tempTeam = this.teamArray.filter(e => {
+      return e.department.department_id == department.target.value
+    });
+    console.log("teams length is" + this.teamArray.length);
+  }
 
 
   updateUser(id: string) {
@@ -64,19 +72,21 @@ export class TableListComponent implements OnInit {
         error => console.log(error));
   }
 
-       doRegisteration() {
-        this.team.team_id = this.user.team_id;
-        this.registerModel.employee_id = this.user.employee_id;
-        this.registerModel.name = this.user.name;
-        this.registerModel.password = this.user.password;
-        this.registerModel.phone_number = this.user.phone_number;
-        this.registerModel.gender = this.user.gender;
-        this.registerModel.role = this.user.role;
-        this.registerModel.position = this.user.position;
-        this.registerModel.team = this.team;
-        this.userServices.createUser(this.registerModel).subscribe(data => {this.router.navigate(['/user-details/'])}
-  );
+  doRegisteration() {
+    this.team.team_id = this.user.team_id;
+    this.registerModel.employee_id = this.user.employee_id;
+    this.registerModel.name = this.user.name;
+    this.registerModel.password = this.user.password;
+    this.registerModel.phone_number = this.user.phone_number;
+    this.registerModel.gender = this.user.gender;
+    this.registerModel.role = this.user.role;
+    this.registerModel.position = this.user.position;
+    this.registerModel.team = this.team;
+    this.userServices.createUser(this.registerModel).subscribe(data => { this.router.navigate(['admin/user-details']);
+    console.log("Successfully");
+  }
+    );
 
- } 
+  }
 
 }

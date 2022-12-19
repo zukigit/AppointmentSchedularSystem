@@ -74,7 +74,7 @@
                         </div>
                     </div>
                 </div>
-            <form>
+            <form (ngModal)="dataOfUser()">
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
@@ -86,7 +86,7 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let user of userDetails">
+                    <tbody *ngFor="let user of userDataDetails">
                         <tr>
                             <td > {{ user.employee_id }} </td>
                             <td > {{ user.name }} </td>
