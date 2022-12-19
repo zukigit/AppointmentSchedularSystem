@@ -1,24 +1,25 @@
 package com.ai.backEnd.model;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-
 public class UserDetail {
 
 
     String employee_id;
     String name;
-    @Enumerated(EnumType.STRING)
     UserRole role;
-
     String team_name;
-
-    String team_id;
-    String department_id;
-
     String department_name;
 
-    public String getEmployee_id() {
+    
+
+	public UserDetail(String employee_id, String name, UserRole role, String team_name, String department_name) {
+		this.employee_id = employee_id;
+		this.name = name;
+		this.role = role;
+		this.team_name = team_name;
+		this.department_name = department_name;
+	}
+
+	public String getEmployee_id() {
         return employee_id;
     }
 
@@ -48,22 +49,6 @@ public class UserDetail {
 
     public void setTeam_name(String team_name) {
         this.team_name = team_name;
-    }
-
-    public String getTeam_id() {
-        return team_id;
-    }
-
-    public void setTeam_id(String team_id) {
-        this.team_id = team_id;
-    }
-
-    public String getDepartment_id() {
-        return department_id;
-    }
-
-    public void setDepartment_id(String department_id) {
-        this.department_id = department_id;
     }
 
     public String getDepartment_name() {

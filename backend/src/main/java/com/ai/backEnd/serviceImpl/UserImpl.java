@@ -1,5 +1,6 @@
 package com.ai.backEnd.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,12 @@ public class UserImpl implements UserService{
 	
 	@Override
 	public List<UserDetail> userDetail() {
-		return (List<UserDetail>) repo.userDetail();
+//		List<UserDetail> returnUser = new ArrayList<UserDetail>();
+//		List<?> dataFromRepo = repo.userDetail();
+//		
+//		for(var data : dataFromRepo) {
+//			System.out.println("data is " + data);
+//		}
+		return repo.userDetail();
 	}
 }
