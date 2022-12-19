@@ -45,7 +45,9 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("loggedInUserRole", this.jwtResponse.role);
 
         if(this.jwtResponse.role == "ROLE_ADMIN"){
+          console.log("go to dashboard");
           this.router.navigate(['/admin/dashboard']);
+          console.log("done");
         } else if(this.jwtResponse.role == "ROLE_USER") {
           this.router.navigate(['/user/test']);
         } else if(this.jwtResponse.role == "ROLE_TRAINEE") {

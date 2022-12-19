@@ -140,9 +140,9 @@ export class NavbarComponent implements OnInit {
       return 'Dashboard';
     }
     logout() {
-        localStorage.removeItem("jwtToken");
-        localStorage.removeItem("loggedInUserRole");
-        this.router.navigate(['/login']);
-        window.location.reload();
+        localStorage.clear();
+        this.router.navigate(['/login']).then(()=>{
+            window.location.reload();
+        });
       }
 }
