@@ -32,9 +32,9 @@ export class UserService {
   return this.http.get<Team[]>("http://localhost:8080/api/v1/getTeam", this.header);
 }
 
-  getUserList(){
-    return this.http.get("http://localhost:8080/api/v1/getUser/", this.header);
-  }
+getUserDetails(){
+  return this.http.get("http://localhost:8080/api/v1/userDetails",this.header);
+}
 
   createUser(users: RegisterationRequestModel):Observable<Object>{
     return this.http.post("http://localhost:8080/api/v1/saveUser/", users, this.header);

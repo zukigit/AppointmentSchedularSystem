@@ -34,7 +34,7 @@ body {
 }
 
 .table-title .btn-group {
-  
+  border-radius: 55%;
   display: inline-block;
 }
 
@@ -544,9 +544,38 @@ label.valid:after {
   
   .radioMale{
     width: auto;
-    
+    margin-bottom: 1px;
+    margin-right: 30px;
   }
 
   .radioFemale{
     width: auto;
+    margin-bottom: 1px;
+  }
+
+  .labelRadio{
+    width: auto;
+    margin-bottom: 1px;
+    margin-right: 30px;
+  }
+
+  .ButtonContainer{
+    padding: 5%;
+    border-radius: 20% 20px;
+    display: flex;
+
+  }
+
+  .cancelButton{
+    border-radius: 5%;
+    margin: 10px;
+    width: 45%;
+    background-color: rgb(197, 79, 79);
+  }
+
+  .addButton{
+    border-radius: 5%;
+    margin:  10px;
+    width: 45%;
+    background-color: #3c9975;
   }

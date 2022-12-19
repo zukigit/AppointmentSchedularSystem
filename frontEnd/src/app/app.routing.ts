@@ -4,6 +4,8 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+
 
 const routes: Routes =[
   {
@@ -20,6 +22,7 @@ const routes: Routes =[
     }]
   },
   { path: 'login', component: LoginComponent },
+  { path: '**', component: PagenotfoundComponent }
 ];
 
 @NgModule({

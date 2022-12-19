@@ -79,12 +79,4 @@ export class TableListComponent implements OnInit {
 
  } 
 
- getUsers() {
-  this.userData = this.userlist.getDepartment().subscribe(data=>this.department=data);
-  console.log("departments " + this.department.department_name)
-  this.userData = this.userlist.getTeam().subscribe(data=> this.teamArray=data);
-  this.userData = this.userlist.getUserList(this.userServices);
-//  console.log = ("users "+this.userData.employee_id+this.userData.name);
-}
-
 }
