@@ -4,14 +4,15 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
 import { Router } from '@angular/router';
 
 
+
 declare interface RouteInfo {
     path: string;
     title: string;
     icon: string;
     class: string;
 }
-export const ROUTES: RouteInfo[] = [
-    { path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
+export const ROUTES= [
+    // { path: 'admin/user-profile', component: UserProfileComponent },
 { path: '#', title: 'Log Out',  icon: 'logout', class: '' },
     
     
@@ -23,7 +24,7 @@ export const ROUTES: RouteInfo[] = [
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-    menuItems: any[];
+    // menuItems: any[];
     private listTitles: any[];
     location: Location;
       mobile_menu_visible: any = 0;
@@ -36,7 +37,7 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit(){
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
+        // this.menuItems = ROUTES.filter(menuItem => menuItem);
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
