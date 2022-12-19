@@ -44,10 +44,6 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("loggedInUserId", this.jwtResponse.userId);
         localStorage.setItem("loggedInUserRole", this.jwtResponse.role);
 
-        console.log("token is: " + this.jwtResponse.token);
-        console.log("role is: " + this.jwtResponse.role);
-        console.log("userId is: " + this.jwtResponse.userId);
-
         if(this.jwtResponse.role == "ROLE_ADMIN"){
           this.router.navigate(['/admin/dashboard']);
         } else if(this.jwtResponse.role == "ROLE_USER") {

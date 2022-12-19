@@ -3,6 +3,7 @@ package com.ai.backEnd.service;
 import java.util.List;
 
 import com.ai.backEnd.model.User;
+import com.ai.backEnd.model.UserDetail;
 
 public interface UserService {
 	
@@ -16,5 +17,5 @@ public interface UserService {
 	
 	User updateUser(User emploee_id);
 	
-
+	List<UserDetail> userDetail();
 }

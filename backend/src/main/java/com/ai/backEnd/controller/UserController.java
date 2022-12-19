@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.ai.backEnd.model.User;
+import com.ai.backEnd.model.UserDetail;
 import com.ai.backEnd.service.UserService;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -73,5 +75,10 @@ public class UserController {
 		dto.setTeam(user.getTeam());
 		User updateUser = service.updateUser(dto);
 		return ResponseEntity.ok(updateUser);
+	}
+	
+	@GetMapping("/userDetail")
+	public List<UserDetail> userDetail(){
+		return service.userDetail();
 	}
 }

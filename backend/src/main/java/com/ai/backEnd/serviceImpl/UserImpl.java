@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ai.backEnd.model.User;
+import com.ai.backEnd.model.UserDetail;
 import com.ai.backEnd.repository.UserRespositroy;
 import com.ai.backEnd.service.UserService;
 
@@ -40,5 +41,9 @@ public class UserImpl implements UserService{
 	public User updateUser(User employee_id) {
 		return repo.save(employee_id);
 	}
-
+	
+	@Override
+	public List<UserDetail> userDetail() {
+		return (List<UserDetail>) repo.userDetail();
+	}
 }
