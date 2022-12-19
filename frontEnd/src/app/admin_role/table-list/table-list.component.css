@@ -34,7 +34,8 @@ body {
 }
 
 .table-title .btn-group {
-  float: right;
+  
+  display: inline-block;
 }
 
 .table-title .btn {
@@ -232,7 +233,7 @@ table.table .avatar {
 
 /* Modal styles */
 .modal .modal-dialog {
-  max-width: 400px;
+  max-width: 500px;
 }
 
 .modal .modal-header,
@@ -248,6 +249,7 @@ table.table .avatar {
 
 .modal-content {
   border-radius: 3px 10%;
+  width: 100%;
   font-size: 14px;
 }
 
@@ -257,7 +259,7 @@ table.table .avatar {
 }
 
 .modal-footer {
-  width: fit-content;
+  width: 100% ;
   border-radius: 0 0 3px 3px;
   
 }
@@ -277,7 +279,7 @@ table.table .avatar {
 }
 
 .modal .btn {
-  width: 100%;
+  width: 50%;
   border-radius: 2px;
   min-width: 100px;
 }
@@ -526,12 +528,14 @@ label.valid:after {
     position: relative;
       margin-bottom: 25px;
       overflow: hidden; 
+      width: 50%;
   }
   
   .selectBoxTeam{
     position: relative;
     margin-bottom: 25px;
     overflow: hidden; 
+    width: 50%;
   }
   
   .selectContainer{
