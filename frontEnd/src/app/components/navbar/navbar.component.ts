@@ -141,7 +141,8 @@ export class NavbarComponent implements OnInit {
     }
     logout() {
         localStorage.removeItem("jwtToken");
+        localStorage.removeItem("loggedInUserRole");
         this.router.navigate(['/login']);
-        console.log("Hello Testing!!!");
+        window.location.reload();
       }
 }
