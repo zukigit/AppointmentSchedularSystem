@@ -139,4 +139,9 @@ export class NavbarComponent implements OnInit {
       }
       return 'Dashboard';
     }
+    logout() {
+        localStorage.removeItem("jwtToken");
+        this.router.navigate(['/login']);
+        console.log("Hello Testing!!!");
+      }
 }

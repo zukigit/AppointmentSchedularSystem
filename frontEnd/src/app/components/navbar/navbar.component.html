@@ -70,7 +70,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         <button class="dropdown-item" [routerLink]="['admin/user-profile']">User Profile</button>
-                        <button class="dropdown-item" [routerLink]="[]">Log Out</button>
+                        <button class="dropdown-item" (click)="logout()">Log Out</button>
                         
                     </div>
                 </li>

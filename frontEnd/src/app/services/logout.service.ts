@@ -8,8 +8,9 @@ export class LogoutService {
 
   constructor(private router: Router) { }
 
-  logout() {
-    localStorage.removeItem("jwtToken");
-    this.router.navigate(['/']);
-  }
+  // logout() {
+  //   localStorage.removeItem("jwtToken");
+  //   this.router.navigate(['/']);
+  //   console.log("Hello Testing!!!");
+  // }
 }
