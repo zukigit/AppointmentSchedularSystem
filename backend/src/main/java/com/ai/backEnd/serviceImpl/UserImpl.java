@@ -1,8 +1,8 @@
 package com.ai.backEnd.serviceImpl;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import com.ai.backEnd.model.UserSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,5 +52,21 @@ public class UserImpl implements UserService{
 //			System.out.println("data is " + data);
 //		}
 		return repo.userDetail();
+	}
+
+	@Override
+	public List<UserDetail> searchByNameOrId(String searchKey) {
+
+		return repo.searchByNameOrId(searchKey);
+	}
+
+	@Override
+	public List<UserDetail> seacrhByDepartmentName(String searchKey) {
+		return repo.seacrhByDepartmentName(searchKey);
+	}
+
+	@Override
+	public List<UserDetail> searchByTeamName(String searchKey) {
+		return repo.searchByTeamName(searchKey);
 	}
 }

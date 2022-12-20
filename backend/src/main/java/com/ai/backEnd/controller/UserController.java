@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.model.UserDetail;
+import com.ai.backEnd.model.UserSearch;
 import com.ai.backEnd.service.UserService;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -80,5 +81,20 @@ public class UserController {
 	@GetMapping("/userDetail")
 	public List<UserDetail> userDetail(){
 		return service.userDetail();
+	}
+
+	@GetMapping("/searchUser")
+	public List<UserDetail> search(UserSearch userSearch){
+		if(userSearch.getSearchType().equals("default")){
+			return service.searchByNameOrId(userSearch.getSearchKey());
+		}else if (userSearch.getSearchType().equals("searchByDepartment")){
+            return service.seacrhByDepartmentName(userSearch.getSearchKey());
+		} else if (userSearch.getSearchType().equals("searchByTeam")) {
+			return service.searchByTeamName(userSearch.getSearchKey());
+		}
+			else{
+				return null;
+		}
+
 	}
 }
