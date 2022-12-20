@@ -13,6 +13,7 @@ import { UserComponent } from 'app/user_role/user/user.component';
 import { TraineeComponent } from 'app/trainee_role/trainee/trainee.component';
 import { AdminAuthGuard } from 'app/admin-auth.guard';
 import { RegisterComponent } from 'app/register/register.component';
+import { UpdateComponent } from 'app/update/update.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -68,5 +69,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'upgrade', component: UpgradeComponent },
     { path: 'user/test', component: UserComponent},
     { path: 'trainee/test', component: TraineeComponent},
-    { path: 'addEmployeeModal', component: RegisterComponent}
+    { path: 'addEmployeeModal', component: RegisterComponent},
+    { path: 'updateuser', component: UpdateComponent}
 ];
