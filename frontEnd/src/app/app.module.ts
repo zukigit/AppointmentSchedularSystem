@@ -15,6 +15,7 @@ import { TraineeComponent } from './trainee_role/trainee/trainee.component';
 import { AdminAuthGuard } from './admin-auth.guard';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { RegisterComponent } from './register/register.component';
+import { UpdateComponent } from './update/update.component';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { RegisterComponent } from './register/register.component';
     TraineeComponent,
     PagenotfoundComponent,
     RegisterComponent,
+    UpdateComponent,
   ],
   providers: [AdminAuthGuard],
   bootstrap: [AppComponent]
