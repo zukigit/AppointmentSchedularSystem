@@ -567,14 +567,12 @@ label.valid:after {
   }
 
   .cancelButton{
-    border-radius: 5%;
     margin: 10px;
     width: 45%;
     background-color: rgb(197, 79, 79);
   }
 
   .addButton{
-    border-radius: 5%;
     margin:  10px;
     width: 45%;
     background-color: #3c9975;
