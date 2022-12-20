@@ -89,4 +89,12 @@ export class TableListComponent implements OnInit {
 
   }
 
+  deleteUserById(employee_id){
+   
+      this.userServices.deleteUser(employee_id)
+      .subscribe(book=>{
+        this.userDataDetails();
+      })
+     
+  }
 }

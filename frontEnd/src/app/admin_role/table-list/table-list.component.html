@@ -94,10 +94,10 @@
                             <td> {{ user.team_name}} </td>
                             <td> {{ user.role}} </td>
                             <td>
-                                <a href="#editEmployeeModal" (click)="updateUser(user.id)" class="edit"
+                                <a href="#editEmployeeModal" (click)="updateUser(user.employee_id)" class="edit"
                                     data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
                                         title="Edit">&#xE254;</i></a>
-                                <a href="#deleteEmployeeModal" (click)="deleteUser(user.id)" class="delete"
+                                <a href="#deleteEmployeeModal" (click)="deleteUser(user.employee_id)" class="delete"
                                     data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
                                         title="Delete">&#xE872;</i></a>
                             </td>
@@ -124,7 +124,7 @@
     <div id="addEmployeeModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form (ngSubmit)="doRegisteration()">
+                <form (ngSubmit)="doRegisteration()" [routerLink]="['/admin/user-details']">
                     <div class=" modal-header">
                         <h4 class="modal-title">Add Employee</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

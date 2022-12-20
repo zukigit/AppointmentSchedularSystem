@@ -48,7 +48,7 @@ getUserDetails(){
     return this.http.patch(`${this.baseUrl}/updateUser/${id}`, data, this.header);
   }
 
-  deleteUser(id: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/deleteUser/${id}`, this.header);
+  deleteUser(employee_id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/deleteUser/${employee_id}`, this.header);
   }
 }
