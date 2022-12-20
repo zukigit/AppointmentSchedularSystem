@@ -70,5 +70,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'user/test', component: UserComponent},
     { path: 'trainee/test', component: TraineeComponent},
     { path: 'addEmployeeModal', component: RegisterComponent},
-    { path: 'updateuser', component: UpdateComponent}
+    { path: 'updateuser/:id', component: UpdateComponent}
 ];

@@ -21,7 +21,7 @@ export class UserService {
   }
 
   constructor(private http: HttpClient) { }
-  private baseUrl = `http://localhost:8080/api/v1/`;
+  private baseUrl = `http://localhost:8080/api/v1`;
 
   getDepartment(){
    return this.http.get("http://localhost:8080/api/v1/getDepartment", this.header);
@@ -40,12 +40,12 @@ getUserDetails(){
     return this.http.post("http://localhost:8080/api/v1/saveUser/", users, this.header);
   }
 
-  getUserId(id: string): Observable<Object> {  
-    return this.http.get(`${this.baseUrl}/userId/${id}`, this.header);  
+  getUserId(id: string): Observable<User> {  
+    return this.http.get<User>(`${this.baseUrl}/getById/${id}`, this.header);  
   }
 
-  updateUser(data: any, id: string): Observable<any> {
-    return this.http.patch(`${this.baseUrl}/updateUser/${id}`, data, this.header);
+  updateUser(id: string, user:User): Observable<User> {
+    return this.http.put(`${this.baseUrl}/updateUser/${id}`, user, this.header);
   }
 
   deleteUser(employee_id: string): Observable<any> {

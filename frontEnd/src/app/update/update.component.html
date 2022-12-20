@@ -1,55 +1,59 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<body>
- <div class="container">
-   <div class="title">Add Employee</div>
-   <div class="content">
-     <form (ngSubmit)="doRegisteration()">
-       <div class="user-details">
-         <div class="input-box">
-           <span class="details">Employee ID</span>
-           <input type="text" [(ngModel)]="user.employee_id" id="employee_id" placeholder="Employee ID">
-         </div> 
-         <div class="input-box">
-           <span class="details">Employee Name</span>
-           <input type="text" [(ngModel)]="user.name" id="name" placeholder="Employee Name" >
-         </div>
-         <div class="input-box">
-           <span class="details">Password</span>
-           <input type="password" [(ngModel)]="user.password" id="pass" placeholder="Password" >
-         </div>
-         <div class="input-box">
-           <span class="details">Phone Number</span>
-           <input type="text" [(ngModel)]="user.phone_number" id="phone" placeholder="Enter Phone number">
-         </div>
-         <div class="input-box">
-           <span class="details">Department</span>
-           <select class="selectDept" (change)="onSelect($event)" >
-            <option selected="true" disabled>Select Department</option>
-            <option *ngFor="let departments of department" value="{{departments.department_id}}">{{departments.department_name}}</option>    
-        </select>
-         </div>
-         <div class="input-box">
-           <span class="details">Team</span>
-           <select [(ngModel)]="user.team_id" class="selectTeam" >Select Team
-            <option selected="true" disabled>Select Team</option>
-           <option *ngFor="let teams of tempTeam" value="{{teams.team_id}}">{{teams.team_name}}</option>
-        </select>
-         </div>
-         <div class="input-box">
-            <span class="details">Position</span>
-            <input type="text" [(ngModel)]="user.position" id="position" placeholder="Enter Position" >
-          </div>
-         <div class="input-box">
-           <span class="details">Permission Role</span>
-           <select [(ngModel)]="user.role" class="selectRoles">
-            <option  default disabled>Select Role</option>
-            <option value="USER">User</option>
-            <option value="TRAINEE">Trainee</option>
-        </select>
-         </div>
 
-       </div>
-       <div class="gender-details">
+<body>
+  <div class="container">
+    <div class="title">Update Employee</div>
+    <div class="content">
+      <form (ngSubmit)="doUpdate()">
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Employee ID</span>
+            <input type="text" [(ngModel)]="user.employee_id" name="employee_id" id="employee_id"
+              placeholder="Employee ID">
+          </div>
+          <div class="input-box">
+            <span class="details">Employee Name</span>
+            <input type="text" [(ngModel)]="user.name" name="name" id="name" placeholder="Employee Name">
+          </div>
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input type="password" [(ngModel)]="user.password" name="password" id="pass" placeholder="Password">
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="text" [(ngModel)]="user.phone_number" name="phone_number" id="phone"
+              placeholder="Enter Phone number">
+          </div>
+          <div class="input-box">
+            <span class="details">Department</span>
+            <select class="selectDept" name="team" (change)="onSelect($event)"> -->
+              <option selected="true" disabled>Select Department</option>
+              <option *ngFor="let departments of department" value="{{departments.department_id}}">
+                {{departments.department_name}}</option>
+            </select>
+          </div>
+          <div class="input-box">
+            <span class="details">Team</span>
+            <select name="team_name" [(ngModel)]="user.team_id" class="selectTeam">Select Team
+              <option selected="true" disabled>Select Team</option>
+              <option *ngFor="let teams of tempTeam" value="{{teams.team_id}}">{{teams.team_name}}</option>
+            </select>
+          </div>
+          <div class="input-box">
+            <span class="details">Position</span>
+            <input type="text" [(ngModel)]="user.position" name="position" id="position" placeholder="Enter Position">
+          </div>
+          <div class="input-box">
+            <span class="details">Permission Role</span>
+            <select name="role" [(ngModel)]="user.role" class="selectRoles">
+              <option default disabled>Select Role</option>
+              <option value="USER">User</option>
+              <option value="TRAINEE">Trainee</option>
+            </select>
+          </div>
+
+        </div>
+        <!-- <div class="gender-details">
          <input type="radio" name="gender" id="dot-1">
          <input type="radio" name="gender" id="dot-2">
          <input type="radio" name="gender" id="dot-3">
@@ -57,31 +61,37 @@
          <div class="category">
            <label for="dot-1">
            <span class="dot one"></span>
-           <span class="gender" [(ngModel)]="user.gender" value="Male">Male</span>
+           <input type="radio" class="gender" name= "gender" [(ngModel)]="user.gender" value="Male">Male
          </label>
          <label for="dot-2">
            <span class="dot two"></span>
-           <span class="gender" name="gender" [(ngModel)]="user.gender" value="Female" >Female</span>
+           <input type="radio" class="gender" name="gender" [(ngModel)]="user.gender" value="Female" >Female
          </label>
          <label for="dot-3">
            <span class="dot three"></span>
-           <span class="gender" name="gender" [(ngModel)]="user.gender" value="Others">Others</span>
+           <input type="radio" class="gender" name="gender" [(ngModel)]="user.gender" value="Others">Others
            </label>
          </div>
          
-       </div>
-       <div class="w3-show-inline-block">
-         <div class="w3-bar" >
-           <!-- <button class="w3-btn w3-red"  style=" border-radius: 3px; margin-right: 10px;">Cancle</button> -->
-           <!-- <button class="w3-btn " style="background-color: #435d7d; color:white; border-radius: 3px;" >Register</button> -->
-           <!-- <input type="submit" class="w3-btn" value="Add"> -->
-            <input type="button" class="w3-btn w3-red" style=" border-radius: 3px; margin-right: 10px;" data-dismiss="modal" value="Cancel">
-            <input type="submit" class="w3-btn" value="Add" style="background-color: #435d7d; color:white; border-radius: 3px;" >
-        
-         </div>
-         </div>
-     </form>
-   </div>
- </div>
-</body>
+       </div> -->
+        <h5 class="gender-details">Select your Gender</h5>
+        <div class="category">
+          Male<input type="radio" class="gender" name="gender" [(ngModel)]="user.gender" value="Male">
+          Female<input type="radio" class="gender" name="gender" [(ngModel)]="user.gender" value="Female">
+        </div>
+        <div class="w3-show-inline-block">
+          <div class="w3-bar">
+            <!-- <button class="w3-btn w3-red"  style=" border-radius: 3px; margin-right: 10px;">Cancle</button> -->
+            <!-- <button class="w3-btn " style="background-color: #435d7d; color:white; border-radius: 3px;" >Register</button> -->
+            <!-- <input type="submit" class="w3-btn" value="Add"> -->
+            <input [routerLink]="['admin/user-details']" type="button" class="w3-btn w3-red" style=" border-radius: 3px; margin-right: 10px;"
+              data-dismiss="modal" value="Cancel">
+            <input type="submit" class="w3-btn" value="Update"
+              style="background-color: #435d7d; color:white; border-radius: 3px;">
 
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>

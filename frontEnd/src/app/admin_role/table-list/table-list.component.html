@@ -95,7 +95,7 @@
                             <td> {{ user.team_name}} </td>
                             <td> {{ user.role}} </td>
                             <td>
-                                <a href="#editEmployeeModal" (click)="updateUser(user.employee_id)" class="edit"
+                                <a href="" (click)="updateUser(user.employee_id)" class="edit"
                                     data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
                                         title="Edit">&#xE254;</i></a>
                                 <a href="#deleteEmployeeModal" (click)="deleteUser(user.employee_id)" class="delete"
@@ -106,22 +106,10 @@
                     </tbody>
                 </table>
             </form>
-                <!-- <div class="clearfix">
-                    <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a href="#">Previous</a></li>
-                        <li class="page-item"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item"><a href="#" class="page-link">2</a></li>
-                        <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                        <li class="page-item"><a href="#" class="page-link">4</a></li>
-                        <li class="page-item"><a href="#" class="page-link">5</a></li>
-                        <li class="page-item"><a href="#" class="page-link">Next</a></li>
-                    </ul>
-                </div> -->
             </div>
         </div>
     </div>
-    <!-- Add Modal HTML -->
+    <!-- Add Modal HTML
     <div id="addEmployeeModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -144,7 +132,7 @@
                     <label>Phone</label>
                     <input type="text" class="form-control" required>
                 </div> -->
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                     <label for="employee_id"><i class="fa-solid fa-id-card"></i></label>
                     <input type="text" [(ngModel)]="user.employee_id" id="employee_id" placeholder="Employee ID" />
                         </div>
@@ -208,9 +196,9 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- Edit Modal HTML -->
-    <div id="editEmployeeModal" class="modal fade">
+    <!-- <div id="editEmployeeModal" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form #loginForm="ngForm" (ngSubmit)="updateUser(loginForm.value)">
@@ -225,7 +213,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --> -->
     <!-- Delete Modal HTML -->
     <div id="deleteEmployeeModal" class="modal fade">
         <div class="modal-dialog">

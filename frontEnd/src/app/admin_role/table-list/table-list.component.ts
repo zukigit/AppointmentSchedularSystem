@@ -66,12 +66,7 @@ export class TableListComponent implements OnInit {
 
 
   updateUser(id: string) {
-    this.userServices.getUserId(id)
-      .subscribe(
-        data => {
-          this.userlist = data
-        },
-        error => console.log(error));
+    this.router.navigate(['updateuser',id])
   }
 
   doRegisteration() {
@@ -127,15 +122,15 @@ export class TableListComponent implements OnInit {
    
 
   
-  SearchTeam(){
-    if(this.userSearch != ""){
-      this.userDataDetails = this.userDataDetails.filter(res=>{
-        return res.team_name.toLocaleLowerCase().match(this.userSearch.toLocaleLowerCase());
-      })
-    }
-    else if(this.userSearch == ""){
-      this.ngOnInit(); 
-    }
+  // SearchTeam(){
+  //   if(this.userSearch != ""){
+  //     this.userDataDetails = this.userDataDetails.filter(res=>{
+  //       return res.team_name.toLocaleLowerCase().match(this.userSearch.toLocaleLowerCase());
+  //     })
+  //   }
+  //   else if(this.userSearch == ""){
+  //     this.ngOnInit(); 
+  //   }
    
-  }
+ }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'app/model/user';
 import { UserService } from 'app/services/user.service';
 import { HttpClient } from '@angular/common/http';
-import { Route, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { data } from 'jquery';
 import * as e from 'express';
 import { filter } from 'rxjs';
@@ -12,7 +12,7 @@ import { Team } from 'app/model/team';
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',
-  styleUrls: ['./update.component.scss']
+  styleUrls: ['./update.component.css']
 })
 export class UpdateComponent implements OnInit {
 
@@ -27,19 +27,27 @@ export class UpdateComponent implements OnInit {
   test = ['a', 'b', 'c'];
   team: Team = new Team();
 
-  user: User = new User();
+  user: User;
   registerModel: RegisterationRequestModel = new RegisterationRequestModel();
 
+  id:string;
   constructor(private userServices: UserService, private http: HttpClient, private userList: UserService,
-    private router: Router) {
+    private router: Router,private route:ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.id = this.route.snapshot.params['id'];
+
+    this.user = new User();
+    this.userServices.getUserId(this.id).subscribe(data => {
+      this.user = data;
+      console.log(this.user);
+    },error => console.log("Update Response Front Error!!"));
 
     this.userDataDetails = this.userServices.getUserDetails().subscribe(data => this.userDataDetails = data);
 
     this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
-    //    this.department = this.userServices.getDepartment(); 
+       this.department = this.userServices.getDepartment(); 
     this.userServices.getTeam().subscribe(
       {
         next: (data) => {
@@ -49,7 +57,6 @@ export class UpdateComponent implements OnInit {
     )
 
   }
-
   dataOfUser() {
     this.userDataDetails = this.userServices.getUserDetails().subscribe(data => this.userDataDetails = data);
     console.log("user data is called" + this.userDataDetails);
@@ -61,40 +68,11 @@ export class UpdateComponent implements OnInit {
     });
     console.log("teams length is" + this.teamArray.length);
   }
-
-
-  updateUser(id: string) {
-    this.userServices.getUserId(id)
-      .subscribe(
-        data => {
-          this.userlist = data
-        },
-        error => console.log(error));
+  doUpdate() {
+    this.userServices.updateUser(this.id , this.user)
+      .subscribe(data => console.log(data), error => console.log(error));
+    this.user = new User();
+    this.router.navigate(['admin/user-details']);
   }
 
-  doRegisteration() {
-    this.team.team_id = this.user.team_id;
-    this.registerModel.employee_id = this.user.employee_id;
-    this.registerModel.name = this.user.name;
-    this.registerModel.password = this.user.password;
-    this.registerModel.phone_number = this.user.phone_number;
-    this.registerModel.gender = this.user.gender;
-    this.registerModel.role = this.user.role;
-    this.registerModel.position = this.user.position;
-    this.registerModel.team = this.team;
-    this.userServices.createUser(this.registerModel).subscribe(data => { this.router.navigate(['admin/user-details']);
-    console.log("Successfully");
   }
-    );
-
-  }
-
-  deleteUserById(employee_id){
-   
-      this.userServices.deleteUser(employee_id)
-      .subscribe(book=>{
-        this.userDataDetails();
-      })
-     
-  }
-}
