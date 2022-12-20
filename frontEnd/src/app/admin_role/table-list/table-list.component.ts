@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Route, Router } from '@angular/router';
 import { data } from 'jquery';
 import * as e from 'express';
-import { filter } from 'rxjs';
+import { filter, switchMap } from 'rxjs';
 import { RegisterationRequestModel } from 'app/model/registeration-request-model';
 import { Team } from 'app/model/team';
 
@@ -53,8 +53,8 @@ export class TableListComponent implements OnInit {
   }
 
   dataOfUser() {
-    this.userDataDetails = this.userServices.getUserDetails().subscribe(data => this.userDataDetails = data);
-    console.log("user data is called" + this.userDataDetails);
+    this.userDataDetails = this.userServices.getUserDetails().subscribe(data => this.userDataDetails (data));
+    
   }
 
   onSelect(department) {
@@ -101,5 +101,41 @@ export class TableListComponent implements OnInit {
       this.ngOnInit(); 
     }
     
+  }
+
+  SearchDepartment(){
+    if(this.userSearch != ""){
+      this.userDataDetails = this.userDataDetails.filter(res=>{
+        return res.department_name.toLocaleLowerCase().match(this.userSearch.toLocaleLowerCase());
+      })
+    }
+    else if(this.userSearch == ""){
+      this.ngOnInit(); 
+    }
+   
+  }
+
+  SearchTeam(){
+    if(this.userSearch != ""){
+      this.userDataDetails = this.userDataDetails.filter(res=>{
+        return res.team_name.toLocaleLowerCase().match(this.userSearch.toLocaleLowerCase());
+      })
+    }
+    else if(this.userSearch == ""){
+      this.ngOnInit(); 
+    }
+   
+
+  
+  SearchTeam(){
+    if(this.userSearch != ""){
+      this.userDataDetails = this.userDataDetails.filter(res=>{
+        return res.team_name.toLocaleLowerCase().match(this.userSearch.toLocaleLowerCase());
+      })
+    }
+    else if(this.userSearch == ""){
+      this.ngOnInit(); 
+    }
+   
   }
 }
