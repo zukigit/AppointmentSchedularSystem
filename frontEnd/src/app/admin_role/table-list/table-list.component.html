@@ -50,7 +50,8 @@
             <div class="table-wrapper">
                 <form class="navbar-form" >
                     <div class="input-group" >
-                        <input type="text" value="" class="form-control" placeholder="Search..."
+                        <input type="text" [(ngModel)]="userSearch" (input)="SearchUser()" class="form-control" placeholder="Search..."
+
                         style="margin-left:65%;
                         border-top: 3px;
                         width: 20%;
@@ -74,7 +75,7 @@
                         </div>
                     </div>
                 </div>
-            <form (ngModal)="dataOfUser()">
+            <form (ngModel)="dataOfUser()">
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>

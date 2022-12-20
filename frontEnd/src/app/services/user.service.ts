@@ -51,4 +51,8 @@ getUserDetails(){
   deleteUser(employee_id: string): Observable<any> {
     return this.http.delete(`${this.baseUrl}/deleteUser/${employee_id}`, this.header);
   }
+
+  searchUser(){
+    return this.http.get("localhost:8080/api/v1/searchUser",this.header);
+  }
 }

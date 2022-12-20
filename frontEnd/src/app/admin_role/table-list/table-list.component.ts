@@ -21,11 +21,13 @@ export class TableListComponent implements OnInit {
 
   userDataDetails: any = [];
   userlist: any = [];
+
   department: any = [];
   teamArray: Team[];
   tempTeam: Team[];
-  test = ['a', 'b', 'c'];
   team: Team = new Team();
+
+   userSearch : any=[];
 
   user: User = new User();
   registerModel: RegisterationRequestModel = new RegisterationRequestModel();
@@ -89,12 +91,15 @@ export class TableListComponent implements OnInit {
 
   }
 
-  // deleteUserById(employee_id){
-   
-  //     this.userServices.deleteUser(employee_id)
-  //     .subscribe(data=>{
-  //       this.userDataDetails(data);
-  //     })
-     
-  // }
+  SearchUser(){
+    if(this.userSearch != ""){
+      this.userDataDetails = this.userDataDetails.filter(res=>{
+        return res.name.toLocaleLowerCase().match(this.userSearch.toLocaleLowerCase());
+      })
+    }
+    else if(this.userSearch == ""){
+      this.ngOnInit(); 
+    }
+    
+  }
 }
