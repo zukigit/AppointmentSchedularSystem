@@ -46,12 +46,17 @@ export class LoginComponent implements OnInit {
 
         if(this.jwtResponse.role == "ROLE_ADMIN"){
           console.log("go to dashboard");
-          this.router.navigate(['/admin/dashboard']);
-          console.log("done");
+          this.router.navigate(['/admin/dashboard']).then(()=>{
+            window.location.reload();
+        });
         } else if(this.jwtResponse.role == "ROLE_USER") {
-          this.router.navigate(['/user/test']);
+          this.router.navigate(['/user/test']).then(()=>{
+            window.location.reload();
+        });
         } else if(this.jwtResponse.role == "ROLE_TRAINEE") {
-          this.router.navigate(['/trainee/test']);
+          this.router.navigate(['/trainee/test']).then(()=>{
+            window.location.reload();
+        });
         } else {
           this.router.navigate(['/login']);
         }
