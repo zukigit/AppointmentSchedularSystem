@@ -1,6 +1,8 @@
 package com.ai.backEnd.repository;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -36,4 +38,6 @@ public interface UserRespositroy extends JpaRepository<User, String>{
 			"    User u join Team t on u.team.team_id = t.team_id join Department d on d.department_id = t.department.department_id where t.team_name=:searchKey")
 	List<UserDetail> searchByTeamName(String searchKey);
 
+	@Query("select count(p) = 1 from User p where employee_id = ?1")
+	public boolean checkUserExist(String userId);
 }
