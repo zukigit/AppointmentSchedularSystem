@@ -48,8 +48,8 @@ getUserDetails(){
     return this.http.put(`${this.baseUrl}/updateUser/${id}`, user, this.header);
   }
 
-  deleteUser(employee_id: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/deleteUser/${employee_id}`, this.header);
+  deleteUser(id: string): Observable<Object> {
+    return this.http.delete(`${this.baseUrl}/deleteById/${id}`, this.header);
   }
 
   searchUser(){

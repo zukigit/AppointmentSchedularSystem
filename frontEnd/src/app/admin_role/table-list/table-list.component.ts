@@ -3,11 +3,9 @@ import { User } from 'app/model/user';
 import { UserService } from 'app/services/user.service';
 import { HttpClient } from '@angular/common/http';
 import { Route, Router } from '@angular/router';
-import { data } from 'jquery';
-import * as e from 'express';
-import { filter, switchMap } from 'rxjs';
 import { RegisterationRequestModel } from 'app/model/registeration-request-model';
 import { Team } from 'app/model/team';
+
 
 @Component({
   selector: 'app-table-list',
@@ -27,7 +25,8 @@ export class TableListComponent implements OnInit {
   tempTeam: Team[];
   team: Team = new Team();
 
-   userSearch : any=[];
+  userSearch: any = [];
+  adminId: string;
 
   user: User = new User();
   registerModel: RegisterationRequestModel = new RegisterationRequestModel();
@@ -53,8 +52,8 @@ export class TableListComponent implements OnInit {
   }
 
   dataOfUser() {
-    this.userDataDetails = this.userServices.getUserDetails().subscribe(data => this.userDataDetails (data));
-    
+    this.userDataDetails = this.userServices.getUserDetails().subscribe(data => this.userDataDetails(data));
+
   }
 
   onSelect(department) {
@@ -66,7 +65,7 @@ export class TableListComponent implements OnInit {
 
 
   updateUser(id: string) {
-    this.router.navigate(['updateuser',id])
+    this.router.navigate(['updateuser', id])
   }
 
   doRegisteration() {
@@ -79,58 +78,75 @@ export class TableListComponent implements OnInit {
     this.registerModel.role = this.user.role;
     this.registerModel.position = this.user.position;
     this.registerModel.team = this.team;
-    this.userServices.createUser(this.registerModel).subscribe(data => { this.router.navigate(['admin/user-details']);
-    console.log("Successfully");
-  }
+    this.userServices.createUser(this.registerModel).subscribe(data => {
+      this.router.navigate(['admin/user-details']);
+      console.log("Successfully");
+    }
     );
 
   }
 
-  SearchUser(){
-    if(this.userSearch != ""){
-      this.userDataDetails = this.userDataDetails.filter(res=>{
+  SearchUser() {
+    if (this.userSearch != "") {
+      this.userDataDetails = this.userDataDetails.filter(res => {
         return res.name.toLocaleLowerCase().match(this.userSearch.toLocaleLowerCase());
       })
     }
-    else if(this.userSearch == ""){
-      this.ngOnInit(); 
+    else if (this.userSearch == "") {
+      this.ngOnInit();
     }
-    
+
   }
 
-  SearchDepartment(){
-    if(this.userSearch != ""){
-      this.userDataDetails = this.userDataDetails.filter(res=>{
+  SearchDepartment() {
+    if (this.userSearch != "") {
+      this.userDataDetails = this.userDataDetails.filter(res => {
         return res.department_name.toLocaleLowerCase().match(this.userSearch.toLocaleLowerCase());
       })
     }
-    else if(this.userSearch == ""){
-      this.ngOnInit(); 
+    else if (this.userSearch == "") {
+      this.ngOnInit();
     }
-   
+
   }
 
-  SearchTeam(){
-    if(this.userSearch != ""){
-      this.userDataDetails = this.userDataDetails.filter(res=>{
+  SearchTeam() {
+    if (this.userSearch != "") {
+      this.userDataDetails = this.userDataDetails.filter(res => {
         return res.team_name.toLocaleLowerCase().match(this.userSearch.toLocaleLowerCase());
       })
     }
-    else if(this.userSearch == ""){
-      this.ngOnInit(); 
+    else if (this.userSearch == "") {
+      this.ngOnInit();
     }
-   
 
-  
-  // SearchTeam(){
-  //   if(this.userSearch != ""){
-  //     this.userDataDetails = this.userDataDetails.filter(res=>{
-  //       return res.team_name.toLocaleLowerCase().match(this.userSearch.toLocaleLowerCase());
-  //     })
-  //   }
-  //   else if(this.userSearch == ""){
-  //     this.ngOnInit(); 
-  //   }
-   
- }
+
+
+    // SearchTeam(){
+    //   if(this.userSearch != ""){
+    //     this.userDataDetails = this.userDataDetails.filter(res=>{
+    //       return res.team_name.toLocaleLowerCase().match(this.userSearch.toLocaleLowerCase());
+    //     })
+    //   }
+    //   else if(this.userSearch == ""){
+    //     this.ngOnInit(); 
+    //   }
+  }
+
+  deleteUser(id: string) {
+    this.adminId = localStorage.getItem("loggedInUserId");
+    console.log("Admin Id is " + this.adminId);
+    if (id != this.adminId) {
+        this.userServices.deleteUser(id).subscribe(data => {
+        this.router.navigate(['admin/user-details']).then(()=>{
+          window.location.reload();
+        });
+      })
+    } else {
+      alert("Can't delete ")
+    }
+
+  }
+
+
 }

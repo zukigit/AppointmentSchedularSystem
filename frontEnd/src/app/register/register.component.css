@@ -111,7 +111,7 @@ form .input-box span.details{
    border-color: #d9d9d9;
  }
  form input[type="radio"]{
-   display: none;
+   /* display: none; */
  }
  form .button{
    height: 45px;
