@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.model.UserDetail;
@@ -50,13 +49,24 @@ public class UserController {
 	}
 	
 	//Delete User
-	@DeleteMapping("/deleteById/{employee_id}")
+	@DeleteMapping("/deleteUser/{employee_id}")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Map<String, Boolean>> deleteUser(@PathVariable String employee_id){
-		service.deleteUserById(employee_id);
+	    service.deleteUserById(employee_id);
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("deleted", Boolean.TRUE);
 		return ResponseEntity.ok(response);
+	}
+
+	@DeleteMapping("/deleteById/{employee_id}")
+	public ResponseEntity<User> deleteById(@PathVariable String employee_id){
+		User dto =  service.getUserById(employee_id);
+		dto.setAccountNonExpired(false);
+		dto.setAccountNonLocked(false);
+		dto.setCredentialsNonExpired(false);
+		dto.setEnabled(false);
+        User user = service.saveUser(dto);
+		return ResponseEntity.ok(user);
 	}
 	
 	//GetById
@@ -103,4 +113,15 @@ public class UserController {
 		}
 
 	}
+
+	// @DeleteMapping("/del/{employee_id}")
+	// @PreAuthorize("hasRole('ADMIN')")
+	// public boolean deleteById(@PathVariable String employee_id){
+	// 	boolean bol = false;
+	// 	if(bol){
+	// 		boolean bol1  = service.deleteById(employee_id);
+	// 		System.out.println("delete successful " + bol1);
+	// 	}
+	// 	return true;
+	// }
 }

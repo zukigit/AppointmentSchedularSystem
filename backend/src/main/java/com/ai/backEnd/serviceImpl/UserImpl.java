@@ -45,12 +45,6 @@ public class UserImpl implements UserService{
 	
 	@Override
 	public List<UserDetail> userDetail() {
-//		List<UserDetail> returnUser = new ArrayList<UserDetail>();
-//		List<?> dataFromRepo = repo.userDetail();
-//		
-//		for(var data : dataFromRepo) {
-//			System.out.println("data is " + data);
-//		}
 		return repo.userDetail();
 	}
 
@@ -68,5 +62,17 @@ public class UserImpl implements UserService{
 	@Override
 	public List<UserDetail> searchByTeamName(String searchKey) {
 		return repo.searchByTeamName(searchKey);
+	}
+
+	@Override
+	public boolean  deleteById(String employee_id) {
+		boolean bol;
+		if(bol = true){
+			repo.deleteById(employee_id);
+			System.out.println("Delete successful....");
+		}else{
+		return true;
+		}
+		return bol;
 	}
 }

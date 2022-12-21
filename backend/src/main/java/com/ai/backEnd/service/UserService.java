@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.model.UserDetail;
-import com.ai.backEnd.model.UserSearch;
+
 
 public interface UserService {
 	
@@ -15,14 +15,21 @@ public interface UserService {
 	User getUserById(String employee_id);
 	
 	void deleteUserById(String employee_id);
+
+	boolean deleteById(String employee_id);
 	
 	User updateUser(User emploee_id);
 	
 	List<UserDetail> userDetail();
 
 	List<UserDetail> searchByNameOrId(String searchKey);
+
 	List<UserDetail> seacrhByDepartmentName(String searchKey);
+
 	List<UserDetail> searchByTeamName(String searchKey);
 
+
+
+ 
 
 }
