@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 import com.ai.backEnd.model.User;
+import com.ai.backEnd.model.UserRole;
 import com.ai.backEnd.security.UserAuthRole;
 import com.ai.backEnd.serviceImpl.UserImpl;
 
@@ -33,8 +34,8 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao{
 			ApplicationUser appUser = new ApplicationUser(
 					user.getEmployee_id(),
 					user.getPassword(),
-					user.getRole().equals("ADMIN")?UserAuthRole.ADMIN.getGrantantedAuthorities()
-							:user.getRole().equals("USER")?UserAuthRole.USER.getGrantantedAuthorities()
+					user.getRole().equals(UserRole.ADMIN)?UserAuthRole.ADMIN.getGrantantedAuthorities()
+							:user.getRole().equals(UserRole.USER)?UserAuthRole.USER.getGrantantedAuthorities()
 							:UserAuthRole.TRAINEE.getGrantantedAuthorities(),
 					user.isAccountNonExpired(),
 					user.isAccountNonLocked(),
