@@ -49,26 +49,11 @@
          </div>
 
        </div>
-       <div class="gender-details">
-         <input type="radio" name="gender" id="dot-1">
-         <input type="radio" name="gender" id="dot-2">
-         <input type="radio" name="gender" id="dot-3">
-         <span class="gender-title">Gender</span>
-         <div class="category">
-           <label for="dot-1">
-           <span class="dot one"></span>
-           <span class="gender" [(ngModel)]="user.gender" value="Male">Male</span>
-         </label>
-         <label for="dot-2">
-           <span class="dot two"></span>
-           <span class="gender" name="gender" [(ngModel)]="user.gender" value="Female" >Female</span>
-         </label>
-         <label for="dot-3">
-           <span class="dot three"></span>
-           <span class="gender" name="gender" [(ngModel)]="user.gender" value="Others">Others</span>
-           </label>
-         </div>
-         
+       <h3 class="gender-details">Select your Gender</h3>
+       <div class="category">
+         Male<input type="radio" class="gender" name="gender" [(ngModel)]="user.gender" value="Male">
+         Female<input type="radio" class="gender" name="gender" [(ngModel)]="user.gender" value="Female">
+         Other<input type="radio" class="gender" name="gender" [(ngModel)]="user.gender" value="Other">
        </div>
        <div class="w3-show-inline-block">
          <div class="w3-bar" >

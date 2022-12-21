@@ -1,11 +1,8 @@
 package com.ai.backEnd.serviceImpl;
 
 import java.util.List;
-
-import com.ai.backEnd.model.UserSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.model.UserDetail;
 import com.ai.backEnd.repository.UserRespositroy;
@@ -65,14 +62,10 @@ public class UserImpl implements UserService{
 	}
 
 	@Override
-	public boolean  deleteById(String employee_id) {
-		boolean bol;
-		if(bol = true){
-			repo.deleteById(employee_id);
-			System.out.println("Delete successful....");
-		}else{
-		return true;
-		}
-		return bol;
+
+	public Boolean isUserExist(String userId) {
+		return repo.checkUserExist(userId);
 	}
+
+
 }
