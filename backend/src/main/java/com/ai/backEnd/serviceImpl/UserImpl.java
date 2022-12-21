@@ -1,11 +1,11 @@
 package com.ai.backEnd.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.ai.backEnd.model.UserSearch;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.model.UserDetail;
 import com.ai.backEnd.repository.UserRespositroy;
@@ -68,5 +68,11 @@ public class UserImpl implements UserService{
 	@Override
 	public List<UserDetail> searchByTeamName(String searchKey) {
 		return repo.searchByTeamName(searchKey);
+	}
+
+	@Override
+	public Boolean isUserExist(String userId) {
+		// TODO Auto-generated method stub
+		return repo.checkUserExist(userId);
 	}
 }

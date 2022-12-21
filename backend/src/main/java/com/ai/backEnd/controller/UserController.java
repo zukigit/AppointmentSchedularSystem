@@ -1,9 +1,14 @@
 package com.ai.backEnd.controller;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.model.UserDetail;
 import com.ai.backEnd.model.UserSearch;
@@ -43,10 +49,14 @@ public class UserController {
 	//AddUser
 	@PostMapping("/saveUser" )
 	@PreAuthorize("hasRole('ADMIN')")
-	public User saveUser(@RequestBody User user) {
-		String encodedPassword = passwordEncoder.encode(user.getPassword());
-		user.setPassword(encodedPassword);
-		return service.saveUser(user);
+	public void saveUser(@RequestBody User user) {
+		if(service.isUserExist(user.getEmployee_id())) {
+	        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "UserId already exists!");
+		} else {
+			String encodedPassword = passwordEncoder.encode(user.getPassword());
+			user.setPassword(encodedPassword);
+			service.saveUser(user);
+		}
 	}
 	
 	//Delete User

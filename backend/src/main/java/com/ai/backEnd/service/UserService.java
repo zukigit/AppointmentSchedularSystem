@@ -1,10 +1,8 @@
 package com.ai.backEnd.service;
 
 import java.util.List;
-
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.model.UserDetail;
-import com.ai.backEnd.model.UserSearch;
 
 public interface UserService {
 	
@@ -21,8 +19,10 @@ public interface UserService {
 	List<UserDetail> userDetail();
 
 	List<UserDetail> searchByNameOrId(String searchKey);
+	
 	List<UserDetail> seacrhByDepartmentName(String searchKey);
+	
 	List<UserDetail> searchByTeamName(String searchKey);
-
-
+	
+	Boolean isUserExist(String userId);
 }
