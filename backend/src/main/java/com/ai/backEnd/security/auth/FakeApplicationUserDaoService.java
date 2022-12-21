@@ -33,7 +33,9 @@ public class FakeApplicationUserDaoService implements ApplicationUserDao{
 			ApplicationUser appUser = new ApplicationUser(
 					user.getEmployee_id(),
 					user.getPassword(),
-					UserAuthRole.ADMIN.getGrantantedAuthorities(),
+					user.getRole().equals("ADMIN")?UserAuthRole.ADMIN.getGrantantedAuthorities()
+							:user.getRole().equals("USER")?UserAuthRole.USER.getGrantantedAuthorities()
+							:UserAuthRole.TRAINEE.getGrantantedAuthorities(),
 					user.isAccountNonExpired(),
 					user.isAccountNonLocked(),
 					user.isCredentialsNonExpired(),

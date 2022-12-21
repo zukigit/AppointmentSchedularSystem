@@ -2,10 +2,8 @@ package com.ai.backEnd.security;
 
 public enum UserPermission {
 
-	STUDENT_READ("student:read"),
-	STUDENT_WRITE("student:write"),
-	COURSE_READ("course:read"),
-	COURSE_WRITE("course:write"),
+	APPOINTMENT_READ("course:read"),
+	APPOINTMENT_WRITE("course:read"),
 	USER_READ("user:read"),
 	USER_WRITE("user:write");
 	

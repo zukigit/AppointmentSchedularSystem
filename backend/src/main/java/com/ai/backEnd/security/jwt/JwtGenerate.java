@@ -2,7 +2,6 @@ package com.ai.backEnd.security.jwt;
 
 import java.util.Map;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,6 +10,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import com.ai.backEnd.model.LoginRequestModel;
+import com.ai.backEnd.security.auth.ApplicationUser;
 
 @Component
 public class JwtGenerate {
@@ -29,7 +29,7 @@ public class JwtGenerate {
 	
 	private JwtResponse createJwtToken(Authentication authentication) {
 		JwtResponse jwtResponse = new JwtResponse();
-		var user = (User) authentication.getPrincipal();
+		var user = (ApplicationUser) authentication.getPrincipal();
 		String userId = user.getUsername();
 		var rolesString = user.getAuthorities().stream()
 											   .map(GrantedAuthority::getAuthority)

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,6 +31,9 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@GetMapping("/getUser")
 	@PreAuthorize("hasRole('ADMIN')")
 	public List<User> getUser(ModelMap model,User employee){
@@ -40,6 +44,8 @@ public class UserController {
 	@PostMapping("/saveUser" )
 	@PreAuthorize("hasRole('ADMIN')")
 	public User saveUser(@RequestBody User user) {
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
 		return service.saveUser(user);
 	}
 	
