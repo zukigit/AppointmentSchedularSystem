@@ -18,26 +18,26 @@ public interface UserRespositroy extends JpaRepository<User, String>{
 	@Query("SELECT " +
 	           "    new com.ai.backEnd.model.UserDetail(u.employee_id, u.name,u.role, t.team_name, d.department_name) " +
 	           "FROM " +
-	           "    User u join Team t on u.team.team_id = t.team_id join Department d on d.department_id = t.department.department_id")
+	           "    User u join Team t on u.team.team_id = t.team_id join Department d on d.department_id = t.department.department_id where u.isEnabled = TRUE")
 	List<UserDetail> userDetail();
 
 	@Query("SELECT " +
 			"    new com.ai.backEnd.model.UserDetail(u.employee_id, u.name,u.role, t.team_name, d.department_name) " +
 			"FROM " +
-			"    User u join Team t on u.team.team_id = t.team_id join Department d on d.department_id = t.department.department_id where u.name=:searchKey or u.employee_id=:searchKey")
+			"    User u join Team t on u.team.team_id = t.team_id join Department d on d.department_id = t.department.department_id where u.name=:searchKey or u.employee_id=:searchKey and u.isEnabled = TRUE")
 	List<UserDetail> searchByNameOrId(String searchKey);
 
 	@Query("SELECT " +
 			"    new com.ai.backEnd.model.UserDetail(u.employee_id, u.name,u.role, t.team_name, d.department_name) " +
 			"FROM " +
-			"    User u join Team t on u.team.team_id = t.team_id join Department d on d.department_id = t.department.department_id where d.department_name=:searchKey")
+			"    User u join Team t on u.team.team_id = t.team_id join Department d on d.department_id = t.department.department_id where d.department_name=:searchKey and u.isEnabled = TRUE")
 	List<UserDetail> seacrhByDepartmentName(String searchKey);
 	@Query("SELECT " +
 			"    new com.ai.backEnd.model.UserDetail(u.employee_id, u.name,u.role, t.team_name, d.department_name) " +
 			"FROM " +
-			"    User u join Team t on u.team.team_id = t.team_id join Department d on d.department_id = t.department.department_id where t.team_name=:searchKey")
+			"    User u join Team t on u.team.team_id = t.team_id join Department d on d.department_id = t.department.department_id where t.team_name=:searchKey and u.isEnabled = TRUE")
 	List<UserDetail> searchByTeamName(String searchKey);
 
-	@Query("select count(p) = 1 from User p where employee_id = ?1")
+	@Query("select count(p) = 1 from User p where employee_id = ?1 and p.isEnabled = TRUE")
 	public boolean checkUserExist(String userId);
 }
