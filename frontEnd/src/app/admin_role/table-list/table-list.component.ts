@@ -65,7 +65,7 @@ export class TableListComponent implements OnInit {
 
 
   updateUser(id: string) {
-    this.router.navigate(['updateuser', id])
+    this.router.navigate(['admin/updateuser', id])
   }
 
   doRegisteration() {

@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("loggedInUserId", this.jwtResponse.userId);
         localStorage.setItem("loggedInUserRole", this.jwtResponse.role);
 
+
         if(this.jwtResponse.role == "ROLE_ADMIN"){
           console.log("go to dashboard");
           this.router.navigate(['/admin/dashboard']).then(()=>{

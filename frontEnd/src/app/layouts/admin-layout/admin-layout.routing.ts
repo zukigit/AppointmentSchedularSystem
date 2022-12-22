@@ -69,6 +69,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'upgrade', component: UpgradeComponent },
     { path: 'user/test', component: UserComponent},
     { path: 'trainee/test', component: TraineeComponent},
-    { path: 'addEmployeeModal', component: RegisterComponent},
-    { path: 'updateuser/:id', component: UpdateComponent}
+    { path: 'admin/addEmployeeModal', component: RegisterComponent,canActivate:[AdminAuthGuard]},
+    { path: 'admin/updateuser/:id', component: UpdateComponent}
 ];

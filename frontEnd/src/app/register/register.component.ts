@@ -83,9 +83,14 @@ export class RegisterComponent implements OnInit {
     this.registerModel.role = this.user.role;
     this.registerModel.position = this.user.position;
     this.registerModel.team = this.team;
-    this.userServices.createUser(this.registerModel).subscribe(data => { this.router.navigate(['admin/user-details']);
-    console.log("Successfully");
-  }
+    this.userServices.createUser(this.registerModel).subscribe(
+      data => { this.router.navigate(['admin/user-details']);
+                console.log("Successfully");
+            },
+            error => {console.log("Not create same userid");
+            this.router.navigate(['admin/user-details']);
+            alert("Can't create same userid")
+          }
     );
 
   }
