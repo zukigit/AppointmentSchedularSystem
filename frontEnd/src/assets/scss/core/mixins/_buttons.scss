@@ -211,7 +211,7 @@
 
 @mixin bmd-raised-button-color() {
   &.btn-primary {
-    @include bmd-raised-button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border-color);
+    @include bmd-raised-button-variant($btn-primary-color, #435d7d, #2b4e78);
   }
   &.btn-secondary {
     @include bmd-raised-button-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border-color);

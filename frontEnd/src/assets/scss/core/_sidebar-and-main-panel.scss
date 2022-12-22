@@ -30,14 +30,14 @@
         background-color: #191919;
     }
     .logo-img{
-        width: 35px;
+        width: 70px;
         display: block;
         max-height: 30px;
-        margin-left: 13px;
-        margin-right: 15px;
+        margin-left: 57px;
+        margin-right: 13px;
 
         img{
-            width: 35px;
+            width: 90px;
             top: 16px;
             position: absolute;
         }
@@ -159,6 +159,9 @@
             }
 
             &.active > a,
+            &.active > a span{
+                color: $white-color;
+            }
             &.active > a i{
                 color: $white-color;
             }
@@ -244,6 +247,9 @@
         display: block;
         position: relative;
         z-index: 4;
+        box-shadow: 0 14px 26px -12px rgb(67 93 125 / 42%), 
+                    0 4px 23px 0px rgb(0 0 0 / 12%), 
+                    0 8px 10px -5px rgb(67 93 125 / 20%);;
 
         &:after{
             content: '';
@@ -269,9 +275,9 @@
             padding: $padding-small-vertical $padding-zero;
             display: inline-block;
             font-size: 18px;
+            font-weight: 1000;
             color: $black-color;
             white-space: nowrap;
-            font-weight: $font-weight-default;
             line-height: 30px;
             overflow: hidden;
             text-align: center;

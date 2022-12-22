@@ -52,7 +52,7 @@
 @mixin set-background-color-button($color){
 
     li.active > a{
-        background-color: $color;
-        @include shadow-big-color($color);
+        background-color: #435d7d;
+        @include shadow-big-color(#063166);
     }
 }

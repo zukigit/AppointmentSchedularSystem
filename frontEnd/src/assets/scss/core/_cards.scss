@@ -191,7 +191,7 @@
     &.bg-warning,
     &.card-rotate.bg-warning .front,
     &.card-rotate.bg-warning .back{
-      background: linear-gradient(60deg, $orange-400, $orange-600);
+      background: linear-gradient(6deg, #ffcc33, #efb70d)
     }
     .card-header-danger .card-icon,
     .card-header-danger .card-text,
@@ -256,7 +256,7 @@
         .card-title a,
         .card-title,
         .icon i{
-            color: $white-color;
+            color: #435d7d;
         }
 
         .icon i{
@@ -359,6 +359,7 @@
 
     .card-title{
       margin-bottom: 3px;
+      font-size: large;
     }
 
     .card-category{
