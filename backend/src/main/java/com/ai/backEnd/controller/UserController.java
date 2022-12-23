@@ -82,10 +82,8 @@ public class UserController {
 	//GetById
 	@GetMapping("/getById/{employee_id}")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<User> getUserById(@PathVariable String employee_id){
-		User user = new User();
-		user = service.getUserById(employee_id);
-		return ResponseEntity.ok(user);
+	public UserDetail getUserById(@PathVariable String employee_id){
+		return service.searchById(employee_id);
 	}
 	//Update User
 	@PutMapping("/updateUser/{employee_id}")
@@ -121,7 +119,6 @@ public class UserController {
 			else{
 				return null;
 		}
-
 	}
 
 	// @DeleteMapping("/del/{employee_id}")

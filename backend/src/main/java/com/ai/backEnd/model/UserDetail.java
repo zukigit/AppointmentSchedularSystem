@@ -1,15 +1,15 @@
 package com.ai.backEnd.model;
 
 public class UserDetail {
-
-
     String employee_id;
     String name;
     UserRole role;
     String team_name;
     String department_name;
-
     
+    public UserDetail() {
+    	
+    }
 
 	public UserDetail(String employee_id, String name, UserRole role, String team_name, String department_name) {
 		this.employee_id = employee_id;

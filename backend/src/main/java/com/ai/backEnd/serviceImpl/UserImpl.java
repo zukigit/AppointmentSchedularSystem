@@ -67,5 +67,8 @@ public class UserImpl implements UserService{
 		return repo.checkUserExist(userId);
 	}
 
-
+	@Override
+	public UserDetail searchById(String searchKey) {
+		return repo.searchById(searchKey);
+	}
 }

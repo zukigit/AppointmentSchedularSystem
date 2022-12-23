@@ -40,4 +40,10 @@ public interface UserRespositroy extends JpaRepository<User, String>{
 
 	@Query("select count(p) = 1 from User p where employee_id = ?1 and p.isEnabled = TRUE")
 	public boolean checkUserExist(String userId);
+	
+	@Query("SELECT " +
+			"    new com.ai.backEnd.model.UserDetail(u.employee_id, u.name,u.role, t.team_name, d.department_name) " +
+			"FROM " +
+			"    User u join Team t on u.team.team_id = t.team_id join Department d on d.department_id = t.department.department_id where u.employee_id=:searchKey and u.isEnabled = TRUE")
+	UserDetail searchById(String searchKey);
 }
