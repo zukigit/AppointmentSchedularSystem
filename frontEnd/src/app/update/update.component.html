@@ -26,16 +26,16 @@
           </div>
           <div class="input-box">
             <span class="details">Department</span>
-            <select class="selectDept" name="team" (change)="onSelect($event)"> -->
-              <option selected="true" disabled>Select Department</option>
+            <select [(ngModel)]="user.department_name" class="selectDept" name="de\\" (change)="onSelect($event)"> -->
+              <option [(ngModel)]="user.department_name" name="department_name" selected="true" disabled>Select Department</option>
               <option *ngFor="let departments of department" value="{{departments.department_id}}">
                 {{departments.department_name}}</option>
             </select>
           </div>
           <div class="input-box">
             <span class="details">Team</span>
-            <select name="team_name" [(ngModel)]="user.team_id" class="selectTeam">Select Team
-              <option selected="true" disabled>Select Team</option>
+            <select name="team_name"  class="selectTeam">Select Team
+              <option [(ngModel)]="user.team_name" name="team_name"  selected="true" disabled>Select Team</option>
               <option *ngFor="let teams of tempTeam" value="{{teams.team_id}}">{{teams.team_name}}</option>
             </select>
           </div>

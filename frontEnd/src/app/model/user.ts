@@ -9,4 +9,7 @@ export class User {
     team_id?:string;
     role?:string;
     position?:string;
+    department_name?:string
+    team_name?:string;
+
 }

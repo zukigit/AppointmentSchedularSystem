@@ -48,19 +48,62 @@
         <div class="table-responsive">
 
             <div class="table-wrapper">
-                <form class="navbar-form">
-                    <div class="input-group">
-                        <input type="text" [(ngModel)]="userSearch" (input)="SearchUser()" class="form-control"
-                            placeholder="Search..." style="margin-left:65%;
-                        border-top: 3px;
-                        width: 20%;
-                        font-size: medium;">
-                        <button mat-raised-button type="submit" class="btn btn-round btn-just-icon">
-                            <i class="material-icons">search</i>
-                            <div class=""></div>
-                        </button>
-                    </div>
-                </form>
+
+                <!-- search start -->
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+                    integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+                    crossorigin="anonymous">
+
+                <!-- jQuery library -->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+                </script>
+
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js">
+                </script>
+
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+                </script>
+
+
+                <!-- Navigation Bar -->
+                <nav class="navbar navbar-expand-sm
+            bg-dark navbar-dark" style="background-color: #21212100 !important; margin-bottom: 20px;">
+
+
+
+                    <ul class="navbar nav ml-auto">
+                        <!-- Dropdown list -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="true" aria-expanded="false" style="color: #435d7d;">
+                                By Name
+                            </a>
+
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="">By Department
+                                </a>
+
+                                <a class="dropdown-item" href="">By Team
+                                </a>
+
+                                <a class="dropdown-item" href="">By Id
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <!-- Search Box -->
+                            <input type="text" [(ngModel)]="userSearch" (input)="SearchUser()" placeholder="Search....."
+                                style="font-size: large;">
+                        </li>
+                    </ul>
+                </nav>
+
+
+                <!-- search end -->
+
+
                 <div class="table-title">
                     <div class="row">
                         <div class="col-sm-6">
@@ -97,8 +140,9 @@
                                     <a href="" (click)="updateUser(user.employee_id)" class="edit"
                                         data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
                                             title="Edit">&#xE254;</i></a>
-                                    <a href="" (click)="deleteUser(user.employee_id)" class="delete" data-toggle="modal"><i
-                                            class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                    <a href="" (click)="deleteUser(user.employee_id)" class="delete"
+                                        data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
+                                            title="Delete">&#xE872;</i></a>
                                     <!-- <a href="#deleteEmployeeModal" class="delete"
                                     data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
                                         title="Delete">&#xE872;</i></a>
@@ -234,7 +278,7 @@
                 </form>
             </div>
         </div>
-    </div> --> -->
+    </div> -->
     <!-- Delete Modal HTML -->
 
 </body>
