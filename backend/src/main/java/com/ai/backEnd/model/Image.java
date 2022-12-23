@@ -23,7 +23,7 @@ public class Image {
     // private String id;
 
     @Column( name = "name")
-    private String name;
+    private String image_name;
     @Column ( name = "type")
     private String type;
     @Lob
@@ -39,11 +39,11 @@ public class Image {
     }
 
     public String getName() {
-        return name;
+        return image_name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.image_name = name;
     }
 
     public String getType() {
@@ -66,7 +66,7 @@ public class Image {
     public String toString() {
         return "Image{" +
                 "id=" + photo_id +
-                ", name='" + name + '\'' +
+                ", name='" + image_name + '\'' +
                 ", type='" + type + '\'' +
                 ", imageData=" + Arrays.toString(imageData) +
                 '}';

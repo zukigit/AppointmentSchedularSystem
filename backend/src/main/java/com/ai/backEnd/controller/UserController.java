@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.model.UserDetail;
+import com.ai.backEnd.model.UserRole;
 import com.ai.backEnd.model.UserSearch;
 import com.ai.backEnd.service.UserService;
 
@@ -62,21 +63,15 @@ public class UserController {
 	@DeleteMapping("/deleteUser/{employee_id}")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Map<String, Boolean>> deleteUser(@PathVariable String employee_id){
-	    service.deleteUserById(employee_id);
-		Map<String, Boolean> response = new HashMap<>();
-		response.put("deleted", Boolean.TRUE);
-		return ResponseEntity.ok(response);
-	}
-
-	@DeleteMapping("/deleteById/{employee_id}")
-	public ResponseEntity<User> deleteById(@PathVariable String employee_id){
 		User dto =  service.getUserById(employee_id);
-		dto.setAccountNonExpired(false);
-		dto.setAccountNonLocked(false);
-		dto.setCredentialsNonExpired(false);
-		dto.setEnabled(false);
-        User user = service.saveUser(dto);
-		return ResponseEntity.ok(user);
+		if(dto.getRole() == UserRole.ADMIN) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Admin can't be deleted");
+		} else {
+			service.deleteUserById(employee_id);
+			Map<String, Boolean> response = new HashMap<>();
+			response.put("deleted", Boolean.TRUE);
+			return ResponseEntity.ok(response);
+		}
 	}
 	
 	//GetById
