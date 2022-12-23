@@ -37,7 +37,7 @@ export class TableListComponent implements OnInit {
 
   ngOnInit() {
 
-    this.userDataDetails = this.userServices.getUserDetails().subscribe(data => this.userDataDetails = data);
+   this.getUserDetails()
 
     this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
     //    this.department = this.userServices.getDepartment(); 
@@ -49,6 +49,9 @@ export class TableListComponent implements OnInit {
       }
     )
 
+  }
+  getUserDetails() {
+    this.userDataDetails = this.userServices.getUserDetails().subscribe(data => this.userDataDetails = data);
   }
 
   dataOfUser() {
@@ -133,20 +136,26 @@ export class TableListComponent implements OnInit {
     //   }
   }
 
-  deleteUser(id: string) {
-    this.adminId = localStorage.getItem("loggedInUserId");
-    console.log("Admin Id is " + this.adminId);
-    if (id != this.adminId) {
-        this.userServices.deleteUser(id).subscribe(data => {
-        this.router.navigate(['admin/user-details']).then(()=>{
-          window.location.reload();
-        });
-      })
-    } else {
-      alert("Can't delete ")
-    }
+  // deleteUser(id: string) {
+  //   this.adminId = localStorage.getItem("loggedInUserId");
+  //   console.log("Admin Id is " + this.adminId);
+  //   if (id != this.adminId) {
+  //       this.userServices.deleteUser(id).subscribe(data => {
+  //       this.router.navigate(['admin/user-details']).then(()=>{
+  //         window.location.reload();
+  //       });
+  //     })
+  //   } else {
+  //     alert("Can't delete ")
+  //   }
 
+  deleteUser(id:string) {
+    if(confirm("Are you sure want to delete?"))
+    this.userServices.deleteUser(id).subscribe(
+      data => this.getUserDetails(),error => alert("Can't delete yourself")
+    )
   }
+
 
 
 }

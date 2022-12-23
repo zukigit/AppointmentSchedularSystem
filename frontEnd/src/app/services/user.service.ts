@@ -49,7 +49,7 @@ getUserDetails(){
   }
 
   deleteUser(id: string): Observable<Object> {
-    return this.http.delete(`${this.baseUrl}/deleteById/${id}`, this.header);
+    return this.http.delete(`${this.baseUrl}/deleteUser/${id}`, this.header);
   }
 
   searchUser(){
