@@ -6,7 +6,8 @@ public class UserDetailForUpdate {
     String name;
     UserRole role;
     String team_name;
-    String department_name;
+    String password;
+	String department_name;
     String phone_number;
     String position;
     String gender;
@@ -70,5 +71,11 @@ public class UserDetailForUpdate {
 	}
 	public void setDepartment_name(String department_name) {
 		this.department_name = department_name;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

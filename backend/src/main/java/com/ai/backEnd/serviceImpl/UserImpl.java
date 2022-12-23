@@ -35,11 +35,6 @@ public class UserImpl implements UserService{
 	public void deleteUserById(String employee_id) {
 		repo.deleteById(employee_id);
 	}
-
-	@Override
-	public User updateUser(User employee_id) {
-		return repo.save(employee_id);
-	}
 	
 	@Override
 	public List<UserDetail> userDetail() {

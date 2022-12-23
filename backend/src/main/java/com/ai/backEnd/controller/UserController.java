@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+
+import com.ai.backEnd.model.Department;
+import com.ai.backEnd.model.Team;
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.model.UserDetail;
 import com.ai.backEnd.model.UserDetailForUpdate;
@@ -80,18 +83,17 @@ public class UserController {
 	//Update User
 	@PutMapping("/updateUser/{employee_id}")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<User> updateUser(@PathVariable String employee_id,@RequestBody User user){
-		User dto = new User();
-		dto.setEmployee_id(user.getEmployee_id());
-		dto.setName(user.getName());
-		dto.setPassword(user.getPassword());
-		dto.setPhone_number(user.getPhone_number());
-		dto.setGender(user.getGender());
-		dto.setPosition(user.getPosition());
-		dto.setRole(user.getRole());
-		dto.setTeam(user.getTeam());
-		User updateUser = service.updateUser(dto);
-		return ResponseEntity.ok(updateUser);
+	public ResponseEntity<User> updateUser(@RequestBody User user){
+		if(user.getPassword().equals("")) {
+			User retreatedUser = service.getUserById(user.getEmployee_id());
+			user.setPassword(retreatedUser.getPassword());
+			service.saveUser(user);
+		} else {
+			String encodedPassword = passwordEncoder.encode(user.getPassword());
+			user.setPassword(encodedPassword);
+			service.saveUser(user);
+		}
+		return ResponseEntity.ok(user);
 	}
 	
 	@GetMapping("/userDetail")
