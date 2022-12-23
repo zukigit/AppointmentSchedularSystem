@@ -1,14 +1,12 @@
 package com.ai.backEnd.repository;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.model.UserDetail;
+import com.ai.backEnd.model.UserDetailForUpdate;
 
 @Repository
 public interface UserRespositroy extends JpaRepository<User, String>{
@@ -42,8 +40,8 @@ public interface UserRespositroy extends JpaRepository<User, String>{
 	public boolean checkUserExist(String userId);
 	
 	@Query("SELECT " +
-			"    new com.ai.backEnd.model.UserDetail(u.employee_id, u.name,u.role, t.team_name, d.department_name) " +
+			"    new com.ai.backEnd.model.UserDetailForUpdate(u.employee_id, u.name,u.role, t.team_name, d.department_name, u.phone_number, u.position, u.gender) " +
 			"FROM " +
 			"    User u join Team t on u.team.team_id = t.team_id join Department d on d.department_id = t.department.department_id where u.employee_id=:searchKey")
-	UserDetail searchById(String searchKey);
+	UserDetailForUpdate searchById(String searchKey);
 }

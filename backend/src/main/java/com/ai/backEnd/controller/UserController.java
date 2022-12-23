@@ -1,12 +1,8 @@
 package com.ai.backEnd.controller;
 
 import java.util.HashMap;
-
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.model.UserDetail;
+import com.ai.backEnd.model.UserDetailForUpdate;
 import com.ai.backEnd.model.UserRole;
 import com.ai.backEnd.model.UserSearch;
 import com.ai.backEnd.service.UserService;
@@ -77,7 +74,7 @@ public class UserController {
 	//GetById
 	@GetMapping("/getById/{employee_id}")
 	@PreAuthorize("hasRole('ADMIN')")
-	public UserDetail getUserById(@PathVariable String employee_id){
+	public UserDetailForUpdate getUserById(@PathVariable String employee_id){
 		return service.searchById(employee_id);
 	}
 	//Update User

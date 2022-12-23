@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.model.UserDetail;
+import com.ai.backEnd.model.UserDetailForUpdate;
 import com.ai.backEnd.repository.UserRespositroy;
 import com.ai.backEnd.service.UserService;
 
@@ -68,7 +69,7 @@ public class UserImpl implements UserService{
 	}
 
 	@Override
-	public UserDetail searchById(String searchKey) {
+	public UserDetailForUpdate searchById(String searchKey) {
 		return repo.searchById(searchKey);
 	}
 }

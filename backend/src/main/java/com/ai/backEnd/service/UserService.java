@@ -3,6 +3,7 @@ package com.ai.backEnd.service;
 import java.util.List;
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.model.UserDetail;
+import com.ai.backEnd.model.UserDetailForUpdate;
 
 public interface UserService {
 	
@@ -18,7 +19,7 @@ public interface UserService {
 	
 	User updateUser(User emploee_id);
 	List<UserDetail> userDetail();
-	UserDetail searchById(String searchKey);
+	UserDetailForUpdate searchById(String searchKey);
 	List<UserDetail> searchByNameOrId(String searchKey);
 	List<UserDetail> seacrhByDepartmentName(String searchKey);
 
