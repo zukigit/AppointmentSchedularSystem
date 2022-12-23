@@ -63,6 +63,10 @@ form .input-box span.details{
   transition: all 0.3s ease;
 }
 
+span {
+  display: none;
+}
+
 .user-details .input-box select{
   height: 45px;
   width: 100%;

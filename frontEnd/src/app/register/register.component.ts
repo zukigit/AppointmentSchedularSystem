@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { User } from 'app/model/user';
 import { UserService } from 'app/services/user.service';
 import { HttpClient } from '@angular/common/http';
@@ -88,7 +89,7 @@ export class RegisterComponent implements OnInit {
                 console.log("Successfully");
             },
             error => {console.log("Not create same userid");
-            this.router.navigate(['admin/user-details']);
+            this.router.navigate(['admin/addEmployeeModal']);
             alert("Can't create same userid")
           }
     );
