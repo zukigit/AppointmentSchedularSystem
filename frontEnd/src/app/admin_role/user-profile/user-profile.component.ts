@@ -21,8 +21,7 @@ export class UserProfileComponent implements OnInit {
       reader.onload=(event:any)=>{
         this.url=event.target.result;
 
-        this.photo =this.userServices.savePhoto().subscribe(data=> this.photo=data);
-      }
+       }
     }
   }
 
