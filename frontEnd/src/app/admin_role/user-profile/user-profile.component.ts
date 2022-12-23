@@ -9,7 +9,21 @@ export class UserProfileComponent implements OnInit {
 
   constructor() { }
 
+    url="./assets/img/default.jpg";
+
   ngOnInit() {
+  }
+
+  onSelectFile(e){
+    if(e.target.files){
+      var reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload=(event:any)=>{
+        this.url=event.target.result;
+
+        this.photo =this.userServices.savePhoto().subscribe(data=> this.photo=data);
+      }
+    }
   }
 
 }
