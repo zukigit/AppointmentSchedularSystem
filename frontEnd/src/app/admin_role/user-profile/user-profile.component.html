@@ -11,14 +11,16 @@
               <div class="card">
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
-                   
-                    <img [src]="url" alt="Admin" class="rounded-circle" width="150">
+                  <form #imageForm=ngForm (ngSubmit)="acceptImage(user,image)">
+                    <img [src]="imageUrl" alt="Admin" class="rounded-circle" width="150">
                     <div class="mt-3">
                       <h3 style="margin: 0 0 15px;">Kenneth Valdez</h3>
                       <h4 class="text-secondary mb-1">Full Stack Developer</h4>
                       <h5 class="text-secondary" style="margin: 0 0 4px;">Employee ID - EE001</h5>
-                      <input type="file" (change)="onSelectFile($event)" class="btn btn-primary">Upload Profile
+                      <input type="file"  #Image accept="image/*" (change)="onSelectFile($event.target.files)" class="btn btn-primary">Upload Profile
+                      <input type="submit" [disabled]="Image.value=='' || !imageForm.valid" >Submit
                     </div>
+                  </form>
                   </div>
                 </div>
               </div>

@@ -8,6 +8,7 @@ import { departmentList } from '../lists/departmentList';
 import { Team } from '../model/team';
 import { map } from 'jquery';
 import { RegisterationRequestModel } from '../model/registeration-request-model';
+import { Image } from 'app/model/image';
 
 @Injectable({
   providedIn: 'root'
@@ -53,6 +54,10 @@ getUserDetails(){
   }
 
   searchUser(){
-    return this.http.get("localhost:8080/api/v1/searchUser",this.header);
+    return this.http.get("http://localhost:8080/api/v1/searchUser",this.header);
+  }
+
+  saveImage(image:Image,fileUpload: File):Observable<Object>{
+    return this.http.post("http://localhost:8080/api/v1/image",this.header);
   }
 }
