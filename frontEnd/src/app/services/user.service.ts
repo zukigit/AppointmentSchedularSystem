@@ -42,7 +42,7 @@ getUserDetails(){
   }
 
   getUserById(id: string): Observable<User> {  
-    return this.http.get<User>(`${this.baseUrl}/getUserById/${id}`, this.header);  
+    return this.http.get<User>(`${this.baseUrl}/getById/${id}`, this.header);  
   }
 
   updateUser(id: string, user:User): Observable<User> {
