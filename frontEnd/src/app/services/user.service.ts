@@ -41,8 +41,8 @@ getUserDetails(){
     return this.http.post("http://localhost:8080/api/v1/saveUser/", users, this.header);
   }
 
-  getUserId(id: string): Observable<User> {  
-    return this.http.get<User>(`${this.baseUrl}/getById/${id}`, this.header);  
+  getUserById(id: string): Observable<User> {  
+    return this.http.get<User>(`${this.baseUrl}/getUserById/${id}`, this.header);  
   }
 
   updateUser(id: string, user:User): Observable<User> {

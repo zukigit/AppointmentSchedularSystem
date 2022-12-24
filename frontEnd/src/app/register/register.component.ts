@@ -66,7 +66,7 @@ export class RegisterComponent implements OnInit {
 
 
   updateUser(id: string) {
-    this.userServices.getUserId(id)
+    this.userServices.getUserById(id)
       .subscribe(
         data => {
           this.userlist = data

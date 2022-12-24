@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Image } from 'app/model/image';
 import { User } from 'app/model/user';
 import { UserService } from 'app/services/user.service';
-import { event } from 'jquery';
+import { data, event } from 'jquery';
 
 @Component({
   selector: 'app-user-profile',
@@ -18,6 +18,8 @@ export class UserProfileComponent implements OnInit {
     fileUpload : File =null;
     image = new Image();
     user = new User();
+
+    detailsById : any =[];
 
   ngOnInit() {
   }
@@ -53,6 +55,10 @@ export class UserProfileComponent implements OnInit {
     )
     console.log("photo is inserted" + this.image);
     
+  }
+
+  getUserDetailsById(){
+    this.detailsById = this.userService.getUserById(this.detailsById).subscribe(data=> this.detailsById=data);
   }
 
 }

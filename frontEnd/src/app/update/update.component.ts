@@ -39,7 +39,7 @@ export class UpdateComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
 
     this.user = new User();
-    this.userServices.getUserId(this.id).subscribe(data => {
+    this.userServices.getUserById(this.id).subscribe(data => {
       this.user = data;
       console.log(this.user);
     },error => console.log("Update Response Front Error!!"));
