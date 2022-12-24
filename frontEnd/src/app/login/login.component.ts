@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
         }
       },
       error => {
-        alert("Login Failed!")
+        alert("UserId and Password doesn't match")
         console.log("exception occured");
       }
     )

@@ -26,34 +26,45 @@
 <div class="header-w3l">
 	<h1>
 		<span>Appointment Schedular System</span>
-		</h1>
+	</h1>
 </div>
 <!--//header-->
 <div class="main-content-agile">
 	<div class="sub-main-w3">
 		<img src="/assets/img/datjoblogo.png" alt="" />
 		<h2>Log In</h2>
-		<form (ngSubmit)="userLogin()" method="post">
+		<form #form="ngForm" (ngSubmit)="userLogin()" method="post">
 			<div class="pom-agile">
 				<div class="p">
 					<!-- <span class="fa fa-o" aria-hidden="true"></span> -->
-					<input placeholder="Employee ID" style="margin-left: -15px;" [(ngModel)]="login.userId" name="userid" class="user" type="text" required="">
+					<input placeholder="Employee ID" style="margin-left: -15px;" [(ngModel)]="login.userId"
+						name="userId" id="userId" class="user" type="text" required>
+				</div>
+
+			</div>
+			<div
+				*ngIf="form.controls['userId'].invalid && (form.controls['userId'].dirty || form.controls['userId'].touched)">
+				<div *ngIf="form.controls['userId'].errors.required" class="text-danger">
+					UserId is required.
 				</div>
 			</div>
 			<div class="pom-agile">
-				<input [type]="changetype?'password':'text'" style="cursor: pointer;" placeholder="Password"  [(ngModel)]="login.password" id="password" name="password" class="pass" type="password" required="">
-				<span class="eyeicon" (click)="viewpass()"> <i [ngClass]="visible?'fa fa-eye': 'fa fa-eye-slash'"></i></span>
+				<input [type]="changetype?'password':'text'" style="cursor: pointer;" placeholder="Password"
+					[(ngModel)]="login.password" id="password" name="password" class="pass" type="password" required>
+				<span class="eyeicon" (click)="viewpass()"> <i
+						[ngClass]="visible?'fa fa-eye': 'fa fa-eye-slash'"></i></span>
+			</div>
+			<div
+				*ngIf="form.controls['password'].invalid && (form.controls['password'].dirty || form.controls['password'].touched)">
+				<div *ngIf="form.controls['password'].errors.required" class="text-danger">
+					Password is required.
+				</div>
 			</div>
 			<div class="sub-w3l">
-				<!-- <div class="sub-agile">
-					<input type="checkbox" id="brand1" value="">
-					<label for="brand1">
-						<span></span>Remember me</label>
-				</div> -->
 				<div class="clear"></div>
 			</div>
 			<div class="right-w3l">
-				<input type="submit" value="Login">
+				<input type="submit" [disabled]="form.invalid" value="Login">
 			</div>
 			<div class="forgot-w3l">
 				<!--<a href="#">Forgot Password?</a>-->

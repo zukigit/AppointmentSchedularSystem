@@ -97,8 +97,8 @@ body {
 }
 
 .right-w3l input[type="submit"] {
-    color: #fff;
-    background: #18ba60;
+    color: rgb(255, 255, 255);
+    background: #15ca66;
     border: none;
     padding: 13px 0;
     margin:25px 0 20px;
@@ -107,23 +107,24 @@ body {
     border-radius: 4px;
     text-transform: uppercase;
     font-size: .9em;
+    
     cursor: pointer;
     letter-spacing: 1px;
     font-family: 'Open Sans', sans-serif;
-    -webkit-transition: 0.5s all;
+    /* -webkit-transition: 0.5s all;
     -o-transition: 0.5s all;
     -moz-transition: 0.5s all;
     -ms-transition: 0.5s all;
-    transition: 0.5s all;
+    transition: 0.5s all; */
 }
-.right-w3l input[type="submit"]:hover {
+/* .right-w3l input[type="submit"]:hover {
     background: #000;
 	-webkit-transition: 0.5s all;
     -o-transition: 0.5s all;
     -moz-transition: 0.5s all;
     -ms-transition: 0.5s all;
 	transition: 0.5s all;
-}
+} */
 span.fa {
     float: right;
     line-height: 1.5;
