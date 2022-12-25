@@ -17,11 +17,22 @@ export class UserProfileComponent implements OnInit {
     imageUrl :string ="./assets/img/default.jpg";
     fileUpload : File =null;
     image = new Image();
-    user = new User();
+    user!:User
 
     detailsById : any =[];
+    loginId:string;
 
   ngOnInit() {
+    this.loginId = localStorage.getItem("loggedInUserId");
+    this.user = new User();
+    this.userService.getUserById(this.loginId)
+    .subscribe({
+      next : (data) => {
+        this.user = data;
+      },
+      error: (e) => console.log("profile error")
+    })
+
   }
 
   // onSelectFile(e){
