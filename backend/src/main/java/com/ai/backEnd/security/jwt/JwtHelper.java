@@ -24,7 +24,7 @@ public class JwtHelper {
 		return Jwts.builder()
 					.setSubject(sub)
 					.addClaims(claims)
-					.setExpiration(Date.from(Instant.now().plus(1, ChronoUnit.HOURS)))
+					.setExpiration(Date.from(Instant.now().plus(12, ChronoUnit.HOURS)))
 					.signWith(key)
 					.compact();
 	}
