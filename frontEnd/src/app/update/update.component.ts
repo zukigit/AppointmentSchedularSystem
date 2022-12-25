@@ -47,7 +47,7 @@ export class UpdateComponent implements OnInit {
     this.userDataDetails = this.userServices.getUserDetails().subscribe(data => this.userDataDetails = data);
 
     this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
-       this.department = this.userServices.getDepartment(); 
+   
     this.userServices.getTeam().subscribe(
       {
         next: (data) => {
@@ -69,7 +69,17 @@ export class UpdateComponent implements OnInit {
     console.log("teams length is" + this.teamArray.length);
   }
   doUpdate() {
-    this.userServices.updateUser(this.id , this.user)
+    this.team.team_id = this.user.team_id;
+    this.registerModel.employee_id = this.user.employee_id;
+    this.registerModel.name = this.user.name;
+    this.registerModel.password = this.user.password;
+    this.registerModel.phone_number = this.user.phone_number;
+    this.registerModel.gender = this.user.gender;
+    this.registerModel.role = this.user.role;
+    this.registerModel.position = this.user.position;
+    this.registerModel.team = this.team;
+    console.log("Team update data " + this.user.team_id )
+    this.userServices.updateUser(this.id , this.registerModel)
       .subscribe(data => console.log(data), error => console.log(error));
     this.user = new User();
     this.router.navigate(['admin/user-details']);
