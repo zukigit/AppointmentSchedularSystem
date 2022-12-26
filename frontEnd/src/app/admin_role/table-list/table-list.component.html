@@ -78,19 +78,18 @@
                             <ul class="navbar nav ml-auto">
                                 <!-- Dropdown list -->
                                 <li class="nav-item dropdown">
-                                    <select [(ngModel)]="search.searchType">Choose The type
+                                    <select [(ngModel)]="search.searchType">
         
-                                        <option value="default">By Name</option>
+                                        <option value="default" selected>By Name</option>
                                         <option value="searchByDepartment">By Department</option>
                                         <option value="searchByTeam">By Team</option>
                                     </select>
                                 </li>
                                 <li>
                                     <!-- Search Box -->
-                                    <input type="text" [(ngModel)]="search.searchKey" placeholder="Search....."
+                                    <input type="text" [(ngModel)]="userSearch" (input)="SearchUser()" placeholder="Search....."
                                         style="font-size: large;">
-                                    <button type="submit" value="search"><i class="fa-solid fa-magnifying-glass"></i></button>
-                                </li>
+                                    </li>
                             </ul>
                             </form>
                     </ul>

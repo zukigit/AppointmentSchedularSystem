@@ -22,6 +22,8 @@ export class TableListComponent implements OnInit {
   userDataDetails: any = [];
   userlist: any = [];
 
+  afterSearch : any = [];
+
   department: any = [];
   teamArray: Team[];
   tempTeam: Team[];
@@ -58,8 +60,7 @@ export class TableListComponent implements OnInit {
   }
 
   dataOfUser() {
-    this.userDataDetails = this.userServices.getUserDetails().subscribe(data => this.userDataDetails(data));
-
+    this.userDataDetails = this.userServices.searchUser(this.search).subscribe(data=>this.getUserDetails());
   }
 
   onSelect(department) {
@@ -103,54 +104,6 @@ export class TableListComponent implements OnInit {
     }
 
   }
-
-  SearchDepartment() {
-    if (this.userSearch != "") {
-      this.userDataDetails = this.userDataDetails.filter(res => {
-        return res.department_name.toLocaleLowerCase().match(this.userSearch.toLocaleLowerCase());
-      })
-    }
-    else if (this.userSearch == "") {
-      this.ngOnInit();
-    }
-
-  }
-
-  SearchTeam() {
-    if (this.userSearch != "") {
-      this.userDataDetails = this.userDataDetails.filter(res => {
-        return res.team_name.toLocaleLowerCase().match(this.userSearch.toLocaleLowerCase());
-      })
-    }
-    else if (this.userSearch == "") {
-      this.ngOnInit();
-    }
-
-
-
-    // SearchTeam(){
-    //   if(this.userSearch != ""){
-    //     this.userDataDetails = this.userDataDetails.filter(res=>{
-    //       return res.team_name.toLocaleLowerCase().match(this.userSearch.toLocaleLowerCase());
-    //     })
-    //   }
-    //   else if(this.userSearch == ""){
-    //     this.ngOnInit(); 
-    //   }
-  }
-
-  // deleteUser(id: string) {
-  //   this.adminId = localStorage.getItem("loggedInUserId");
-  //   console.log("Admin Id is " + this.adminId);
-  //   if (id != this.adminId) {
-  //       this.userServices.deleteUser(id).subscribe(data => {
-  //       this.router.navigate(['admin/user-details']).then(()=>{
-  //         window.location.reload();
-  //       });
-  //     })
-  //   } else {
-  //     alert("Can't delete ")
-  //   }
 
   deleteUser(id:string) {
     if(confirm("Are you sure want to delete?"))
