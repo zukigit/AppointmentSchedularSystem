@@ -82,9 +82,8 @@ export class UpdateComponent implements OnInit {
     console.log("Team update data " + this.user.team_id )
     this.userServices.updateUser(this.id , this.registerModel)
       .subscribe(data => console.log(data), error => console.log(error));
-      Swal.fire('Successfully Updated', 'success')
+     
     this.user = new User();
-    this.router.navigate(['admin/user-details']);
+    this.router.navigate(['admin/user-details']).then(() => window.location.reload() )
   }
-
   }

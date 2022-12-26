@@ -34,9 +34,9 @@
           </div>
           <div class="input-box">
             <span class="details">Team</span>
-            <select name="team_name"  class="selectTeam">Select Team
-              <option [(ngModel)]="user.team_id" name="team_name"  selected="true" disabled>{{user.team_name}}</option>
-              <option *ngFor="let teams of tempTeam"   value="{{teams.team_id}}">{{teams.team_name}}</option>
+            <select [(ngModel)]="user.team_id"  class="selectTeam">Select Team
+              <option name="team_name"  selected="true" disabled>{{user.team_name}}</option>
+              <option *ngFor="let teams of tempTeam" value="{{teams.team_id}}">{{teams.team_name}}</option>
             </select>
           </div>
           <div class="input-box">
