@@ -54,13 +54,7 @@ getUserDetails(){
     return this.http.delete(`${this.baseUrl}/deleteUser/${id}`, this.header);
   }
 
-  searchUser(search:Search){
-    console.log("search type " + search.searchType);
-    console.log("search key " + search.searchKey);
-    return this.http.post("http://localhost:8080/api/v1/searchUser", search, this.header);
-  }
-
   saveImage(image:Image,fileUpload: File):Observable<Object>{
-    return this.http.post("http://localhost:8080/api/v1/image",this.header);
+    return this.http.post("http://localhost:8080/api/v1/image",image, this.header);
   }
 }

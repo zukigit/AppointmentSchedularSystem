@@ -44,25 +44,10 @@ export class TableListComponent implements OnInit {
 
   ngOnInit() {
 
-   this.getUserDetails()
-
-    this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
-    //    this.department = this.userServices.getDepartment(); 
-    this.userServices.getTeam().subscribe(
-      {
-        next: (data) => {
-          this.teamArray = data;
-        }
-      }
-    )
-
+   this.getUserDetails();
   }
   getUserDetails() {
     this.userDataDetails = this.userServices.getUserDetails().subscribe(data => this.userDataDetails = data);
-  }
-
-  dataOfUser() {
-    this.userDataDetails = this.userServices.searchUser(this.search).subscribe(data=>this.getUserDetails());
   }
 
   onSelect(type) {
@@ -140,13 +125,5 @@ export class TableListComponent implements OnInit {
       }) 
     )
   }
-  
-  SearchOnUser(){
-    
-    this.userServices.searchUser(this.search).subscribe();
 
-     console.log("search key" + this.search.searchKey);
-     console.log("search type" + this.search.searchType);
-   
- }
 }

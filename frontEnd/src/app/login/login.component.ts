@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
           console.log("go to dashboard");
           this.router.navigate(['/admin/dashboard']).then(()=>{
             Swal.fire('Loggined Success!', 'Loggined as Admin.', 'success')
-            //window.location.reload();
+            window.location.reload();
             
         });
         } else if(this.jwtResponse.role == "ROLE_USER") {
