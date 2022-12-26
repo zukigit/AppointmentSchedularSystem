@@ -35,6 +35,8 @@ export class TableListComponent implements OnInit {
 
   user: User = new User();
   registerModel: RegisterationRequestModel = new RegisterationRequestModel();
+  
+  searchOption:string = "";
 
   constructor(private userServices: UserService, private http: HttpClient, private userList: UserService,
     private router: Router) {
@@ -63,11 +65,8 @@ export class TableListComponent implements OnInit {
     this.userDataDetails = this.userServices.searchUser(this.search).subscribe(data=>this.getUserDetails());
   }
 
-  onSelect(department) {
-    this.tempTeam = this.teamArray.filter(e => {
-      return e.department.department_id == department.target.value
-    });
-    console.log("teams length is" + this.teamArray.length);
+  onSelect(type) {
+    this.searchOption = type.target.value;
   }
 
 
@@ -94,15 +93,40 @@ export class TableListComponent implements OnInit {
   }
 
   SearchUser() {
-    if (this.userSearch != "") {
-      this.userDataDetails = this.userDataDetails.filter(res => {
-        return res.name.toLocaleLowerCase().match(this.userSearch.toLocaleLowerCase());
-      })
+    if(this.searchOption == "") {
+      this.searchOption = "default";
     }
-    else if (this.userSearch == "") {
-      this.ngOnInit();
+    if(this.searchOption == "default"){
+      if (this.userSearch != "") {
+        console.log("it's default");
+        this.userDataDetails = this.userDataDetails.filter(res => {
+          return res.name.toLocaleLowerCase().match(this.userSearch.toLocaleLowerCase());
+        })
+      }
+      else if (this.userSearch == "") {
+        this.ngOnInit();
+      }
+    } else if(this.searchOption == "searchByDepartment"){
+      if (this.userSearch != "") {
+        console.log("it's default");
+        this.userDataDetails = this.userDataDetails.filter(res => {
+          return res.department_name.toLocaleLowerCase().match(this.userSearch.toLocaleLowerCase());
+        })
+      }
+      else if (this.userSearch == "") {
+        this.ngOnInit();
+      }
+    } else {
+      if (this.userSearch != "") {
+        console.log("it's default");
+        this.userDataDetails = this.userDataDetails.filter(res => {
+          return res.team_name.toLocaleLowerCase().match(this.userSearch.toLocaleLowerCase());
+        })
+      }
+      else if (this.userSearch == "") {
+        this.ngOnInit();
+      }
     }
-
   }
 
   deleteUser(id:string) {
