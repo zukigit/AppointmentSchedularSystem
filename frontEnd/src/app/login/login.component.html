@@ -34,21 +34,21 @@
 		<img src="/assets/img/datjoblogo.png" alt="" />
 		<h2>Log In</h2>
 		<form #form="ngForm" (ngSubmit)="userLogin()" method="post">
-			<div class="pom-agile">
+			<div class="pom-agile" style=" margin-bottom:1px">
 				<div class="p">
 					<!-- <span class="fa fa-o" aria-hidden="true"></span> -->
-					<input placeholder="Employee ID" style="margin-left: -15px;" [(ngModel)]="login.userId"
+					<input placeholder="Employee ID" style="margin-left: -15px; margin-bottom: 1px;" [(ngModel)]="login.userId"
 						name="userId" id="userId" class="user" type="text" required>
 				</div>
 
 			</div>
 			<div
 				*ngIf="form.controls['userId'].invalid && (form.controls['userId'].dirty || form.controls['userId'].touched)">
-				<div *ngIf="form.controls['userId'].errors.required" class="text-danger">
-					UserId is required.
+				<div *ngIf="form.controls['userId'].errors.required" class="text-danger" style="font-weight:10px;">
+					Id is required.
 				</div>
 			</div>
-			<div class="pom-agile">
+			<div class="pom-agile" style=" margin-top:15px; margin-bottom:1px">
 				<input [type]="changetype?'password':'text'" style="cursor: pointer;" placeholder="Password"
 					[(ngModel)]="login.password" id="password" name="password" class="pass" type="password" required>
 				<span class="eyeicon" (click)="viewpass()"> <i
@@ -56,7 +56,7 @@
 			</div>
 			<div
 				*ngIf="form.controls['password'].invalid && (form.controls['password'].dirty || form.controls['password'].touched)">
-				<div *ngIf="form.controls['password'].errors.required" class="text-danger">
+				<div *ngIf="form.controls['password'].errors.required" class="text-danger" style="font-weight:10px;">
 					Password is required.
 				</div>
 			</div>

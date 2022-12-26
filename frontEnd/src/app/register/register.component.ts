@@ -9,6 +9,8 @@ import * as e from 'express';
 import { filter } from 'rxjs';
 import { RegisterationRequestModel } from 'app/model/registeration-request-model';
 import { Team } from 'app/model/team';
+// import swal from 'sweetalert';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 
 @Component({
@@ -17,7 +19,7 @@ import { Team } from 'app/model/team';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+  // alert:boolean=false
   userData: any = [];
   userDetails: any = [];
 
@@ -75,6 +77,7 @@ export class RegisterComponent implements OnInit {
   }
 
   doRegisteration() {
+    
     this.team.team_id = this.user.team_id;
     this.registerModel.employee_id = this.user.employee_id;
     this.registerModel.name = this.user.name;
@@ -86,6 +89,10 @@ export class RegisterComponent implements OnInit {
     this.registerModel.team = this.team;
     this.userServices.createUser(this.registerModel).subscribe(
       data => { this.router.navigate(['admin/user-details']);
+                // window.alert("Employee succesfully Added!")
+                // swal("Employee succesfully Added!");
+                Swal.fire('Added One Employee!!', 'Employee added succesfully!', 'success')
+                // window.location.reload();
                 console.log("Successfully");
             },
             error => {console.log("Not create same userid");
@@ -104,4 +111,10 @@ export class RegisterComponent implements OnInit {
       })
      
   }
+  // closeAlert(){
+  //   this.alert=false;
+  //     }
+  // alertWithSuccess(){  
+  //   Swal.fire('Thank you...', 'You submitted succesfully!', 'success')  
+  // } 
 }

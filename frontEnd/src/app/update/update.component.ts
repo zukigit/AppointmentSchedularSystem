@@ -8,6 +8,7 @@ import * as e from 'express';
 import { filter } from 'rxjs';
 import { RegisterationRequestModel } from 'app/model/registeration-request-model';
 import { Team } from 'app/model/team';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-update',
@@ -81,6 +82,7 @@ export class UpdateComponent implements OnInit {
     console.log("Team update data " + this.user.team_id )
     this.userServices.updateUser(this.id , this.registerModel)
       .subscribe(data => console.log(data), error => console.log(error));
+      Swal.fire('Successfully Updated', 'success')
     this.user = new User();
     this.router.navigate(['admin/user-details']);
   }

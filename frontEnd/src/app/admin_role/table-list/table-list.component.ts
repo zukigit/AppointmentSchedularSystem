@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Route, Router } from '@angular/router';
 import { RegisterationRequestModel } from 'app/model/registeration-request-model';
 import { Team } from 'app/model/team';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 
 @Component({
@@ -151,8 +152,13 @@ export class TableListComponent implements OnInit {
 
   deleteUser(id:string) {
     if(confirm("Are you sure want to delete?"))
+    Swal.fire('Delete Success', 'Employee is deleted', 'success')
     this.userServices.deleteUser(id).subscribe(
-      data => this.getUserDetails(),error => alert("Can't delete yourself")
+      data => this.getUserDetails(),error => Swal.fire({  
+        icon: 'error',  
+        title: 'Delete Failed',  
+        text: 'Can not delete yourself',   
+      }) 
     )
   }
 
