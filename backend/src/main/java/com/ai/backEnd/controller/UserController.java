@@ -101,8 +101,8 @@ public class UserController {
 		return service.userDetail();
 	}
 
-	@GetMapping("/searchUser")
-	public List<UserDetail> search(UserSearch userSearch){
+	@PostMapping("/searchUser")
+	public List<UserDetail> search(@RequestBody UserSearch userSearch){
 		if(userSearch.getSearchType().equals("default")){
 			return service.searchByNameOrId(userSearch.getSearchKey());
 		}else if (userSearch.getSearchType().equals("searchByDepartment")){

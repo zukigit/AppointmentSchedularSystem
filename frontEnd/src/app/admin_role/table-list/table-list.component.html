@@ -74,29 +74,25 @@
 
 
                     <ul class="navbar nav ml-auto">
-                        <!-- Dropdown list -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
-                                aria-haspopup="true" aria-expanded="false" style="color: #435d7d;">
-                                By Name
-                            </a>
-
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" >By Department
-                                </a>
-
-                                <a class="dropdown-item" >By Team
-                                </a>
-
-                                <a class="dropdown-item" >By Id
-                                </a>
-                            </div>
-                        </li>
-                        <li>
-                            <!-- Search Box -->
-                            <input type="text" [(ngModel)]="userSearch" (input)="SearchUser()" placeholder="Search....."
-                                style="font-size: large;">
-                        </li>
+                        <form (ngSubmit)="SearchOnUser()">
+                            <ul class="navbar nav ml-auto">
+                                <!-- Dropdown list -->
+                                <li class="nav-item dropdown">
+                                    <select [(ngModel)]="search.searchType">Choose The type
+        
+                                        <option value="default">By Name</option>
+                                        <option value="searchByDepartment">By Department</option>
+                                        <option value="searchByTeam">By Team</option>
+                                    </select>
+                                </li>
+                                <li>
+                                    <!-- Search Box -->
+                                    <input type="text" [(ngModel)]="search.searchKey" placeholder="Search....."
+                                        style="font-size: large;">
+                                    <button type="submit" value="search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </li>
+                            </ul>
+                            </form>
                     </ul>
                 </nav>
 

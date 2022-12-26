@@ -6,6 +6,7 @@ import { Route, Router } from '@angular/router';
 import { RegisterationRequestModel } from 'app/model/registeration-request-model';
 import { Team } from 'app/model/team';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { Search } from 'app/model/search';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class TableListComponent implements OnInit {
 
   userSearch: any = [];
   adminId: string;
+  search:Search = new Search();
 
   user: User = new User();
   registerModel: RegisterationRequestModel = new RegisterationRequestModel();
@@ -161,7 +163,13 @@ export class TableListComponent implements OnInit {
       }) 
     )
   }
+  
+  SearchOnUser(){
+    
+    this.userServices.searchUser(this.search).subscribe();
 
-
-
+     console.log("search key" + this.search.searchKey);
+     console.log("search type" + this.search.searchType);
+   
+ }
 }

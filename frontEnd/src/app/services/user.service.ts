@@ -9,6 +9,7 @@ import { Team } from '../model/team';
 import { map } from 'jquery';
 import { RegisterationRequestModel } from '../model/registeration-request-model';
 import { Image } from 'app/model/image';
+import { Search } from 'app/model/search';
 
 @Injectable({
   providedIn: 'root'
@@ -53,8 +54,10 @@ getUserDetails(){
     return this.http.delete(`${this.baseUrl}/deleteUser/${id}`, this.header);
   }
 
-  searchUser(){
-    return this.http.get("http://localhost:8080/api/v1/searchUser",this.header);
+  searchUser(search:Search){
+    console.log("search type " + search.searchType);
+    console.log("search key " + search.searchKey);
+    return this.http.post("http://localhost:8080/api/v1/searchUser", search, this.header);
   }
 
   saveImage(image:Image,fileUpload: File):Observable<Object>{
