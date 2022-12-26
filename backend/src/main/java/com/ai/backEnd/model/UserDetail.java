@@ -6,17 +6,27 @@ public class UserDetail {
     UserRole role;
     String team_name;
     String department_name;
+    String team_id;
     
-    public UserDetail() {
+    public String getTeam_id() {
+		return team_id;
+	}
+
+	public void setTeam_id(String team_id) {
+		this.team_id = team_id;
+	}
+
+	public UserDetail() {
     	
     }
 
-	public UserDetail(String employee_id, String name, UserRole role, String team_name, String department_name) {
+	public UserDetail(String employee_id, String name, UserRole role, String team_name, String department_name, String team_id) {
 		this.employee_id = employee_id;
 		this.name = name;
 		this.role = role;
 		this.team_name = team_name;
 		this.department_name = department_name;
+		this.team_id = team_id;
 	}
 
 	public String getEmployee_id() {

@@ -14,24 +14,24 @@ public interface UserRespositroy extends JpaRepository<User, String>{
 //    List<UserDetail> userDetail();
 	
 	@Query("SELECT " +
-	           "    new com.ai.backEnd.model.UserDetail(u.employee_id, u.name,u.role, t.team_name, d.department_name) " +
+	           "    new com.ai.backEnd.model.UserDetail(u.employee_id, u.name,u.role, t.team_name, d.department_name, t.team_id) " +
 	           "FROM " +
 	           "    User u join Team t on u.team.team_id = t.team_id join Department d on d.department_id = t.department.department_id")
 	List<UserDetail> userDetail();
 
 	@Query("SELECT " +
-			"    new com.ai.backEnd.model.UserDetail(u.employee_id, u.name,u.role, t.team_name, d.department_name) " +
+			"    new com.ai.backEnd.model.UserDetail(u.employee_id, u.name,u.role, t.team_name, d.department_name, t.team_id) " +
 			"FROM " +
 			"    User u join Team t on u.team.team_id = t.team_id join Department d on d.department_id = t.department.department_id where u.name=:searchKey or u.employee_id=:searchKey")
 	List<UserDetail> searchByNameOrId(String searchKey);
 
 	@Query("SELECT " +
-			"    new com.ai.backEnd.model.UserDetail(u.employee_id, u.name,u.role, t.team_name, d.department_name) " +
+			"    new com.ai.backEnd.model.UserDetail(u.employee_id, u.name,u.role, t.team_name, d.department_name, t.team_id) " +
 			"FROM " +
 			"    User u join Team t on u.team.team_id = t.team_id join Department d on d.department_id = t.department.department_id where d.department_name=:searchKey")
 	List<UserDetail> seacrhByDepartmentName(String searchKey);
 	@Query("SELECT " +
-			"    new com.ai.backEnd.model.UserDetail(u.employee_id, u.name,u.role, t.team_name, d.department_name) " +
+			"    new com.ai.backEnd.model.UserDetail(u.employee_id, u.name,u.role, t.team_name, d.department_name, t.team_id) " +
 			"FROM " +
 			"    User u join Team t on u.team.team_id = t.team_id join Department d on d.department_id = t.department.department_id where t.team_name=:searchKey")
 	List<UserDetail> searchByTeamName(String searchKey);
