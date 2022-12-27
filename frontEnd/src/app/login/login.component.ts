@@ -50,18 +50,18 @@ export class LoginComponent implements OnInit {
           console.log("go to dashboard");
           this.router.navigate(['/admin/dashboard']).then(()=>{
             Swal.fire('Loggined Success!', 'Loggined as Admin.', 'success')
-            window.location.reload();
+            // window.location.reload();
             
         });
         } else if(this.jwtResponse.role == "ROLE_USER") {
           this.router.navigate(['/user/test']).then(()=>{
             Swal.fire('Loggined Success!', 'Loggined as User.', 'success')
-            window.location.reload();
+            // window.location.reload();
         });
         } else if(this.jwtResponse.role == "ROLE_TRAINEE") {
           this.router.navigate(['/trainee/test']).then(()=>{
             Swal.fire('Loggined Success!', 'Loggined as Trainee.', 'success')
-            window.location.reload();
+            // window.location.reload();
         });
         } else {
           this.router.navigate(['/login']);
