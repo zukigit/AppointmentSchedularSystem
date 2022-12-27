@@ -9,6 +9,7 @@ import { filter } from 'rxjs';
 import { RegisterationRequestModel } from 'app/model/registeration-request-model';
 import { Team } from 'app/model/team';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { threadId } from 'worker_threads';
 
 @Component({
   selector: 'app-update',
@@ -31,9 +32,9 @@ export class UpdateComponent implements OnInit {
   user: User;
   registerModel: RegisterationRequestModel = new RegisterationRequestModel();
 
-  id:string;
+  id: string;
   constructor(private userServices: UserService, private http: HttpClient, private userList: UserService,
-    private router: Router,private route:ActivatedRoute) {
+    private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -43,12 +44,12 @@ export class UpdateComponent implements OnInit {
     this.userServices.getUserById(this.id).subscribe(data => {
       this.user = data;
       console.log(this.user);
-    },error => console.log("Update Response Front Error!!"));
+    }, error => console.log("Update Response Front Error!!"));
 
     this.userDataDetails = this.userServices.getUserDetails().subscribe(data => this.userDataDetails = data);
 
     this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
-   
+
     this.userServices.getTeam().subscribe(
       {
         next: (data) => {
@@ -73,17 +74,26 @@ export class UpdateComponent implements OnInit {
     this.team.team_id = this.user.team_id;
     this.registerModel.employee_id = this.user.employee_id;
     this.registerModel.name = this.user.name;
-    this.registerModel.password = this.user.password;
+
+    if (this.user.password == null) {
+      this.registerModel.password = "";
+      
+    } else {
+      this.registerModel.password = this.user.password;
+    }
+
+    console.log("do update password " + this.registerModel.password)
+    // this.registerModel.password = this.user.password;
     this.registerModel.phone_number = this.user.phone_number;
     this.registerModel.gender = this.user.gender;
     this.registerModel.role = this.user.role;
     this.registerModel.position = this.user.position;
     this.registerModel.team = this.team;
-    console.log("Team update data " + this.user.team_id )
-    this.userServices.updateUser(this.id , this.registerModel)
+    console.log("Team update data " + this.user.team_id)
+    this.userServices.updateUser(this.id, this.registerModel)
       .subscribe(data => console.log(data), error => console.log(error));
-     
+
     this.user = new User();
-    this.router.navigate(['admin/user-details']).then(() => window.location.reload() )
+    this.router.navigate(['admin/user-details']).then(() => window.location.reload())
   }
-  }
+}
