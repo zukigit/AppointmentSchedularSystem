@@ -30,7 +30,6 @@ export class UserService {
 }
 
  getTeam() {
-  console.log("get team is called");
   return this.http.get<Team[]>("http://localhost:8080/api/v1/getTeam", this.header);
 }
 
