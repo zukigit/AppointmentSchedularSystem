@@ -116,9 +116,11 @@ export class TableListComponent implements OnInit {
 
   deleteUser(id:string) {
     if(confirm("Are you sure want to delete?"))
-    Swal.fire('Delete Success', 'Employee is deleted', 'success')
+   
     this.userServices.deleteUser(id).subscribe(
-      data => this.getUserDetails(),error => Swal.fire({  
+      data => {this.getUserDetails(),
+      Swal.fire('Delete Success', 'Employee is deleted', 'success')}
+      ,error => Swal.fire({  
         icon: 'error',  
         title: 'Delete Failed',  
         text: 'Can not delete yourself',   
