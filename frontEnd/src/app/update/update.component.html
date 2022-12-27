@@ -44,8 +44,8 @@
             <input type="text" [(ngModel)]="user.position" name="position" id="position" placeholder="Enter Position">
           </div>
           <div class="input-box">
-            <span class="details">Permission Role</span>
-            <select name="role" [(ngModel)]="user.role" class="selectRoles">
+            <span *ngIf="!show" class="details">Permission Role</span>
+            <select *ngIf="!show" name="role" [(ngModel)]="user.role" class="selectRoles">
               <option default disabled>Select Role</option>
               <option value="USER">User</option>
               <option value="TRAINEE">Trainee</option>
@@ -89,7 +89,6 @@
               data-dismiss="modal" value="Cancel">
             <input type="submit" class="w3-btn" value="Update"
               style="background-color: #435d7d; color:white; border-radius: 3px;">
-
           </div>
         </div>
       </form>

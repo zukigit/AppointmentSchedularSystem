@@ -14,18 +14,18 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 })
 export class LoginComponent implements OnInit {
 
-  visible:boolean=true;
-  changetype:boolean=true;
-  jwtResponse:JwtResponse = new JwtResponse();
-  viewpass(){
-    this.visible=!this.visible;
-    this.changetype=!this.changetype;
+  visible: boolean = true;
+  changetype: boolean = true;
+  jwtResponse: JwtResponse = new JwtResponse();
+  viewpass() {
+    this.visible = !this.visible;
+    this.changetype = !this.changetype;
   }
 
 
-  login:Login = new Login();
+  login: Login = new Login();
 
-  constructor(private service:LoginService, private router:Router,private userS:UserService) {
+  constructor(private service: LoginService, private router: Router, private userS: UserService) {
 
   }
 
@@ -39,30 +39,19 @@ export class LoginComponent implements OnInit {
     localStorage.removeItem("loggedInUserRole");
 
     this.service.loginUser(this.login).subscribe(
-      data =>{
+      data => {
         this.jwtResponse = data;
         localStorage.setItem("jwtToken", this.jwtResponse.token);
         localStorage.setItem("loggedInUserId", this.jwtResponse.userId);
         localStorage.setItem("loggedInUserRole", this.jwtResponse.role);
 
+        if (this.jwtResponse.role == "ROLE_ADMIN") {
+          this.goToAdmin(), Swal.fire('Loggined Success!', 'Loggined as Admin.', 'success')
 
-        if(this.jwtResponse.role == "ROLE_ADMIN"){
-          console.log("go to dashboard");
-          this.router.navigate(['/admin/dashboard']).then(()=>{
-            Swal.fire('Loggined Success!', 'Loggined as Admin.', 'success')
-            // window.location.reload();
-            
-        });
-        } else if(this.jwtResponse.role == "ROLE_USER") {
-          this.router.navigate(['/user/test']).then(()=>{
-            Swal.fire('Loggined Success!', 'Loggined as User.', 'success')
-            // window.location.reload();
-        });
-        } else if(this.jwtResponse.role == "ROLE_TRAINEE") {
-          this.router.navigate(['/trainee/test']).then(()=>{
-            Swal.fire('Loggined Success!', 'Loggined as Trainee.', 'success')
-            // window.location.reload();
-        });
+        } else if (this.jwtResponse.role == "ROLE_USER") {
+          this.goToUser(), Swal.fire('Loggined Success!', 'Loggined as User.', 'success');
+        } else if (this.jwtResponse.role == "ROLE_TRAINEE") {
+          this.goToTrainee(), Swal.fire('Loggined Success!', 'Loggined as Trainee.', 'success');
         } else {
           this.router.navigate(['/login']);
         }
@@ -73,4 +62,15 @@ export class LoginComponent implements OnInit {
       }
     )
   }
+
+  goToUser() {
+    this.router.navigate(['/user/test']).then (() => window.location.reload()),10000;
+  }
+  goToAdmin() {
+    this.router.navigate(['/admin/dashboard']).then (() => window.location.reload()),10000;
+  }
+  goToTrainee() {
+    this.router.navigate(['/trainee/test']).then (() => window.location.reload()),5000;
+  }
+
 }

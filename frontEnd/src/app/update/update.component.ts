@@ -25,9 +25,16 @@ export class UpdateComponent implements OnInit {
   constructor(private userServices: UserService, private router: Router, private route: ActivatedRoute) {
   }
 
+  loginRole:string;
+  show:boolean=false;
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
     this.userServices.getUserById(this.id).subscribe(data => {
+      this.loginRole = data.role;
+      console.log("Roleee " + this.loginRole)
+      if (this.loginRole=='ADMIN'){
+        this.show=true;
+      }
       this.user = data;
       this.temTeam = data.team_name;
       this.temTeamId = data.team_id;
