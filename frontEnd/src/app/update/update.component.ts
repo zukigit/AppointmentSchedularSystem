@@ -90,10 +90,20 @@ export class UpdateComponent implements OnInit {
     this.registerModel.position = this.user.position;
     this.registerModel.team = this.team;
     console.log("Team update data " + this.user.team_id)
-    this.userServices.updateUser(this.id, this.registerModel)
-      .subscribe(data => console.log(data), error => console.log(error));
+    this.userServices.updateUser(this.id, this.registerModel).subscribe ( data => {
+      this.goToUserDetails();
+    },error => alert("Fail Update!") )
 
-    this.user = new User();
-    this.router.navigate(['admin/user-details']).then(() => window.location.reload())
+
+
+      // .subscribe(data => console.log(data), error => console.log(error));
+
+    // this.user = new User();
+
+    // this.router.navigate(['admin/user-details']).then(() => window.location.reload())
+  }
+
+  goToUserDetails() {
+    this.router.navigate(['admin/user-details']);
   }
 }
