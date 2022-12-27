@@ -20,7 +20,6 @@ export class UpdateComponent implements OnInit {
 
   userData: any = [];
   userDetails: any = [];
-
   userDataDetails: any = [];
   userlist: any = [];
   department: any = [];
@@ -28,8 +27,9 @@ export class UpdateComponent implements OnInit {
   tempTeam: Team[];
   test = ['a', 'b', 'c'];
   team: Team = new Team();
+  user: User = new User();
 
-  user: User;
+  
   registerModel: RegisterationRequestModel = new RegisterationRequestModel();
 
   id: string;
@@ -39,11 +39,8 @@ export class UpdateComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
-
-    this.user = new User();
     this.userServices.getUserById(this.id).subscribe(data => {
       this.user = data;
-      console.log(this.user);
     }, error => console.log("Update Response Front Error!!"));
 
     this.userDataDetails = this.userServices.getUserDetails().subscribe(data => this.userDataDetails = data);

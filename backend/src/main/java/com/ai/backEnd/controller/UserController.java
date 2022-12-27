@@ -87,12 +87,11 @@ public class UserController {
 		if(user.getPassword().equals("")) {
 			User retreatedUser = service.getUserById(user.getEmployee_id());
 			user.setPassword(retreatedUser.getPassword());
-			service.saveUser(user);
 		} else {
 			String encodedPassword = passwordEncoder.encode(user.getPassword());
 			user.setPassword(encodedPassword);
-			service.saveUser(user);
 		}
+		service.saveUser(user);
 		return ResponseEntity.ok(user);
 	}
 	

@@ -11,9 +11,10 @@ public class UserDetailForUpdate {
     String phone_number;
     String position;
     String gender;
+    String team_id;
 	
 	public UserDetailForUpdate(String employee_id, String name, UserRole role, String team_name, String department_name,
-			String phone_number, String position, String gender) {
+			String phone_number, String position, String gender, String team_id) {
 		super();
 		this.employee_id = employee_id;
 		this.name = name;
@@ -23,6 +24,13 @@ public class UserDetailForUpdate {
 		this.phone_number = phone_number;
 		this.position = position;
 		this.gender = gender;
+		this.team_id = team_id;
+	}
+	public String getTeam_id() {
+		return team_id;
+	}
+	public void setTeam_id(String team_id) {
+		this.team_id = team_id;
 	}
 	public String getPhone_number() {
 		return phone_number;
