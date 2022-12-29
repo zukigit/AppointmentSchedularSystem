@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -114,14 +115,27 @@ public class UserController {
 		}
 	}
 
-	// @DeleteMapping("/del/{employee_id}")
-	// @PreAuthorize("hasRole('ADMIN')")
-	// public boolean deleteById(@PathVariable String employee_id){
-	// 	boolean bol = false;
-	// 	if(bol){
-	// 		boolean bol1  = service.deleteById(employee_id);
-	// 		System.out.println("delete successful " + bol1);
-	// 	}
-	// 	return true;
-	// }
+	@GetMapping("/updatePhoneNumber")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String updatePhone(@RequestParam String userId,@RequestParam String newPhoneNumber) {
+        System.out.println("user Id " + userId);
+        System.out.println("phone Id " + newPhoneNumber);
+
+        User user = service.getUserById(userId);
+        user.setPhone_number(newPhoneNumber);
+        service.saveUser(user);
+        return user.getPhone_number();
+    }
+
+    @PostMapping("/changePassword")
+    @PreAuthorize("hasRole('ADMIN')")
+    public void changePassword(@RequestParam String oldPassword, @RequestParam String newPassword, @RequestParam String userId) {
+        User user = service.getUserById(userId);
+        if(passwordEncoder.matches(oldPassword, user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(newPassword));
+            service.saveUser(user);
+        } else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Old password is wrong!");
+        }
+    }
 }
