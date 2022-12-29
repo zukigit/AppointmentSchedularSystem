@@ -29,7 +29,7 @@
             *ngIf="form.controls['password'].invalid && (form.controls['password'].dirty || form.controls['password'].touched)"></span>
           <div class="input-box">
             <span class="details">Phone Number</span>
-            <input type="text" name="phone_number" [(ngModel)]="user.phone_number" id="phone" placeholder="Enter Phone number" required>
+            <input type="number" name="phone_number" [(ngModel)]="user.phone_number" id="phone" placeholder="Enter Phone number" required>
           </div>
           <span
             *ngIf="form.controls['phone_number'].invalid && (form.controls['phone_number'].dirty || form.controls['phone_number'].touched)"></span>

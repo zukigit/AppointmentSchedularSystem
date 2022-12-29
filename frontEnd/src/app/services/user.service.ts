@@ -56,4 +56,9 @@ getUserDetails(){
   saveImage(image:Image,fileUpload: File):Observable<Object>{
     return this.http.post("http://localhost:8080/api/v1/image",image, this.header);
   }
+
+  updatePhoneNo(userId:string,phone_number:string):Observable<Object>{
+    return this.http.get(`${this.baseUrl}/updatePhoneNumber?userId=${userId}&newPhoneNumber=${phone_number} `, this.header);
+  }
+
 }
