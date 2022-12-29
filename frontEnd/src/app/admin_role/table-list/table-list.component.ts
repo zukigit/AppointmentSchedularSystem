@@ -115,17 +115,47 @@ export class TableListComponent implements OnInit {
   }
 
   deleteUser(id:string) {
-    if(confirm("Are you sure want to delete?"))
+    
+      // confirm("Are you sure want to delete?")
+      Swal.fire({  
+        title: 'Are you sure want to delete?',  
+        // text: 'You will not be able to recover this file!',  
+        icon: 'warning',  
+        showCancelButton: true, 
+        cancelButtonText: 'No, keep it', 
+        confirmButtonText: 'Yes, delete it!'  
+          
+      }).then((result) => {  
+        if (result.value) {  
+          this.userServices.deleteUser(id).subscribe(
+            data => {this.getUserDetails(),
+              Swal.fire({  
+              icon: 'success',  
+              title: 'Delete Success',  
+              text: 'Your selected Employee is deleted',   
+            }) 
+            }
+            ,error => Swal.fire({  
+              icon: 'error',  
+              title: 'Delete Failed',  
+              text: 'Can not delete yourself',   
+            }) 
+            
+          )
+        } 
+        // else if (result.dismiss === Swal.DismissReason.cancel) {  
+        //   Swal.fire(  
+        //     'Cancelled',  
+        //     'Your selected Employee is safe :)',  
+        //     'error'  
+        //   )  
+        // }  
+      })
+    
+    
+    
    
-    this.userServices.deleteUser(id).subscribe(
-      data => {this.getUserDetails(),
-      Swal.fire('Delete Success', 'Employee is deleted', 'success')}
-      ,error => Swal.fire({  
-        icon: 'error',  
-        title: 'Delete Failed',  
-        text: 'Can not delete yourself',   
-      }) 
-    )
+    
   }
 
 }

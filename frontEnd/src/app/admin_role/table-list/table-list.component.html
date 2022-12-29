@@ -55,6 +55,7 @@
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
                     integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
                     crossorigin="anonymous">
+                
 
                 <!-- jQuery library -->
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
@@ -69,16 +70,17 @@
 
                 <!-- Navigation Bar -->
                 <nav class="navbar navbar-expand-sm
-            bg-dark navbar-dark" style="background-color: #21212100 !important; margin-bottom: 20px;">
+            bg-dark navbar-dark" style="background-color: #21212100 !important; margin-bottom: 20px; box-shadow: none;">
 
 
 
-                    <ul class="navbar nav ml-auto">
+                    <ul class="navbar nav ml-auto" style="box-shadow: none;">
                         <form >
-                            <ul class="navbar nav ml-auto">
+                            <ul class="navbar nav ml-auto" style="border:none;"> 
                                 <!-- Dropdown list -->
-                                <li class="nav-item dropdown">
-                                    <select (change)="onSelect($event)" ng-model="type">
+                                <li class="nav-item dropdown" style="box-shadow: none;"> <i class="fa fa-caret-down" aria-hidden="true" style="float: right; width:14px;"> </i>
+                                    <select (change)="onSelect($event)"  ng-model="type" style="font-size:14px; font: 400 14px/20px Roboto, 'Helvetica Neue', sans-serif; 
+                                    color: #435d7d; border: none;" > 
         
                                         <option value="default" selected>By Name</option>
                                         <option value="searchByDepartment">By Department</option>
