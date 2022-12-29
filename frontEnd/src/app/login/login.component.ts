@@ -46,18 +46,26 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("loggedInUserRole", this.jwtResponse.role);
 
         if (this.jwtResponse.role == "ROLE_ADMIN") {
-          this.goToAdmin(), Swal.fire('Loggined Success!', 'Loggined as Admin.', 'success')
+          this.goToAdmin() 
+          //Swal.fire('Loggined Success!', 'Loggined as Admin.', 'success')
 
         } else if (this.jwtResponse.role == "ROLE_USER") {
-          this.goToUser(), Swal.fire('Loggined Success!', 'Loggined as User.', 'success');
+          this.goToUser()
+          //Swal.fire('Loggined Success!', 'Loggined as User.', 'success');
         } else if (this.jwtResponse.role == "ROLE_TRAINEE") {
-          this.goToTrainee(), Swal.fire('Loggined Success!', 'Loggined as Trainee.', 'success');
+          this.goToTrainee()
+          //Swal.fire('Loggined Success!', 'Loggined as Trainee.', 'success');
         } else {
           this.router.navigate(['/login']);
         }
       },
       error => {
-        alert("UserId and Password doesn't match")
+        Swal.fire({  
+          icon: 'error',  
+          title: 'Login Failed',  
+          text: 'UserId and Password does not match',   
+        }) 
+        // alert("UserId and Password doesn't match")
         console.log("exception occured");
       }
     )
