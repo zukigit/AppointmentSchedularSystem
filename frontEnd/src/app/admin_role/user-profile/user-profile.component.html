@@ -61,7 +61,7 @@
                       </div>
                       <div class="col-sm-9 text-secondary">
                           <form (ngSubmit)="updatePhoneNumber()">
-                          <input type="text" [(ngModel)]="user.phone_number">
+                          <input type="number" [(ngModel)]="user.phone_number">
                           <button type="submit" value="Update">Update Phone</button>
                         </form>
                       </div>
