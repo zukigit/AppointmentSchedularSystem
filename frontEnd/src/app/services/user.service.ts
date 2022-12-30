@@ -63,7 +63,7 @@ getUserDetails(){
   }
 
   chgPass(pass: ChangePass):Observable<Object>{
-    console.log("service data "+ pass.new_password)
+    console.log("service data "+ pass.newPassword)
     return this.http.post("http://localhost:8080/api/v1/changePassword/", pass, this.header);
   }
 

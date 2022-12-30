@@ -41,14 +41,12 @@ export class ChangePassComponent implements OnInit {
   }
 
   changePassword() {
-    this.changePass.userid=this.loginId;
-    this.changePass.new_password=this.changePass.new_password;
-    this.changePass.old_password=this.changePass.old_password;
-    console.log("change userid" + this.changePass.old_password)
+    this.changePass.userId=this.loginId;
+   
+    console.log("change userid" + this.changePass.oldPassword)
     this.service.chgPass(this.changePass).subscribe(
-      data => alert("Ok"))
-    //   error=> alert("Something Wrong>>")
-    // )
+      data => alert("Ok"),
+      error=> console.log("kjalfdafdlafdhasmhsfh asdk"))
   }
 
 }

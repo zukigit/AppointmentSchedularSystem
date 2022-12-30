@@ -22,7 +22,7 @@
 
                         <div class="form-group">
                             <label class="form-control-label" style="margin-right: 50px;">Old Password</label>
-                            <input [(ngModel)]="changePass.old_password" [type]="changetype?'password':'text'" style="cursor: pointer;" id="password"
+                            <input [(ngModel)]="changePass.oldPassword" [type]="changetype?'password':'text'" style="cursor: pointer;" id="password"
                                 name="password" class="" type="password" required>
                             <span class="eyeicon" (click)="viewpass()"> <i
                                     [ngClass]="visible?'fa fa-eye': 'fa fa-eye-slash'"
@@ -32,7 +32,7 @@
 
                         <div class="form-group">
                             <label class="form-control-label" style="margin-right: 50px;">New Password</label>
-                            <input [(ngModel)]="changePass.new_password" [type]="changetype?'password':'text'" style="cursor: pointer;" id="password"
+                            <input [(ngModel)]="changePass.newPassword" [type]="changetype?'password':'text'" style="cursor: pointer;" id="password"
                                 name="password" class="" type="password" required>
                             <span class="eyeicon" (click)="viewpass_one()"> <i
                                     [ngClass]="visible?'fa fa-eye': 'fa fa-eye-slash'"
