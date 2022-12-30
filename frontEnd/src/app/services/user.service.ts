@@ -53,8 +53,8 @@ getUserDetails(){
     return this.http.delete(`${this.baseUrl}/deleteUser/${id}`, this.header);
   }
 
-  saveImage(image:Image,fileUpload: File):Observable<Object>{
-    return this.http.post("http://localhost:8080/api/v1/image",image, this.header);
+  saveImage(uploadImageData : FormData):Observable<Object>{
+    return this.http.post("http://localhost:8080/api/v1/image",uploadImageData, this.header);
   }
 
   updatePhoneNo(userId:string,phone_number:string):Observable<Object>{

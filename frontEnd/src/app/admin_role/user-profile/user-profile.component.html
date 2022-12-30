@@ -12,7 +12,7 @@
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
                  
-                    <img [src]="getInitialNames(user?.name)" (change)="onSelectFile($event)" class="rounded-circle" width="100">
+                    <img [src]="imageUrl" (change)="onSelectFile($event)" class="rounded-circle" width="100">
                     {{user.name}}
                     <div class="mt-3">
                       

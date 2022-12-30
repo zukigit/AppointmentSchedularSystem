@@ -19,7 +19,7 @@ export class UserProfileComponent implements OnInit {
 
    nameList : any;
 
-  //  imageUrl :string ="./assets/img/default.jpg";
+   imageUrl :string ="./assets/img/default.jpg";
 
    selectedFile : File ;
    photoExport : any;
@@ -62,56 +62,39 @@ export class UserProfileComponent implements OnInit {
 
     this.photoExport = this.selectedFile;
 
-    // this.photoExport = this.userService.saveImage(uploadImageData);
+    this.photoExport = this.userService.saveImage(uploadImageData);
   }
 
   getUserDetailsById(){
     this.detailsById = this.userService.getUserById(this.detailsById).subscribe(data=> this.detailsById=data);
   }
 
-  getInitialNames(name){
-    // console.log("name is" + name);
-    // const initialName : string = name.
+  // getInitialNames(name){
    
-   
-    this.nameList = this.userService.getUserById(this.loginId).subscribe(data=> this.nameList =data);
+  //   this.nameList = this.userService.getUserById(this.loginId).subscribe(data=> this.nameList =data);
     
-    const canvas = document.createElement('canvas');
-    canvas.style.display = 'block';
-    canvas.width=32;
-    canvas.height=32;
-    document.body.appendChild(canvas);
+  //   const canvas = document.createElement('canvas');
+  //   canvas.style.display = 'block';
+  //   canvas.width=32;
+  //   canvas.height=32;
+  //   document.body.appendChild(canvas);
 
-    const context = canvas.getContext('2d');
-    context.fillStyle = '#476ce8';
-    context.fillRect(0,0,canvas.width , canvas.height);
-    context.font = '20px Arial';
-    context.fillStyle = '#FFFFFF';
+  //   const context = canvas.getContext('2d');
+  //   context.fillStyle = '#476ce8';
+  //   context.fillRect(0,0,canvas.width , canvas.height);
+  //   context.font = '20px Arial';
+  //   context.fillStyle = '#FFFFFF';
     
-    const nameList = name.split(' ');
-    console.log("name is" + name);
-    console.log("namelist is" + nameList);
-    let initials = '';
-    for(let i = 0; i < nameList.length; i++){
-      // if(i<1){
-      //   initials = initials + nameList[i][0];
-      // }
-
-      initials+= nameList[i][0];
-      if(initials.length >= 1){
-        context.fillText(initials.toUpperCase(),7,22);
-      }
-      console.log("initial : "+initials);
-    }
+  //   const nameList = name.split(' ');
+  //   console.log("name is" + name);
+  //   console.log("namelist is" + nameList);
+  //   let initials = '';
     
-    // else{
-    //   context.fillText(initials.toUpperCase(),10,22);
-    // }
-    const data = canvas.toDataURL();
-    document.body.removeChild(canvas);
-    console.log("outside");
-    return data;
-  }
+  //   const data = canvas.toDataURL();
+  //   document.body.removeChild(canvas);
+  //   console.log("outside");
+  //   return data;
+  // }
  
   updatePhoneNumber() {
     console.log("Login id  " + this.loginId)
