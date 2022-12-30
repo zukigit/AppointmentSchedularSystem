@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <body>
   <div class="container">
@@ -16,7 +17,12 @@
             <input type="text" [(ngModel)]="user.name" name="name" id="name" placeholder="Employee Name">
           </div>
           <div class="input-box">
-            <span class="details">Password</span>
+            <span class="details">Password
+
+              <a class="side-bar"><i class="material-icons" style="font-size:15px">error_outline</i>
+                <span class="nav-sec-level" style="font-size: 11px;">If you don't want to update your password, you can let the blank to this field.
+                </span></a>
+            </span>
             <input type="password" [(ngModel)]="user.password" name="password" id="pass" placeholder="Password">
           </div>
           <div class="input-box">
