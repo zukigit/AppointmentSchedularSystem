@@ -128,11 +128,12 @@ public class UserController {
 
     @PostMapping("/changePassword")
     @PreAuthorize("hasRole('ADMIN')")
-    public void changePassword(@RequestBody ChangePasswordModel changePasswordModel) {
+    public boolean changePassword(@RequestBody ChangePasswordModel changePasswordModel) {
         User user = service.getUserById(changePasswordModel.getUserId());
         if(passwordEncoder.matches(changePasswordModel.getOldPassword(), user.getPassword())) {
             user.setPassword(passwordEncoder.encode(changePasswordModel.getNewPassword()));
             service.saveUser(user);
+            return true;
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Old password is wrong!");
         }
