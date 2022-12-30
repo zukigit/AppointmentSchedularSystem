@@ -72,5 +72,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'trainee/test', component: TraineeComponent},
     { path: 'admin/addEmployeeModal', component: RegisterComponent,canActivate:[AdminAuthGuard]},
     { path: 'admin/updateuser/:id', component: UpdateComponent,canActivate:[AdminAuthGuard]},
-    { path: 'admin/change_pass/:id',component:ChangePassComponent,canActivate:[AdminAuthGuard]}
+    { path: 'admin/change_pass',component:ChangePassComponent,canActivate:[AdminAuthGuard]}
 ];

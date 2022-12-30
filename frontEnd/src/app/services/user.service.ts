@@ -10,6 +10,7 @@ import { map } from 'jquery';
 import { RegisterationRequestModel } from '../model/registeration-request-model';
 import { Image } from 'app/model/image';
 import { Search } from 'app/model/search';
+import { ChangePass } from 'app/model/change-pass';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +60,11 @@ getUserDetails(){
 
   updatePhoneNo(userId:string,phone_number:string):Observable<Object>{
     return this.http.get(`${this.baseUrl}/updatePhoneNumber?userId=${userId}&newPhoneNumber=${phone_number} `, this.header);
+  }
+
+  chgPass(pass: ChangePass):Observable<Object>{
+    console.log("service data "+ pass.new_password)
+    return this.http.post("http://localhost:8080/api/v1/changePassword/", pass, this.header);
   }
 
 }

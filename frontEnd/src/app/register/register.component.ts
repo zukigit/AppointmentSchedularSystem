@@ -38,6 +38,16 @@ export class RegisterComponent implements OnInit {
     private router: Router) {
   }
 
+  validateNumber(event) {
+    const pattern = /[0-9]/;
+
+    let inputChar = String.fromCharCode(event.charCode);
+    if (!pattern.test(inputChar)) {
+      // invalid character, prevent input
+      event.preventDefault();
+    }
+  }
+
   ngOnInit() {
 
     this.userDataDetails = this.userServices.getUserDetails().subscribe(data => this.userDataDetails = data);
