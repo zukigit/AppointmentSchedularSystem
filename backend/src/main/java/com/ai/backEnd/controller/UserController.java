@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+
+import com.ai.backEnd.model.ChangePasswordModel;
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.model.UserDetail;
 import com.ai.backEnd.model.UserDetailForUpdate;
@@ -126,10 +128,10 @@ public class UserController {
 
     @PostMapping("/changePassword")
     @PreAuthorize("hasRole('ADMIN')")
-    public void changePassword(@RequestParam String oldPassword, @RequestParam String newPassword, @RequestParam String userId) {
-        User user = service.getUserById(userId);
-        if(passwordEncoder.matches(oldPassword, user.getPassword())) {
-            user.setPassword(passwordEncoder.encode(newPassword));
+    public void changePassword(@RequestBody ChangePasswordModel changePasswordModel) {
+        User user = service.getUserById(changePasswordModel.getUserId());
+        if(passwordEncoder.matches(changePasswordModel.getOldPassword(), user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(changePasswordModel.getNewPassword()));
             service.saveUser(user);
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Old password is wrong!");
