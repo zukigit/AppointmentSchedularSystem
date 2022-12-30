@@ -1,1 +1,76 @@
-<p>change-pass works!</p>
+<div class="container">
+  <div class="row">
+      <div class="col-lg-3 col-md-2"></div>
+      <div class="col-lg-6 col-md-8 login-box">
+          <div class="col-lg-12 login-key">
+              <i class="fa fa-key" aria-hidden="true"></i>
+          </div>
+          <div class="col-lg-12 login-title">
+              Please change your password!
+          </div>
+
+          <div class="col-lg-12 login-form">
+              <div class="col-lg-12 login-form">
+                  <form>
+                    <!-- <div class="pom-agile" style=" margin-top:15px; margin-bottom:1px">
+                      <input [type]="changetype?'password':'text'" style="cursor: pointer;" placeholder="Password"
+                         id="password" name="password" class="pass" type="password" required>
+                      <span class="eyeicon" (click)="viewpass()"> <i
+                          [ngClass]="visible?'fa fa-eye': 'fa fa-eye-slash'"></i></span>
+                    </div> -->
+
+
+
+
+                      <div class="form-group">
+                        <label class="form-control-label">Current Password</label>
+                        <input [type]="changetype?'password':'text'" style="cursor: pointer;"
+                         id="password" name="password" class="" type="password" required>
+                      <span class="eyeicon" (click)="viewpass()"> <i
+                          [ngClass]="visible?'fa fa-eye': 'fa fa-eye-slash'" style="color: rgb(202, 217, 213);"></i></span>
+                      </div>
+
+
+                      <div class="form-group">
+                        <label class="form-control-label" style="margin-right: 50px;">New Password</label>
+                        <input [type]="changetype?'password':'text'" style="cursor: pointer;"
+                         id="password" name="password" class="" type="password" required>
+                      <span class="eyeicon" (click)="viewpass_one()"> <i
+                          [ngClass]="visible?'fa fa-eye': 'fa fa-eye-slash'" style="color: rgb(202, 217, 213);"></i></span>
+                      </div>
+
+
+                      <div class="form-group">
+                        <label class="form-control-label">Confirm Password</label>
+                        <input [type]="changetype?'password':'text'" style="cursor: pointer;"
+                         id="password" name="password" class="" type="password" required>
+                      <span class="eyeicon" (click)="viewpass_two()"> <i
+                          [ngClass]="visible?'fa fa-eye': 'fa fa-eye-slash' " style="color: rgb(202, 217, 213);"></i></span>
+                      </div>
+
+
+
+                      <!-- <div class="form-group">
+                        <label class="form-control-label">Confirm Password</label>
+                        <input type="password" class="form-control" i>
+                    </div> -->
+
+                      <div class="col-lg-12 loginbttm">
+                          <div class="col-lg-6 login-btm login-text">
+                              <!-- Error Message -->
+                          </div>
+                          <div class="col-lg-6 login-btm login-button">
+                              <button type="submit" class="btn btn-outline-primary">Comfirm</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-2"></div>
+      </div>
+  </div>
+
+
+
+
+
