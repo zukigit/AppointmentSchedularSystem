@@ -11,7 +11,7 @@
 
             <div class="col-lg-12 login-form">
                 <div class="col-lg-12 login-form">
-                    <form (ngSubmit)="changePassword()">
+                    <form id="passwordForm" (ngSubmit)="changePassword()">
                         <!-- <div class="pom-agile" style=" margin-top:15px; margin-bottom:1px">
                       <input [type]="changetype?'password':'text'" style="cursor: pointer;" placeholder="Password"
                          id="password" name="password" class="pass" type="password" required>
@@ -22,8 +22,9 @@
 
                         <div class="form-group">
                             <label class="form-control-label" style="margin-right: 50px;">Old Password</label>
-                            <input [(ngModel)]="changePass.oldPassword" [type]="changetype?'password':'text'" style="cursor: pointer;" id="password"
-                                name="password" class="" type="password" required>
+                            <input [(ngModel)]="changePass.oldPassword" [type]="changetype?'password':'text'"
+                                style="cursor: pointer;" id="ppassword" name="password" class="" type="password"
+                                required>
                             <span class="eyeicon" (click)="viewpass()"> <i
                                     [ngClass]="visible?'fa fa-eye': 'fa fa-eye-slash'"
                                     style="color: rgb(202, 217, 213);"></i></span>
@@ -32,8 +33,9 @@
 
                         <div class="form-group">
                             <label class="form-control-label" style="margin-right: 50px;">New Password</label>
-                            <input [(ngModel)]="changePass.newPassword" [type]="changetype?'password':'text'" style="cursor: pointer;" id="password"
-                                name="password" class="" type="password" required>
+                            <input [(ngModel)]="changePass.newPassword" [type]="changetype?'password':'text'"
+                                style="cursor: pointer;" id="password" name="password" class="" type="password"
+                                required>
                             <span class="eyeicon" (click)="viewpass_one()"> <i
                                     [ngClass]="visible?'fa fa-eye': 'fa fa-eye-slash'"
                                     style="color: rgb(202, 217, 213);"></i></span>
@@ -42,7 +44,7 @@
 
                         <div class="form-group">
                             <label class="form-control-label">Confirm Password</label>
-                            <input [type]="changetype?'password':'text'" style="cursor: pointer;" id="password"
+                            <input [(ngModel)]="changePass.conPassword" [type]="changetype?'password':'text'" style="cursor: pointer;" id="conPassword"
                                 name="password" class="" type="password" required>
                             <span class="eyeicon" (click)="viewpass_two()"> <i
                                     [ngClass]="visible?'fa fa-eye': 'fa fa-eye-slash' "
@@ -70,3 +72,16 @@
             <div class="col-lg-3 col-md-2"></div>
         </div>
     </div>
+    <script>
+
+        const form = document.getElementById('passwordForm');
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('conPassword');
+
+        form.addEventListener('submit', function (event) {
+            if (password.value !== conPassword.value) {
+                event.preventDefault();
+                alert('Password and confirm password do not match.');
+            }
+        });
+    </script>

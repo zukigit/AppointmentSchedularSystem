@@ -9,12 +9,12 @@ import { UserService } from 'app/services/user.service';
 })
 export class ChangePassComponent implements OnInit {
 
-  changePass:ChangePass=new ChangePass();
+  changePass: ChangePass = new ChangePass();
 
   visible: boolean = true;
   changetype: boolean = true;
 
-  loginId:string=localStorage.getItem("loggedInUserId");
+  loginId: string = localStorage.getItem("loggedInUserId");
 
 
   viewpass() {
@@ -35,18 +35,23 @@ export class ChangePassComponent implements OnInit {
     this.changetype = !this.changetype;
   }
 
-  constructor(private service:UserService) { }
+  constructor(private service: UserService) { }
 
   ngOnInit(): void {
   }
 
   changePassword() {
-    this.changePass.userId=this.loginId;
-   
-    console.log("change userid" + this.changePass.oldPassword)
-    this.service.chgPass(this.changePass).subscribe(
-      data => alert("Ok"),
-      error=> console.log("kjalfdafdlafdhasmhsfh asdk"))
+    this.changePass.userId = this.loginId;
+
+    if (this.changePass.newPassword != this.changePass.conPassword) {
+      alert("Password and Confirm password does not match")
+    } else {
+      console.log("change userid" + this.changePass.oldPassword)
+      this.service.chgPass(this.changePass).subscribe(
+        data => alert("Ok"),
+        error => alert("Old password wrong!!!"))
+    }
   }
+
 
 }
