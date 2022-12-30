@@ -44,58 +44,31 @@ export class UserProfileComponent implements OnInit {
 
   onSelectFile(event){
 
-    var reader = new FileReader();
-    reader.onload = (event: any) => {
-      this.selectedFile = event.target.files[0];
+    this.selectedFile =event.target.files[0];
+
+    // var reader = new FileReader();
+    // reader.onload = (event: any) => {
+    //   this.selectedFile = event.target.files[0];
   
-    }
-    reader.readAsDataURL(this.selectedFile);
+    // }
+    // reader.readAsDataURL(this.selectedFile);
     }
 
   acceptImage(){
 
-    console.log(this.selectedFile);
+    const image = this.userService.saveImage(this.selectedFile).subscribe();
 
-    const uploadImageData = new FormData();
-    uploadImageData.append('image',this.selectedFile,this.selectedFile.name);
-    uploadImageData.append('id',this.selectedFile,this.selectedFile.name);
+    // console.log(this.selectedFile);
 
-    this.photoExport = this.selectedFile;
+    // this.photoExport = this.selectedFile;
 
-    this.photoExport = this.userService.saveImage(uploadImageData);
+    // this.photoExport = this.userService.saveImage(uploadImageData).subscribe();
   }
 
   getUserDetailsById(){
     this.detailsById = this.userService.getUserById(this.detailsById).subscribe(data=> this.detailsById=data);
   }
 
-  // getInitialNames(name){
-   
-  //   this.nameList = this.userService.getUserById(this.loginId).subscribe(data=> this.nameList =data);
-    
-  //   const canvas = document.createElement('canvas');
-  //   canvas.style.display = 'block';
-  //   canvas.width=32;
-  //   canvas.height=32;
-  //   document.body.appendChild(canvas);
-
-  //   const context = canvas.getContext('2d');
-  //   context.fillStyle = '#476ce8';
-  //   context.fillRect(0,0,canvas.width , canvas.height);
-  //   context.font = '20px Arial';
-  //   context.fillStyle = '#FFFFFF';
-    
-  //   const nameList = name.split(' ');
-  //   console.log("name is" + name);
-  //   console.log("namelist is" + nameList);
-  //   let initials = '';
-    
-  //   const data = canvas.toDataURL();
-  //   document.body.removeChild(canvas);
-  //   console.log("outside");
-  //   return data;
-  // }
- 
   updatePhoneNumber() {
     console.log("Login id  " + this.loginId)
     console.log("phone number " + this.user.phone_number)
