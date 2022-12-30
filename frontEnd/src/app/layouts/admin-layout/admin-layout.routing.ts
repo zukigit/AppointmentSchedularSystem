@@ -14,6 +14,7 @@ import { TraineeComponent } from 'app/trainee_role/trainee/trainee.component';
 import { AdminAuthGuard } from 'app/admin-auth.guard';
 import { RegisterComponent } from 'app/register/register.component';
 import { UpdateComponent } from 'app/update/update.component';
+import { ChangePassComponent } from 'app/admin_role/change-pass/change-pass.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -70,5 +71,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'user/test', component: UserComponent},
     { path: 'trainee/test', component: TraineeComponent},
     { path: 'admin/addEmployeeModal', component: RegisterComponent,canActivate:[AdminAuthGuard]},
-    { path: 'admin/updateuser/:id', component: UpdateComponent}
+    { path: 'admin/updateuser/:id', component: UpdateComponent,canActivate:[AdminAuthGuard]},
+    { path: 'admin/change_pass/:id',component:ChangePassComponent,canActivate:[AdminAuthGuard]}
 ];

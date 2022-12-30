@@ -6,6 +6,7 @@ import { UserService } from 'app/services/user.service';
 import { response } from 'express';
 import { data, event } from 'jquery';
 import { isContext } from 'vm';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-profile',
@@ -14,7 +15,7 @@ import { isContext } from 'vm';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(private http : HttpClient,private userService : UserService) { }
+  constructor(private http : HttpClient,private userService : UserService,private router:Router) { }
 
    nameList : any;
 
@@ -118,5 +119,8 @@ export class UserProfileComponent implements OnInit {
     this.userService.updatePhoneNo(this.loginId,this.user.phone_number).subscribe(
       data=>alert("Successfully Change Phone Number")
     )
+  }
+  changePass(id:string) {
+    this.router.navigate(['admin/change_pass',id]);
   }
 }

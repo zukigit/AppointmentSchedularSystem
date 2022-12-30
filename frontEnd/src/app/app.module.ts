@@ -16,6 +16,7 @@ import { AdminAuthGuard } from './admin-auth.guard';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { RegisterComponent } from './register/register.component';
 import { UpdateComponent } from './update/update.component';
+import { ChangePassComponent } from './admin_role/change-pass/change-pass.component';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { UpdateComponent } from './update/update.component';
     PagenotfoundComponent,
     RegisterComponent,
     UpdateComponent,
+    ChangePassComponent,
   ],
   providers: [AdminAuthGuard],
   bootstrap: [AppComponent]
