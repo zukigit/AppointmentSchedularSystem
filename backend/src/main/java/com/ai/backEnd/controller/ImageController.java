@@ -32,14 +32,6 @@ public class ImageController {
     public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file, @RequestParam("id") String employee_id) throws IOException {
         String id = employee_id;
         User user = userService.getUserById(id);
-        int a = user.getPhoto_id();
-        Image data = service.getImageById(a);
-        int photo_id = data.getPhoto_id();
-        if(a == photo_id){
-            service.deleteImage(photo_id);
-            userService.saveUser(user);
-        }
-        
         String uploadImage = service.uploadImage(file);
         String name = file.getOriginalFilename();
         ArrayList<Image> image =  service.getImageByName(name);
