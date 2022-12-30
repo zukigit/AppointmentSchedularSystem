@@ -4,17 +4,19 @@ import com.ai.backEnd.model.Image;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public interface ImageService {
 
     String uploadImage(MultipartFile file) throws IOException;
     byte[] downloadImage(String fileName);
 
-    Optional<Image> getImageByName(String name);
+    ArrayList<Image> getImageByName(String name);
 
     List<Image> getImage();
+
+    Image getImageById(int photo_id);
 
     void deleteImage(int photo_id);
 }

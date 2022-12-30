@@ -9,8 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class ImageImpl implements ImageService {
@@ -34,13 +35,13 @@ public class ImageImpl implements ImageService {
 
     @Override
     public byte[] downloadImage(String fileName) {
-        Optional<Image> dbImageData = repo.findByName(fileName);
-        byte[] images = ImageUtils.decompressImage(dbImageData.get().getImageData());
+        ArrayList<Image> dbImageData = repo.findByName(fileName);
+        byte[] images = ImageUtils.decompressImage(dbImageData.get(0).getImageData());
         return images;
     }
 
     @Override
-    public Optional<Image> getImageByName(String name) {
+    public ArrayList<Image> getImageByName(String name) {
         return repo.findByName(name);
     }
 
@@ -53,5 +54,10 @@ public class ImageImpl implements ImageService {
     public void deleteImage(int photo_id) {
         repo.deleteById(photo_id);
 
+    }
+
+    @Override
+    public Image getImageById(int photo_id) {
+        return repo.findById(photo_id).get();
     }
 }

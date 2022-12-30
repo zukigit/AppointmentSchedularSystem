@@ -11,10 +11,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -27,35 +27,70 @@ public class ImageController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/image")
+    //Upload Image By User Id
+    @PostMapping("/imageUpload")
     public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file, @RequestParam("id") String employee_id) throws IOException {
         String id = employee_id;
         User user = userService.getUserById(id);
+        int a = user.getPhoto_id();
+        Image data = service.getImageById(a);
+        int photo_id = data.getPhoto_id();
+        if(a == photo_id){
+            user.setPhoto_id(0);
+            userService.saveUser(user);
+        }
+        service.deleteImage(photo_id);
         String uploadImage = service.uploadImage(file);
         String name = file.getOriginalFilename();
-        Optional<Image> image =  service.getImageByName(name);
-        int a = image.get().getPhoto_id();
-        user.setPhoto_id(a);
+        ArrayList<Image> image =  service.getImageByName(name);
+        for (int i = 0; i < image.size()-1; i++) {
+            Image setImage = image.get(i);
+             user.setPhoto_id(setImage.getPhoto_id());
+        }
         userService.saveUser(user);
         return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
     }
 
-    @GetMapping("{fileName}")
-    public ResponseEntity<?> downloadImage(@PathVariable String fileName){
-        byte[] imageData = service.downloadImage(fileName);
+    //Get Image By User Id
+    @GetMapping("/getImageByUserId")
+    public ResponseEntity<?> downloadImage( @RequestParam("id") String employee_id){
+        String id = employee_id;
+        User user = userService.getUserById(id);
+        int i = user.getPhoto_id();
+        Image data = service.getImageById(i);
+        byte[] imageData = service.downloadImage(data.getName());
         return ResponseEntity.status(HttpStatus.OK).contentType(MediaType.valueOf("image/png")).body(imageData);
     }
+
     @GetMapping("/getImage")
     public List<Image> getImage(){
         return service.getImage();
     }
 
-    //Delete User
-    @DeleteMapping("/deleteImage/{photo_id}")
-    public ResponseEntity<Map<String, Boolean>> deleteUser(@PathVariable int photo_id){
+    //Delete Image By User Id
+    @DeleteMapping("/deleteImageByUserId/{employee_id}")
+    public ResponseEntity<Map<String, Boolean>> deleteImageByUserId(@PathVariable String employee_id){
+        String id = employee_id;
+        User user = userService.getUserById(id);
+        int i = user.getPhoto_id();
+        Image data = service.getImageById(i);
+        int photo_id = data.getPhoto_id();
+        if(i == photo_id){
+            user.setPhoto_id(0);
+            userService.saveUser(user);
+        }
         service.deleteImage(photo_id);
         Map<String, Boolean> response = new HashMap<>();
         response.put("deleted", Boolean.TRUE);
         return ResponseEntity.ok(response);
     }
+
+    //Get Image By Photo Id
+    @GetMapping("/getImageById/{photo_id}")
+    public ResponseEntity<Image> getImageById(@PathVariable int photo_id){
+		Image image = new Image();
+		image = service.getImageById(photo_id);
+		return ResponseEntity.ok(image);
+	}
+
 }
