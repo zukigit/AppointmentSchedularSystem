@@ -36,10 +36,10 @@ public class ImageController {
         Image data = service.getImageById(a);
         int photo_id = data.getPhoto_id();
         if(a == photo_id){
-            user.setPhoto_id(0);
+            service.deleteImage(photo_id);
             userService.saveUser(user);
         }
-        service.deleteImage(photo_id);
+        
         String uploadImage = service.uploadImage(file);
         String name = file.getOriginalFilename();
         ArrayList<Image> image =  service.getImageByName(name);
