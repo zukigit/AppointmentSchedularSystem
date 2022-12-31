@@ -1,11 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Image } from 'app/model/image';
 import { User } from 'app/model/user';
 import { UserService } from 'app/services/user.service';
-import { response } from 'express';
-import { data, event } from 'jquery';
-import { isContext } from 'vm';
 import { Router } from '@angular/router';
 
 @Component({
@@ -43,26 +39,11 @@ export class UserProfileComponent implements OnInit {
   }
 
   onSelectFile(event){
-
-    this.selectedFile =event.target.files[0];
-
-    // var reader = new FileReader();
-    // reader.onload = (event: any) => {
-    //   this.selectedFile = event.target.files[0];
-  
-    // }
-    // reader.readAsDataURL(this.selectedFile);
-    }
+    this.selectedFile = event.target.files[0];
+  }
 
   acceptImage(){
-
-    const image = this.userService.saveImage(this.selectedFile).subscribe();
-
-    // console.log(this.selectedFile);
-
-    // this.photoExport = this.selectedFile;
-
-    // this.photoExport = this.userService.saveImage(uploadImageData).subscribe();
+   this.userService.saveImage(this.selectedFile).subscribe();
   }
 
   getUserDetailsById(){

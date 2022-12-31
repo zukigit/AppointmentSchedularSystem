@@ -58,13 +58,13 @@ getUserDetails(){
     
     const formData = new FormData();
     formData.append('image', selectedFile);
-    formData.append('id', selectedFile);
 
     const headers = new HttpHeaders()
-                                    .set('Authorization',  `Bearer ${this.jwtToken}`)
-                                    .set('Content-Type', 'multipart/form-data');
+                                    .set('Authorization',  `Bearer ${this.jwtToken}`);
+    
+    headers.append('Content-Type', `multipart/form-data`);
 
-    return this.http.post<any>("http://localhost:8080/api/v1/imageUpload", formData, { headers });
+    return this.http.post<any>("http://localhost:8080/api/v1/testImage", formData, { headers });
     
   }
 
