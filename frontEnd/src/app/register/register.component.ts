@@ -99,11 +99,7 @@ export class RegisterComponent implements OnInit {
     this.registerModel.team = this.team;
     this.userServices.createUser(this.registerModel).subscribe(
       data => { this.router.navigate(['admin/user-details']);
-                // window.alert("Employee succesfully Added!")
-                // swal("Employee succesfully Added!");
                 Swal.fire('Added One Employee!!', 'Employee added succesfully!', 'success')
-                // window.location.reload();
-                console.log("Successfully");
             },
             error => {console.log("Not create same userid");
             this.router.navigate(['admin/addEmployeeModal']);

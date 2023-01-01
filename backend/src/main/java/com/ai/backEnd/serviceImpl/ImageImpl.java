@@ -22,14 +22,14 @@ public class ImageImpl implements ImageService {
 
     @Override
     public String uploadImage(MultipartFile file) throws IOException {
-        Image image = repo.save(Image.builder()
-                .name(file.getOriginalFilename())
-                .type(file.getContentType())
-                .imageData(ImageUtils.compressImage(file.getBytes())).build());
-
-        if (image != null) {
-            return "file upload success : " + file.getOriginalFilename();
-        }
+//        Image image = repo.save(Image.builder()
+//                .name(file.getOriginalFilename())
+//                .type(file.getContentType())
+//                .imageData(ImageUtils.compressImage(file.getBytes())).build());
+//
+//        if (image != null) {
+//            return "file upload success : " + file.getOriginalFilename();
+//        }
         return null;
     }
 

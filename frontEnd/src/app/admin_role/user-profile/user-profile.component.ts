@@ -43,7 +43,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   acceptImage(){
-   this.userService.saveImage(this.selectedFile).subscribe();
+   this.userService.saveImage(this.selectedFile, this.loginId).subscribe(data=> console.log(data));
   }
 
   getUserDetailsById(){

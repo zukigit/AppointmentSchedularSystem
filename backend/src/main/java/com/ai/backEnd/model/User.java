@@ -8,12 +8,13 @@ import javax.persistence.*;
 public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-
 	@Id
 	private String employee_id;
 	private String name;
 	private String password;
-	private int photo_id;
+    @OneToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "image_id", referencedColumnName = "image_id")
+	private UserImage userImage = null;
 	private String phone_number;
 	private String gender;
 	private String position;
@@ -26,6 +27,12 @@ public class User implements Serializable{
 	private boolean isAccountNonLocked = true;
 	private boolean isCredentialsNonExpired = true;
 	private boolean isEnabled = true;
+	public UserImage getUserImage() {
+		return userImage;
+	}
+	public void setUserImage(UserImage userImage) {
+		this.userImage = userImage;
+	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -46,12 +53,6 @@ public class User implements Serializable{
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public int getPhoto_id() {
-		return photo_id;
-	}
-	public void setPhoto_id(int photo_id) {
-		this.photo_id = photo_id;
 	}
 	public String getPhone_number() {
 		return phone_number;
@@ -107,6 +108,4 @@ public class User implements Serializable{
 	public void setEnabled(boolean isEnabled) {
 		this.isEnabled = isEnabled;
 	}
-
-	
 }

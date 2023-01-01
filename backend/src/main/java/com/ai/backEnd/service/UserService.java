@@ -1,6 +1,7 @@
 package com.ai.backEnd.service;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.model.UserDetail;
 import com.ai.backEnd.model.UserDetailForUpdate;
