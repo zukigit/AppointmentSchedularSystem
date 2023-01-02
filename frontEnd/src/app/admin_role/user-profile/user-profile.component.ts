@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'app/model/user';
 import { UserService } from 'app/services/user.service';
 import { Router } from '@angular/router';
+import { ImageClass } from 'app/model/image-class';
+import { ImageService } from 'app/services/image.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,19 +13,22 @@ import { Router } from '@angular/router';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(private http : HttpClient,private userService : UserService,private router:Router) { }
+  constructor(private http : HttpClient, private userService : UserService,private router:Router, private imageService: ImageService) { }
 
-   nameList : any;
+  nameList : any;
+  imageData:any=[];
 
-   imageUrl :string ="./assets/img/default.jpg";
+  imageUrl :any ="./assets/img/default.jpg";
 
-   selectedFile : File ;
-   photoExport : any;
+  selectedFile : File ;
+  photoExport : any;
+  user!:User
+  image : any = new ImageClass ();
 
-    user!:User
+  detailsById : any =[];
+  loginId:string=localStorage.getItem("loggedInUserId");
 
-    detailsById : any =[];
-    loginId:string=localStorage.getItem("loggedInUserId");
+  imageString: string;
 
   ngOnInit() {
     this.loginId;
@@ -43,7 +48,15 @@ export class UserProfileComponent implements OnInit {
   }
 
   acceptImage(){
-   this.userService.saveImage(this.selectedFile, this.loginId).subscribe(data=> console.log(data));
+    this.userService.saveImage(this.selectedFile, this.loginId).subscribe(response => {
+      const reader = new FileReader();
+      reader.addEventListener('load', () => {
+        this.imageUrl = reader.result;
+      }, false);
+      if (response) {
+        reader.readAsDataURL(response);
+      }
+    });
   }
 
   getUserDetailsById(){
@@ -51,8 +64,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   updatePhoneNumber() {
-    console.log("Login id  " + this.loginId)
-    console.log("phone number " + this.user.phone_number)
     this.userService.updatePhoneNo(this.loginId,this.user.phone_number).subscribe(
       data=>alert("Successfully Change Phone Number")
     )

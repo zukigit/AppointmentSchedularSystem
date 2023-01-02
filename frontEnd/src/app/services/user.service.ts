@@ -54,7 +54,7 @@ getUserDetails(){
     return this.http.delete(`${this.baseUrl}/deleteUser/${id}`, this.header);
   }
 
-  saveImage(selectedFile : File, id : string):Observable<Object>{
+   saveImage(selectedFile : File, id : string):Observable<Blob>{
     
     const formData = new FormData();
     formData.append('image', selectedFile);
@@ -64,8 +64,9 @@ getUserDetails(){
                                     .set('Authorization',  `Bearer ${this.jwtToken}`);
     
     headers.append('Content-Type', `multipart/form-data`);
+    headers.append('responseType', `blob`);
 
-    return this.http.post<any>("http://localhost:8080/api/v1/uploadImage", formData, { headers });
+    return this.http.post("http://localhost:8080/api/v1/uploadImage", formData, { headers, responseType: 'blob'});
     
   }
 
