@@ -1,1 +1,148 @@
-<p>app-register works!</p>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>Free Online Student Registration Form</title>
+    <link rel="stylesheet" href="style.css"> -->
+
+</head>
+
+<body>
+    <div class="container">
+
+
+      <marquee class="marq"
+
+      direction="right"
+      loop="">
+      <h1>Appointment Registration From</h1>
+</marquee>
+
+
+
+
+                <!-- <div class="col-md-4">
+                  <span class="btn btn-info "><i class="glyphicon glyphicon-plus"> </i> Browse
+                      <input type="file" style="position:relative;overflow:hidden" id="inPutArtistImage" name="ArtistImage" accept="image/png, image/jpeg" />
+                  </span>
+              </div> -->
+
+
+              <div class="form-item">
+
+                <label for="datetime">Start Time:</label>
+
+                <input type="time" name="time" value="22:00" />
+
+
+
+                <label for="datetime">End Time:</label>
+
+                <input type="time" name="time" value="22:00" />
+
+
+
+
+
+            </div>
+
+
+
+                <div class="form-item">
+
+                    <label for="datetime">Start Date:</label>
+                    <input type="date" name="date" value="2023-01-01" min="2023-01-01" max="2024-01-01">
+
+                </div>
+
+
+                <div class="form-item">
+
+                  <label for="datetime">End Date:</label>
+                  <input type="date" name="date" value="2023-01-01" min="2023-01-01" max="2024-01-01">
+
+
+              </div>
+
+
+                <div class="form-item">
+                    <label for="username">Description</label>
+                    <textarea name="comments" id="comments" style="font-family:sans-serif;font: size 1.5em; font-weight: bold;">
+
+                      </textarea>
+                </div>
+
+
+                <div class="form-item">
+                    <label for="gender">Set Privacy:</label>
+                    <div class="genders">
+                        <p>Public</p> <input type="radio" name="gender" id="gender" value="male" required>
+                        <p>Private</p> <input type="radio" name="gender" id="gender" value="female">
+
+                    </div>
+                </div>
+
+
+                <!-- Department & Team -->
+
+                <!-- <div class="form-item">
+                <label for="department">Department:</label>
+                  <select  class="selectDept" (change)="onSelect($event)" >
+                    <option  selected="true" disabled>Select Department</option>
+                    <option *ngFor="let departments of department" value="{{departments.department_id}}">
+                      {{departments.department_name}}</option>
+                  </select>
+
+                </div>
+
+                <div class="form-item">
+                  <label for="team">Team:</label>
+                  <select [(ngModel)]="user.team_id" class="selectTeam">Select Team
+                    <option selected="true" disabled>Select Team</option>
+                    <option *ngFor="let teams of tempTeam" value="{{teams.team_id}}">{{teams.team_name}}</option>
+                  </select>
+                </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Attached file -->
+               <div class="form-wrapper">
+            <form action="">
+                <div class="form-item">
+                    <label for="fullname">Attached File:</label>
+                    <input type="file" name="attachedfile" id="attachedfile" style="width: 30%;" required>
+                    <p><b>(Maximum File Size: 5 Mb)</b></p>
+
+                </div>
+
+
+            <input type="submit" class="register" value="Add">
+
+
+
+              <input type="button" class="cancel" data-dismiss="modal" value="Cancel">
+
+            </form>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

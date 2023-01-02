@@ -12,4 +12,5 @@ export class AppRegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
 }
