@@ -68,8 +68,8 @@
                         <i class="material-icons">person</i></a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                         
-                        <button class="dropdown-item" [routerLink]="['admin/user-profile']" style=" width:90%;"><i class="material-icons">person</i>User Profile</button>
-                        
+                        <button class="dropdown-item" [routerLink]="['profile']" style=" width:90%;"><i class="material-icons">person</i>User Profile</button>
+                        <button class="dropdown-item" [routerLink]="['admin/change_pass']"  style=" width:90%;"><i class="material-icons">lock_reset</i> Change Password</button>
                         <button class="dropdown-item" (click)="logout()" style="width:90%;"><i class="material-icons">logout</i>Log Out</button>
                     </div>
                 </li>

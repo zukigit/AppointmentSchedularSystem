@@ -17,6 +17,10 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { RegisterComponent } from './register/register.component';
 import { UpdateComponent } from './update/update.component';
 import { ChangePassComponent } from './admin_role/change-pass/change-pass.component';
+import { AppointmentComponent } from './appointment/appointment.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { AppRegisterComponent } from './app-register/app-register.component';
+
 
 @NgModule({
   imports: [
@@ -28,6 +32,7 @@ import { ChangePassComponent } from './admin_role/change-pass/change-pass.compon
     RouterModule,
     AppRoutingModule,
     MatRadioModule,
+    FullCalendarModule
   ],
   declarations: [
     AppComponent,
@@ -39,6 +44,8 @@ import { ChangePassComponent } from './admin_role/change-pass/change-pass.compon
     RegisterComponent,
     UpdateComponent,
     ChangePassComponent,
+    AppointmentComponent,
+    AppRegisterComponent,
   ],
   providers: [AdminAuthGuard],
   bootstrap: [AppComponent]
