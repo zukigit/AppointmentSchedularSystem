@@ -1,10 +1,10 @@
 package com.ai.backEnd.service;
 
 import java.util.List;
-import org.springframework.stereotype.Service;
+
 import com.ai.backEnd.model.User;
-import com.ai.backEnd.model.UserDetail;
-import com.ai.backEnd.model.UserDetailForUpdate;
+import com.ai.backEnd.dto.UserDetail;
+import com.ai.backEnd.dto.UserDetailForUpdate;
 
 public interface UserService {
 	

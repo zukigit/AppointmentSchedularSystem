@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import com.ai.backEnd.model.LoginRequestModel;
+import com.ai.backEnd.dto.LoginRequestModel;
 import com.ai.backEnd.security.jwt.JwtGenerate;
 import com.ai.backEnd.security.jwt.JwtResponse;
 

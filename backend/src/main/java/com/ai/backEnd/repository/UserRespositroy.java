@@ -5,8 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import com.ai.backEnd.model.User;
-import com.ai.backEnd.model.UserDetail;
-import com.ai.backEnd.model.UserDetailForUpdate;
+import com.ai.backEnd.dto.UserDetail;
+import com.ai.backEnd.dto.UserDetailForUpdate;
 
 @Repository
 public interface UserRespositroy extends JpaRepository<User, String>{

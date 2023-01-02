@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.ai.backEnd.model.ChangePasswordModel;
+import com.ai.backEnd.dto.ChangePasswordModel;
 import com.ai.backEnd.model.User;
-import com.ai.backEnd.model.UserDetail;
-import com.ai.backEnd.model.UserDetailForUpdate;
+import com.ai.backEnd.dto.UserDetail;
+import com.ai.backEnd.dto.UserDetailForUpdate;
 import com.ai.backEnd.model.UserRole;
-import com.ai.backEnd.model.UserSearch;
+import com.ai.backEnd.dto.UserSearch;
 import com.ai.backEnd.service.UserService;
 
 @CrossOrigin(origins = "http://localhost:4200")

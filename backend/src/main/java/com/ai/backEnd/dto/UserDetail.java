@@ -1,4 +1,6 @@
-package com.ai.backEnd.model;
+package com.ai.backEnd.dto;
+
+import com.ai.backEnd.model.UserRole;
 
 public class UserDetail {
     String employee_id;

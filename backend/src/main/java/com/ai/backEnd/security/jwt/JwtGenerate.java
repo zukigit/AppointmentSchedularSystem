@@ -7,9 +7,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
-import com.ai.backEnd.model.LoginRequestModel;
+import com.ai.backEnd.dto.LoginRequestModel;
 import com.ai.backEnd.security.auth.ApplicationUser;
 
 @Component

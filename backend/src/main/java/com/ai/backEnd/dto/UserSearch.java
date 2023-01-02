@@ -1,4 +1,4 @@
-package com.ai.backEnd.model;
+package com.ai.backEnd.dto;
 
 public class UserSearch {
 

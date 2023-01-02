@@ -4,8 +4,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ai.backEnd.model.User;
-import com.ai.backEnd.model.UserDetail;
-import com.ai.backEnd.model.UserDetailForUpdate;
+import com.ai.backEnd.dto.UserDetail;
+import com.ai.backEnd.dto.UserDetailForUpdate;
 import com.ai.backEnd.repository.UserRespositroy;
 import com.ai.backEnd.service.UserService;
 
