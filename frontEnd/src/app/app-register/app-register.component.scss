@@ -1,0 +1,206 @@
+html {
+  background: rgba(233, 225, 225, 0.479);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  width: 75vw;
+  background: #6fd5e659;
+  padding: 25px;
+
+  margin-top: 65px;
+}
+
+.container h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(16, 31, 40);
+  font-size: 20px;
+
+  margin-bottom: 10px;
+
+}
+
+.container h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(59, 55, 55);
+  font-size: 20px;
+  margin-top: 5px;
+}
+
+.form-wrapper {
+  margin: 15px;
+  width: 100%;
+}
+
+.form {
+  width: 90%;
+}
+
+#studentimage {
+  height: 80px;
+  width: 80px;
+  border-radius: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(59, 55, 55);
+}
+
+p {
+  font-family: Arial, Helvetica, sans-serif;
+  color: Black;
+  font-size: 14px;
+}
+
+.form-item {
+  display: flex;
+  margin: auto;
+  align-items: center;
+  width: 80%;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.form-item label {
+  width: 150px;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.form-item input {
+  margin: 5px 15px;
+  height: 50px;
+  width: 50%;
+  font-size: 15px;
+  font-weight: bold;
+  border: 1.5px black solid;
+  border-radius: 5px;
+  margin: 30px;
+  margin-left: 10px;
+
+}
+
+.form-item select {
+  margin: 5px 0px;
+  width: max-content;
+}
+
+.genders {
+  display: flex;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 16px;
+  font-size: 14px;
+}
+
+.genders input {
+  width: 20px;
+}
+
+hr {
+  margin-top: 15px;
+  width: 80%;
+}
+
+h3 {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+}
+.same-perm{
+  display: flex;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  font-size: 13px;
+  margin: 5px 105px;
+}
+
+.register {
+  margin: 25px;
+  background: #1e90ff;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 7px 20px;
+  border-radius: 5px;
+  color: #fbfbfb;
+  border: 0;
+  cursor: pointer;
+}
+
+.register:hover {
+  color: #3a3636;
+}
+
+
+
+.cancel {
+
+  background: #c61313;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 7px 20px;
+  border-radius: 5px;
+  color: #fbfbfb;
+  border: 0;
+  cursor: pointer;
+}
+
+.cancel:hover {
+  color: #3a3636;
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width: 640px) {
+  .container {
+      width: 90vw;
+      padding: 10px 5px;
+  }
+  .form-item label {
+      font-size: 16px;
+      font-weight: bold;
+      font-family: monospace;
+
+  }
+  .form-item input {
+      margin: 5px 10px;
+      font-size: 12px;
+  }
+  .genders {
+      margin-left: 10px;
+      font-size: 13px;
+  }
+  .genders input {
+      width: 15px;
+  }
+  .same-perm{
+
+  font-size: 13px;
+  margin: 5px 50px;
+}
+  /* .register {
+      margin: 25px;
+      font-size: 15px;
+      padding: 7px 10px;
+  }
+  .cancel {
+    margin: 25px;
+    font-size: 15px;
+    padding: 7px 10px;
+} */
+
+
+
+
+
+
+
+
+}
