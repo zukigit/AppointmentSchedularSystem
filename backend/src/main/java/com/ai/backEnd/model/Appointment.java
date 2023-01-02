@@ -22,6 +22,8 @@ public class Appointment {
 	private int appointent_id;
 	private String title;
 	private String description;
+
+	private byte[] file;
 	@DateTimeFormat(pattern = "yyyy-mm-dd'T'HH:mm")
 	private LocalDateTime created_date;
 	@DateTimeFormat(pattern = "yyyy-mm-dd'T'HH:mm")
@@ -38,9 +40,16 @@ public class Appointment {
                     @JoinColumn(name = "employee_id", 
                             nullable = false, updatable = false)})
 	private Set<User> employee_id;
-	
-	
-	
+
+
+	public byte[] getFile() {
+		return file;
+	}
+
+	public void setFile(byte[] file) {
+		this.file = file;
+	}
+
 	public int getAppointent_id() {
 		return appointent_id;
 	}
