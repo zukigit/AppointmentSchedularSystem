@@ -2,93 +2,89 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <title>Free Online Student Registration Form</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <title>Free Online Student Registration Form</title>
     <link rel="stylesheet" href="style.css"> -->
 
 </head>
 
 <body>
+  <form (submit)="addAppointment()">
     <div class="container">
 
 
-      <marquee class="marq"
-
-      direction="right"
-      loop="">
-      <h1>Appointment Registration From</h1>
-</marquee>
+      <marquee class="marq" direction="right" loop="">
+        <h1>Appointment Registration From</h1>
+      </marquee>
 
 
 
 
-                <!-- <div class="col-md-4">
+      <!-- <div class="col-md-4">
                   <span class="btn btn-info "><i class="glyphicon glyphicon-plus"> </i> Browse
                       <input type="file" style="position:relative;overflow:hidden" id="inPutArtistImage" name="ArtistImage" accept="image/png, image/jpeg" />
                   </span>
               </div> -->
 
 
-              <div class="form-item">
+      <div class="form-item">
 
-                <label for="datetime">Start Time:</label>
+        <label for="datetime">Start Time:</label>
 
-                <input type="time" name="time" value="22:00" />
-
-
-
-                <label for="datetime">End Time:</label>
-
-                <input type="time" name="time" value="22:00" />
+        <input type="time" [(ngModel)]="sTime" name="time" value="hh:mm" />
 
 
 
+        <label for="datetime">End Time:</label>
+
+        <input type="time" [(ngModel)]="eTime" name="time" value="hh:mm" />
 
 
-            </div>
+
+      </div>
 
 
 
-                <div class="form-item">
+      <div class="form-item">
 
-                    <label for="datetime">Start Date:</label>
-                    <input type="date" name="date" value="2023-01-01" min="2023-01-01" max="2024-01-01">
+        <label for="datetime">Start Date:</label>
+        <input type="date" [(ngModel)]="sDate" name="date" value="2023-01-01" min="2023-01-01" max="2024-01-01">
 
-                </div>
-
-
-                <div class="form-item">
-
-                  <label for="datetime">End Date:</label>
-                  <input type="date" name="date" value="2023-01-01" min="2023-01-01" max="2024-01-01">
+      </div>
 
 
-              </div>
+      <div class="form-item">
+
+        <label for="datetime">End Date:</label>
+        <input type="date" [(ngModel)]="eDate" name="date" value="2023-01-01" min="2023-01-01" max="2024-01-01">
 
 
-                <div class="form-item">
-                    <label for="username">Description</label>
-                    <textarea name="comments" id="comments" style="font-family:sans-serif;font: size 1.5em; font-weight: bold;">
+      </div>
+
+
+      <!-- <div class="form-item">
+        <label for="username">Description</label>
+        <textarea name="comments" id="comments" style="font-family:sans-serif;font: size 1.5em; font-weight: bold;">
 
                       </textarea>
-                </div>
+      </div>
 
 
-                <div class="form-item">
-                    <label for="gender">Set Privacy:</label>
-                    <div class="genders">
-                        <p>Public</p> <input type="radio" name="gender" id="gender" value="male" required>
-                        <p>Private</p> <input type="radio" name="gender" id="gender" value="female">
+      <div class="form-item">
+        <label for="gender">Set Privacy:</label>
+        <div class="genders">
+          <p>Public</p> <input type="radio" name="gender" id="gender" value="male" required>
+          <p>Private</p> <input type="radio" name="gender" id="gender" value="female">
 
-                    </div>
-                </div>
+        </div>
+      </div> -->
 
 
-                <!-- Department & Team -->
+      <!-- Department & Team -->
 
-                <!-- <div class="form-item">
+      <!-- <div class="form-item">
                 <label for="department">Department:</label>
                   <select  class="selectDept" (change)="onSelect($event)" >
                     <option  selected="true" disabled>Select Department</option>
@@ -121,27 +117,28 @@
 
 
 
-<!-- Attached file -->
-               <div class="form-wrapper">
-            <form action="">
-                <div class="form-item">
-                    <label for="fullname">Attached File:</label>
-                    <input type="file" name="attachedfile" id="attachedfile" style="width: 30%;" required>
-                    <p><b>(Maximum File Size: 5 Mb)</b></p>
+      <!-- Attached file -->
+      <div class="form-wrapper">
 
-                </div>
+        <div class="form-item">
+          <label for="fullname">Attached File:</label>
+          <input type="file" name="attachedfile" id="attachedfile" style="width: 30%;" required>
+          <p><b>(Maximum File Size: 5 Mb)</b></p>
 
-
-            <input type="submit" class="register" value="Add">
-
-
-
-              <input type="button" class="cancel" data-dismiss="modal" value="Cancel">
-
-            </form>
         </div>
 
+
+        <input type="submit" class="register" value="Add">
+
+
+
+        <input type="button"  class="cancel" data-dismiss="modal" value="Cancel">
+
+
+      </div> 
+
     </div>
+  </form>
 
 </body>
 
