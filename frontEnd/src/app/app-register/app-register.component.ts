@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { aN } from '@fullcalendar/core/internal-common';
+import { Team } from 'app/model/team';
+import { User } from 'app/model/user';
+import { UserService } from 'app/services/user.service';
 
 @Component({
   selector: 'app-app-register',
@@ -13,11 +17,58 @@ export class AppRegisterComponent implements OnInit {
   sTime:any;
   eTime:any;
 
-  constructor() { }
+  department: any = [];
+  team : any =[];
+  user : any =[];
+
+  teamArray: Team[];
+  tempTeam: Team[];
+
+  tempUser : User[];
+  userArray : any =[];
+  AssignDevice : any =[];
+  UnassignDevice : any =[];
+
+  constructor(private userServices : UserService) { }
 
   ngOnInit(): void {
-    this.doReset();
+    
+
+    this.department = this.userServices.getDepartment().subscribe(data => this.department= data);
+
+    this.userServices.getTeam().subscribe(
+      {
+        next: (data) => {
+          this.team = data;
+        }
+      });
+
+    this.userServices.getUserDetails().subscribe(
+      {
+        next : (data)=>{
+          this.user = data;
+        }
+      } 
+    )
+
   }
+
+  
+  onSelectDept(department){
+	
+    this.tempTeam = this.team.filter(e => {
+       return e.department.department_id == department.target.value
+     });
+ 
+ }
+ 
+ onSelectTeam(team){ 
+ this.AssignDevice= this.user.filter(f => {
+   return f.team_id == team.target.value 
+ });
+ console.log(this.AssignDevice);
+ this.doReset(); 
+ }
 
 
   addAppointment() {
@@ -43,32 +94,28 @@ export class AppRegisterComponent implements OnInit {
       tab = 1;
       keepSorted = true;
       key: string;
-      display: any;
-      filter = true;
+      display: string;
+      filter = false;
       source: AssignedDeviceCode[] = [];
       confirmed: UnAssignedDeviceCode[] = [];
       userAdd = '';
       disabled = false;
       sourceLeft = true;
-      AssignDevice = [{"deviceCode":"100006","isValid":true,"validationErrors":{"items":[]}},{"deviceCode":"100008","isValid":true,"validationErrors":{"items":[]}},{"deviceCode":"100009","isValid":true,"validationErrors":{"items":[]}},{"deviceCode":"100010","isValid":true,"validationErrors":{"items":[]}}];
-      UnassignDevice=[{"deviceCode":"100005","isValid":true,"validationErrors":{"items":[]}},{"deviceCode":"100007","isValid":true,"validationErrors":{"items":[]}}];
+     
       format: any = { add: 'Remove Device from User', remove: 'Assign Device To User', all: 'Select All', none: 'Unselect All', direction: 'left-to-right', draggable: true, locale: undefined };
 
-      // ngOnInit(): void {
-      //     this.doReset();
-      // }
     doReset() {
-          this.sourceDevice = JSON.parse(JSON.stringify(this.AssignDevice));
-          this.confirmedDevice = JSON.parse(JSON.stringify(this.UnassignDevice));
+           this.sourceDevice = JSON.parse(JSON.stringify(this.AssignDevice));
+           this.confirmedDevice = JSON.parse(JSON.stringify(this.UnassignDevice));
           console.log(this.confirmedDevice);
           this.populateList();
       }
 
       private populateList() {
-          this.key = 'deviceCode';
-          this.display = this.showLabel;
+          this.key = 'employee_id';
+          this.display = 'name';
           this.keepSorted = true;
-          this.source = [...this.sourceDevice, ...this.confirmedDevice];
+          this.source = this.AssignDevice;
           this.confirmed = this.confirmedDevice;
           console.log("source: " + JSON.stringify(this.source));
           console.log("confirmed: " + JSON.stringify(this.confirmed));
@@ -77,6 +124,7 @@ export class AppRegisterComponent implements OnInit {
       private showLabel(item: any) {
           return item.deviceCode;
       }
+
   }
 
 

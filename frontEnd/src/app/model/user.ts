@@ -11,5 +11,5 @@ export class User {
     position?:string;
     department_name?:string
     team_name?:string;
-
+    team ?: Team;
 }

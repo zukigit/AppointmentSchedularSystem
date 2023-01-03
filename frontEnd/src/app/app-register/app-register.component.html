@@ -64,7 +64,7 @@
       </div>
 
 
-      <!-- <div class="form-item">
+      <div class="form-item">
         <label for="username">Description</label>
         <textarea name="comments" id="comments" style="font-family:sans-serif;font: size 1.5em; font-weight: bold;">
 
@@ -79,14 +79,12 @@
           <p>Private</p> <input type="radio" name="gender" id="gender" value="female">
 
         </div>
-      </div> -->
+      </div>
 
 
-      <!-- Department & Team -->
-
-      <!-- <div class="form-item">
+       <div class="form-item">
                 <label for="department">Department:</label>
-                  <select  class="selectDept" (change)="onSelect($event)" >
+                  <select  class="selectDept" (change)="onSelectDept($event)" >
                     <option  selected="true" disabled>Select Department</option>
                     <option *ngFor="let departments of department" value="{{departments.department_id}}">
                       {{departments.department_name}}</option>
@@ -96,21 +94,22 @@
 
                 <div class="form-item">
                   <label for="team">Team:</label>
-                  <select [(ngModel)]="user.team_id" class="selectTeam">Select Team
+                  <select [(ngModel)]="user.team_id" class="selectTeam" (change)="onSelectTeam($event)">Select Team
                     <option selected="true" disabled>Select Team</option>
                     <option *ngFor="let teams of tempTeam" value="{{teams.team_id}}">{{teams.team_name}}</option>
                   </select>
-                </div> -->
+                </div>
 
-<!-- listbox -->
+listbox
 
 <dual-list [sort]="keepSorted" [source]="source" [key]="key" [display]="display" [filter]="filter"
-[destination]="confirmed" height="365px" [format]="format" [disabled]="disabled">
+[destination]="confirmed" height="365px" [format]="format" [disabled]="disabled" >
+
 </dual-list>
 
 
 
-      <!-- Attached file -->
+       Attached file 
       <div class="form-wrapper">
 
         <div class="form-item">
