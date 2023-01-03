@@ -20,7 +20,7 @@ import { ChangePassComponent } from './admin_role/change-pass/change-pass.compon
 import { AppointmentComponent } from './appointment/appointment.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { AppRegisterComponent } from './app-register/app-register.component';
-
+import { AngularDualListBoxModule } from 'angular-dual-listbox';
 
 @NgModule({
   imports: [
@@ -32,7 +32,8 @@ import { AppRegisterComponent } from './app-register/app-register.component';
     RouterModule,
     AppRoutingModule,
     MatRadioModule,
-    FullCalendarModule
+    FullCalendarModule,
+    AngularDualListBoxModule
   ],
   declarations: [
     AppComponent,
