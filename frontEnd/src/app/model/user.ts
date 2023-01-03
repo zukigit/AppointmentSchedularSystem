@@ -1,3 +1,4 @@
+import { Image } from "./image";
 import { Team } from "./team";
 
 export class User {
@@ -12,4 +13,5 @@ export class User {
     department_name?:string
     team_name?:string;
     team ?: Team;
+    userImage ?: Image;
 }

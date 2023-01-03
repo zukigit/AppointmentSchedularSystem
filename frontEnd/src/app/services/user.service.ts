@@ -2,14 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../model/user';
-import { JwtResponse } from '../model/jwt-response';
-import { teamList } from '../lists/teamList';
-import { departmentList } from '../lists/departmentList';
 import { Team } from '../model/team';
-import { map } from 'jquery';
 import { RegisterationRequestModel } from '../model/registeration-request-model';
-import { Image } from 'app/model/image';
-import { Search } from 'app/model/search';
 import { ChangePass } from 'app/model/change-pass';
 
 @Injectable({

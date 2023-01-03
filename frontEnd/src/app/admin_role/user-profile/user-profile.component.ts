@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'app/model/user';
 import { UserService } from 'app/services/user.service';
 import { Router } from '@angular/router';
-import { ImageClass } from 'app/model/image-class';
 import { ImageService } from 'app/services/image.service';
 
 @Component({
@@ -17,14 +16,10 @@ export class UserProfileComponent implements OnInit {
 
   nameList : any;
   imageData:any=[];
-
   imageUrl :any ="./assets/img/default.jpg";
-
   selectedFile : File ;
   photoExport : any;
   user!:User
-  image : any = new ImageClass ();
-
   detailsById : any =[];
   loginId:string=localStorage.getItem("loggedInUserId");
 

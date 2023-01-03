@@ -76,6 +76,7 @@ export class UpdateComponent implements OnInit {
     this.registerModel.role = this.user.role;
     this.registerModel.position = this.user.position;
     this.registerModel.team = this.team;
+    this.registerModel.userImage = this.user.userImage;
     this.userServices.updateUser(this.id, this.registerModel).subscribe ( data => {
       this.goToUserDetails();
     },error => alert("Fail Update!") )

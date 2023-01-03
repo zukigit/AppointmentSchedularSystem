@@ -1,7 +1,7 @@
-import { Image } from './image';
+import { ImageClass } from './image';
 
-describe('Image', () => {
+describe('ImageClass', () => {
   it('should create an instance', () => {
-    expect(new Image()).toBeTruthy();
+    expect(new ImageClass()).toBeTruthy();
   });
 });

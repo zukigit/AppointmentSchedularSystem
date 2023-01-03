@@ -1,3 +1,4 @@
+import { Image } from "./image";
 import { Team } from "./team";
 
 export class RegisterationRequestModel {
@@ -9,4 +10,5 @@ export class RegisterationRequestModel {
     team:Team;
     role:string;
     position:string;
+    userImage ?: Image;
 }

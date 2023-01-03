@@ -1,5 +1,6 @@
 package com.ai.backEnd.dto;
 
+import com.ai.backEnd.model.UserImage;
 import com.ai.backEnd.model.UserRole;
 
 public class UserDetailForUpdate {
@@ -14,9 +15,11 @@ public class UserDetailForUpdate {
     String position;
     String gender;
     String team_id;
+    UserImage userImage;
 	
-	public UserDetailForUpdate(String employee_id, String name, UserRole role, String team_name, String department_name,
-			String phone_number, String position, String gender, String team_id) {
+	
+	public UserDetailForUpdate(String employee_id, String name, UserRole role, String team_name, String department_name, String phone_number, String position, String gender, String team_id,
+			UserImage userImage) {
 		super();
 		this.employee_id = employee_id;
 		this.name = name;
@@ -27,6 +30,13 @@ public class UserDetailForUpdate {
 		this.position = position;
 		this.gender = gender;
 		this.team_id = team_id;
+		this.userImage = userImage;
+	}
+	public UserImage getUserImage() {
+		return userImage;
+	}
+	public void setUserImage(UserImage userImage) {
+		this.userImage = userImage;
 	}
 	public String getTeam_id() {
 		return team_id;

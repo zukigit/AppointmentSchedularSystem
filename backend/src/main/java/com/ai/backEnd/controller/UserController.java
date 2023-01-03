@@ -117,8 +117,6 @@ public class UserController {
 	@GetMapping("/updatePhoneNumber")
     @PreAuthorize("hasRole('ADMIN')")
     public String updatePhone(@RequestParam String userId,@RequestParam String newPhoneNumber) {
-        System.out.println("user Id " + userId);
-        System.out.println("phone Id " + newPhoneNumber);
 
         User user = service.getUserById(userId);
         user.setPhone_number(newPhoneNumber);

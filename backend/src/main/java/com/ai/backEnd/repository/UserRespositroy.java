@@ -40,7 +40,7 @@ public interface UserRespositroy extends JpaRepository<User, String>{
 	public boolean checkUserExist(String userId);
 	
 	@Query("SELECT " +
-			"    new com.ai.backEnd.dto.UserDetailForUpdate(u.employee_id, u.name,u.role, t.team_name, d.department_name, u.phone_number, u.position, u.gender, t.team_id) " +
+			"    new com.ai.backEnd.dto.UserDetailForUpdate(u.employee_id, u.name, u.role, t.team_name, d.department_name, u.phone_number, u.position, u.gender, t.team_id, u.userImage) " +
 			"FROM " +
 			"    User u join Team t on u.team.team_id = t.team_id join Department d on d.department_id = t.department.department_id where u.employee_id=:searchKey")
 	UserDetailForUpdate searchById(String searchKey);
