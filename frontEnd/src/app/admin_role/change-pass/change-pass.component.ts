@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangePass } from 'app/model/change-pass';
 import { UserService } from 'app/services/user.service';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-change-pass',
@@ -44,12 +45,25 @@ export class ChangePassComponent implements OnInit {
     this.changePass.userId = this.loginId;
 
     if (this.changePass.newPassword != this.changePass.conPassword) {
-      alert("Password and Confirm password does not match")
+      Swal.fire({  
+        icon: 'error',  
+        title: 'Failed',  
+        text: 'Password and Confirm Password does not match',   
+      }) 
     } else {
       console.log("change userid" + this.changePass.oldPassword)
       this.service.chgPass(this.changePass).subscribe(
-        data => alert("Ok"),
-        error => alert("Old password wrong!!!"))
+        data => Swal.fire({  
+          icon: 'success',  
+          title: 'Scccess',  
+          text: 'Password Changed',   
+        }) ,
+        error => 
+        Swal.fire({  
+          icon: 'error',  
+          title: 'Wrong Password',  
+          text: 'Old Password Wrong!!!',   
+        }))
     }
   }
 

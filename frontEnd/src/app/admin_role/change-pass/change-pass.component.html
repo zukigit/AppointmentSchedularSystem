@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div class="row">
         <div class="col-lg-3 col-md-2"></div>
         <div class="col-lg-6 col-md-8 login-box">
@@ -12,12 +12,7 @@
             <div class="col-lg-12 login-form">
                 <div class="col-lg-12 login-form">
                     <form id="passwordForm" (ngSubmit)="changePassword()">
-                        <!-- <div class="pom-agile" style=" margin-top:15px; margin-bottom:1px">
-                      <input [type]="changetype?'password':'text'" style="cursor: pointer;" placeholder="Password"
-                         id="password" name="password" class="pass" type="password" required>
-                      <span class="eyeicon" (click)="viewpass()"> <i
-                          [ngClass]="visible?'fa fa-eye': 'fa fa-eye-slash'"></i></span>
-                    </div> -->
+                        
 
 
                         <div class="form-group">
@@ -53,14 +48,11 @@
 
 
 
-                        <!-- <div class="form-group">
-                        <label class="form-control-label">Confirm Password</label>
-                        <input type="password" class="form-control" i>
-                    </div> -->
+                        
 
                         <div class="col-lg-12 loginbttm">
                             <div class="col-lg-6 login-btm login-text">
-                                <!-- Error Message -->
+                                
                             </div>
                             <div class="col-lg-6 login-btm login-button">
                                 <button type="submit" class="btn btn-outline-primary">Confirm</button>
@@ -71,8 +63,8 @@
             </div>
             <div class="col-lg-3 col-md-2"></div>
         </div>
-    </div>
-    <script>
+    </div> -->
+    <!-- <script>
 
         const form = document.getElementById('passwordForm');
         const password = document.getElementById('password');
@@ -84,4 +76,126 @@
                 alert('Password and confirm password do not match.');
             }
         });
-    </script>
+    </script> -->
+
+    
+   
+   <body>
+      <div class="container d-flex justify-content-center align-items-center vh-100" style="padding-bottom: 1px;">
+         <div class="bg-white text-center p-5 mt-3 center" style="padding-bottom: 1px;">
+            <h3>Change Password </h3>
+            <form class="pb-3" id="passwordForm" (ngSubmit)="changePassword()">
+               <div class="form-group">
+                <label> Unhide <span class="eyeicon" (click)="viewpass()"> <i
+                    [ngClass]="visible?'fa fa-eye': 'fa fa-eye-slash'"
+                    style="color: #8092a8;"></i></span></label>
+                  <input type="password" class="form-control" placeholder="Your Password"
+                  [(ngModel)]="changePass.oldPassword" [type]="changetype?'password':'text'"
+                                style="cursor: pointer;" id="ppassword" name="password" type="password"
+                                 required>
+                                 
+                <input type="password" class="form-control" placeholder="New Password"
+                [(ngModel)]="changePass.newPassword" [type]="changetype?'password':'text'"
+                                style="cursor: pointer;" id="password" name="password"  type="password"
+                            required>
+                  
+                <input type="password" class="form-control" placeholder="Confirm Password"
+                [(ngModel)]="changePass.conPassword" [type]="changetype?'password':'text'" style="cursor: pointer;" id="conPassword"
+                                name="password" type="password"
+                            required>
+               </div>
+
+
+               <div class="w3-show-inline-block">
+                <div class="w3-bar">
+                  <!-- <button class="w3-btn w3-red"  style=" border-radius: 3px; margin-right: 10px;">Cancle</button> -->
+                  <!-- <button class="w3-btn " style="background-color: #435d7d; color:white; border-radius: 3px;" >Register</button> -->
+                  <!-- <input type="submit" class="w3-btn" value="Add"> -->
+                  <button type="" class="w3-btn" style="background-color: #7c020c; color:white; border-radius: 3px; margin-right: 15px;">Cancle</button>
+                  <!-- <input type="submit" class="w3-btn" value="Confirm"
+                    style="background-color: #435d7d; color:white; border-radius: 3px;"> -->
+                    <button type="submit" class="w3-btn" style="background-color: #435d7d; color:white; border-radius: 3px;">Confirm</button>
+                </div>
+              </div>
+
+            </form>
+            <!-- <button type="button" class="btn-gray">Cancle</button>
+            <button type="button" class="btn">Reset Password</button> -->
+
+            
+         </div>
+      </div>
+   </body>
+
+   <script>
+
+    const form = document.getElementById('passwordForm');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('conPassword');
+
+    form.addEventListener('submit', function (event) {
+        if (password.value !== conPassword.value) {
+            event.preventDefault();
+            alert('Password and confirm password do not match.');
+        }
+    });
+</script>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:300i,400,700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+      <style>
+         body {
+         background-color: #17c0eb;
+         font-family: Nunito Sans;
+         background: linear-gradient(135deg, #d1e0f3, #cdc1e6);
+         }
+         .btn {
+         background-color: #435d7d;
+         width: 50%;
+         color: #fff;
+         padding: 10px;
+         font-size: 18px;
+         display: inline;
+         }
+         .btn-gray {
+         background-color: #878c92;
+         width: 50%;
+         color: #fff;
+         padding: 10px;
+         font-size: 18px;
+         display: inline;
+         }
+         .btn:hover {
+         background-color: #2d3436;
+         color: #fff;
+         }
+         input {
+         height: 50px !important;
+         }
+         .form-control:focus {
+         border-color: #435d7d;
+         box-shadow: none;
+         }
+         h3 {
+         color: #435d7d;
+         font-size: 36px;
+         }
+         .cw {
+         width: 35%;
+         }
+         @media(max-width: 992px) {
+         .cw {
+         width: 60%;
+         }
+         }
+         @media(max-width: 768px) {
+         .cw {
+         width: 80%;
+         }
+         }
+         @media(max-width: 492px) {
+         .cw {
+         width: 90%;
+         }
+         }
+      </style>
