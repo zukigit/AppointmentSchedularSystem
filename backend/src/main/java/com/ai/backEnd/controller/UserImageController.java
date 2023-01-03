@@ -1,8 +1,14 @@
 package com.ai.backEnd.controller;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +31,7 @@ public class UserImageController {
 	private UserImageService userImageService;
 	
 	@PostMapping("/uploadImage")
-	public UserImage saveImage(@RequestParam("image") MultipartFile image, @RequestParam("userId") String userId) throws IOException {
+	public ResponseEntity<InputStreamResource> saveImage(@RequestParam("image") MultipartFile image, @RequestParam("userId") String userId) throws IOException {
 		User user = userService.getUserById(userId);
 		UserImage oldImage = user.getUserImage();
 		UserImage userImage = new UserImage();
@@ -41,10 +47,14 @@ public class UserImageController {
 		if(oldImage != null) {
 			userImageService.deleteImage(oldImage);
 		}
-		
-		User savedUser = userService.getUserById(userId);
-		UserImage newImage = savedUser.getUserImage();
-		
-		return newImage;
+				
+		return getImage(userId);
+	}
+	
+	@GetMapping("/images/{userId}")
+	public ResponseEntity<InputStreamResource> getImage(@PathVariable String userId){
+		UserImage userImage = userService.getUserById(userId).getUserImage();
+		InputStreamResource inputStreamResource = new InputStreamResource(new ByteArrayInputStream(userImage.getData()));
+		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(inputStreamResource);
 	}
 }
