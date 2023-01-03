@@ -40,11 +40,23 @@ export class UserProfileComponent implements OnInit {
       },
       error: (e) => console.log("profile error")
     })
-
+    this.getImage();
   }
 
   onSelectFile(event){
     this.selectedFile = event.target.files[0];
+  }
+
+  getImage(){
+    this.userService.getImage(this.loginId).subscribe(response => {
+      const reader = new FileReader();
+      reader.addEventListener('load', () => {
+        this.imageUrl = reader.result;
+      }, false);
+      if (response) {
+        reader.readAsDataURL(response);
+      }
+    });
   }
 
   acceptImage(){
