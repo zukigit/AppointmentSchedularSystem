@@ -1,9 +1,9 @@
 package com.ai.backEnd.controller;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,7 +31,7 @@ public class UserImageController {
 	private UserImageService userImageService;
 	
 	@PostMapping("/uploadImage")
-	public ResponseEntity<InputStreamResource> saveImage(@RequestParam("image") MultipartFile image, @RequestParam("userId") String userId) throws IOException {
+	public ResponseEntity<byte[]> saveImage(@RequestParam("image") MultipartFile image, @RequestParam("userId") String userId) throws IOException {
 		User user = userService.getUserById(userId);
 		UserImage oldImage = user.getUserImage();
 		UserImage userImage = new UserImage();
@@ -52,9 +52,11 @@ public class UserImageController {
 	}
 	
 	@GetMapping("/images/{userId}")
-	public ResponseEntity<InputStreamResource> getImage(@PathVariable String userId){
+	public ResponseEntity<byte[]> getImage(@PathVariable String userId) throws IOException{
+		
 		UserImage userImage = userService.getUserById(userId).getUserImage();
-		InputStreamResource inputStreamResource = new InputStreamResource(new ByteArrayInputStream(userImage.getData()));
-		return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(inputStreamResource);
+		HttpHeaders headers = new HttpHeaders();
+	    headers.setContentType(MediaType.IMAGE_JPEG);
+	    return new ResponseEntity<>(userImage.getData(), headers, HttpStatus.OK);
 	}
 }

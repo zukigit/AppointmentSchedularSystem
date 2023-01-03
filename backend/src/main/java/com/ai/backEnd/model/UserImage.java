@@ -1,9 +1,13 @@
 package com.ai.backEnd.model;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class UserImage {
@@ -13,6 +17,8 @@ public class UserImage {
     private Integer image_id;
 	private String image_name;
 	private String image_content_type;
+	@Lob @Basic(fetch = FetchType.LAZY)
+	@Column(length=65535)
 	private byte[] data;
 	
 	public int getImage_id() {
