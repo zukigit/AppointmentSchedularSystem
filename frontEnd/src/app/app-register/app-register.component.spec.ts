@@ -13,6 +13,7 @@ describe('AppRegisterComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(AppRegisterComponent);
+   
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
