@@ -21,6 +21,7 @@ import { AppointmentComponent } from './appointment/appointment.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { AppRegisterComponent } from './app-register/app-register.component';
 import { AngularDualListBoxModule } from 'angular-dual-listbox';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { AngularDualListBoxModule } from 'angular-dual-listbox';
     AppRoutingModule,
     MatRadioModule,
     FullCalendarModule,
-    AngularDualListBoxModule
+    AngularDualListBoxModule,
+    DatePipe
   ],
   declarations: [
     AppComponent,
@@ -48,7 +50,7 @@ import { AngularDualListBoxModule } from 'angular-dual-listbox';
     AppointmentComponent,
     AppRegisterComponent,
   ],
-  providers: [AdminAuthGuard],
+  providers: [AdminAuthGuard,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

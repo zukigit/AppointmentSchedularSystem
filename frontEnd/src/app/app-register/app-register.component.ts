@@ -1,5 +1,7 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { aN } from '@fullcalendar/core/internal-common';
+import { AppointmentRegister } from 'app/model/appointment-register';
 import { Team } from 'app/model/team';
 import { User } from 'app/model/user';
 import { UserService } from 'app/services/user.service';
@@ -11,30 +13,30 @@ import { UserService } from 'app/services/user.service';
 })
 export class AppRegisterComponent implements OnInit {
 
-  sDate: any;
-  eDate: any;
-
-  sTime:any;
-  eTime:any;
 
   department: any = [];
-  team : any =[];
-  user : any =[];
+  team: any = [];
+  user: any = [];
+
+  startTime: string;
+  endTime: string;
 
   teamArray: Team[];
   tempTeam: Team[];
 
-  tempUser : User[];
-  userArray : any =[];
-  AssignDevice : any =[];
-  UnassignDevice : any =[];
+  tempUser: User[];
+  userArray: any = [];
+  AssignDevice: any = [];
+  UnassignDevice: any = [];
 
-  constructor(private userServices : UserService) { }
+  app: AppointmentRegister = new AppointmentRegister()
+
+  constructor(private userServices: UserService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
-    
 
-    this.department = this.userServices.getDepartment().subscribe(data => this.department= data);
+
+    this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
 
     this.userServices.getTeam().subscribe(
       {
@@ -45,92 +47,81 @@ export class AppRegisterComponent implements OnInit {
 
     this.userServices.getUserDetails().subscribe(
       {
-        next : (data)=>{
+        next: (data) => {
           this.user = data;
         }
-      } 
+      }
     )
 
   }
 
-  
-  onSelectDept(department){
-	
+
+  onSelectDept(department) {
+
     this.tempTeam = this.team.filter(e => {
-       return e.department.department_id == department.target.value
-     });
- 
- }
- 
- onSelectTeam(team){ 
- this.AssignDevice= this.user.filter(f => {
-   return f.team_id == team.target.value 
- });
- console.log(this.AssignDevice);
- this.doReset(); 
- }
+      return e.department.department_id == department.target.value
+    });
 
-
-  addAppointment() {
-    this.sDate = new Date(this.sDate);
-    this.eDate = new Date(this.eDate);
-    function getDataForDate(date) {
-      return `Data for ${date.toISOString().slice(0, 10)}`;
-    }
-    while (this.sDate <= this.eDate) {
-      const data = getDataForDate(this.sDate);
-      console.log(data);
-      this.sDate.setDate(this.sDate.getDate() + 1);
-    }
-
-    console.log("time is " + this.sTime)
   }
 
+  onSelectTeam(team) {
+    this.AssignDevice = this.user.filter(f => {
+      return f.team_id == team.target.value
+    });
+    console.log(this.AssignDevice);
+    this.doReset();
+  }
+  addAppointment() {
+    this.app.sDate = new Date(this.app.sDate);
+    this.app.eDate = new Date(this.app.eDate);
+  }
   name = 'Angular';
   private sourceDevice: AssignedDeviceCode[] = [];
-      private confirmedDevice: Array<any>;
-      //AssignDevice: AssignedDeviceCode[] = [];
-      //UnassignDevice: UnAssignedDeviceCode[] = [];
-      tab = 1;
-      keepSorted = true;
-      key: string;
-      display: string;
-      filter = false;
-      source: AssignedDeviceCode[] = [];
-      confirmed: UnAssignedDeviceCode[] = [];
-      userAdd = '';
-      disabled = false;
-      sourceLeft = true;
-     
-      format: any = { add: 'Remove Device from User', remove: 'Assign Device To User', all: 'Select All', none: 'Unselect All', direction: 'left-to-right', draggable: true, locale: undefined };
+  private confirmedDevice: Array<any>;
+  //AssignDevice: AssignedDeviceCode[] = [];
+  //UnassignDevice: UnAssignedDeviceCode[] = [];
+  tab = 1;
+  keepSorted = true;
+  key: string;
+  display: string;
+  filter = false;
+  source: AssignedDeviceCode[] = [];
+  confirmed: UnAssignedDeviceCode[] = [];
+  userAdd = '';
+  disabled = false;
+  sourceLeft = true;
 
-    doReset() {
-           this.sourceDevice = JSON.parse(JSON.stringify(this.AssignDevice));
-           this.confirmedDevice = JSON.parse(JSON.stringify(this.UnassignDevice));
-          console.log(this.confirmedDevice);
-          this.populateList();
-      }
+  format: any = { add: 'Remove Device from User', remove: 'Assign Device To User', all: 'Select All', none: 'Unselect All', direction: 'left-to-right', draggable: true, locale: undefined };
 
-      private populateList() {
-          this.key = 'employee_id';
-          this.display = 'name';
-          this.keepSorted = true;
-          this.source = this.AssignDevice;
-          this.confirmed = this.confirmedDevice;
-          console.log("source: " + JSON.stringify(this.source));
-          console.log("confirmed: " + JSON.stringify(this.confirmed));
-      }
+  doReset() {
+    this.sourceDevice = JSON.parse(JSON.stringify(this.AssignDevice));
+    this.confirmedDevice = JSON.parse(JSON.stringify(this.UnassignDevice));
+    console.log(this.confirmedDevice);
+    this.populateList();
+  }
 
-      private showLabel(item: any) {
-          return item.deviceCode;
-      }
+  private populateList() {
+    this.key = 'employee_id';
+    this.display = 'name';
+    this.keepSorted = true;
+    this.source = this.AssignDevice;
+    this.confirmed = this.confirmedDevice;
+    console.log("source: " + JSON.stringify(this.source));
+    console.log("confirmed: " + JSON.stringify(this.confirmed));
+  }
 
+  private showLabel(item: any) {
+    return item.deviceCode;
   }
 
 
-  export class AssignedDeviceCode {
-      public DeviceCode: number;
-  }
-  export class UnAssignedDeviceCode {
-      public DeviceCode: number;
-  }
+
+}
+
+
+export class AssignedDeviceCode {
+  public DeviceCode: number;
+}
+export class UnAssignedDeviceCode {
+  public DeviceCode: number;
+}
