@@ -102,7 +102,7 @@
 
       listbox
 
-      <dual-list [sort]="keepSorted" [source]="source" [key]="key" [display]="display" [filter]="filter"
+      <dual-list [sort]="keepSorted" [source]="source" [(ngModel)]="app.listbox_key" [key]="key" [display]="display" [filter]="filter"
         [destination]="confirmed" height="365px" [format]="format" [disabled]="disabled">
 
       </dual-list>

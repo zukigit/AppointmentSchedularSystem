@@ -12,4 +12,6 @@ export class AppointmentRegister {
     update_date : Date;
     create_userId : string;
     attached:File;
+    listbox_key:string;
+    listbox:any=[];
 }

@@ -4,7 +4,9 @@ import { aN } from '@fullcalendar/core/internal-common';
 import { AppointmentRegister } from 'app/model/appointment-register';
 import { Team } from 'app/model/team';
 import { User } from 'app/model/user';
+import { AppointmentService } from 'app/services/appointment.service';
 import { UserService } from 'app/services/user.service';
+import { listenerCount } from 'process';
 
 @Component({
   selector: 'app-app-register',
@@ -29,9 +31,11 @@ export class AppRegisterComponent implements OnInit {
   AssignDevice: any = [];
   UnassignDevice: any = [];
 
+
+
   app: AppointmentRegister = new AppointmentRegister()
 
-  constructor(private userServices: UserService, private datePipe: DatePipe) { }
+  constructor(private userServices: UserService, private datePipe: DatePipe,private appService:AppointmentService) { }
 
   ngOnInit(): void {
 
@@ -71,10 +75,7 @@ export class AppRegisterComponent implements OnInit {
     console.log(this.AssignDevice);
     this.doReset();
   }
-  addAppointment() {
-    this.app.sDate = new Date(this.app.sDate);
-    this.app.eDate = new Date(this.app.eDate);
-  }
+
   name = 'Angular';
   private sourceDevice: AssignedDeviceCode[] = [];
   private confirmedDevice: Array<any>;
@@ -96,6 +97,7 @@ export class AppRegisterComponent implements OnInit {
   doReset() {
     this.sourceDevice = JSON.parse(JSON.stringify(this.AssignDevice));
     this.confirmedDevice = JSON.parse(JSON.stringify(this.UnassignDevice));
+    localStorage.setItem("listbox", this.confirmedDevice.forEach.toString())
     console.log(this.confirmedDevice);
     this.populateList();
   }
@@ -113,7 +115,29 @@ export class AppRegisterComponent implements OnInit {
   private showLabel(item: any) {
     return item.deviceCode;
   }
+  addAppointment() {
+    this.app.sDate = new Date(this.app.sDate);
+    this.app.eDate = new Date(this.app.eDate);
+    this.app.listbox = this.confirmedDevice;
 
+    // let list: string[] = [];
+
+    // for (let result of this.confirmedDevice) {
+    //   list.push(result.employee_id);
+    //   console.log(list)
+    // }
+    console.log("sdate " + this.app.sDate)
+    console.log("edate  " + this.app.eDate)
+    console.log("stime" + this.app.sTime)
+    console.log("etime " + this.app.eTime)
+    console.log("description " + this.app.description)
+    console.log("type " + this.app.type)
+
+    this.appService.createAppointment(this.app).subscribe(
+      data => console.log("Ok na sarrrrrr"),
+      error => console.log("Error appointment responseee ")
+    )
+  }
 
 
 }
