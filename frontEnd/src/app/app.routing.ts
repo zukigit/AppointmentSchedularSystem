@@ -5,7 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './login/login.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
-import { UpdateComponent } from './update/update.component';
+import { LoginAuthGuard } from './security/login-auth.guard';
 
 
 const routes: Routes =[
@@ -22,7 +22,7 @@ const routes: Routes =[
       loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
     }]
   },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate:[LoginAuthGuard]},
   { path: '**', component: PagenotfoundComponent }
 ];
 
