@@ -61,6 +61,8 @@ export class UserProfileComponent implements OnInit {
       } else{
         this.imageUrl = "./assets/img/default.jpg";
       }
+    }, error => {
+      this.isLoading = false;
     });
   }
 

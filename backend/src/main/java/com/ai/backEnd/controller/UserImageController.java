@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
+
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.model.UserImage;
 import com.ai.backEnd.service.UserImageService;
@@ -35,7 +37,6 @@ public class UserImageController {
 		User user = userService.getUserById(userId);
 		UserImage oldImage = null;
 		if(user.getUserImage() != null) {
-			System.out.println("image is not null");
 			oldImage = user.getUserImage();
 		} else {
 			System.out.println("image is null");
@@ -57,14 +58,13 @@ public class UserImageController {
 		return getImage(userId);
 	}
 	
-	@GetMapping("/images/{userId}")
-	public ResponseEntity<byte[]> getImage(@PathVariable String userId) throws IOException{
+	@GetMapping("/images")
+	public ResponseEntity<byte[]> getImage(@RequestParam String userId) throws IOException{
 		
 		UserImage userImage = userService.getUserById(userId).getUserImage();
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setContentType(MediaType.IMAGE_JPEG);
 	    if(userImage == null) {
-	    	System.out.println("image is null");
 	    	return new ResponseEntity<>(headers, HttpStatus.NOT_FOUND);
 	    } else {
 	    	return new ResponseEntity<>(userImage.getData(), headers, HttpStatus.OK);

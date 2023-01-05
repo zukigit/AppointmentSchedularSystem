@@ -85,6 +85,7 @@ public class UserController {
 	@PutMapping("/updateUser/{employee_id}")
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<User> updateUser(@RequestBody User user){
+		user.setUserImage(service.getUserById(user.getEmployee_id()).getUserImage());
 		if(user.getPassword().equals("")) {
 			User retreatedUser = service.getUserById(user.getEmployee_id());
 			user.setPassword(retreatedUser.getPassword());

@@ -67,7 +67,7 @@ getUserDetails(){
   getImage(userId:string):Observable<Blob> {
     const headers = new HttpHeaders()
                                     .set('Authorization',  `Bearer ${this.jwtToken}`);
-    return this.http.get(`http://localhost:8080/api/v1/images/${userId}`, { headers, responseType: 'blob'});
+    return this.http.get(`http://localhost:8080/api/v1/images?userId=${userId}`, { headers, responseType: 'blob'});
   }
 
   updatePhoneNo(userId:string,phone_number:string):Observable<Object>{
