@@ -1,33 +1,35 @@
 package com.ai.backEnd.model;
 
-import java.time.LocalDateTime;
+import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 
-import org.springframework.format.annotation.DateTimeFormat;
+
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class Appointment {
+public class Appointment implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
-	private int appointent_id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer appointment_id;
 	private String title;
 	private String description;
-
-	private byte[] file;
-	@DateTimeFormat(pattern = "yyyy-mm-dd'T'HH:mm")
-	private LocalDateTime created_date;
-	@DateTimeFormat(pattern = "yyyy-mm-dd'T'HH:mm")
-	private LocalDateTime updated_date;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
+	private LocalDate created_date;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
+	private LocalDate updated_date;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm")
+	private  LocalTime start_time;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm")
+	private LocalTime end_time;
 	private boolean isDeleted;
 	@Enumerated(EnumType.STRING)
 	private AppointmentType type;
@@ -40,21 +42,16 @@ public class Appointment {
                     @JoinColumn(name = "employee_id", 
                             nullable = false, updatable = false)})
 	private Set<User> employee_id;
-
-
-	public byte[] getFile() {
-		return file;
+	
+	
+	
+	
+	
+	public Integer getAppointment_id() {
+		return appointment_id;
 	}
-
-	public void setFile(byte[] file) {
-		this.file = file;
-	}
-
-	public int getAppointent_id() {
-		return appointent_id;
-	}
-	public void setAppointent_id(int appointent_id) {
-		this.appointent_id = appointent_id;
+	public void setAppointment_id(Integer appointment_id) {
+		this.appointment_id = appointment_id;
 	}
 	public String getTitle() {
 		return title;
@@ -68,17 +65,29 @@ public class Appointment {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public LocalDateTime getCreated_date() {
+	public LocalDate getCreated_date() {
 		return created_date;
 	}
-	public void setCreated_date(LocalDateTime created_date) {
+	public void setCreated_date(LocalDate created_date) {
 		this.created_date = created_date;
 	}
-	public LocalDateTime getUpdated_date() {
+	public LocalDate getUpdated_date() {
 		return updated_date;
 	}
-	public void setUpdated_date(LocalDateTime updated_date) {
+	public void setUpdated_date(LocalDate updated_date) {
 		this.updated_date = updated_date;
+	}
+	public LocalTime getStart_time() {
+		return start_time;
+	}
+	public void setStart_time(LocalTime start_time) {
+		this.start_time = start_time;
+	}
+	public LocalTime getEnd_time() {
+		return end_time;
+	}
+	public void setEnd_time(LocalTime end_time) {
+		this.end_time = end_time;
 	}
 	public boolean isDeleted() {
 		return isDeleted;
@@ -98,6 +107,8 @@ public class Appointment {
 	public void setEmployee_id(Set<User> employee_id) {
 		this.employee_id = employee_id;
 	}
-	
+
+
+
 	
 }
