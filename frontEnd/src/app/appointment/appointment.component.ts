@@ -13,8 +13,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./appointment.component.css']
 })
 export class AppointmentComponent  {
+  header: any;
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
+    // customButtons: {
+    //   myCustomButton: {
+    //     text: 'Remove Mamber',
+    //     click: function () {
+    //       alert('clicked the custom button!');
+    //     }
+    //   }
+    // },
     plugins: [
       interactionPlugin,
       dayGridPlugin,
@@ -26,13 +35,22 @@ export class AppointmentComponent  {
       center: 'title',
       right: 'timeGridWeek,timeGridDay',
     },
+
+    
+ 
+  views: {
+      timelineMyWeek: {
+          type: 'timeGridWeek',
+          slotDuration: '01:00:00'
+      },
+  },
     initialView: 'timeGridDay',
     //initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
-    weekends: true,
-    //editable: true,
+    weekends: false,
+    slotMinTime: "08:00:00",
+    slotMaxTime: "19:00:00",
     selectable: true,
-    //selectMirror: true,
-    //dayMaxEvents: true,
+    allDaySlot:false,
     select: this.handleDateSelect.bind(this),
     // eventClick: this.handleEventClick.bind(this),
     // eventsSet: this.handleEvents.bind(this)
@@ -45,8 +63,16 @@ export class AppointmentComponent  {
   currentEvents: EventApi[] = [];
 
   constructor(private changeDetector: ChangeDetectorRef,private router:Router) {
-  }
+    this.header = {
+      left: 'today prev,next',
+      center: 'title',
+      right: 'timelineDay,timelineWeek,month'                
+  };
 
+  
+  }
+  
+  
   // handleCalendarToggle() {
   //   this.calendarVisible = !this.calendarVisible;
   // }

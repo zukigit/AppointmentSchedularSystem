@@ -4,6 +4,7 @@ import { User } from 'app/model/user';
 import { UserService } from 'app/services/user.service';
 import { Router } from '@angular/router';
 import { ImageService } from 'app/services/image.service';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-user-profile',
@@ -72,7 +73,12 @@ export class UserProfileComponent implements OnInit {
 
   updatePhoneNumber() {
     this.userService.updatePhoneNo(this.loginId,this.user.phone_number).subscribe(
-      data=>alert("Successfully Change Phone Number")
+      data=>
+      Swal.fire({  
+        icon: 'success',  
+        title: 'Scccess',  
+        text: 'Successfully Change Phone Number',   
+      }) 
     )
   }
   changePass(id:string) {

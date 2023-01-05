@@ -13,14 +13,15 @@
                   <div class="d-flex flex-column align-items-center text-center">
                     
                     <img [src]="imageUrl" class="rounded-circle" width="100">
+                    <span class="loader"></span>
                     <div class="mt-3">
                       
                       <h3 style="margin: 0 0 15px;">{{user.name}}</h3>
                       <h4 class="text-secondary mb-1">{{user.position}}</h4>
                       <h5 class="text-secondary" style="margin: 0 0 4px;">{{user.employee_id}}</h5>
-                      <input type="file" (change)="onSelectFile($event)" accept="image/*" class="btn btn-primary">Upload Profile
-                      <input type="submit" (click)="acceptImage()" >Submit
-                    
+                      <input type="file" (change)="onSelectFile($event)" accept="image/*" >
+                      <input type="submit" (click)="acceptImage()" class="btn btn-primary">
+                      
                     </div>
                   
                   </div>
@@ -58,8 +59,8 @@
                       </div>
                       <div class="col-sm-9 text-secondary">
                           <form (ngSubmit)="updatePhoneNumber()">
-                          <input type="number" [(ngModel)]="user.phone_number">
-                          <button type="submit" value="Update">Update Phone</button>
+                          <input type="number" style="border: none; border-bottom: 1px solid #435d7d;" [(ngModel)]="user.phone_number">
+                          <button class="btn" style="padding:3px; border-color: #435d7d ; border:2px; box-shadow: 0 20px 38px -12px #435d7d, 0 4px 25px 0px rgb(0 0 0 / 12%), 0 8px 10px -5px rgb(0 0 0 / 13)"><i class="fa fa-check"  style="padding:2px; color: #ffcc33; "></i></button>
                         </form>
                       </div>
                     </div>
