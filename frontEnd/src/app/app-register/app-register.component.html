@@ -23,21 +23,21 @@
 
           <div class="input-box">
             <span class="details">Start Time</span>
-            <input type="text" type="time" [(ngModel)]="app.sTime" name="time" value="hh:mm"  required minlength="2" maxlength="10">
+            <input type="text" type="time" [(ngModel)]="app.start_time" name="time" value="hh:mm"  required minlength="2" maxlength="10">
           </div>
           
           <div class="input-box">
             <span class="details">End Time</span>
-            <input type="time" [(ngModel)]="app.eTime" name="time" value="hh:mm"  required>
+            <input type="time" [(ngModel)]="app.end_time" name="time" value="hh:mm"  required>
           </div>
           
           <div class="input-box">
             <span class="details">Start Date</span>
-            <input type="date" [(ngModel)]="app.sDate" name="date" value="2023-01-01" min="2023-01-01" max="2024-01-01" required>
+            <input type="date" [(ngModel)]="app.start_date" name="date" value="2023-01-01" min="2023-01-01" max="2024-01-01" required>
           </div>
           <div class="input-box">
             <span class="details">End Date</span>
-            <input type="date" [(ngModel)]="app.eDate" name="date" value="2023-01-01" min="2023-01-01" max="2024-01-01" required>
+            <input type="date" [(ngModel)]="app.end_date" name="date" value="2023-01-01" min="2023-01-01" max="2024-01-01" required>
           </div>
     
           
@@ -76,8 +76,8 @@
           <div class="form-item" style="width: calc(100%  - 20px);">
             <label  class="details" for="gender" style="font-weight:500">Set Privacy:</label>
             <div class="genders">
-              <p>Public</p> <input type="radio" [(ngModel)]="app.type" name="gender" id="gender" value="public" required>
-              <p>Private</p> <input type="radio" [(ngModel)]="app.type" name="gender" id="gender" value="private">
+              <p>Public</p> <input type="radio" [(ngModel)]="app.type" name="gender" id="gender" value="PUBLIC" required>
+              <p>Private</p> <input type="radio" [(ngModel)]="app.type" name="gender" id="gender" value="PRIVATE">
     
             </div>
           </div>

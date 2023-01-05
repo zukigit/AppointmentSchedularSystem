@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { aN } from '@fullcalendar/core/internal-common';
 import { AppointmentRegister } from 'app/model/appointment-register';
+import { Schdule } from 'app/model/schdule';
 import { Team } from 'app/model/team';
 import { User } from 'app/model/user';
 import { AppointmentService } from 'app/services/appointment.service';
@@ -14,7 +15,7 @@ import { listenerCount } from 'process';
   styleUrls: ['./app-register.component.scss']
 })
 export class AppRegisterComponent implements OnInit {
-
+  schedule:Schdule = new Schdule();
 
   department: any = [];
   team: any = [];
@@ -117,24 +118,36 @@ export class AppRegisterComponent implements OnInit {
     return item.deviceCode;
   }
   addAppointment() {
-    this.app.sDate = new Date(this.app.sDate);
-    this.app.eDate = new Date(this.app.eDate);
+    this.app.start_date = new Date(this.app.start_date);
+    this.app.end_date = new Date(this.app.end_date);
     this.app.listbox = this.confirmedDevice;
+
+    
 
     // let list: string[] = [];
 
     // for (let result of this.confirmedDevice) {
     //   list.push(result.employee_id);
     //   console.log(list)
-    // }
-    console.log("sdate " + this.app.sDate)
-    console.log("edate  " + this.app.eDate)
-    console.log("stime" + this.app.sTime)
-    console.log("etime " + this.app.eTime)
-    console.log("description " + this.app.description)
-    console.log("type " + this.app.type)
+    // // }
+    // console.log("sdate " + this.app.sDate)
+    // console.log("edate  " + this.app.eDate)
+    // console.log("stime" + this.app.sTime)
+    // console.log("etime " + this.app.eTime)
+    // console.log("description " + this.app.description)
+    // console.log("type " + this.app.type)
+    console.log("start date " + this.datePipe.transform(this.app.start_date, 'dd/MM/yyyy'))
+    console.log("start date " + this.datePipe.transform(this.app.start_date, 'dd/MM/yyyy'))
 
-    this.appService.createAppointment(this.app).subscribe(
+
+
+    this.schedule.date = this.datePipe.transform(this.app.start_date, 'dd/MM/yyyy');
+    this.schedule.date = this.datePipe.transform(this.app.end_date, 'dd/MM/yyyy');
+    this.schedule.start_time = this.app.start_time;
+    this.schedule.end_time= this.app.end_time;
+    this.schedule.appointment = this.app;
+
+    this.appService.createAppointment(this.schedule).subscribe(
       data => console.log("Ok na sarrrrrr"),
       error => console.log("Error appointment responseee ")
     )

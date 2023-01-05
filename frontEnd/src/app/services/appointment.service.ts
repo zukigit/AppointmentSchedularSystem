@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AppointmentRegister } from 'app/model/appointment-register';
+import { Schdule } from 'app/model/schdule';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -17,8 +18,8 @@ export class AppointmentService {
   constructor(private http: HttpClient) { }
   private baseUrl = `http://localhost:8080/api/v1`;
 
-  createAppointment(app: AppointmentRegister):Observable<Object>{
-    return this.http.post("http://localhost:8080/api/v1/addAppointment/", app, this.header);
+  createAppointment(app: Schdule):Observable<Object>{
+    return this.http.post("http://localhost:8080/api/v1/saveSchedule/", app, this.header);
   }
 
 }
