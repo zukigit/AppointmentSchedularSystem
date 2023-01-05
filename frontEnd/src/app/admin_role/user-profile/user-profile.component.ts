@@ -22,12 +22,12 @@ export class UserProfileComponent implements OnInit {
   photoExport : any;
   user!:User
   detailsById : any =[];
-  loginId:string=localStorage.getItem("loggedInUserId");
+  loginId:string;
 
   imageString: string;
 
   ngOnInit() {
-    this.loginId;
+    this.loginId = localStorage.getItem("loggedInUserId");
     this.user = new User();
     this.userService.getUserById(this.loginId)
     .subscribe({
@@ -41,6 +41,11 @@ export class UserProfileComponent implements OnInit {
 
   onSelectFile(event){
     this.selectedFile = event.target.files[0];
+    var reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.imageUrl = event.target.result;
+    }
+    reader.readAsDataURL(this.selectedFile);
   }
 
   getImage(){
@@ -51,19 +56,15 @@ export class UserProfileComponent implements OnInit {
       }, false);
       if (response) {
         reader.readAsDataURL(response);
+      } else{
+        this.imageUrl = "./assets/img/default.jpg";
       }
     });
   }
 
   acceptImage(){
-    this.userService.saveImage(this.selectedFile, this.loginId).subscribe(response => {
-      const reader = new FileReader();
-      reader.addEventListener('load', () => {
-        this.imageUrl = reader.result;
-      }, false);
-      if (response) {
-        reader.readAsDataURL(response);
-      }
+    this.userService.saveImage(this.selectedFile, this.loginId).subscribe(() => {
+      this.getImage();
     });
   }
 
