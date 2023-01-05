@@ -5,16 +5,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum AppointmentType {
 
 	@JsonValue
-	DecisonMakingMetting,
+	PUBLIC,
 	@JsonValue
-	ProblemSolvingMetting,
-	@JsonValue
-	BaringStormingMeeting,
-	@JsonValue
-	CommunicationMeeting,
-	@JsonValue
-	MonitoringProgressMetting,
-	@JsonValue
-	TeamMetting
+	PRIVATE,
+	
 	
 }

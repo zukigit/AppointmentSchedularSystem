@@ -22,6 +22,15 @@ public class schedule {
 	@ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "appointment_id", nullable = false)
 	private Appointment appointment_id;
+	
+	private Appointment app;
+	
+	public Appointment getApp() {
+		return app;
+	}
+	public void setApp(Appointment app) {
+		this.app = app;
+	}
 	public int getId() {
 		return id;
 	}
