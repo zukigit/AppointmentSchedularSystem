@@ -33,7 +33,7 @@
 
         <label for="datetime">Start Time:</label>
 
-        <input type="time" [(ngModel)]="app.sTime" name="time" value="hh:mm" />
+        <input type="time" [(ngModel)]="app.sTime" name="time" value="hh:mm"/>
 
 
 
@@ -50,7 +50,9 @@
       <div class="form-item">
 
         <label for="datetime">Start Date:</label>
-        <input type="date" [(ngModel)]="app.sDate" name="date" value="2023-01-01" min="2023-01-01" max="2024-01-01">
+        <input type="date" [(ngModel)]="app.sDate" name="date" value="2023-01-01" 
+        
+        min="{{currentDate | date : 'yyyy-MM-dd'}}">
 
       </div>
 
@@ -58,7 +60,8 @@
       <div class="form-item">
 
         <label for="datetime">End Date:</label>
-        <input type="date" [(ngModel)]="app.eDate" name="date" value="2023-01-01" min="2023-01-01" max="2024-01-01">
+        <input type="date" [(ngModel)]="app.eDate" name="date" value="2023-01-01" 
+        min="{{currentDate | date : 'yyyy-MM-dd'}}">
 
 
       </div>

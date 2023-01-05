@@ -31,7 +31,8 @@ export class AppRegisterComponent implements OnInit {
   AssignDevice: any = [];
   UnassignDevice: any = [];
 
-
+  title:'datePicker';
+  currentDate : any = new Date();
 
   app: AppointmentRegister = new AppointmentRegister()
 
