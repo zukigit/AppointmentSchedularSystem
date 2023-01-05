@@ -25,6 +25,7 @@ export class UserProfileComponent implements OnInit {
   loginId:string;
   isLoading:boolean = false;
   imageString: string;
+  oldPhoneNumber: string;
 
   ngOnInit() {
     this.loginId = localStorage.getItem("loggedInUserId");
@@ -33,6 +34,7 @@ export class UserProfileComponent implements OnInit {
     .subscribe({
       next : (data) => {
         this.user = data;
+        this.oldPhoneNumber = this.user.phone_number;
       },
       error: (e) => console.log("profile error")
     })
@@ -70,7 +72,22 @@ export class UserProfileComponent implements OnInit {
     this.isLoading = true;
     this.userService.saveImage(this.selectedFile, this.loginId).subscribe(() => {
       this.getImage();
+      this.selectedFile = null;
     });
+  }
+
+  checkChanges(){
+    if(this.selectedFile == null && this.oldPhoneNumber == this.user.phone_number) {
+      Swal.fire({  
+        icon: 'fail',  
+        title: 'FAIL',  
+        text: 'Nothing has changed',   
+      })
+    } else if(this.selectedFile != null) {
+      this.acceptImage();
+    } else if(this.oldPhoneNumber != this.user.phone_number) {
+      this.updatePhoneNumber();
+    }
   }
 
   getUserDetailsById(){
