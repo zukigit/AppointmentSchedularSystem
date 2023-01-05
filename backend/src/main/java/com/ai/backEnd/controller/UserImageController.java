@@ -33,7 +33,13 @@ public class UserImageController {
 	@PostMapping("/uploadImage")
 	public ResponseEntity<byte[]> saveImage(@RequestParam("image") MultipartFile image, @RequestParam("userId") String userId) throws IOException {
 		User user = userService.getUserById(userId);
-		UserImage oldImage = user.getUserImage();
+		UserImage oldImage = null;
+		if(user.getUserImage() != null) {
+			System.out.println("image is not null");
+			oldImage = user.getUserImage();
+		} else {
+			System.out.println("image is null");
+		}
 		UserImage userImage = new UserImage();
 		byte[] imageData = image.getBytes();
 		
@@ -57,6 +63,12 @@ public class UserImageController {
 		UserImage userImage = userService.getUserById(userId).getUserImage();
 		HttpHeaders headers = new HttpHeaders();
 	    headers.setContentType(MediaType.IMAGE_JPEG);
-	    return new ResponseEntity<>(userImage.getData(), headers, HttpStatus.OK);
+	    if(userImage == null) {
+	    	System.out.println("image is null");
+	    	return new ResponseEntity<>(headers, HttpStatus.NOT_FOUND);
+	    } else {
+	    	return new ResponseEntity<>(userImage.getData(), headers, HttpStatus.OK);
+	    }
+	    
 	}
 }
