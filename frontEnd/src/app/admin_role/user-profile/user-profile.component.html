@@ -13,9 +13,8 @@
                   <div class="d-flex flex-column align-items-center text-center">
                     
                     <img [src]="imageUrl" class="rounded-circle" width="100">
-                    <span class="loader"></span>
+                      <span *ngIf="isLoading" class="loader"></span>
                     <div class="mt-3">
-                      
                       <h3 style="margin: 0 0 15px;">{{user.name}}</h3>
                       <h4 class="text-secondary mb-1">{{user.position}}</h4>
                       <h5 class="text-secondary" style="margin: 0 0 4px;">{{user.employee_id}}</h5>

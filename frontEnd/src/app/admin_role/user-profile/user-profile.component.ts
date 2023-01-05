@@ -23,7 +23,7 @@ export class UserProfileComponent implements OnInit {
   user!:User
   detailsById : any =[];
   loginId:string;
-
+  isLoading:boolean = false;
   imageString: string;
 
   ngOnInit() {
@@ -49,10 +49,12 @@ export class UserProfileComponent implements OnInit {
   }
 
   getImage(){
+    this.isLoading = true;
     this.userService.getImage(this.loginId).subscribe(response => {
       const reader = new FileReader();
       reader.addEventListener('load', () => {
         this.imageUrl = reader.result;
+        this.isLoading = false;
       }, false);
       if (response) {
         reader.readAsDataURL(response);
@@ -63,6 +65,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   acceptImage(){
+    this.isLoading = true;
     this.userService.saveImage(this.selectedFile, this.loginId).subscribe(() => {
       this.getImage();
     });
@@ -73,13 +76,16 @@ export class UserProfileComponent implements OnInit {
   }
 
   updatePhoneNumber() {
+    this.isLoading = true;
     this.userService.updatePhoneNo(this.loginId,this.user.phone_number).subscribe(
-      data=>
-      Swal.fire({  
-        icon: 'success',  
-        title: 'Scccess',  
-        text: 'Successfully Change Phone Number',   
-      }) 
+      data =>{
+        this.isLoading = false;
+        Swal.fire({  
+          icon: 'success',  
+          title: 'Scccess',  
+          text: 'Successfully Change Phone Number',   
+        })
+      } 
     )
   }
   changePass(id:string) {
