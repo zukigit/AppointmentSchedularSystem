@@ -233,7 +233,7 @@
   }
   &,
   &.btn-default{
-    @include bmd-raised-button-variant($btn-default-color, $btn-default-bg, $btn-default-border-color);
+    @include bmd-raised-button-variant($btn-default-color, #ffcc33, $btn-default-border-color);
   }
 }
 

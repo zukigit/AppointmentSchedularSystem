@@ -1,92 +1,6 @@
-html {
-  background: rgba(233, 225, 225, 0.479);
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: auto;
-  width: 75vw;
-  background: #6fd5e659;
-  padding: 25px;
 
-  margin-top: 65px;
-}
-
-.container h1 {
-  font-family: Arial, Helvetica, sans-serif;
-  color: rgb(16, 31, 40);
-  font-size: 20px;
-
-  margin-bottom: 10px;
-
-}
-
-.container h2 {
-  font-family: Arial, Helvetica, sans-serif;
-  color: rgb(59, 55, 55);
-  font-size: 20px;
-  margin-top: 5px;
-}
-
-.form-wrapper {
-  margin: 15px;
-  width: 100%;
-}
-
-.form {
-  width: 90%;
-}
-
-#studentimage {
-  height: 80px;
-  width: 80px;
-  border-radius: 5px;
-  font-family: Arial, Helvetica, sans-serif;
-  color: rgb(59, 55, 55);
-}
-
-p {
-  font-family: Arial, Helvetica, sans-serif;
-  color: Black;
-  font-size: 14px;
-}
-
-.form-item {
-  display: flex;
-  margin: auto;
-  align-items: center;
-  width: 80%;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.form-item label {
-  width: 150px;
-  color: #000;
-  font-size: 16px;
-  font-weight: bold;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.form-item input {
-  margin: 5px 15px;
-  height: 50px;
-  width: 50%;
-  font-size: 15px;
-  font-weight: bold;
-  border: 1.5px black solid;
-  border-radius: 5px;
-  margin: 30px;
-  margin-left: 10px;
-
-}
-
-.form-item select {
-  margin: 5px 0px;
-  width: max-content;
-}
 
 .genders {
   display: flex;
@@ -96,30 +10,10 @@ p {
   font-size: 14px;
 }
 
-.genders input {
-  width: 20px;
-}
-
-hr {
-  margin-top: 15px;
-  width: 80%;
-}
-
-h3 {
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
-}
-.same-perm{
-  display: flex;
-  font-family: Arial, Helvetica, sans-serif;
-  text-align: center;
-  font-size: 13px;
-  margin: 5px 105px;
-}
-
 .register {
   margin: 25px;
-  background: #1e90ff;
+  width: 450px;
+  background: #06b33d;
   font-size: 20px;
   font-family: Arial, Helvetica, sans-serif;
   padding: 7px 20px;
@@ -138,6 +32,7 @@ h3 {
 .cancel {
 
   background: #c61313;
+  width: 450px;
   font-size: 20px;
   font-family: Arial, Helvetica, sans-serif;
   padding: 7px 20px;
@@ -154,225 +49,192 @@ h3 {
 
 
 
+.nav-sec-level{
+  display: none;
+ }
+ .side-bar{
+  cursor: pointer;
+ }
+
+.side-bar:hover .nav-sec-level{
+   display: inline;
+}
 
 
 
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins',sans-serif;
+}
+body{
+  // height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 40px;
+  background: linear-gradient(135deg, #d1e0f3, #cdc1e6);
+}
+.container{
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+}
+.container .title{
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.container .title::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #025186, #2d027e);
+}
+.content form .user-details{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0 12px 0;
+}
+form .user-details .input-box{
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+}
+form .input-box span.details{
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.user-details .input-box input{
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.user-details .input-box textarea{
+  height: 60px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
 
-@media screen and (max-width: 640px) {
-  .container {
-      width: 90vw;
-      padding: 10px 5px;
+span {
+  display: none;
+}
+
+.user-details .input-box select{
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  
+  border: 1px solid #ccc;
+  border-bottom-width: 4px;
+  transition: all 0.3s ease;
+}
+.user-details .input-box input:focus,
+.user-details .input-box input:valid{
+  border-color: #435d7d;
+}
+ form .gender-details .gender-title{
+  font-size: 20px;
+  font-weight: 500;
+ }
+ form .category{
+   display: flex;
+   width: 50%;
+   margin: 14px 0 ;
+   justify-content: space-between;
+ }
+ form .category label{
+   display: flex;
+   align-items: center;
+   padding-right: 10%;
+   cursor: pointer;
+ }
+ form .category label .dot{
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  margin-right: 10px;
+  background: #d9d9d9;
+  border: 5px solid transparent;
+  transition: all 0.3s ease;
+}
+ #dot-1:checked ~ .category label .one,
+ #dot-2:checked ~ .category label .two,
+ #dot-3:checked ~ .category label .three{
+   background: #435d7d;
+   border-color: #d9d9d9;
+ }
+ form input[type="radio"]{
+   /* display: none; */
+ }
+ form .button{
+   height: 45px;
+   margin: 35px 0
+ }
+ form .button input{
+   height: 100%;
+   width: 50%;
+  
+   border-radius: 5px;
+   border: none;
+   color: #fff;
+   font-size: 18px;
+   font-weight: 500;
+   letter-spacing: 1px;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   background: linear-gradient(135deg, #71b7e6, #9b59b6);
+ }
+ form .button input:hover{
+  /* transform: scale(0.99); */
+  background: linear-gradient(-135deg, #71b7e6, #9b59b6);
   }
-  .form-item label {
-      font-size: 16px;
-      font-weight: bold;
-      font-family: monospace;
-
-  }
-  .form-item input {
-      margin: 5px 10px;
-      font-size: 12px;
-  }
-  .genders {
-      margin-left: 10px;
-      font-size: 13px;
-  }
-  .genders input {
-      width: 15px;
-  }
-  .same-perm{
-
-  font-size: 13px;
-  margin: 5px 50px;
+ @media(max-width: 584px){
+ .container{
+  max-width: 100%;
 }
-  /* .register {
-      margin: 25px;
-      font-size: 15px;
-      padding: 7px 10px;
-  }
-  .cancel {
-    margin: 25px;
-    font-size: 15px;
-    padding: 7px 10px;
-} */
-
-
-
-
-p {
-  font-family: Lato;
-}
-
-div.record-picker {
-    overflow-x: hidden;
-    overflow-y: auto;
-    border: 1px solid #337ab7;
-    border-radius: 8px;
-    position: relative;
-    cursor: pointer;
-}
-
-/* http://www.ourtuts.com/how-to-customize-browser-scrollbars-using-css3/ */
-div.record-picker::-webkit-scrollbar {
-    width: 12px;
-}
-
-div.record-picker::-webkit-scrollbar-button {
-    width: 0px;
-    height: 0px;
-}
-
-div.record-picker {
-    scrollbar-base-color: #337ab7;
-    scrollbar-3dlight-color: #337ab7;
-    scrollbar-highlight-color: #337ab7;
-    scrollbar-track-color: #eee;
-    scrollbar-arrow-color: gray;
-    scrollbar-shadow-color: gray;
-    scrollbar-dark-shadow-color: gray;
-}
-
-div.record-picker::-webkit-scrollbar-track {
-    background: #eee;
-    box-shadow: 0px 0px 3px #dfdfdf inset;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-}
-
-div.record-picker::-webkit-scrollbar-thumb {
-    background: #337ab7;
-    border: thin solid gray;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-}
-
-div.record-picker::-webkit-scrollbar-thumb:hover {
-    background: #286090;
-}
-
-.record-picker ul {
-    margin: 0;
-    padding: 0 0 1px 0;
-}
-
-.record-picker li {
-    border-top: thin solid #ddd;
-    border-bottom: 1px solid #ddd;
-    display: block;
-    padding: 2px 2px 2px 10px;
-    margin-bottom: -1px;
-    font-size: 0.85em;
-    cursor: pointer;
-    white-space: nowrap;
-    min-height: 16px;
-}
-
-.record-picker li:hover {
-    background-color: #f5f5f5;
-}
-
-.record-picker li.selected {
-    background-color: #d9edf7;
-}
-
-.record-picker li.selected:hover {
-    background-color: #c4e3f3;
-}
-
-.record-picker li.disabled {
-    opacity: 0.5;
-    cursor: default;
-    background-color: inherit;
-}
-
-.record-picker li:first-child {
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    border-top: none;
-}
-
-.record-picker li:last-child {
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-    border-bottom: none;
-}
-
-.record-picker label {
-    cursor: pointer;
-    font-weight: inherit;
-    font-size: 14px;
-    padding: 4px;
-    margin-bottom: -1px;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-.record-picker ul.over {
-    background-color: lightgray;
-}
-
-.dual-list {
-    display: -webkit-box;
-    display: flex;
-    flex-direction: row;
-    align-content: flex-start;
-}
-
-.dual-list .listbox {
-    width: 50%;
-    margin: 0px;
-}
-
-.dual-list .button-bar {
-    margin-top: 8px;
-}
-
-/* &nbsp;&nbsp;&nbsp;&#9654; */
-.point-right::after {
-    content: "\25B6";
-    padding-left: 1em;
-}
-
-/* &#9664;&nbsp;&nbsp;&nbsp; */
-.point-left::before {
-    content: "\25C0";
-    padding-right: 1em;
-}
-
-.dual-list .button-bar button {
-    width: 47%;
-}
-
-button.btn-block {
-    display: block;
+form .user-details .input-box{
+    margin-bottom: 15px;
     width: 100%;
-    margin-bottom: 8px;
+  }
+  form .category{
+    width: 100%;
+  }
+  .content form .user-details{
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .user-details::-webkit-scrollbar{
+    width: 5px;
+  }
+  }
+  @media(max-width: 459px){
+  .container .content .category{
+    flex-direction: column;
+  }
 }
 
-.filter {
-    margin-bottom: -2.2em;
-}
-
-.filter::after {
-    content: "o";
-    width: 40px;
-    color: transparent;
-    font-size: 2em;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M0 64l192 192v192l128-32V256L512 64H0z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: center center;
-    opacity: .2;
-    top: -36px;
-    left: calc(100% - 21px);
-    position: relative;
-}
-
-
-
-
-
-}

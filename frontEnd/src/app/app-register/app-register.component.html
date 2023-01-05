@@ -1,137 +1,104 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <title>Free Online Student Registration Form</title>
-    <link rel="stylesheet" href="style.css"> -->
-
-</head>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <body>
-  <form (submit)="addAppointment()">
-    <div class="container">
+  <div class="container">
+    <div class="title">Appointment Registration From</div>
+    <div class="content">
+      <form #form="ngForm" (submit)="addAppointment()">
+        <div class="user-details">
+
+          <div class="input-box">
+            <span class="details" style="width: calc(100% /2  - 20px);" >Title</span>
+            <textarea name="comments" [(ngModel)]="app.description" id="comments"
+            style="font-family:sans-serif;font: size 1.5em; font-weight: bold;">
+            </textarea>
+          </div>
+          <div class="input-box">
+            <span class="details" style="width: calc(100% /2  - 20px);"s>Description</span>
+            <textarea name="comments" [(ngModel)]="app.description" id="comments"
+            style="font-family:sans-serif;font: size 1.5em; font-weight: bold;">
+            </textarea>
+          </div>
+
+          <div class="input-box">
+            <span class="details">Start Time</span>
+            <input type="text" type="time" [(ngModel)]="app.sTime" name="time" value="hh:mm"  required minlength="2" maxlength="10">
+          </div>
+          
+          <div class="input-box">
+            <span class="details">End Time</span>
+            <input type="time" [(ngModel)]="app.eTime" name="time" value="hh:mm"  required>
+          </div>
+          
+          <div class="input-box">
+            <span class="details">Start Date</span>
+            <input type="date" [(ngModel)]="app.sDate" name="date" value="2023-01-01" min="2023-01-01" max="2024-01-01" required>
+          </div>
+          <div class="input-box">
+            <span class="details">End Date</span>
+            <input type="date" [(ngModel)]="app.eDate" name="date" value="2023-01-01" min="2023-01-01" max="2024-01-01" required>
+          </div>
+    
+          
+          
+          
+            <!-- <span class="details">Set Privacy:</span> -->
+            <!-- <div class="genders">
+              <p>Public</p> <input type="radio" [(ngModel)]="app.type" name="gender" id="gender" value="public" required>
+              <p>Private</p> <input type="radio" [(ngModel)]="app.type" name="gender" id="gender" value="private">
+    
+            </div> -->
+          
+          
+          
+          <div class="input-box">
+            <span class="details">Department</span>
+            <select class="selectDept" (change)="onSelectDept($event)">
+              <option selected="true" disabled>Select Department</option>
+              <option *ngFor="let departments of department" value="{{departments.department_id}}">
+                {{departments.department_name}}</option>
+            </select>
+          </div>
+          <div class="input-box">
+            <span class="details">Team</span>
+            <select [(ngModel)]="user.team_id" class="selectTeam" (change)="onSelectTeam($event)">Select Team
+              <option selected="true" disabled>Select Team</option>
+              <option *ngFor="let teams of tempTeam" value="{{teams.team_id}}">{{teams.team_name}}</option>
+            </select>
+          </div>
 
 
-      <marquee class="marq" direction="right" loop="">
-        <h1>Appointment Registration From</h1>
-      </marquee>
+          <dual-list [sort]="keepSorted" [source]="source" [key]="key" [display]="display" [filter]="filter"
+          [destination]="confirmed" style=" color: balck;font-weight: bold;font-display: #435d7d;  width:100%" [format]="format" [disabled]="disabled">
+          </dual-list>
 
-
-
-
-      <!-- <div class="col-md-4">
-                  <span class="btn btn-info "><i class="glyphicon glyphicon-plus"> </i> Browse
-                      <input type="file" style="position:relative;overflow:hidden" id="inPutArtistImage" name="ArtistImage" accept="image/png, image/jpeg" />
-                  </span>
-              </div> -->
-
-
-      <div class="form-item">
-
-        <label for="datetime">Start Time:</label>
-
-        <input type="time" [(ngModel)]="app.sTime" name="time" value="hh:mm"/>
-
-
-
-        <label for="datetime">End Time:</label>
-
-        <input type="time" [(ngModel)]="app.eTime" name="time" value="hh:mm"/>
-
-
-
-      </div>
-
-
-
-      <div class="form-item">
-
-        <label for="datetime">Start Date:</label>
-        <input type="date" [(ngModel)]="app.sDate" name="date" value="2023-01-01" 
-        
-        min="{{currentDate | date : 'yyyy-MM-dd'}}">
-
-      </div>
-
-
-      <div class="form-item">
-
-        <label for="datetime">End Date:</label>
-        <input type="date" [(ngModel)]="app.eDate" name="date" value="2023-01-01" 
-        min="{{currentDate | date : 'yyyy-MM-dd'}}">
-
-
-      </div>
-
-
-      <div class="form-item">
-        <label for="username">Description</label>
-        <textarea name="comments" [(ngModel)]="app.description" id="comments"
-          style="font-family:sans-serif;font: size 1.5em; font-weight: bold;">
-        </textarea>
-      </div>
-
-
-      <div class="form-item">
-        <label for="gender">Set Privacy:</label>
-        <div class="genders">
-          <p>Public</p> <input type="radio" [(ngModel)]="app.type" name="gender" id="gender" value="public" required>
-          <p>Private</p> <input type="radio" [(ngModel)]="app.type" name="gender" id="gender" value="private">
-
-        </div>
-      </div>
-
-
-      <div class="form-item">
-        <label for="department">Department:</label>
-        <select class="selectDept" (change)="onSelectDept($event)">
-          <option selected="true" disabled>Select Department</option>
-          <option *ngFor="let departments of department" value="{{departments.department_id}}">
-            {{departments.department_name}}</option>
-        </select>
-
-      </div>
-
-      <div class="form-item">
-        <label for="team">Team:</label>
-        <select [(ngModel)]="user.team_id" class="selectTeam" (change)="onSelectTeam($event)">Select Team
-          <option selected="true" disabled>Select Team</option>
-          <option *ngFor="let teams of tempTeam" value="{{teams.team_id}}">{{teams.team_name}}</option>
-        </select>
-      </div>
-
-      listbox
-
-      <dual-list [sort]="keepSorted" [source]="source" [(ngModel)]="app.listbox_key" [key]="key" [display]="display" [filter]="filter"
-        [destination]="confirmed" height="365px" [format]="format" [disabled]="disabled">
-
-      </dual-list>
-
-
-
-      Attached file
-      <div class="form-wrapper">
-
-        <div class="form-item">
-          <label for="fullname">Attached File:</label>
-          <input type="file" [(ngModel)]="app.attached" name="attachedfile" id="attachedfile" style="width: 30%;"
+          <div class="form-item" style="width: calc(100%  - 20px);">
+            <label  class="details" for="gender" style="font-weight:500">Set Privacy:</label>
+            <div class="genders">
+              <p>Public</p> <input type="radio" [(ngModel)]="app.type" name="gender" id="gender" value="public" required>
+              <p>Private</p> <input type="radio" [(ngModel)]="app.type" name="gender" id="gender" value="private">
+    
+            </div>
+          </div>
+          <div class="input-box">
+            <span class="details">Attached File</span>
+            <input type="file" [(ngModel)]="app.attached" name="attachedfile" id="attachedfile" style="width: 30%;"
             required>
           <p><b>(Maximum File Size: 5 Mb)</b></p>
-
-        </div>
-
-
-        <input type="submit" class="register" value="Add">
+          </div>
+        </div> 
+        <div class="w3-show-inline-block">
+          <div class="w3-bar">
+            <!-- <button class="w3-btn w3-red"  style=" border-radius: 3px; margin-right: 10px;">Cancle</button> -->
+            <!-- <button class="w3-btn " style="background-color: #435d7d; color:white; border-radius: 3px;" >Register</button> -->
+            <!-- <input type="submit" class="w3-btn" value="Add"> -->
+            <input type="submit" class="register" value="Add">
         <input type="button" class="cancel" data-dismiss="modal" value="Cancel">
 
-      </div>
-
+          </div>
+        </div>
+      </form>
     </div>
-  </form>
-
+  </div>
 </body>
-
-</html>
