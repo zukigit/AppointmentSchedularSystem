@@ -26,10 +26,6 @@ public class Appointment implements Serializable{
 	private LocalDate created_date;
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
 	private LocalDate updated_date;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm")
-	private  LocalTime start_time;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm")
-	private LocalTime end_time;
 	private boolean isDeleted;
 	@Enumerated(EnumType.STRING)
 	private AppointmentType type;
@@ -41,10 +37,7 @@ public class Appointment implements Serializable{
             inverseJoinColumns = {
                     @JoinColumn(name = "employee_id", 
                             nullable = false, updatable = false)})
-	private Set<User> employee_id;
-	
-	
-	
+	private Set<User> employee;
 	
 	
 	public Integer getAppointment_id() {
@@ -77,18 +70,7 @@ public class Appointment implements Serializable{
 	public void setUpdated_date(LocalDate updated_date) {
 		this.updated_date = updated_date;
 	}
-	public LocalTime getStart_time() {
-		return start_time;
-	}
-	public void setStart_time(LocalTime start_time) {
-		this.start_time = start_time;
-	}
-	public LocalTime getEnd_time() {
-		return end_time;
-	}
-	public void setEnd_time(LocalTime end_time) {
-		this.end_time = end_time;
-	}
+	
 	public boolean isDeleted() {
 		return isDeleted;
 	}
@@ -101,14 +83,11 @@ public class Appointment implements Serializable{
 	public void setType(AppointmentType type) {
 		this.type = type;
 	}
-	public Set<User> getEmployee_id() {
-		return employee_id;
+	public Set<User> getEmployee() {
+		return employee;
 	}
-	public void setEmployee_id(Set<User> employee_id) {
-		this.employee_id = employee_id;
+	public void setEmployee(Set<User> employee) {
+		this.employee = employee;
 	}
-
-
-
 	
 }

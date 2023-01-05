@@ -30,6 +30,7 @@ public class ScheduleController {
     @PostMapping("/saveSchedule")
     public void saveSchedule(@RequestBody Schedules schedule){
     	Appointment appointment = schedule.getAppointment();
+    	appointment.setAppointment_id(schedule.getId());
     	appointmentService.saveAppointment(appointment);
     	scheduleService.saveSchedule(schedule);
     }

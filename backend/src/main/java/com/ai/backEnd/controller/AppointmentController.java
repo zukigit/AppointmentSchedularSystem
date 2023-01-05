@@ -47,8 +47,12 @@ public class AppointmentController {
 	Schedules sch = new Schedules();
 	sch.setAppointment(app);
 	scheService.saveSchedule(sch);
-		
 
+	}
+	
+	@GetMapping("/getAppById")
+	public Appointment getAppById(Integer id) {
+		return service.getAppById(id);
 	}
 	
 	
