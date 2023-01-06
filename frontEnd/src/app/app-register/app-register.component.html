@@ -3,7 +3,7 @@
 
 <body>
   <div class="container">
-    <div class="title">Appointment Registration From</div>
+    <div class="title">Appointment Registration Form</div>
     <div class="content">
       <form #form="ngForm" (submit)="addAppointment()">
         <div class="user-details">
@@ -68,34 +68,38 @@
             </select>
           </div>
 
-
+          <div class="input-boxx">
+            <div class="detailss" style="font-weight: 600;">Attendees</div></div>
           <dual-list [sort]="keepSorted" [source]="source" [key]="key" [display]="display" [filter]="filter"
           [destination]="confirmed" style=" color: balck;font-weight: bold;font-display: #435d7d;  width:100%" [format]="format" [disabled]="disabled">
           </dual-list>
 
           <div class="form-item" style="width: calc(100%  - 20px);">
-            <label  class="details" for="gender" style="font-weight:500">Set Privacy:</label>
+            <label  class="details" for="gender" style="font-weight: 600;">Set Privacy:</label>
             <div class="genders">
-              <p>Public</p> <input type="radio" [(ngModel)]="app.type" name="gender" id="gender" value="PUBLIC" required>
-              <p>Private</p> <input type="radio" [(ngModel)]="app.type" name="gender" id="gender" value="PRIVATE">
+              <p>Public</p> <input type="radio" [(ngModel)]="app.type" name="gender" id="gender" value="PUBLIC" style="margin: 10px;
+              margin-bottom: 19px;" required>
+              <p>Private</p> <input type="radio" [(ngModel)]="app.type" name="gender" id="gender" value="PRIVATE" style="margin: 10px;
+              margin-bottom: 19px;">
     
             </div>
           </div>
           <div class="input-box">
-            <span class="details">Attached File</span>
-            <input type="file" [(ngModel)]="app.attached" name="attachedfile" id="attachedfile" style="width: 30%;"
+            <span class="details" style="font-weight: 600;">Attached File</span>
+            <input type="file" [(ngModel)]="app.attached" name="attachedfile" id="attachedfile" style="width: 75%; font-size: 14px;"
             required>
-          <p><b>(Maximum File Size: 5 Mb)</b></p>
+          <p><b style="font-size: 13px;">(Maximum File Size: 5 Mb)</b></p>
           </div>
         </div> 
-        <div class="w3-show-inline-block">
+        <div class="w3-show-inline-block" style="text-align: center;width: 100%;">
           <div class="w3-bar">
             <!-- <button class="w3-btn w3-red"  style=" border-radius: 3px; margin-right: 10px;">Cancle</button> -->
             <!-- <button class="w3-btn " style="background-color: #435d7d; color:white; border-radius: 3px;" >Register</button> -->
             <!-- <input type="submit" class="w3-btn" value="Add"> -->
-            <input type="submit" class="register" value="Add">
-        <input type="button" class="cancel" data-dismiss="modal" value="Cancel">
-
+            <!-- <input type="submit" class="register" value="Add">
+        <input type="button" class="cancel" data-dismiss="modal" value="Cancel"> -->
+        <input type="button" class="w3-btn w3-red" value="Add"  style=" border-radius: 3px; margin-right: 10px; width:250px;">
+        <input type="submit" class="w3-btn " value="Cancel" style="background-color: #435d7d; color:white; border-radius: 3px; width:250px;" >
           </div>
         </div>
       </form>

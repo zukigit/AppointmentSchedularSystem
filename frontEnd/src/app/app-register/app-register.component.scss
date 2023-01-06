@@ -1,6 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
-
+.w3-show-inline-block .w3-bar button .w3-btn{
+  background-color: #435d7d; color:white; border-radius: 3px; width:250px;
+}
+.w3-show-inline-block .w3-bar button .w3-btn:hover{
+  width: 280px;
+}
 
 .genders {
   display: flex;
@@ -81,6 +86,7 @@ body{
   width: 100%;
   background-color: #fff;
   padding: 25px 30px;
+  margin-top: 30px;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.15);
 }
@@ -114,6 +120,18 @@ form .input-box span.details{
   font-weight: 500;
   margin-bottom: 5px;
 }
+
+form .input-boxx div.detailss{
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+form .form-item label.details{
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
 .user-details .input-box input{
   height: 45px;
   width: 100%;
@@ -125,6 +143,18 @@ form .input-box span.details{
   border-bottom-width: 2px;
   transition: all 0.3s ease;
 }
+.user-details .input-box input:focus{
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 8px;
+  border-color: #ffcc33;
+  transition: all 0.3s ease;
+}
 .user-details .input-box textarea{
   height: 60px;
   width: 100%;
@@ -134,6 +164,18 @@ form .input-box span.details{
   padding-left: 15px;
   border: 1px solid #ccc;
   border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.user-details .input-box textarea:focus{
+  height: 60px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 8px;
+  border-color: #ffcc33;
   transition: all 0.3s ease;
 }
 
