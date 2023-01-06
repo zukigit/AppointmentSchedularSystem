@@ -1,9 +1,7 @@
 package com.ai.backEnd.model;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,8 +13,7 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class Schedules implements Serializable{
-	private static final long serialVersionUID = 1L;
+public class Schedules{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -20,8 +20,8 @@ public class User implements Serializable{
 	private String position;
 	@Enumerated(EnumType.STRING)
 	private UserRole role;
-	@ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "team_id",nullable = false)
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "team_id")
 	private Team team;
 	private boolean isAccountNonExpired = true;
 	private boolean isAccountNonLocked = true;
