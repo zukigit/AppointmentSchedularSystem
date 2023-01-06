@@ -13,6 +13,32 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 })
 export class UserProfileComponent implements OnInit {
 
+  //input only number on firefox
+  isNumberKey(event) {
+    console.log('event', event);
+    if (
+      event.which != 46 &&
+      event.which != 45 &&
+      event.which != 46 &&
+      !(event.which >= 48 && event.which <= 57)
+    ) {
+      return false;
+    }
+    return true;
+  }
+
+  pasteCallback(event) {
+    
+    let numberRegex = /[^\-?(\d+\.?\d*|\d*\.?\d+)$]/; // it allows integer & decimal
+    if (event.clipboardData.getData('Text').match(numberRegex)) {
+      console.log('clipboardData', event.clipboardData.getData('Text'));
+      event.preventDefault();
+    }
+  }
+
+
+
+
   constructor(private http : HttpClient, private userService : UserService,private router:Router, private imageService: ImageService) { }
 
   nameList : any;
