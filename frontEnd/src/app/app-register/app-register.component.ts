@@ -80,7 +80,7 @@ export class AppRegisterComponent implements OnInit {
 
   name = 'Angular';
   private sourceDevice: AssignedDeviceCode[] = [];
-  private confirmedDevice: Array<any>;
+  private confirmedUsers: Array<any>;
   //AssignDevice: AssignedDeviceCode[] = [];
   //UnassignDevice: UnAssignedDeviceCode[] = [];
   tab = 1;
@@ -98,9 +98,9 @@ export class AppRegisterComponent implements OnInit {
 
   doReset() {
     this.sourceDevice = JSON.parse(JSON.stringify(this.AssignDevice));
-    this.confirmedDevice = JSON.parse(JSON.stringify(this.UnassignDevice));
-    localStorage.setItem("listbox", this.confirmedDevice.forEach.toString())
-    console.log(this.confirmedDevice);
+    this.confirmedUsers = JSON.parse(JSON.stringify(this.UnassignDevice));
+    localStorage.setItem("listbox", this.confirmedUsers.forEach.toString())
+    console.log(this.confirmedUsers);
     this.populateList();
   }
 
@@ -109,7 +109,7 @@ export class AppRegisterComponent implements OnInit {
     this.display = 'name';
     this.keepSorted = true;
     this.source = this.AssignDevice;
-    this.confirmed = this.confirmedDevice;
+    this.confirmed = this.confirmedUsers;
     console.log("source: " + JSON.stringify(this.source));
     console.log("confirmed: " + JSON.stringify(this.confirmed));
   }
@@ -120,33 +120,18 @@ export class AppRegisterComponent implements OnInit {
   addAppointment() {
     this.app.start_date = new Date(this.app.start_date);
     this.app.end_date = new Date(this.app.end_date);
-    this.app.listbox = this.confirmedDevice;
-
     
+    // console.log("start date " + this.datePipe.transform(this.app.start_date, 'dd/MM/yyyy'))
+    // console.log("start date " + this.datePipe.transform(this.app.start_date, 'dd/MM/yyyy'))
 
-    // let list: string[] = [];
-
-    // for (let result of this.confirmedDevice) {
-    //   list.push(result.employee_id);
-    //   console.log(list)
-    // // }
-    // console.log("sdate " + this.app.sDate)
-    // console.log("edate  " + this.app.eDate)
-    // console.log("stime" + this.app.sTime)
-    // console.log("etime " + this.app.eTime)
-    // console.log("description " + this.app.description)
-    // console.log("type " + this.app.type)
-    console.log("start date " + this.datePipe.transform(this.app.start_date, 'dd/MM/yyyy'))
-    console.log("start date " + this.datePipe.transform(this.app.start_date, 'dd/MM/yyyy'))
-
-
-
+    this.app.employee = this.confirmedUsers;
+    //schedule add
     this.schedule.date = this.datePipe.transform(this.app.start_date, 'dd/MM/yyyy');
     this.schedule.date = this.datePipe.transform(this.app.end_date, 'dd/MM/yyyy');
     this.schedule.start_time = this.app.start_time;
     this.schedule.end_time= this.app.end_time;
     this.schedule.appointment = this.app;
-
+   
     this.appService.createAppointment(this.schedule).subscribe(
       data => console.log("Ok na sarrrrrr"),
       error => console.log("Error appointment responseee ")

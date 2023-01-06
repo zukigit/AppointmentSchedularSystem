@@ -1,4 +1,5 @@
 import { Time } from "@angular/common";
+import { Team } from "./team";
 
 export class AppointmentRegister {
     start_date : Date;
@@ -14,5 +15,6 @@ export class AppointmentRegister {
     create_userId : string;
     attached:File;
     listbox_key:string;
-    listbox:any=[];
+    employee:any=[];
+
 }
