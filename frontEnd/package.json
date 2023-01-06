@@ -34,6 +34,7 @@
     "@fullcalendar/core": "^6.0.2",
     "@fullcalendar/daygrid": "^6.0.2",
     "@fullcalendar/interaction": "^6.0.2",
+    "@fullcalendar/list": "^6.0.2",
     "@fullcalendar/timegrid": "^6.0.2",
     "ajv": "8.11.0",
     "angular-dual-listbox": "^7.0.0",
