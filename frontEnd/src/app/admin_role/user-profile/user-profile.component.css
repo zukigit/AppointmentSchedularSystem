@@ -1,3 +1,77 @@
+
+  div.show-image {
+    position: relative;
+    float:left;
+    margin:5px;
+}
+div.show-image:hover img{
+    opacity:0.5;
+}
+div.show-image:hover button {
+    display: block;
+}
+div.show-image button {
+    position:absolute;
+    display:none;
+}
+
+div.show-image button.btn {
+    top:0;
+    left:59%;
+}
+
+
+  .outer {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 150px !important; /* any size */
+    max-height: 150px !important; /* any size */
+    margin: auto;
+    background-color: #6eafd4;
+    border-radius: 100%;
+    position: relative;
+    }
+    
+  .inner {
+    background-color: #435d7d;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+  
+  .inner:hover {
+    background-color: #5555ff;
+  }
+  .inputfile {
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: 1;
+      width: 40px;
+      height: 40px;
+  }
+  .inputfile + label {
+      font-size: 1.25rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      display: inline-block;
+      overflow: hidden;
+      width: 40px;
+      height: 40px;
+      pointer-events: none;
+      cursor: pointer;
+      line-height: 45px;
+      text-align: center;
+  }
+  .inputfile + label svg {
+      fill: #ffcc33;
+  }
+
+
+
 /* .loader {
     width: 30px;
     height: 30px;
@@ -38,6 +112,16 @@
 	from {transform:rotate(0deg);}
 	to {transform:rotate(360deg);}
 }
+/* input .btn {
+    background-color: #435d7d;
+    border:1px;
+    border-color: #031844;
+    color: #fff;
+}
+input .btn :hover{
+background-color: #ffcc33;
+color: #ffcc33;
+} */
 
 .loader {
     content:'';

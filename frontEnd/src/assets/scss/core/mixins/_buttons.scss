@@ -212,6 +212,12 @@
 @mixin bmd-raised-button-color() {
   &.btn-primary {
     @include bmd-raised-button-variant($btn-primary-color, #435d7d, #2b4e78);
+    &:hover,
+    &:focus,
+    &:active{
+        background-color: #ffcc33;
+        color: #fff;
+    }
   }
   &.btn-secondary {
     @include bmd-raised-button-variant($btn-secondary-color, $btn-secondary-bg, $btn-secondary-border-color);

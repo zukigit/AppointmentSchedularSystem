@@ -12,22 +12,41 @@
                 <div class="card-body">
                   <div class="d-flex flex-column align-items-center text-center">
                     
-                    <img [src]="imageUrl" class="rounded-circle" width="100">
+                    <!-- <img [src]="imageUrl" class="rounded-circle" width="60%" > -->
+                    <div class="show-image">
+                      <!-- <img src="http://taditdash.files.wordpress.com/2014/01/tadit-dash.jpg" /> -->
+                      <img [src]="imageUrl" class="rounded-circle" width="60%" >
+                      <!-- <input class="delete" type="button" value="Delete" /> -->
+                      <button class="btn"><i class="fa fa-trash"></i></button>
+                  </div>
+                    
+                    
+                      <div class="outer">
+                        <div class="inner">
+                        <input type="file" (change)="onSelectFile($event)" accept="image/*" class="inputfile" type="file" name="pic" accept="image/*">
+                        
+                        <label><svg xmlns="http://www.w3.org/2000/svg" width="13" height="11" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg></label>
+                        </div>
+                      </div>
+                    
+
+
+                    
                       <span *ngIf="isLoading" class="loader"></span>
                     <div class="mt-3">
-                      <h3 style="margin: 0 0 15px;">{{user.name}}</h3>
-                      <h4 class="text-secondary mb-1">{{user.position}}</h4>
-                      <h5 class="text-secondary" style="margin: 0 0 4px;">{{user.employee_id}}</h5>
-                      <input type="file" (change)="onSelectFile($event)" accept="image/*" >
-                      
+                      <h2 style="margin: 0 0 15px; ">{{user.name}}</h2>
+                      <h3 class="text-secondary mb-1">{{user.position}}</h3>
+                      <h4 class="text-secondary" style="margin: 0 0 4px;">{{user.employee_id}}</h4>
                     </div>
-                  
+                    
                   </div>
+                  
                 </div>
+                
               </div>
               
             </div>
-
+            
               <div class="col-md-8">
                 <div class="card mb-3">
                   <div class="card-body">
@@ -88,14 +107,14 @@
                       
                       <div class="col-sm-9 text-secondary">
                         {{user.position}}  
-                        <input style="float:right;" (click)="checkChanges()" type="submit" value="Submit Changes" class="btn btn-primary">
+                        
                        </div>
                     </div>
                     <!-- <a href="admin/change_pass"  class="text-danger">Change Password</a> -->
                   </div>
                 </div>
               </div>
-          
+              <input (click)="checkChanges()" style="text-align: center;" type="submit" value="Submit Changes" class="btn btn-primary">
           </div>
 
          

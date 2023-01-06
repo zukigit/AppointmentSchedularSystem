@@ -6,6 +6,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { createEventId } from 'app/event-utils';
 import { Router } from '@angular/router';
 //import { INITIAL_EVENTS, createEventId } from './event-utils';
+import { Calendar } from 'fullcalendar';
 
 @Component({
   selector: 'app-appointment',
@@ -33,25 +34,43 @@ export class AppointmentComponent  {
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'timeGridWeek,timeGridDay',
+      right: 'timeGridDay,timeGridWeek',
     },
 
     
  
   views: {
-      timelineMyWeek: {
+    timeGridWeek: {
           type: 'timeGridWeek',
-          slotDuration: '01:00:00'
+          slotDuration: '24:00:00',
+          weekends: false,
+          slotMinTime: "08:00:00",
+          slotMaxTime: "18:00:00",
+          selectable: true,
+          allDaySlot:false,
+          select: this.handleDateSelect.bind(this),
+          contentHeight: 200
+          // this.calendarOptions.setOption('height', 700),
       },
+      timeGridDay:{
+        type: 'timeGridDay',
+          slotMinTime: "08:00:00",
+          slotMaxTime: "18:00:00",
+          slotDuration: '00:15:00',
+          selectable: true,
+          allDaySlot:false,
+          select: this.handleDateSelect.bind(this),
+      }
   },
     initialView: 'timeGridDay',
     //initialEvents: INITIAL_EVENTS, // alternatively, use the `events` setting to fetch from a feed
-    weekends: false,
-    slotMinTime: "08:00:00",
-    slotMaxTime: "19:00:00",
-    selectable: true,
-    allDaySlot:false,
-    select: this.handleDateSelect.bind(this),
+    // weekends: false,
+    // slotMinTime: "08:00:00",
+    // slotMaxTime: "18:00:00",
+    // slotDuration: '00:15:00',
+    // selectable: true,
+    // allDaySlot:false,
+    // select: this.handleDateSelect.bind(this),
     // eventClick: this.handleEventClick.bind(this),
     // eventsSet: this.handleEvents.bind(this)
     /* you can update a remote database when these fire:
@@ -60,13 +79,15 @@ export class AppointmentComponent  {
     eventRemove:
     */
   };
+
+  
   currentEvents: EventApi[] = [];
 
   constructor(private changeDetector: ChangeDetectorRef,private router:Router) {
     this.header = {
       left: 'today prev,next',
       center: 'title',
-      right: 'timelineDay,timelineWeek,month'                
+      right: 'timeGridDay,timeLineWeek'                
   };
 
   
