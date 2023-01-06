@@ -31,6 +31,7 @@ public class ScheduleController {
     @Autowired
     private AppointmentImpl appointmentService;
     
+    @Autowired
     private UserImpl userService;
 
     @PostMapping("/saveSchedule")
@@ -40,7 +41,7 @@ public class ScheduleController {
     	Set<User> users = appointment.getEmployee();
     	for(User user: users) {
     		User newUser = userService.getUserById(user.getEmployee_id());
-    		user = newUser;
+    		user.setTeam(newUser.getTeam());
     	}
     	appointmentService.saveAppointment(appointment);
     	scheduleService.saveSchedule(schedule);
