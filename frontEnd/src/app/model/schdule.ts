@@ -1,9 +1,8 @@
 import { AppointmentRegister } from "./appointment-register";
 
 export class Schdule {
-
-    date:string;
+    date:Date;
     start_time:number;
     end_time:number;
-    appointment:AppointmentRegister;
+    // appointment:AppointmentRegister;
 }

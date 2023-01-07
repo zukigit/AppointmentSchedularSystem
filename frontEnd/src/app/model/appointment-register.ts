@@ -1,4 +1,5 @@
 import { Time } from "@angular/common";
+import { Schdule } from "./schdule";
 import { Team } from "./team";
 
 export class AppointmentRegister {
@@ -16,5 +17,6 @@ export class AppointmentRegister {
     attached:File;
     listbox_key:string;
     employee:any=[];
+    schedules:Schdule[]=[];
 
 }

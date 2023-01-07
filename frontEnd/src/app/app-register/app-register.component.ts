@@ -15,7 +15,9 @@ import { listenerCount } from 'process';
   styleUrls: ['./app-register.component.scss']
 })
 export class AppRegisterComponent implements OnInit {
-  schedule:Schdule = new Schdule();
+  schedule: Schdule;
+
+  loginId = localStorage.getItem("loggedInUserId")
 
   department: any = [];
   team: any = [];
@@ -32,12 +34,12 @@ export class AppRegisterComponent implements OnInit {
   AssignDevice: any = [];
   UnassignDevice: any = [];
 
-  title:'datePicker';
-  currentDate : any = new Date();
+  title: 'datePicker';
+  currentDate: any = new Date();
 
   app: AppointmentRegister = new AppointmentRegister()
 
-  constructor(private userServices: UserService, private datePipe: DatePipe,private appService:AppointmentService) { }
+  constructor(private userServices: UserService, private datePipe: DatePipe, private appService: AppointmentService) { }
 
   ngOnInit(): void {
 
@@ -117,22 +119,39 @@ export class AppRegisterComponent implements OnInit {
   private showLabel(item: any) {
     return item.deviceCode;
   }
+  schedules: Schdule[] = [];
   addAppointment() {
     this.app.start_date = new Date(this.app.start_date);
     this.app.end_date = new Date(this.app.end_date);
-    
+
     // console.log("start date " + this.datePipe.transform(this.app.start_date, 'dd/MM/yyyy'))
     // console.log("start date " + this.datePipe.transform(this.app.start_date, 'dd/MM/yyyy'))
 
+    for (let d = this.app.start_date; d <= this.app.end_date; d.setDate(d.getDate() + 1)) {
+      // console.log(d.toISOString().slice(0, 10));
+      // this.schedules.push(new Schdule().)
+      // this.schedules.push(d.toISOString().slice(0, 10));
+      // console.log(this.schedules)
+      this.schedule = new Schdule()
+      this.schedule.date = d;
+      this.schedule.start_time = this.app.start_time
+      this.schedule.end_time = this.app.end_time
+      this.schedules.push(this.schedule)
+      
+    }
+    //appointment add
+    this.app.schedules = this.schedules
+    console.log("Sche " + this.schedules)
     this.app.employee = this.confirmedUsers;
-    //schedule add
-    this.schedule.date = this.datePipe.transform(this.app.start_date, 'dd/MM/yyyy');
-    this.schedule.date = this.datePipe.transform(this.app.end_date, 'dd/MM/yyyy');
-    this.schedule.start_time = this.app.start_time;
-    this.schedule.end_time= this.app.end_time;
-    this.schedule.appointment = this.app;
-   
-    this.appService.createAppointment(this.schedule).subscribe(
+    this.app.create_userId = this.loginId;
+    // //schedule add
+    // this.schedule.date = this.datePipe.transform(this.app.start_date, 'dd/MM/yyyy');
+    // this.schedule.date = this.datePipe.transform(this.app.end_date, 'dd/MM/yyyy');
+    // this.schedule.start_time = this.app.start_time;
+    // this.schedule.end_time = this.app.end_time;
+    // this.schedule.appointment = this.app;
+
+    this.appService.createAppointment(this.app).subscribe(
       data => console.log("Ok na sarrrrrr"),
       error => console.log("Error appointment responseee ")
     )
