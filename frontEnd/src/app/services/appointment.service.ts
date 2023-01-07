@@ -22,4 +22,8 @@ export class AppointmentService {
     return this.http.post("http://localhost:8080/api/v1/saveSchedule/", app, this.header);
   }
 
+  getAppointment(){
+    return this.http.get("http://localhost:8080/api/v1/getSchedules",this.header);
+  }
+
 }
