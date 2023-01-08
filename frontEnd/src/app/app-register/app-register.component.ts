@@ -15,7 +15,14 @@ import { listenerCount } from 'process';
   styleUrls: ['./app-register.component.scss']
 })
 export class AppRegisterComponent implements OnInit {
+  app: AppointmentRegister = new AppointmentRegister()
   schedule: Schdule;
+  currentDate:any = new Date();
+  sDate:any = new Date(this.app.start_date)
+  startDate() {
+   this.sDate = new Date(this.app.start_date)
+  }
+  
 
   loginId = localStorage.getItem("loggedInUserId")
 
@@ -35,9 +42,8 @@ export class AppRegisterComponent implements OnInit {
   UnassignDevice: any = [];
 
   title: 'datePicker';
-  currentDate: any = new Date();
 
-  app: AppointmentRegister = new AppointmentRegister()
+ 
 
   constructor(private userServices: UserService, private datePipe: DatePipe, private appService: AppointmentService) { }
 
@@ -96,7 +102,7 @@ export class AppRegisterComponent implements OnInit {
   disabled = false;
   sourceLeft = true;
 
-  format: any = { add: 'Remove Device from User', remove: 'Assign Device To User', all: 'Select All', none: 'Unselect All', direction: 'left-to-right', draggable: true, locale: undefined };
+  format: any = { add: 'Add Selected Member', remove: 'Remove Selected Member', all: 'Select All', none: 'Unselect All', direction: 'right-to-left', draggable: true, locale: undefined };
 
   doReset() {
     this.sourceDevice = JSON.parse(JSON.stringify(this.AssignDevice));
@@ -132,7 +138,7 @@ export class AppRegisterComponent implements OnInit {
       // this.schedules.push(new Schdule().)
       // this.schedules.push(d.toISOString().slice(0, 10));
       // console.log(this.schedules)
-      this.schedule = new Schdule();
+      this.schedule = new Schdule()
       this.schedule.date = d;
       this.schedule.start_time = this.app.start_time
       this.schedule.end_time = this.app.end_time
@@ -143,7 +149,13 @@ export class AppRegisterComponent implements OnInit {
     this.app.schedules = this.schedules
     console.log("Sche " + this.schedules)
     this.app.employee = this.confirmedUsers;
-    this.app.createUser = {"employee_id" : this.loginId};
+    this.app.createUser = {"employee_id" : this.loginId}
+    // //schedule add
+    // this.schedule.date = this.datePipe.transform(this.app.start_date, 'dd/MM/yyyy');
+    // this.schedule.date = this.datePipe.transform(this.app.end_date, 'dd/MM/yyyy');
+    // this.schedule.start_time = this.app.start_time;
+    // this.schedule.end_time = this.app.end_time;
+    // this.schedule.appointment = this.app;
 
     this.appService.createAppointment(this.app).subscribe(
       data => console.log("Ok na sarrrrrr"),
