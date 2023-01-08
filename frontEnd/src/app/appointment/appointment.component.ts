@@ -3,10 +3,8 @@ import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullca
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { createEventId } from 'app/event-utils';
 import { Router } from '@angular/router';
 //import { INITIAL_EVENTS, createEventId } from './event-utils';
-import { Calendar } from 'fullcalendar';
 
 @Component({
   selector: 'app-appointment',

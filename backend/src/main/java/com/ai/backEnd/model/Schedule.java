@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class Schedules{
+public class Schedule{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

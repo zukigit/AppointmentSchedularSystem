@@ -1,6 +1,8 @@
 package com.ai.backEnd.model;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 
@@ -27,6 +29,9 @@ public class User implements Serializable{
 	private boolean isAccountNonLocked = true;
 	private boolean isCredentialsNonExpired = true;
 	private boolean isEnabled = true;
+	@ManyToMany(mappedBy = "employee")
+	private List<Appointment> appointments;
+	
 	public UserImage getUserImage() {
 		return userImage;
 	}

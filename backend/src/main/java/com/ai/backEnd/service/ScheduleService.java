@@ -2,14 +2,14 @@ package com.ai.backEnd.service;
 
 import java.util.List;
 
-import com.ai.backEnd.model.Schedules;
+import com.ai.backEnd.model.Schedule;
 
 public interface ScheduleService {
 
-    Schedules saveSchedule(Schedules schedule);
+    Schedule saveSchedule(Schedule schedule);
 
-    List<Schedules> getSchedules();
+    List<Schedule> getSchedules();
     
-    Schedules getScheduleById(Integer id);
+    Schedule getScheduleById(Integer id);
     
 }

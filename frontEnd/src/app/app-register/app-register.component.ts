@@ -132,7 +132,7 @@ export class AppRegisterComponent implements OnInit {
       // this.schedules.push(new Schdule().)
       // this.schedules.push(d.toISOString().slice(0, 10));
       // console.log(this.schedules)
-      this.schedule = new Schdule()
+      this.schedule = new Schdule();
       this.schedule.date = d;
       this.schedule.start_time = this.app.start_time
       this.schedule.end_time = this.app.end_time
@@ -143,13 +143,7 @@ export class AppRegisterComponent implements OnInit {
     this.app.schedules = this.schedules
     console.log("Sche " + this.schedules)
     this.app.employee = this.confirmedUsers;
-    this.app.create_userId = this.loginId;
-    // //schedule add
-    // this.schedule.date = this.datePipe.transform(this.app.start_date, 'dd/MM/yyyy');
-    // this.schedule.date = this.datePipe.transform(this.app.end_date, 'dd/MM/yyyy');
-    // this.schedule.start_time = this.app.start_time;
-    // this.schedule.end_time = this.app.end_time;
-    // this.schedule.appointment = this.app;
+    this.app.create_userId = {"employee_id" : this.loginId};
 
     this.appService.createAppointment(this.app).subscribe(
       data => console.log("Ok na sarrrrrr"),

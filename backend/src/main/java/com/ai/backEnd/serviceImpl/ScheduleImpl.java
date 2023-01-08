@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ai.backEnd.model.Schedules;
+import com.ai.backEnd.model.Schedule;
 import com.ai.backEnd.repository.ScheduleRepository;
 import com.ai.backEnd.service.ScheduleService;
 
@@ -16,17 +16,17 @@ public class ScheduleImpl implements ScheduleService{
     private ScheduleRepository repo;
 
     @Override
-    public Schedules saveSchedule(Schedules schedule) {
+    public Schedule saveSchedule(Schedule schedule) {
         return repo.save(schedule);
     }
 
     @Override
-    public List<Schedules> getSchedules() {
+    public List<Schedule> getSchedules() {
         return repo.findAll();
     }
 
     @Override
-    public Schedules getScheduleById(Integer id) {
+    public Schedule getScheduleById(Integer id) {
         return repo.findById(id).get();
     }
     

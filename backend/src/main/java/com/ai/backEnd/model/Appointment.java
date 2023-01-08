@@ -1,22 +1,13 @@
 package com.ai.backEnd.model;
 
-import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
-import java.util.Set;
-
 import javax.persistence.*;
-
-
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class Appointment implements Serializable{
+public class Appointment{
 	
-	private static final long serialVersionUID = 1L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer appointment_id;
@@ -29,16 +20,15 @@ public class Appointment implements Serializable{
 	private boolean isDeleted;
 	@Enumerated(EnumType.STRING)
 	private AppointmentType type;
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "user_appointment",
-            joinColumns = {
-                    @JoinColumn(name = "appointment_id",
-                            nullable = false, updatable = false)},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "employee_id", 
-                            nullable = false, updatable = false)})
-	private Set<User> employee;
-	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+	  name = "user_appointment", 
+	  joinColumns = @JoinColumn(name = "appointment_id"), 
+	  inverseJoinColumns = @JoinColumn(name = "employee_id"))
+	private List<User> employee;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "appCreated_userId")
+	private User createUser;
 	
 	public Integer getAppointment_id() {
 		return appointment_id;
@@ -83,11 +73,16 @@ public class Appointment implements Serializable{
 	public void setType(AppointmentType type) {
 		this.type = type;
 	}
-	public Set<User> getEmployee() {
+	public List<User> getEmployee() {
 		return employee;
 	}
-	public void setEmployee(Set<User> employee) {
+	public void setEmployee(List<User> employee) {
 		this.employee = employee;
 	}
-	
+	public User getCreateUser() {
+		return createUser;
+	}
+	public void setCreateUser(User createUser) {
+		this.createUser = createUser;
+	}
 }

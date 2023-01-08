@@ -20,13 +20,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-
 import com.ai.backEnd.dto.ChangePasswordModel;
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.dto.UserDetail;
 import com.ai.backEnd.dto.UserDetailForUpdate;
 import com.ai.backEnd.model.UserRole;
-import com.ai.backEnd.dto.UserSearch;
 import com.ai.backEnd.service.UserService;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -100,20 +98,6 @@ public class UserController {
 	@GetMapping("/userDetail")
 	public List<UserDetail> userDetail(){
 		return service.userDetail();
-	}
-
-	@PostMapping("/searchUser")
-	public List<UserDetail> search(@RequestBody UserSearch userSearch){
-		if(userSearch.getSearchType().equals("default")){
-			return service.searchByNameOrId(userSearch.getSearchKey());
-		}else if (userSearch.getSearchType().equals("searchByDepartment")){
-            return service.seacrhByDepartmentName(userSearch.getSearchKey());
-		} else if (userSearch.getSearchType().equals("searchByTeam")) {
-			return service.searchByTeamName(userSearch.getSearchKey());
-		}
-			else{
-				return null;
-		}
 	}
 
 	@GetMapping("/updatePhoneNumber")

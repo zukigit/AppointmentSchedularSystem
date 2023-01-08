@@ -19,7 +19,7 @@ export class AppointmentService {
   private baseUrl = `http://localhost:8080/api/v1`;
 
   createAppointment(app: AppointmentRegister):Observable<Object>{
-    return this.http.post("http://localhost:8080/api/v1/saveSchedule/", app, this.header);
+    return this.http.post("http://localhost:8080/api/v1/addAppointment/", app, this.header);
   }
 
   getAppointment(){
