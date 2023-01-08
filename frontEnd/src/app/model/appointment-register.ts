@@ -13,7 +13,7 @@ export class AppointmentRegister {
     attachedment_file : File;
     created_date:Date;
     updated_date : Date;
-    create_userId : {employee_id:string};
+    createUser : {employee_id:string};
     attached:File;
     listbox_key:string;
     employee:any=[];

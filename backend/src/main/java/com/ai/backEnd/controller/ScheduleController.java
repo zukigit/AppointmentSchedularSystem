@@ -1,6 +1,8 @@
 package com.ai.backEnd.controller;
 
 import java.util.List;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,7 +36,7 @@ public class ScheduleController {
     public void saveSchedule(@RequestBody Schedule schedule){
     	Appointment appointment = schedule.getAppointment();
     	appointment.setAppointment_id(schedule.getId());
-    	List<User> users = appointment.getEmployee();
+    	Set<User> users = appointment.getEmployee();
     	for(User user: users) {
     		User newUser = userService.getUserById(user.getEmployee_id());
     		user.setTeam(newUser.getTeam());

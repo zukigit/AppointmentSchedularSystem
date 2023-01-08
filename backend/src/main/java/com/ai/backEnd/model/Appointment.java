@@ -1,7 +1,7 @@
 package com.ai.backEnd.model;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -25,7 +25,7 @@ public class Appointment{
 	  name = "user_appointment", 
 	  joinColumns = @JoinColumn(name = "appointment_id"), 
 	  inverseJoinColumns = @JoinColumn(name = "employee_id"))
-	private List<User> employee;
+	private Set<User> employee;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "appCreated_userId")
 	private User createUser;
@@ -73,10 +73,10 @@ public class Appointment{
 	public void setType(AppointmentType type) {
 		this.type = type;
 	}
-	public List<User> getEmployee() {
+	public Set<User> getEmployee() {
 		return employee;
 	}
-	public void setEmployee(List<User> employee) {
+	public void setEmployee(Set<User> employee) {
 		this.employee = employee;
 	}
 	public User getCreateUser() {
