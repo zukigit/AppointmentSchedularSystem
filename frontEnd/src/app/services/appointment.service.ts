@@ -18,12 +18,11 @@ export class AppointmentService {
   constructor(private http: HttpClient) { }
   private baseUrl = `http://localhost:8080/api/v1`;
 
-  createAppointment(app: AppointmentRegister):Observable<Object>{
+  createAppointment(app: AppointmentRegister):Observable<Object> {
     return this.http.post("http://localhost:8080/api/v1/addAppointment/", app, this.header);
   }
 
-  getAppointment(){
+  getAppointment() {
     return this.http.get("http://localhost:8080/api/v1/getSchedules",this.header);
   }
-
 }

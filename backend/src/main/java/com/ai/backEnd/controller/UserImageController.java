@@ -7,7 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,8 +37,6 @@ public class UserImageController {
 		UserImage oldImage = null;
 		if(user.getUserImage() != null) {
 			oldImage = user.getUserImage();
-		} else {
-			System.out.println("image is null");
 		}
 		UserImage userImage = new UserImage();
 		byte[] imageData = image.getBytes();
@@ -66,6 +66,20 @@ public class UserImageController {
 	    } else {
 	    	return new ResponseEntity<>(userImage.getData(), headers, HttpStatus.OK);
 	    }
-	    
+	}
+	
+	@DeleteMapping("/images/{userId}")
+	public ResponseEntity<String> deletImage(@PathVariable String userId){
+		User user = userService.getUserById(userId);
+		UserImage userImage = user.getUserImage();
+		
+		if(userImage != null) {
+			user.setUserImage(null);
+			userService.saveUser(user);
+			userImageService.deleteImage(userImage);
+			return new ResponseEntity<>("deleted", HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>("delete error", HttpStatus.OK);
+		}
 	}
 }

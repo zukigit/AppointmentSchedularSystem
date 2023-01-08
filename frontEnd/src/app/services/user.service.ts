@@ -79,4 +79,10 @@ getUserDetails(){
     return this.http.post("http://localhost:8080/api/v1/changePassword/", pass, this.header);
   }
 
+  deleteImage(userId:string) : Observable<Object>{
+    console.log("userid " + userId);
+    const headers = new HttpHeaders()
+                                    .set('Authorization',  `Bearer ${this.jwtToken}`);
+    return this.http.delete(`http://localhost:8080/api/v1/images/${userId}`, {headers, responseType: 'text'});
+  }
 }

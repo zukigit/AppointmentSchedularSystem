@@ -5,6 +5,7 @@ import { UserService } from 'app/services/user.service';
 import { Router } from '@angular/router';
 import { ImageService } from 'app/services/image.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { data, error } from 'jquery';
 
 @Component({
   selector: 'app-user-profile',
@@ -98,6 +99,11 @@ export class UserProfileComponent implements OnInit {
     this.isLoading = true;
     this.userService.saveImage(this.selectedFile, this.loginId).subscribe(() => {
       this.getImage();
+      Swal.fire({  
+        icon: 'success',  
+        title: 'Scccess',  
+        text: 'Successfully Changed Profile Picture',   
+      })
       this.selectedFile = null;
     });
   }
@@ -114,6 +120,21 @@ export class UserProfileComponent implements OnInit {
     } else if(this.oldPhoneNumber != this.user.phone_number) {
       this.updatePhoneNumber();
     }
+  }
+
+  deleteImage(){
+    this.isLoading = true;
+    this.userService.deleteImage(this.loginId).subscribe(
+      data => {
+        this.isLoading = false;
+        this.imageUrl = "./assets/img/default.jpg";
+        Swal.fire({  
+          icon: 'success',  
+          title: 'Scccess',  
+          text: 'Successfully Deleted Profile Picture',   
+        })
+      }
+    );
   }
 
   getUserDetailsById(){

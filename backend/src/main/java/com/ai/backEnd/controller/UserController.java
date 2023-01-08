@@ -76,7 +76,6 @@ public class UserController {
 	@GetMapping("/getById/{employee_id}")
 	@PreAuthorize("hasRole('ADMIN')")
 	public UserDetailForUpdate getUserById(@PathVariable String employee_id){
-		System.out.println("getuser by id is called");
 		return service.searchById(employee_id);
 	}
 	//Update User
