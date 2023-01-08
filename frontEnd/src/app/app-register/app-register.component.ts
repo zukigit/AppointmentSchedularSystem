@@ -104,23 +104,28 @@ export class AppRegisterComponent implements OnInit {
 
   format: any = { add: 'Add Selected Member', remove: 'Remove Selected Member', all: 'Select All', none: 'Unselect All', direction: 'right-to-left', draggable: true, locale: undefined };
 
-  doReset() {
-    this.sourceDevice = JSON.parse(JSON.stringify(this.AssignDevice));
-    this.confirmedUsers = JSON.parse(JSON.stringify(this.UnassignDevice));
-    localStorage.setItem("listbox", this.confirmedUsers.forEach.toString())
-    console.log(this.confirmedUsers);
-    this.populateList();
-  }
 
   private populateList() {
     this.key = 'employee_id';
     this.display = 'name';
     this.keepSorted = true;
     this.source = this.AssignDevice;
+    this.confirmedUsers = this.UnassignDevice;
     this.confirmed = this.confirmedUsers;
     console.log("source: " + JSON.stringify(this.source));
     console.log("confirmed: " + JSON.stringify(this.confirmed));
   }
+
+  doReset() {
+  
+    this.sourceDevice = JSON.parse(JSON.stringify(this.AssignDevice));
+    this.confirmedUsers = JSON.parse(JSON.stringify(this.UnassignDevice));
+    localStorage.setItem("listbox", this.confirmedUsers.forEach.toString())
+    console.log(this.confirmedUsers);
+    this.populateList();
+  
+  }
+
 
   private showLabel(item: any) {
     return item.deviceCode;
