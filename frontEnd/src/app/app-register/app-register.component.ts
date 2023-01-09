@@ -144,15 +144,16 @@ export class AppRegisterComponent implements OnInit {
       // this.schedules.push(d.toISOString().slice(0, 10));
       // console.log(this.schedules)
       this.schedule = new Schdule()
-      this.schedule.date = d;
+      this.schedule.date = this.datePipe.transform(d, 'dd/MM/yyyy');
       this.schedule.start_time = this.app.start_time
       this.schedule.end_time = this.app.end_time
+      console.log("time " + this.app.start_time)
       this.schedules.push(this.schedule)
       
     }
     //appointment add
     this.app.schedules = this.schedules
-    console.log("Sche " + this.schedules)
+    console.log("Sche " + this.app.schedules)
     this.app.employee = this.confirmedUsers;
     this.app.createUser = {"employee_id" : this.loginId}
     // //schedule add
