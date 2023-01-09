@@ -34,11 +34,12 @@
                       </svg></label>
                   </div>
                 </div>
+                
+                <!-- Loader -->
+                <span *ngIf="isLoading" class="containerLoader">
+                <span  class="loader"></span>
+                </span>
 
-
-
-
-                <span *ngIf="isLoading" class="loader"></span>
                 <div class="mt-3">
                   <h2 style="margin: 0 0 15px; ">{{user.name}}</h2>
                   <h3 class="text-secondary mb-1">{{user.position}}</h3>
