@@ -18,11 +18,6 @@ public class AppointmentController {
 
     @Autowired
     private AppointmentImpl appointmentService;
-    
-    @PostMapping("/saveAppointment")
-	public void saveAppointment(@RequestBody Appointment appointment) {
-    	appointmentService.saveAppointment(appointment);
-    }
 
     @GetMapping("/getApp")
 	public List<Appointment> getAppointment(){
@@ -31,6 +26,7 @@ public class AppointmentController {
 
 	@PostMapping("/addAppointment")
 	public Appointment registerAppointmnet(@RequestBody Appointment appointment ){
+		System.out.println("schedules size" + appointment.getSchedules().size());
 		appointmentService.saveAppointment(appointment);
 		return appointment;
 	}

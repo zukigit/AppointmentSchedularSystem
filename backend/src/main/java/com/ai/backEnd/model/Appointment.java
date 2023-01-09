@@ -1,13 +1,16 @@
 package com.ai.backEnd.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class Appointment{
+public class Appointment implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer appointment_id;
@@ -29,7 +32,15 @@ public class Appointment{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "appCreated_userId")
 	private User createUser;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Schedule> schedules;
 	
+	public List<Schedule> getSchedules() {
+		return schedules;
+	}
+	public void setSchedules(List<Schedule> schedules) {
+		this.schedules = schedules;
+	}
 	public Integer getAppointment_id() {
 		return appointment_id;
 	}

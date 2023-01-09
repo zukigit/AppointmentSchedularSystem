@@ -32,18 +32,18 @@ public class ScheduleController {
     @Autowired
     private UserImpl userService;
 
-    @PostMapping("/saveSchedule")
-    public void saveSchedule(@RequestBody Schedule schedule){
-    	Appointment appointment = schedule.getAppointment();
-    	appointment.setAppointment_id(schedule.getId());
-    	Set<User> users = appointment.getEmployee();
-    	for(User user: users) {
-    		User newUser = userService.getUserById(user.getEmployee_id());
-    		user.setTeam(newUser.getTeam());
-    	}
-    	appointmentService.saveAppointment(appointment);
-    	scheduleService.saveSchedule(schedule);
-    }
+//    @PostMapping("/saveSchedule")
+//    public void saveSchedule(@RequestBody Schedule schedule){
+//    	Appointment appointment = schedule.getAppointment();
+//    	appointment.setAppointment_id(schedule.getId());
+//    	Set<User> users = appointment.getEmployee();
+//    	for(User user: users) {
+//    		User newUser = userService.getUserById(user.getEmployee_id());
+//    		user.setTeam(newUser.getTeam());
+//    	}
+//    	appointmentService.saveAppointment(appointment);
+//    	scheduleService.saveSchedule(schedule);
+//    }
 
     @GetMapping("/getSchedules")
     public List<Schedule> getAllSchedules(){
