@@ -29,7 +29,7 @@ public class User implements Serializable{
 	private boolean isAccountNonLocked = true;
 	private boolean isCredentialsNonExpired = true;
 	private boolean isEnabled = true;
-	@ManyToMany(mappedBy = "employee")
+	@ManyToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
 	private List<Appointment> appointments;
 	
 	public UserImage getUserImage() {
