@@ -14,11 +14,11 @@
               <div class="d-flex flex-column align-items-center text-center">
 
                 <!-- <img [src]="imageUrl" class="rounded-circle" width="60%" > -->
-                <div class="show-image">
+                <div class="show-image" style="width:70%">
                   <!-- <img src="http://taditdash.files.wordpress.com/2014/01/tadit-dash.jpg" /> -->
                   <img [src]="imageUrl" class="rounded-circle" width="60%">
                   <!-- <input class="delete" type="button" value="Delete" /> -->
-                  <button class="btn" (click)="deleteImage()"><i class="fa fa-trash"></i></button>
+                  <button class="btn" (click)="deleteImage()"><i class="fa fa-trash" ></i></button>
                 </div>
 
 
@@ -83,7 +83,7 @@
                 <div class="col-sm-9 text-secondary">
                   <form (ngSubmit)="updatePhoneNumber()">
                     <input (keypress)="isNumberKey($event)" (paste)="pasteCallback($event)" type="number"
-                      style="border: none; border-bottom: 1px solid #435d7d;" maxlength="11"
+                      style="border: none; border-bottom: 1px solid #435d7d; width: 95px;" maxlength="11"
                       placeholder="eg. 09782572442"
                       oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                       [(ngModel)]="user.phone_number" digitOnly>
