@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { aN } from '@fullcalendar/core/internal-common';
+import { aN, H, m } from '@fullcalendar/core/internal-common';
 import { AppointmentRegister } from 'app/model/appointment-register';
 import { Schdule } from 'app/model/schdule';
 import { Team } from 'app/model/team';
@@ -43,12 +43,15 @@ export class AppRegisterComponent implements OnInit {
 
   title: 'datePicker';
 
- 
+  startHour : string;
+  startMinute : string;
+
+  endHour : string;
+  endMinute : string;
 
   constructor(private userServices: UserService, private datePipe: DatePipe, private appService: AppointmentService) { }
 
   ngOnInit(): void {
-
 
     this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
 
@@ -134,34 +137,30 @@ export class AppRegisterComponent implements OnInit {
   addAppointment() {
     this.app.start_date = new Date(this.app.start_date);
     this.app.end_date = new Date(this.app.end_date);
+    
+    console.log("start hour"+this.startHour);
 
-    // console.log("start date " + this.datePipe.transform(this.app.start_date, 'dd/MM/yyyy'))
-    // console.log("start date " + this.datePipe.transform(this.app.start_date, 'dd/MM/yyyy'))
+    console.log("end hour"+this.endHour);
+
 
     for (let d = this.app.start_date; d <= this.app.end_date; d.setDate(d.getDate() + 1)) {
-      // console.log(d.toISOString().slice(0, 10));
-      // this.schedules.push(new Schdule().)
-      // this.schedules.push(d.toISOString().slice(0, 10));
-      // console.log(this.schedules)
+      
       this.schedule = new Schdule()
       this.schedule.date = this.datePipe.transform(d, 'dd/MM/yyyy');
+      this.app.start_time = this.startHour+ ":"+this.startMinute;
+      this.app.end_time = this.endHour +":"+ this.endMinute;
       this.schedule.start_time = this.app.start_time
       this.schedule.end_time = this.app.end_time
       console.log("time " + this.app.start_time)
       this.schedules.push(this.schedule)
       
+      console.log("starttime is " + this.schedule.start_time);
+      console.log("end time is " + this.schedule.end_time);
     }
-    //appointment add
     this.app.schedules = this.schedules
     console.log("Sche " + this.app.schedules)
     this.app.employee = this.confirmedUsers;
     this.app.createUser = {"employee_id" : this.loginId}
-    // //schedule add
-    // this.schedule.date = this.datePipe.transform(this.app.start_date, 'dd/MM/yyyy');
-    // this.schedule.date = this.datePipe.transform(this.app.end_date, 'dd/MM/yyyy');
-    // this.schedule.start_time = this.app.start_time;
-    // this.schedule.end_time = this.app.end_time;
-    // this.schedule.appointment = this.app;
 
     this.appService.createAppointment(this.app).subscribe(
       data => console.log("Ok na sarrrrrr"),

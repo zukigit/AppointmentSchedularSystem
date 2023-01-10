@@ -5,8 +5,8 @@ import { Team } from "./team";
 export class AppointmentRegister {
     start_date : Date;
     end_date : Date;
-    start_time : number;
-    end_time : number;
+    start_time : string;
+    end_time : string;
     description : string;
     type : string;
     title : string;
