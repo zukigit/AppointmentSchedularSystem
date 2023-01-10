@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'app/services/user.service';
 import * as Chartist from 'chartist';
 
 @Component({
@@ -9,7 +10,13 @@ import * as Chartist from 'chartist';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userServices : UserService) { }
+
+  departmentAndTeam : any ;
+  department : any;
+  team : any;
+  teamArr : any ;
+
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
       seq = 0;
@@ -67,6 +74,9 @@ export class DashboardComponent implements OnInit {
       seq2 = 0;
   };
   ngOnInit() {
+
+    this.getDepartmentAndTeam();
+    console.log(this.departmentAndTeam);
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
       const dataDailySalesChart: any = {
@@ -147,4 +157,11 @@ export class DashboardComponent implements OnInit {
       //start animation for the Emails Subscription Chart
       this.startAnimationForBarChart(websiteViewsChart);
   }
+
+  getDepartmentAndTeam(){
+    this.team = this.userServices.getTeam().subscribe(data=> this.team = data);
+    // this.team = this.userServices.getTeam().subscribe(data=>  this.team = data);
+    // this.teamArr = this.team.filter(this.department.department_id == this.team.department_id);
+  }
+
 }

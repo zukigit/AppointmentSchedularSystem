@@ -12,17 +12,18 @@
                         <p class="card-category"></p>
                     </div>
                     <div class="card-body table-responsive">
+                        <form (ngModel)="getDepartmentAndTeam()">
                         <table class="table table-hover">
                             <thead class="text-warning">
                                 <th>Department</th>
                                 <th>Team</th>
                             </thead>
-                            <tbody>
+                            <tbody *ngFor="let data of team">
                                 <tr>
-                                    <td>Finance</td>
-                                    <td>Finance</td>
+                                    <td>{{data.department.department_name}}</td>
+                                    <td>{{data.team_name}}</td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td>HR/Admin</td>
                                     <td>HR/Admin</td>
                                 </tr>
@@ -109,9 +110,10 @@
                                 <tr>
                                     <td></td>
                                     <td>OMG</td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
+                    </form>
                     </div>
                 </div>
             </div>
