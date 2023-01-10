@@ -146,6 +146,7 @@ export class UserProfileComponent implements OnInit {
     this.userService.updatePhoneNo(this.loginId,this.user.phone_number).subscribe(
       data =>{
         this.isLoading = false;
+        this.oldPhoneNumber = this.user.phone_number;
         Swal.fire({  
           icon: 'success',  
           title: 'Scccess',  
