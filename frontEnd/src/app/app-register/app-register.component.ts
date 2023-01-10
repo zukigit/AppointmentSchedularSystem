@@ -101,6 +101,8 @@ export class AppRegisterComponent implements OnInit {
   userAdd = '';
   disabled = false;
   sourceLeft = true;
+  files:File[] = [];
+  convertedFiles:FormData[] = [];
 
   format: any = { add: 'Add Selected Member', remove: 'Remove Selected Member', all: 'Select All', none: 'Unselect All', direction: 'right-to-left', draggable: true, locale: undefined };
 
@@ -170,7 +172,16 @@ export class AppRegisterComponent implements OnInit {
   }
 
   addFiles(event) {
-    this.app.attached = event.target.files;
+    this.files = event.target.files;
+  }
+
+  convertToFormdata(){
+    for(let i = 0; i < this.files.length; i++){
+      const formData = new FormData();
+      formData.append("file", this.files[i])
+      this.convertedFiles.push(formData);
+    }
+    console.log("converted files" + this.convertedFiles.length)
   }
 }
 
