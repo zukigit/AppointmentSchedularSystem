@@ -22,6 +22,8 @@ import { AppRegisterComponent } from './app-register/app-register.component';
 import { AngularDualListBoxModule } from 'angular-dual-listbox';
 import { DatePipe } from '@angular/common';
 import { LoginAuthGuard } from './security/login-auth.guard';
+import { DailyviewComponent } from './dailyview/dailyview.component';
+import { WeeklyviewComponent } from './weeklyview/weeklyview.component';
 
 @NgModule({
   imports: [
@@ -49,6 +51,8 @@ import { LoginAuthGuard } from './security/login-auth.guard';
     ChangePassComponent,
     AppointmentComponent,
     AppRegisterComponent,
+    DailyviewComponent,
+    WeeklyviewComponent,
   ],
   providers: [AdminAuthGuard, DatePipe, LoginAuthGuard],
   bootstrap: [AppComponent]

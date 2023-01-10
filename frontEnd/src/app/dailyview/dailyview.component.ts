@@ -9,11 +9,12 @@ import { FixedScaleAxis } from 'chartist';
 //import { INITIAL_EVENTS, createEventId } from './event-utils';
 
 @Component({
-  selector: 'app-appointment',
-  templateUrl: './appointment.component.html',
-  styleUrls: ['./appointment.component.css']
+  selector: 'app-dailyview',
+  templateUrl: './dailyview.component.html',
+  styleUrls: ['./dailyview.component.css']
 })
-export class AppointmentComponent implements OnInit  {
+export class DailyviewComponent implements OnInit {
+
   startDate = new Date()
 
     constructor(private changeDetector: ChangeDetectorRef,private router:Router) {

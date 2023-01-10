@@ -15,6 +15,8 @@ import { UpdateComponent } from 'app/update/update.component';
 import { ChangePassComponent } from 'app/admin_role/change-pass/change-pass.component';
 import { AppointmentComponent } from 'app/appointment/appointment.component';
 import { AppRegisterComponent } from 'app/app-register/app-register.component';
+import { DailyviewComponent } from 'app/dailyview/dailyview.component';
+import { WeeklyviewComponent } from 'app/weeklyview/weeklyview.component';
 
 export const AdminLayoutRoutes: Routes = [
     
@@ -32,5 +34,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'admin/updateuser/:id', component: UpdateComponent,canActivate:[AdminAuthGuard]},
     { path: 'admin/change_pass',component:ChangePassComponent,canActivate:[AdminAuthGuard]},
     { path: 'appointment', component:AppointmentComponent},
-    { path: 'app-register',component:AppRegisterComponent}
+    { path: 'app-register',component:AppRegisterComponent},
+    { path: 'dailyview', component: DailyviewComponent},
+    { path: 'weeklyview', component: WeeklyviewComponent}
 ];
