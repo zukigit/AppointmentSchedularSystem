@@ -14,7 +14,7 @@ export class AppointmentRegister {
     created_date:Date;
     updated_date : Date;
     createUser : {employee_id:string};
-    attached:File;
+    attached:File[] = [];
     listbox_key:string;
     employee:any=[];
     schedules:Schdule[]=[];

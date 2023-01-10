@@ -34,7 +34,15 @@ public class Appointment implements Serializable{
 	private User createUser;
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Schedule> schedules;
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<AppointmentFile> files;
 	
+	public List<AppointmentFile> getFiles() {
+		return files;
+	}
+	public void setFiles(List<AppointmentFile> files) {
+		this.files = files;
+	}
 	public List<Schedule> getSchedules() {
 		return schedules;
 	}

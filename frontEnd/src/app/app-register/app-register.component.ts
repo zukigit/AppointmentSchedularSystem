@@ -169,7 +169,9 @@ export class AppRegisterComponent implements OnInit {
     )
   }
 
-
+  addFiles(event) {
+    this.app.attached = event.target.files;
+  }
 }
 
 
