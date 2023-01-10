@@ -22,7 +22,7 @@ export class AppointmentService {
     return this.http.post("http://localhost:8080/api/v1/addAppointment/", app, this.header);
   }
 
-  getAppointment() {
+  getAllAppointment() {
     return this.http.get("http://localhost:8080/api/v1/getSchedules",this.header);
   }
 }
