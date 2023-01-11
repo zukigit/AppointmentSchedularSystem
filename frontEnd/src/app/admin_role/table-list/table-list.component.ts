@@ -54,6 +54,9 @@ export class TableListComponent implements OnInit {
     this.searchOption = type.target.value;
   }
 
+  goToAddEmployee() {
+    this.router.navigate(['admin/addEmployeeModal'])
+  }
 
   updateUser(id: string) {
     this.router.navigate(['admin/updateuser', id])

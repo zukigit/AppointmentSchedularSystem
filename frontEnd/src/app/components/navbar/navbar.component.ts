@@ -50,6 +50,10 @@ export class NavbarComponent implements OnInit {
          }
      });
     }
+    //go to dashboard with router
+    goToDashboard(){
+        this.router.navigate(['admin/dashboard'])
+    }
 
     sidebarOpen() {
         const toggleButton = this.toggleButton;
