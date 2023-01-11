@@ -8,109 +8,30 @@
             margin-left: 30px;">
                 <div class="card">
                     <div class="card-header card-header-warning">
-                        <h4 class="card-title">Employees Stats</h4>
+                        <h4 class="card-title">Appointment Stats</h4>
                         <p class="card-category"></p>
                     </div>
                     <div class="card-body table-responsive">
-                        <form (ngModel)="getDepartmentAndTeam()">
+                        <form (ngModel)="getSchedules()">
                         <table class="table table-hover">
                             <thead class="text-warning">
-                                <th>Department</th>
-                                <th>Team</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Start Time</th>
+                                <th>---></th>
+                                <th>End Time</th>
+                                <th>Date</th>
                             </thead>
-                            <tbody *ngFor="let data of team">
+                            <tbody *ngFor="let data of schedules">
                                 <tr>
-                                    <td>{{data.department.department_name}}</td>
-                                    <td>{{data.team_name}}</td>
+                                    <td>{{data.title}}</td>
+                                    <td>{{data.description}}</td>
+                                    <td>{{data.start_time}}</td>
+                                    <td>---></td>
+                                    <td>{{data.end_time}}</td>
+                                    <td>{{data.date}}</td>
                                 </tr>
-                                <!-- <tr>
-                                    <td>HR/Admin</td>
-                                    <td>HR/Admin</td>
-                                </tr>
-                                <tr>
-                                    <td>PMO</td>
-                                    <td>PMO</td>
-                                </tr>
-                                <tr>
-                                    <td>SDQC</td>
-                                    <td>SDQC</td>
-                                </tr>
-                                <tr>
-                                    <td>Offshore Dept1</td>
-                                    <td>DOT</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>FPD</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>Mark/Smart</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>SNR-MF</td>
-                                </tr>
-                                <tr>
-                                    <td>Offshore Dept2</td>
-                                    <td>OSS</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>KTS</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>KNW21</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>MODOS</td>
-                                </tr>
-                                <tr>
-                                    <td>SSD</td>
-                                    <td>Front</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>Back</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>Exchang</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>CAI</td>
-                                </tr>
-                                <tr>
-                                    <td>Local</td>
-                                    <td>Aeon</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>Toyota</td>
-                                </tr>
-                                <tr>
-                                    <td>Common Infra</td>
-                                    <td>Infra</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>NW</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>Service Desk</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>1st Line</td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td>OMG</td>
-                                </tr> -->
+                                
                             </tbody>
                         </table>
                     </form>
