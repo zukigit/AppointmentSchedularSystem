@@ -18,6 +18,7 @@ export class AppRegisterComponent implements OnInit {
   schedule: Schdule;
   currentDate: any = new Date();
   sDate: any = new Date()
+  sTime:any = new Date()
   
 
   loginId = localStorage.getItem("loggedInUserId")

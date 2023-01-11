@@ -91,7 +91,7 @@
             <!-- <button class="w3-btn w3-red"  style=" border-radius: 3px; margin-right: 10px;">Cancle</button> -->
             <!-- <button class="w3-btn " style="background-color: #435d7d; color:white; border-radius: 3px;" >Register</button> -->
             <!-- <input type="submit" class="w3-btn" value="Add"> -->
-            <input [routerLink]="['admin/user-details']" type="button" class="w3-btn w3-red" style=" border-radius: 3px; margin-right: 10px;"
+            <input (click)="goToUserDetails()" type="button" class="w3-btn w3-red" style=" border-radius: 3px; margin-right: 10px;"
               data-dismiss="modal" value="Cancel">
             <input type="submit" class="w3-btn" value="Update"
               style="background-color: #435d7d; color:white; border-radius: 3px;">
