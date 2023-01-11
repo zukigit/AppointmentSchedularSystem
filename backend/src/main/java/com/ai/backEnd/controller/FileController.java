@@ -28,18 +28,21 @@ public class FileController {
 	private AppointmentService appointmentService;
 	
 	@PostMapping("/uploadFile")
-	public ResponseEntity<String> addFiles(@RequestParam("files") MultipartFile[] files, @RequestParam("userId") String userId) throws IOException{
-		System.out.println("total files" + files.length);
-//		Appointment appointment = appointmentService.getAppById(Integer.parseInt(appointment_id));
-//		List<AppointmentFile> attFiles = appointment.getFiles();
-//		AppointmentFile appointmentFile = new AppointmentFile();
-//		appointmentFile.setFile_name(files.getOriginalFilename());
-//		appointmentFile.setFile_content_type(files.getContentType());
-//		appointmentFile.setData(files.getBytes());
-//		attFiles.add(appointmentFile);
-//		
-//		appointment.setFiles(attFiles);
-//		appointmentService.saveAppointment(appointment);
+	public ResponseEntity<String> addFiles(@RequestParam("files") MultipartFile[] files, @RequestParam("appointmentId") String appointmentId) throws IOException{
+		
+		System.out.println("app id" + appointmentId);
+		Appointment appointment = appointmentService.getAppById(Integer.parseInt(appointmentId));
+		List<AppointmentFile> attFiles = appointment.getFiles();
+		
+		for(MultipartFile file : files) {
+			AppointmentFile appointmentFile = new AppointmentFile();
+			appointmentFile.setFile_name(file.getOriginalFilename());
+			appointmentFile.setFile_content_type(file.getContentType());
+			appointmentFile.setData(file.getBytes());
+			attFiles.add(appointmentFile);
+		}
+
+		appointmentService.saveAppointment(appointment);
 		return new ResponseEntity<>("added", HttpStatus.OK);
 	}
 }

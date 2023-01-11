@@ -11,6 +11,7 @@ import { RegisterationRequestModel } from 'app/model/registeration-request-model
 import { Team } from 'app/model/team';
 // import swal from 'sweetalert';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { NotifierModule, NotifierService } from 'angular-notifier';
 
 
 @Component({
@@ -62,7 +63,7 @@ export class RegisterComponent implements OnInit {
   registerModel: RegisterationRequestModel = new RegisterationRequestModel();
 
   constructor(private userServices: UserService, private http: HttpClient, private userList: UserService,
-    private router: Router) {
+    private router: Router , private notifier : NotifierService) {
   }
 
   validateNumber(event) {
@@ -130,14 +131,14 @@ export class RegisterComponent implements OnInit {
     this.registerModel.team = this.team;
     this.userServices.createUser(this.registerModel).subscribe(
       data => { this.router.navigate(['admin/user-details']);
-                Swal.fire('Added One Employee!!', 'Employee added succesfully!', 'success')
-            },
+                Swal.fire('Added One Employee!!', 'Employee added succesfully!', 'success');
+                },
             error => {console.log("Not create same userid");
             this.router.navigate(['admin/addEmployeeModal']);
-            alert("Can't create same userid")
-          }
+            alert("Can't create same userid");
+           }
     );
-
+    
   }
 
   deleteUserById(employee_id){

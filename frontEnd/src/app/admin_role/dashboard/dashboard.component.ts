@@ -1,7 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppointmentService } from 'app/services/appointment.service';
 import { UserService } from 'app/services/user.service';
 import * as Chartist from 'chartist';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,12 +12,14 @@ import * as Chartist from 'chartist';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private router: Router, private userServices : UserService) { }
+  constructor(private router: Router, private userServices : UserService , private appService : AppointmentService) { }
 
   departmentAndTeam : any ;
   department : any;
   team : any;
   teamArr : any ;
+
+  schedules : any;
 
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
@@ -75,8 +79,10 @@ export class DashboardComponent implements OnInit {
   };
   ngOnInit() {
 
-    this.getDepartmentAndTeam();
-    console.log(this.departmentAndTeam);
+   // this.getDepartmentAndTeam();
+    this.getSchedules();
+   // console.log(this.departmentAndTeam);
+    console.log("app is"+this.schedules);
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
       const dataDailySalesChart: any = {
@@ -160,8 +166,10 @@ export class DashboardComponent implements OnInit {
 
   getDepartmentAndTeam(){
     this.team = this.userServices.getTeam().subscribe(data=> this.team = data);
-    // this.team = this.userServices.getTeam().subscribe(data=>  this.team = data);
-    // this.teamArr = this.team.filter(this.department.department_id == this.team.department_id);
+  }
+
+  getSchedules(){
+    this.schedules = this.appService.getAllAppointment().subscribe(data => this.schedules =data)
   }
 
 }
