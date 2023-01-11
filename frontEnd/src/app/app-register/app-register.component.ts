@@ -1,13 +1,12 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { aN, H, m } from '@fullcalendar/core/internal-common';
 import { AppointmentRegister } from 'app/model/appointment-register';
 import { Schdule } from 'app/model/schdule';
 import { Team } from 'app/model/team';
 import { User } from 'app/model/user';
 import { AppointmentService } from 'app/services/appointment.service';
 import { UserService } from 'app/services/user.service';
-import { listenerCount } from 'process';
+
 
 @Component({
   selector: 'app-app-register',
@@ -49,6 +48,22 @@ export class AppRegisterComponent implements OnInit {
   endHour : string;
   endMinute : string;
 
+  name = 'Angular';
+  private sourceDevice: AssignedDeviceCode[] = [];
+  private confirmedUsers: Array<any>;
+  tab = 1;
+  keepSorted = true;
+  key: string;
+  display: string;
+  filter = false;
+  source: AssignedDeviceCode[] = [];
+  confirmed: UnAssignedDeviceCode[] = [];
+  userAdd = '';
+  disabled = false;
+  sourceLeft = true;
+  files:File[] = [];
+  format: any = { add: 'Add Selected Member', remove: 'Remove Selected Member', all: 'Select All', none: 'Unselect All', direction: 'right-to-left', draggable: true, locale: undefined };
+
   constructor(private userServices: UserService, private datePipe: DatePipe, private appService: AppointmentService) { }
 
   ngOnInit(): void {
@@ -88,27 +103,6 @@ export class AppRegisterComponent implements OnInit {
     console.log(this.AssignDevice);
     this.doReset();
   }
-
-  name = 'Angular';
-  private sourceDevice: AssignedDeviceCode[] = [];
-  private confirmedUsers: Array<any>;
-  //AssignDevice: AssignedDeviceCode[] = [];
-  //UnassignDevice: UnAssignedDeviceCode[] = [];
-  tab = 1;
-  keepSorted = true;
-  key: string;
-  display: string;
-  filter = false;
-  source: AssignedDeviceCode[] = [];
-  confirmed: UnAssignedDeviceCode[] = [];
-  userAdd = '';
-  disabled = false;
-  sourceLeft = true;
-  files:File[] = [];
-  convertedFiles:FormData[] = [];
-
-  format: any = { add: 'Add Selected Member', remove: 'Remove Selected Member', all: 'Select All', none: 'Unselect All', direction: 'right-to-left', draggable: true, locale: undefined };
-
 
   private populateList() {
     this.key = 'employee_id';
@@ -172,19 +166,17 @@ export class AppRegisterComponent implements OnInit {
 
   addFiles(event) {
     this.files = event.target.files;
-  }
-
-  convertToFormdata(){
-    for(let i = 0; i < this.files.length; i++){
-      const formData = new FormData();
-      formData.append("file", this.files[i])
-      this.convertedFiles.push(formData);
+    const formdata = new FormData();
+    formdata.append("userId", this.loginId);
+    for(let i = 0; i < this.files.length; i++) {
+      formdata.append("files", this.files[i]);
     }
-    console.log("converted files" + this.convertedFiles.length)
+    this.appService.uploadFiles(formdata).subscribe(
+      data=>console.log("Yes"),
+      error=>console.log("No")
+    );
   }
 }
-
-
 export class AssignedDeviceCode {
   public DeviceCode: number;
 }

@@ -28,9 +28,8 @@ public class FileController {
 	private AppointmentService appointmentService;
 	
 	@PostMapping("/uploadFile")
-	public ResponseEntity<String> addFiles(@RequestBody ImageUploadModel data) throws IOException{
-		System.out.println("app id" + data.getAppointmentId());
-		System.out.println("total files" + data.getFiles().size());
+	public ResponseEntity<String> addFiles(@RequestParam("files") MultipartFile[] files, @RequestParam("userId") String userId) throws IOException{
+		System.out.println("total files" + files.length);
 //		Appointment appointment = appointmentService.getAppById(Integer.parseInt(appointment_id));
 //		List<AppointmentFile> attFiles = appointment.getFiles();
 //		AppointmentFile appointmentFile = new AppointmentFile();
