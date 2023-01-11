@@ -17,11 +17,8 @@ export class AppRegisterComponent implements OnInit {
   app: AppointmentRegister = new AppointmentRegister()
   schedule: Schdule;
   currentDate: any = new Date();
-  sDate: any = new Date(this.app.start_date)
-  startDate() {
-    this.sDate = new Date(this.app.start_date)
-  }
-
+  sDate: any = new Date()
+  
 
   loginId = localStorage.getItem("loggedInUserId")
 
@@ -162,6 +159,14 @@ export class AppRegisterComponent implements OnInit {
       data => console.log("Ok na sarrrrrr"),
       error => console.log("Error appointment responseee ")
     )
+  }
+  //date
+  onSelect(event) {
+  
+    console.log(this.app.start_date);
+   
+    this.sDate = new Date(this.app.start_date)
+    // do something with the selected text here
   }
 
   addFiles(event) {

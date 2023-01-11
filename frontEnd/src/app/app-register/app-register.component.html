@@ -84,7 +84,7 @@
           
           <div class="input-box">
             <span class="details">Start Date</span>
-            <input type="date" min="{{currentDate | date:'yyyy-MM-dd'}}" (click)="startDate()" [(ngModel)]="app.start_date" name="date" required>
+            <input type="date" (change)="onSelect($event)" min="{{currentDate | date:'yyyy-MM-dd'}}"  [(ngModel)]="app.start_date" name="date" required>
           </div>
           <div class="input-box">
             <span class="details">End Date</span>
