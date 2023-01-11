@@ -6,11 +6,10 @@ import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Appointment implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer appointment_id;
@@ -23,32 +22,19 @@ public class Appointment implements Serializable{
 	private boolean isDeleted;
 	@Enumerated(EnumType.STRING)
 	private AppointmentType type;
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany()
 	@JoinTable(
 	  name = "user_appointment", 
 	  joinColumns = @JoinColumn(name = "appointment_id"), 
 	  inverseJoinColumns = @JoinColumn(name = "employee_id"))
 	private Set<User> employee;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name = "appCreated_userId")
 	private User createUser;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany( cascade = CascadeType.ALL)
 	private List<Schedule> schedules;
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany( cascade = CascadeType.ALL)
 	private List<AppointmentFile> files;
-	
-	public List<AppointmentFile> getFiles() {
-		return files;
-	}
-	public void setFiles(List<AppointmentFile> files) {
-		this.files = files;
-	}
-	public List<Schedule> getSchedules() {
-		return schedules;
-	}
-	public void setSchedules(List<Schedule> schedules) {
-		this.schedules = schedules;
-	}
 	public Integer getAppointment_id() {
 		return appointment_id;
 	}
@@ -79,7 +65,6 @@ public class Appointment implements Serializable{
 	public void setUpdated_date(LocalDate updated_date) {
 		this.updated_date = updated_date;
 	}
-	
 	public boolean isDeleted() {
 		return isDeleted;
 	}
@@ -103,5 +88,36 @@ public class Appointment implements Serializable{
 	}
 	public void setCreateUser(User createUser) {
 		this.createUser = createUser;
+	}
+	public List<Schedule> getSchedules() {
+		return schedules;
+	}
+	public void setSchedules(List<Schedule> schedules) {
+		this.schedules = schedules;
+	}
+	public List<AppointmentFile> getFiles() {
+		return files;
+	}
+	public void setFiles(List<AppointmentFile> files) {
+		this.files = files;
+	}
+	public Appointment(Integer appointment_id, String title, String description, LocalDate created_date,
+			LocalDate updated_date, boolean isDeleted, AppointmentType type, Set<User> employee, User createUser,
+			List<Schedule> schedules, List<AppointmentFile> files) {
+		this.appointment_id = appointment_id;
+		this.title = title;
+		this.description = description;
+		this.created_date = created_date;
+		this.updated_date = updated_date;
+		this.isDeleted = isDeleted;
+		this.type = type;
+		this.employee = employee;
+		this.createUser = createUser;
+		this.schedules = schedules;
+		this.files = files;
+	}
+	
+	public Appointment(){
+
 	}
 }

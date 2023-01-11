@@ -1,5 +1,6 @@
 package com.ai.backEnd.serviceImpl;
 
+import com.ai.backEnd.dto.ShowAppointment;
 import com.ai.backEnd.model.Appointment;
 import com.ai.backEnd.repository.AppointmentRepository;
 import com.ai.backEnd.service.AppointmentService;
@@ -14,6 +15,7 @@ public class AppointmentImpl implements AppointmentService {
 
     @Autowired
     private AppointmentRepository repo;
+    
     @Override
     public Appointment saveAppointment(Appointment appointment) {
         return repo.save(appointment);
@@ -26,5 +28,15 @@ public class AppointmentImpl implements AppointmentService {
 	public Appointment getAppById(Integer id) {
 		return repo.findById(id).get();
 	}
+
+    @Override
+    public List<ShowAppointment> showAppointment() {
+        return repo.showAppointment();
+    }
+    @Override
+    public List<Appointment> getAll() {
+        // TODO Auto-generated method stub
+        return repo.getAll();
+    }
    
 }

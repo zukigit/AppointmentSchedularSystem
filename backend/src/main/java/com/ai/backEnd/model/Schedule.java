@@ -1,5 +1,6 @@
 package com.ai.backEnd.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import javax.persistence.Entity;
@@ -9,7 +10,9 @@ import javax.persistence.Id;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-public class Schedule{
+public class Schedule {
+
+
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;

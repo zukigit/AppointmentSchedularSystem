@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.ai.backEnd.dto.ShowAppointment;
 import com.ai.backEnd.model.Appointment;
 import com.ai.backEnd.serviceImpl.AppointmentImpl;
 
@@ -34,6 +36,16 @@ public class AppointmentController {
 	@GetMapping("/getAppById")
 	public Appointment getAppById(Integer id) {
 		return appointmentService.getAppById(id);
+	}
+
+	@GetMapping("/showApp")
+	public List<ShowAppointment> showAppointment(){
+		return appointmentService.showAppointment();
+	}
+
+	@GetMapping("/getAll")
+	public List<Appointment> getAll(){
+		return appointmentService.getAll();
 	}
 }
 

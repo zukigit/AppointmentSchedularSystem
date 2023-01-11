@@ -1,6 +1,8 @@
 package com.ai.backEnd.service;
 
 import java.util.List;
+
+import com.ai.backEnd.dto.ShowAppointment;
 import com.ai.backEnd.model.Appointment;
 
 
@@ -11,6 +13,9 @@ public interface AppointmentService {
     List<Appointment> getAppointment();
 
     Appointment getAppById(Integer id);
+
+    List<ShowAppointment> showAppointment();
     
-	
+	List<Appointment> getAll();
+    
 }
