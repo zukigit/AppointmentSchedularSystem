@@ -18,11 +18,7 @@ export class DailyviewComponent implements OnInit {
   startDate = new Date()
 
   constructor(private changeDetector: ChangeDetectorRef,private router:Router) {
-    this.header = {
-      left: 'today prev,next',
-      center: 'title',
-      right: 'timeGridDay,timeLineWeek'                
-  }
+    
 };
 header: any;
 calendarVisible = true;
@@ -39,6 +35,14 @@ ngOnInit() {
   var calendarEl2 = this.calendar2.nativeElement;
 
   var calendar = new Calendar(calendarEl, {
+    customButtons: {
+      myCustomButton: {
+        text: 'Add Appointment',
+        click: function() {
+          alert('clicked the custom button!');
+        }
+      }
+    },
     initialView: 'timeGridDay',
     plugins: [timeGridPlugin],
     views: {
@@ -68,6 +72,12 @@ ngOnInit() {
       
 
     ],
+
+    headerToolbar: {
+      left: 'myCustomButton',
+      center: 'title',
+      right: 'today prev,next',
+    },
   });
   var calendar2 = new Calendar(calendarEl2, {
     initialView: 'timeGridDay',

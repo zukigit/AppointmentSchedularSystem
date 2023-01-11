@@ -41,6 +41,14 @@ ngOnInit() {
   var calendar = new Calendar(calendarEl, {
     initialView: 'timeGridWeek',
     plugins: [timeGridPlugin],
+    customButtons: {
+      myCustomButton: {
+        text: 'Add Appointment',
+        click: function() {
+          alert('clicked the custom button!');
+        }
+      }
+    },
     views: {
         timeGridWeek:{
           type: 'timeGridWeek',
@@ -74,6 +82,12 @@ ngOnInit() {
       
 
     ],
+
+    headerToolbar: {
+      left: 'myCustomButton',
+      center: 'title',
+      right: 'today prev,next',
+    },
   });
   var calendar2 = new Calendar(calendarEl2, {
     initialView: 'timeGridWeek',
