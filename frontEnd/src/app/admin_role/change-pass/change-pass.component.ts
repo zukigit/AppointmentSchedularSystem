@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangePass } from 'app/model/change-pass';
 import { UserService } from 'app/services/user.service';
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
@@ -36,10 +37,14 @@ export class ChangePassComponent implements OnInit {
     this.changetype = !this.changetype;
   }
 
-  constructor(private service: UserService) { }
+  constructor(private service: UserService,private router:Router) { }
 
   ngOnInit(): void {
   }
+  goToDashboard(){
+    this.router.navigate(['admin/dashboard'])
+}
+
 
   changePassword() {
     this.changePass.userId = this.loginId;

@@ -91,6 +91,10 @@ export class RegisterComponent implements OnInit {
     )
 
   }
+  //gotodashbord with router link
+  goToDashboard() {
+    this.router.navigate(['admin/dashboard'])
+  }
 
   dataOfUser() {
     this.userDataDetails = this.userServices.getUserDetails().subscribe(data => this.userDataDetails = data);

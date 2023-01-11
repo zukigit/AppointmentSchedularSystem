@@ -1,7 +1,6 @@
 package com.ai.backEnd.model;
 
 
-import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -9,8 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Team implements Serializable{
-	private static final long serialVersionUID = 1L;
+public class Team {
 	
 	@Id
 	private String team_id;

@@ -17,54 +17,112 @@ export class DailyviewComponent implements OnInit {
 
   startDate = new Date()
 
-    constructor(private changeDetector: ChangeDetectorRef,private router:Router) {
-      this.header = {
-        left: 'today prev,next',
-        center: 'title',
-        right: 'timeGridDay,timeLineWeek'                
-    }
-  };
-  header: any;
-  calendarVisible = true;
-  
-  
-    @ViewChild('calendar', { static: true }) calendar: ElementRef<any>;
-  name = 'Angular ' + VERSION.major;
+  constructor(private changeDetector: ChangeDetectorRef,private router:Router) {
+    
+};
+header: any;
+calendarVisible = true;
 
-  ngOnInit() {
-    var calendarEl = this.calendar.nativeElement;
 
-    var calendar = new Calendar(calendarEl, {
-      initialView: 'timeGridDay',
-      plugins: [timeGridPlugin],
-      views: {
-          timeGridDay:{
-            type: 'timeGridDay',
-            allDaySlot: false,
-            slotMinTime: "07:00:00",
-            slotMaxTime: "20:00:00",
-            contentHeight: 550,
-          }
+  @ViewChild('calendar', { static: true }) calendar: ElementRef<any>;
+  @ViewChild('calendar2', { static: true }) calendar2: ElementRef<any>;
+
+name = 'Angular ' + VERSION.major;
+
+
+ngOnInit() {
+  var calendarEl = this.calendar.nativeElement;
+  var calendarEl2 = this.calendar2.nativeElement;
+
+  var calendar = new Calendar(calendarEl, {
+    customButtons: {
+      myCustomButton: {
+        text: 'Add Appointment',
+        click: function() {
+          alert('clicked the custom button!');
+        }
+      }
+    },
+    initialView: 'timeGridDay',
+    plugins: [timeGridPlugin],
+    views: {
+      timeGridDay:{
+        type: 'timeGridDay',
+        allDaySlot: false,
+        slotMinTime: "07:00:00",
+        slotMaxTime: "20:00:00",
+        contentHeight: 550,
+        selectable: true,
+      }
+  },
+    
+    events: [
+      {
+        title: 'Meeting',
+        start: '2023-01-11T10:10:00',
+        end: '2023-01-11T11:30:00',
       },
       
-      events: [
-        {
-          title: 'Meeting',
-          start: '2023-01-10T10:10:00',
-          end: '2023-01-10T11:30:00',
-        },
-      ],
-    });
+      
+      {
+        title: 'Meeting',
+        start: '2023-01-11T16:40:00',
+        end: '2023-01-11T18:50:00',
+      },
+      
 
-    calendar.render();
-  }
-  handleDateSelect(selectInfo: DateSelectArg) {
-  }
+    ],
 
-  goToApp() {
-    this.router.navigate(['app-register'])
-  }
+    headerToolbar: {
+      left: 'myCustomButton',
+      center: 'title',
+      right: 'today prev,next',
+    },
+  });
+  var calendar2 = new Calendar(calendarEl2, {
+    initialView: 'timeGridDay',
+    plugins: [timeGridPlugin],
+    views: {
+      timeGridDay:{
+        type: 'timeGridDay',
+        allDaySlot: false,
+        slotMinTime: "07:00:00",
+        slotMaxTime: "20:00:00",
+        contentHeight: 550,
+        selectable: true,
+        
+      }
+  },
     
+    events: [
+      
+      
+      
+      {
+        title: 'Meeting',
+        start: '2023-01-11T18:40:00',
+        end: '2023-01-11T18:50:00',
+      },
+      
+
+    ],
+    headerToolbar: {
+      left: '',
+      center: '',
+      right: 'today prev,next',
+    },
+    
+  });
+
+  calendar.render();
+  calendar2.render();
+}
+handleDateSelect(selectInfo: DateSelectArg) {
+  this.router.navigate(['app-register'])
 }
 
- 
+// goToApp() {
+//   this.router.navigate(['app-register'])
+// }
+  
+}

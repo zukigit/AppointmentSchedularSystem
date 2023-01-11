@@ -1,14 +1,12 @@
 package com.ai.backEnd.model;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.*;
 
 
 @Entity
-public class User implements Serializable{
-	private static final long serialVersionUID = 1L;
+public class User  {
 	
 	@Id
 	private String employee_id;
@@ -32,15 +30,19 @@ public class User implements Serializable{
 	@ManyToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
 	private List<Appointment> appointments;
 	
+	public List<Appointment> getAppointments() {
+		return appointments;
+	}
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
+	}
 	public UserImage getUserImage() {
 		return userImage;
 	}
 	public void setUserImage(UserImage userImage) {
 		this.userImage = userImage;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	
 	public String getEmployee_id() {
 		return employee_id;
 	}

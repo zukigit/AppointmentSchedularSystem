@@ -29,10 +29,7 @@ public class AppointmentImpl implements AppointmentService {
 		return repo.findById(id).get();
 	}
 
-    @Override
-    public List<ShowAppointment> showAppointment() {
-        return repo.showAppointment();
-    }
+    
     @Override
     public List<Appointment> getAll() {
         // TODO Auto-generated method stub
