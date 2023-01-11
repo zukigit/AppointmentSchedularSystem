@@ -16,12 +16,12 @@ import { UserService } from 'app/services/user.service';
 export class AppRegisterComponent implements OnInit {
   app: AppointmentRegister = new AppointmentRegister()
   schedule: Schdule;
-  currentDate:any = new Date();
-  sDate:any = new Date(this.app.start_date)
+  currentDate: any = new Date();
+  sDate: any = new Date(this.app.start_date)
   startDate() {
-   this.sDate = new Date(this.app.start_date)
+    this.sDate = new Date(this.app.start_date)
   }
-  
+
 
   loginId = localStorage.getItem("loggedInUserId")
 
@@ -42,11 +42,11 @@ export class AppRegisterComponent implements OnInit {
 
   title: 'datePicker';
 
-  startHour : string;
-  startMinute : string;
+  startHour: string;
+  startMinute: string;
 
-  endHour : string;
-  endMinute : string;
+  endHour: string;
+  endMinute: string;
 
   name = 'Angular';
   private sourceDevice: AssignedDeviceCode[] = [];
@@ -116,13 +116,13 @@ export class AppRegisterComponent implements OnInit {
   }
 
   doReset() {
-  
+
     this.sourceDevice = JSON.parse(JSON.stringify(this.AssignDevice));
     this.confirmedUsers = JSON.parse(JSON.stringify(this.UnassignDevice));
     localStorage.setItem("listbox", this.confirmedUsers.forEach.toString())
     console.log(this.confirmedUsers);
     this.populateList();
-  
+
   }
 
 
@@ -133,30 +133,30 @@ export class AppRegisterComponent implements OnInit {
   addAppointment() {
     this.app.start_date = new Date(this.app.start_date);
     this.app.end_date = new Date(this.app.end_date);
-    
-    console.log("start hour"+this.startHour);
 
-    console.log("end hour"+this.endHour);
+    console.log("start hour" + this.startHour);
+
+    console.log("end hour" + this.endHour);
 
 
     for (let d = this.app.start_date; d <= this.app.end_date; d.setDate(d.getDate() + 1)) {
-      
+
       this.schedule = new Schdule()
       this.schedule.date = this.datePipe.transform(d, 'dd/MM/yyyy');
-      this.app.start_time = this.startHour+ ":"+this.startMinute;
-      this.app.end_time = this.endHour +":"+ this.endMinute;
+      this.app.start_time = this.startHour + ":" + this.startMinute;
+      this.app.end_time = this.endHour + ":" + this.endMinute;
       this.schedule.start_time = this.app.start_time
       this.schedule.end_time = this.app.end_time
       console.log("time " + this.app.start_time)
       this.schedules.push(this.schedule)
-      
+
       console.log("starttime is " + this.schedule.start_time);
       console.log("end time is " + this.schedule.end_time);
     }
     this.app.schedules = this.schedules
     console.log("Sche " + this.app.schedules)
     this.app.employee = this.confirmedUsers;
-    this.app.createUser = {"employee_id" : this.loginId}
+    this.app.createUser = { "employee_id": this.loginId }
 
     this.appService.createAppointment(this.app).subscribe(
       data => console.log("Ok na sarrrrrr"),
@@ -175,6 +175,12 @@ export class AppRegisterComponent implements OnInit {
       data=>console.log("Yes"),
       error=>console.log("No")
     );
+
+    if (event.target.files[0].size > 5000000) {
+      alert('File size should be less than 5MB!!');
+    } else {
+      this.app.attached = event.target.files;
+    }
   }
 }
 export class AssignedDeviceCode {
