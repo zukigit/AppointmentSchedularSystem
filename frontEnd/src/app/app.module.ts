@@ -24,6 +24,7 @@ import { DatePipe } from '@angular/common';
 import { LoginAuthGuard } from './security/login-auth.guard';
 import { DailyviewComponent } from './dailyview/dailyview.component';
 import { WeeklyviewComponent } from './weeklyview/weeklyview.component';
+import { NotifierModule,NotifierService } from 'angular-notifier';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import { WeeklyviewComponent } from './weeklyview/weeklyview.component';
     MatRadioModule,
     FullCalendarModule,
     AngularDualListBoxModule,
-    DatePipe
+    DatePipe,
+    NotifierModule
   ],
   declarations: [
     AppComponent,

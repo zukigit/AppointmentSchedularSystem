@@ -38,6 +38,7 @@
     "@fullcalendar/timegrid": "^6.0.2",
     "ajv": "8.11.0",
     "angular-dual-listbox": "^7.0.0",
+    "angular-notifier": "^12.0.0",
     "arrive": "2.4.1",
     "bootstrap": "4.6.1",
     "bootstrap-material-design": "4.1.3",
