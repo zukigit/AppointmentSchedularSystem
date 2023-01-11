@@ -21,16 +21,6 @@
             </textarea>
           </div>
 
-          <!-- <div class="input-box">
-            <span class="details">Start Time</span>
-            <input type="text" type="time" [(ngModel)]="app.start_time" name="time" value="hh:mm"  required minlength="2" maxlength="10">
-          </div>
-          
-          <div class="input-box">
-            <span class="details">End Time</span>
-            <input type="time" [(ngModel)]="app.end_time" name="time" value="hh:mm"  required>
-          </div> -->
-
            <div class="input-box">
             <span class="details" style="width: calc(100% /2  - 20px);">Start Time</span>
            
@@ -94,11 +84,11 @@
           
           <div class="input-box">
             <span class="details">Start Date</span>
-            <input type="date" min="{{currentDate | date:'yyyy-MM-dd'}}" (click)="startDate()" [(ngModel)]="app.start_date" name="date" value="2023-01-01" min="2023-01-01" max="2024-01-01" required>
+            <input type="date" min="{{currentDate | date:'yyyy-MM-dd'}}" (click)="startDate()" [(ngModel)]="app.start_date" name="date" required>
           </div>
           <div class="input-box">
             <span class="details">End Date</span>
-            <input type="date"  min="{{sDate | date:'yyyy-MM-dd'}}"  [(ngModel)]="app.end_date" name="date" value="2023-01-01" min="2023-01-01" max="2024-01-01" required>
+            <input type="date"  min="{{sDate | date:'yyyy-MM-dd'}}" [(ngModel)]="app.end_date" name="date" required>
           </div>
     
           

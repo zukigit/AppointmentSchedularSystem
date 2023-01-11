@@ -58,6 +58,7 @@
     "sweetalert": "^2.1.2",
     "sweetalert2": "^11.6.16",
     "tslib": "^2.3.0",
+    "upgrade-node-modules": "^1.4.0",
     "web-animations-js": "2.3.2",
     "webpack": "^5.75.0",
     "zone.js": "~0.11.4"
