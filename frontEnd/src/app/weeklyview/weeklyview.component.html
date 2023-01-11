@@ -1,2 +1,42 @@
-<div #calendar (click)="goToApp()" style="margin-top:100px;">
+<div class='demo-app-main'>
+
+<input type="text"  placeholder="Search User....." style="margin-bottom: 30px;margin-top:100px;">
+<button type="submit" class="searchButton">
+  <i class="fa fa-search"></i>
+</button><br>
+        <a href="#">Remove Mamber</a><a href="#"><i class="material-icons">arrow_back_ios</i> Previous Mamber</a><a href="#">Next Mamber <i class="material-icons">arrow_forward_ios</i></a>
+        <div style="padding-left: 10px;">Your Name</div>
+
+<span >
+  <table>
+    <tr>
+      <td>
+        <div #calendar style="margin-top:10px; width: 1000px; display: inline-block;">
+          <ng-template #eventContent  let-arg>
+          </ng-template>
+        </div>
+      </td>
+    </tr>
+    <tr >
+      <td>
+        <div #calendar2>
+          <ng-template #eventContent  let-arg>
+          </ng-template>
+        </div>
+      </td>
+    </tr>
+  </table>
+  <!-- <tr style="width: 100%;">
+    <div #calendar style="margin-top:10px;">
+      <ng-template #eventContent  let-arg>
+      </ng-template>
+    </div>
+  </tr>
+  <tr>
+    <div #calendar style="margin-top:100px;">
+      <ng-template #eventContent  let-arg>
+      </ng-template>
+    </div>
+  </tr> -->
+</span>
 </div>

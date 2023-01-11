@@ -19,7 +19,7 @@ export class WeeklyviewComponent implements OnInit {
 
   constructor(private changeDetector: ChangeDetectorRef,private router:Router) {
     this.header = {
-      left: 'today prev,next',
+      left: 'prev,next today',
       center: 'title',
       right: 'timeGridDay,timeLineWeek'                
   }
@@ -29,10 +29,14 @@ calendarVisible = true;
 
 
   @ViewChild('calendar', { static: true }) calendar: ElementRef<any>;
+  @ViewChild('calendar2', { static: true }) calendar2: ElementRef<any>;
+
 name = 'Angular ' + VERSION.major;
+
 
 ngOnInit() {
   var calendarEl = this.calendar.nativeElement;
+  var calendarEl2 = this.calendar2.nativeElement;
 
   var calendar = new Calendar(calendarEl, {
     initialView: 'timeGridWeek',
@@ -44,28 +48,79 @@ ngOnInit() {
           weekends: false,
           slotMinTime: "07:00:00",
           slotMaxTime: "20:00:00",
+          selectable: true,
+          select: this.handleDateSelect.bind(this),
           allDaySlot:false,
-          contentHeight: 200
+          contentHeight: 200,
+          eventShortHeight: 100,
+          eventMinHeight: 30,
+          expandRows: true,
         }
     },
     
     events: [
       {
         title: 'Meeting',
-        start: '2023-01-10T10:10:00',
-        end: '2023-01-10T11:30:00',
+        start: '2023-01-11T10:10:00',
+        end: '2023-01-11T11:30:00',
+      },
+      
+      
+      {
+        title: 'Meeting',
+        start: '2023-01-11T18:40:00',
+        end: '2023-01-11T18:50:00',
+      },
+      
+
+    ],
+  });
+  var calendar2 = new Calendar(calendarEl2, {
+    initialView: 'timeGridWeek',
+    plugins: [timeGridPlugin],
+    views: {
+        timeGridWeek:{
+          type: 'timeGridWeek',
+          slotDuration: '24:00:00',
+          weekends: false,
+          slotMinTime: "07:00:00",
+          slotMaxTime: "20:00:00",
+          selectable: true,
+          select: this.handleDateSelect.bind(this),
+          allDaySlot:false,
+          contentHeight: 200,
+          eventShortHeight: 100,
+          eventMinHeight: 30,
+          expandRows: true,
+        }
+    },
+    
+    events: [
+      {
+        title: 'Meeting',
+        start: '2023-01-11T18:40:00',
+        end: '2023-01-11T18:50:00',
       },
     ],
+
+    headerToolbar: {
+      left: '',
+      center: '',
+      right: 'today prev,next',
+    },
+
   });
 
   calendar.render();
+  calendar2.render();
 }
 handleDateSelect(selectInfo: DateSelectArg) {
-}
-
-goToApp() {
   this.router.navigate(['app-register'])
 }
+
+// goToApp() {
+//   this.router.navigate(['app-register'])
+// }
   
 }
 
