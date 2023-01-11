@@ -10,11 +10,10 @@ export class AppointmentRegister {
     description : string;
     type : string;
     title : string;
-    attachedment_file : File;
     created_date:Date;
     updated_date : Date;
     createUser : {employee_id:string};
-    attached:File[] = [];
+    attached:FormData[] = [];
     listbox_key:string;
     employee:any=[];
     schedules:Schdule[]=[];

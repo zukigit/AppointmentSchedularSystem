@@ -25,4 +25,12 @@ export class AppointmentService {
   getAllAppointment() {
     return this.http.get("http://localhost:8080/api/v1/getSchedules",this.header);
   }
+
+  uploadFiles(files : FormData):Observable<Object> {
+    const headers = new HttpHeaders()
+                                    .set('Authorization',  `Bearer ${this.jwtToken}`);
+    headers.append('Content-Type', `multipart/form-data`);
+
+    return this.http.post("http://localhost:8080/api/v1/uploadFile", files, {headers, responseType: 'text'});
+  }
 }

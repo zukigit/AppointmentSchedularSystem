@@ -1,85 +1,4 @@
-<!-- <div class="container">
-    <div class="row">
-        <div class="col-lg-3 col-md-2"></div>
-        <div class="col-lg-6 col-md-8 login-box">
-            <div class="col-lg-12 login-key">
-                <i class="fa fa-key" aria-hidden="true"></i>
-            </div>
-            <div class="col-lg-12 login-title">
-                Please change your password!
-            </div>
 
-            <div class="col-lg-12 login-form">
-                <div class="col-lg-12 login-form">
-                    <form id="passwordForm" (ngSubmit)="changePassword()">
-                        
-
-
-                        <div class="form-group">
-                            <label class="form-control-label" style="margin-right: 50px;">Old Password</label>
-                            <input [(ngModel)]="changePass.oldPassword" [type]="changetype?'password':'text'"
-                                style="cursor: pointer;" id="ppassword" name="password" class="" type="password"
-                                required>
-                            <span class="eyeicon" (click)="viewpass()"> <i
-                                    [ngClass]="visible?'fa fa-eye': 'fa fa-eye-slash'"
-                                    style="color: rgb(202, 217, 213);"></i></span>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="form-control-label" style="margin-right: 50px;">New Password</label>
-                            <input [(ngModel)]="changePass.newPassword" [type]="changetype?'password':'text'"
-                                style="cursor: pointer;" id="password" name="password" class="" type="password"
-                                required>
-                            <span class="eyeicon" (click)="viewpass_one()"> <i
-                                    [ngClass]="visible?'fa fa-eye': 'fa fa-eye-slash'"
-                                    style="color: rgb(202, 217, 213);"></i></span>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label class="form-control-label">Confirm Password</label>
-                            <input [(ngModel)]="changePass.conPassword" [type]="changetype?'password':'text'" style="cursor: pointer;" id="conPassword"
-                                name="password" class="" type="password" required>
-                            <span class="eyeicon" (click)="viewpass_two()"> <i
-                                    [ngClass]="visible?'fa fa-eye': 'fa fa-eye-slash' "
-                                    style="color: rgb(202, 217, 213);"></i></span>
-                        </div>
-
-
-
-                        
-
-                        <div class="col-lg-12 loginbttm">
-                            <div class="col-lg-6 login-btm login-text">
-                                
-                            </div>
-                            <div class="col-lg-6 login-btm login-button">
-                                <button type="submit" class="btn btn-outline-primary">Confirm</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-2"></div>
-        </div>
-    </div> -->
-    <!-- <script>
-
-        const form = document.getElementById('passwordForm');
-        const password = document.getElementById('password');
-        const confirmPassword = document.getElementById('conPassword');
-
-        form.addEventListener('submit', function (event) {
-            if (password.value !== conPassword.value) {
-                event.preventDefault();
-                alert('Password and confirm password do not match.');
-            }
-        });
-    </script> -->
-
-    
-   
    <body>
       <div class="container d-flex justify-content-center align-items-center vh-100" style="padding-bottom: 1px;">
          <div class="bg-white text-center p-5 mt-3 center" style="padding-bottom: 1px;">
@@ -91,7 +10,7 @@
                     style="color: #8092a8;"></i></span></label>
                   <input type="password" class="form-control" placeholder="Your Password"
                   [(ngModel)]="changePass.oldPassword" [type]="changetype?'password':'text'"
-                                style="cursor: pointer;" id="ppassword" name="password" type="password"
+                                style="cursor: pointer;" id="password" name="password" type="password"
                                  required>
                                  
                 <input type="password" class="form-control" placeholder="New Password"
@@ -108,20 +27,12 @@
 
                <div class="w3-show-inline-block">
                 <div class="w3-bar">
-                  <!-- <button class="w3-btn w3-red"  style=" border-radius: 3px; margin-right: 10px;">Cancle</button> -->
-                  <!-- <button class="w3-btn " style="background-color: #435d7d; color:white; border-radius: 3px;" >Register</button> -->
-                  <!-- <input type="submit" class="w3-btn" value="Add"> -->
                   <button type="" class="w3-btn" style="background-color: #7c020c; color:white; border-radius: 3px; margin-right: 15px;">Cancle</button>
-                  <!-- <input type="submit" class="w3-btn" value="Confirm"
-                    style="background-color: #435d7d; color:white; border-radius: 3px;"> -->
                     <button type="submit" class="w3-btn" style="background-color: #435d7d; color:white; border-radius: 3px;">Confirm</button>
                 </div>
               </div>
 
             </form>
-            <!-- <button type="button" class="btn-gray">Cancle</button>
-            <button type="button" class="btn">Reset Password</button> -->
-
             
          </div>
       </div>
