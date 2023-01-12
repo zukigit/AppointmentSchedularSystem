@@ -155,7 +155,7 @@ export class AppRegisterComponent implements OnInit {
     this.app.schedules = this.schedules
     console.log("Sche " + this.app.schedules)
     this.app.employee = this.confirmedUsers;
-    this.app.createUser = { "employee_id": this.loginId }
+      
 
     this.appService.createAppointment(this.app).subscribe(
       data => console.log("Ok na sarrrrrr"),
