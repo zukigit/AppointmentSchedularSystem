@@ -133,7 +133,6 @@ export class AppRegisterComponent implements OnInit {
     this.app.end_date = new Date(this.app.end_date);
 
     console.log("start hour" + this.startHour);
-
     console.log("end hour" + this.endHour);
 
 
@@ -155,6 +154,7 @@ export class AppRegisterComponent implements OnInit {
     this.app.schedules = this.schedules
     console.log("Sche " + this.app.schedules)
     this.app.employee = this.confirmedUsers;
+    this.app.createUser = {employee_id:this.loginId}
       
 
     this.appService.createAppointment(this.app).subscribe(
