@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Appointment implements Serializable  {
 
-	public static long serializeuId=1L;
+	public static long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,19 +26,19 @@ public class Appointment implements Serializable  {
 	private boolean isDeleted;
 	@Enumerated(EnumType.STRING)
 	private AppointmentType type;
-	@ManyToMany()
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JsonIgnore
 	@JoinTable(
 	  name = "user_appointment", 
 	  joinColumns = @JoinColumn(name = "appointment_id"), 
 	  inverseJoinColumns = @JoinColumn(name = "employee_id"))
-	private Set<User> employee;
-	@ManyToOne()
+	private List<User> employee;
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "appCreated_userId")
 	private User createUser;
-	@OneToMany( cascade = CascadeType.ALL)
+	@OneToMany( fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Schedule> schedules;
-	@OneToMany( cascade = CascadeType.ALL)
+	@OneToMany( fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<AppointmentFile> files;
 	public Integer getAppointment_id() {
 		return appointment_id;
@@ -82,10 +82,12 @@ public class Appointment implements Serializable  {
 	public void setType(AppointmentType type) {
 		this.type = type;
 	}
-	public Set<User> getEmployee() {
+
+	
+	public List<User> getEmployee() {
 		return employee;
 	}
-	public void setEmployee(Set<User> employee) {
+	public void setEmployee(List<User> employee) {
 		this.employee = employee;
 	}
 	public User getCreateUser() {
@@ -107,7 +109,7 @@ public class Appointment implements Serializable  {
 		this.files = files;
 	}
 	public Appointment(Integer appointment_id, String title, String description, LocalDate created_date,
-			LocalDate updated_date, boolean isDeleted, AppointmentType type, Set<User> employee, User createUser,
+			LocalDate updated_date, boolean isDeleted, AppointmentType type, List<User> employee, User createUser,
 			List<Schedule> schedules, List<AppointmentFile> files) {
 		this.appointment_id = appointment_id;
 		this.title = title;

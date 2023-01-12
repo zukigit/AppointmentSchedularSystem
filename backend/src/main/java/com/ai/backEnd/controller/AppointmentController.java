@@ -32,10 +32,17 @@ public class AppointmentController {
     @Autowired
     private UserImpl userService;
 
-    @GetMapping("/getApp")
-	public List<Appointment> getAppointment()  throws JsonProcessingException{
-		return appointmentService.getAppointment();
+    // @GetMapping("/getApp")
+	// public List<Appointment> getAppointment()  throws JsonProcessingException{
+	// 	return appointmentService.getAppointment();
+	// }
+
+	@GetMapping("/getApp")
+	public ResponseEntity<?> getAppoint(){
+		List<Appointment> app = appointmentService.getAppointment();
+		return ResponseEntity.ok(app);
 	}
+	
 
 	@PostMapping("/addAppointment")
 	public ResponseEntity<String> registerAppointmnet(@RequestBody Appointment appointment ){
@@ -49,15 +56,14 @@ public class AppointmentController {
 		return appointmentService.getAppById(id);
 	}
 	
-	//@ExceptionHandler(value = <com.fasterxml.jackson.databind.ser.BeanSerializer.serialize>.class)
+	
 	@GetMapping("/getAppById/{employee_id}")
-	public ResponseEntity<List<ShowAppointment>> getShowApp(@PathVariable String employee_id) {
+	public ResponseEntity<List<ShowAppointment>> getShowApp(@PathVariable String employee_id)throws JsonProcessingException {
 		User user = userService.getUserById(employee_id);
 		List<Appointment> appointments = user.getAppointments();
 		List<ShowAppointment> showAppointments = new ArrayList<ShowAppointment>();
 		for(Appointment appointment : appointments) {
 			ShowAppointment showAppointment = new ShowAppointment();
-			System.out.println("Apponintment Desc : " + appointment.getDescription());
 			showAppointment.setTitle(appointment.getTitle());
 			showAppointment.setDescription(appointment.getDescription());
 			showAppointment.setType(appointment.getType());
