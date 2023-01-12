@@ -151,6 +151,7 @@ export class AppRegisterComponent implements OnInit {
       console.log("starttime is " + this.schedule.start_time);
       console.log("end time is " + this.schedule.end_time);
     }
+    this.app.created_date = this.currentDate;
     this.app.schedules = this.schedules
     console.log("Sche " + this.app.schedules)
     this.app.employee = this.confirmedUsers;
