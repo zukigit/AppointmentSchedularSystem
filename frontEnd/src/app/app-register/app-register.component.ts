@@ -100,8 +100,8 @@ export class AppRegisterComponent implements OnInit {
 
   }
 
-  isOptionDisabled(value: string): boolean {
-    return value === value && this.startHour === value;
+  isOptionDisabled(value: string): boolean {   
+    return this.startHour>=value ;
   }
 
   onSelectDept(department) {
