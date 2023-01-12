@@ -32,7 +32,7 @@ public class AppointmentImpl implements AppointmentService {
     
     @Override
     public List<Appointment> getAll() {
-        // TODO Auto-generated method stub
+   
         return repo.getAll();
     }
    

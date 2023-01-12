@@ -1,13 +1,16 @@
 package com.ai.backEnd.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
-public class User  {
-	
+public class User implements Serializable{
+	private static final long serialVersionUID = 1L;
 	@Id
 	private String employee_id;
 	private String name;
@@ -28,8 +31,34 @@ public class User  {
 	private boolean isCredentialsNonExpired = true;
 	private boolean isEnabled = true;
 	@ManyToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
+	
 	private List<Appointment> appointments;
 	
+	public User() {
+		
+	}
+	
+	public User(String employee_id, String name, String password, UserImage userImage, String phone_number,
+			String gender, String position, UserRole role, Team team, boolean isAccountNonExpired,
+			boolean isAccountNonLocked, boolean isCredentialsNonExpired, boolean isEnabled,
+			List<Appointment> appointments) {
+		super();
+		this.employee_id = employee_id;
+		this.name = name;
+		this.password = password;
+		this.userImage = userImage;
+		this.phone_number = phone_number;
+		this.gender = gender;
+		this.position = position;
+		this.role = role;
+		this.team = team;
+		this.isAccountNonExpired = isAccountNonExpired;
+		this.isAccountNonLocked = isAccountNonLocked;
+		this.isCredentialsNonExpired = isCredentialsNonExpired;
+		this.isEnabled = isEnabled;
+		this.appointments = appointments;
+	}
+
 	public List<Appointment> getAppointments() {
 		return appointments;
 	}

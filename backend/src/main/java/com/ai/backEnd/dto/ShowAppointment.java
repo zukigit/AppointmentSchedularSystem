@@ -1,10 +1,5 @@
 package com.ai.backEnd.dto;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
-
-import com.ai.backEnd.model.AppointmentFile;
 import com.ai.backEnd.model.AppointmentType;
 import com.ai.backEnd.model.Schedule;
 import com.ai.backEnd.model.User;

@@ -19,6 +19,7 @@ import com.ai.backEnd.model.Appointment;
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.serviceImpl.AppointmentImpl;
 import com.ai.backEnd.serviceImpl.UserImpl;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -32,7 +33,7 @@ public class AppointmentController {
     private UserImpl userService;
 
     @GetMapping("/getApp")
-	public List<Appointment> getAppointment(){
+	public List<Appointment> getAppointment()  throws JsonProcessingException{
 		return appointmentService.getAppointment();
 	}
 
@@ -56,6 +57,7 @@ public class AppointmentController {
 		List<ShowAppointment> showAppointments = new ArrayList<ShowAppointment>();
 		for(Appointment appointment : appointments) {
 			ShowAppointment showAppointment = new ShowAppointment();
+			System.out.println("Apponintment Desc : " + appointment.getDescription());
 			showAppointment.setTitle(appointment.getTitle());
 			showAppointment.setDescription(appointment.getDescription());
 			showAppointment.setType(appointment.getType());

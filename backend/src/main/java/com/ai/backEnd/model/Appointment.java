@@ -1,13 +1,19 @@
 package com.ai.backEnd.model;
 
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Appointment {
+public class Appointment implements Serializable  {
+
+	public static long serializeuId=1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer appointment_id;
@@ -21,6 +27,7 @@ public class Appointment {
 	@Enumerated(EnumType.STRING)
 	private AppointmentType type;
 	@ManyToMany()
+	@JsonIgnore
 	@JoinTable(
 	  name = "user_appointment", 
 	  joinColumns = @JoinColumn(name = "appointment_id"), 

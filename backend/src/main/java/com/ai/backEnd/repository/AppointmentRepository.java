@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment,Integer> {
 
-    @Query("SELECT a From Appointment a")
+    @Query("SELECT a.description From Appointment a")
     List<Appointment> getAll();
     
 }

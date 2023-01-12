@@ -15,8 +15,6 @@ public interface UserService {
 	User getUserById(String employee_id);
 	
 	void deleteUserById(String employee_id);
-
-	//boolean deleteById(String employee_id);
 	
 	List<UserDetail> userDetail();
 	UserDetailForUpdate searchById(String searchKey);
