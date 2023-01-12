@@ -6,6 +6,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { Router } from '@angular/router';
 import { FixedScaleAxis } from 'chartist';
+import { User } from 'app/model/user';
+import { UserService } from 'app/services/user.service';
 //import { INITIAL_EVENTS, createEventId } from './event-utils';
 
 @Component({
@@ -15,9 +17,11 @@ import { FixedScaleAxis } from 'chartist';
 })
 export class WeeklyviewComponent implements OnInit {
 
-  startDate = new Date()
+  startDate = new Date();
+  loginId : string;
+  user!: User;
 
-  constructor(private changeDetector: ChangeDetectorRef,private router:Router) {
+  constructor(private changeDetector: ChangeDetectorRef,private router:Router,private userService : UserService) {
     this.header = {
       left: 'prev,next today',
       center: 'title',
@@ -35,6 +39,17 @@ name = 'Angular ' + VERSION.major;
 
 
 ngOnInit() {
+  this.loginId = localStorage.getItem("loggedInUserId");
+  this.user = new User();
+    this.userService.getUserById(this.loginId)
+    .subscribe({
+      next : (data) => {
+        this.user = data;
+       },
+      error: (e) => console.log("profile error")
+    })
+  
+
   var calendarEl = this.calendar.nativeElement;
   var calendarEl2 = this.calendar2.nativeElement;
 
