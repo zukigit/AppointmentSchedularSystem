@@ -10,7 +10,7 @@ export class AppointmentRegister {
     description : string;
     type : string;
     title : string;
-    created_date:Date;
+    created_date:string;
     updated_date : Date;
     createUser : {employee_id:string};
     attached:FormData[] = [];
