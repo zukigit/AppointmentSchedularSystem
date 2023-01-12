@@ -56,14 +56,14 @@ ngOnInit() {
   var calendar = new Calendar(calendarEl, {
     initialView: 'timeGridWeek',
     plugins: [timeGridPlugin],
-    customButtons: {
-      myCustomButton: {
-        text: 'Add Appointment',
-        click: function() {
-          alert('clicked the custom button!');
-        }
-      }
-    },
+    // customButtons: {
+    //   myCustomButton: {
+    //     text: 'Add Appointment',
+    //     click: function() {
+    //       alert('clicked the custom button!');
+    //     }
+    //   }
+    // },
     views: {
         timeGridWeek:{
           type: 'timeGridWeek',
@@ -99,8 +99,8 @@ ngOnInit() {
     ],
 
     headerToolbar: {
-      left: 'myCustomButton',
-      center: 'title',
+      left: 'title',
+      center: '',
       right: 'today prev,next',
     },
   });
@@ -133,7 +133,7 @@ ngOnInit() {
     ],
 
     headerToolbar: {
-      left: '',
+      left: 'title',
       center: '',
       right: 'today prev,next',
     },
@@ -147,9 +147,9 @@ handleDateSelect(selectInfo: DateSelectArg) {
   this.router.navigate(['app-register'])
 }
 
-// goToApp() {
-//   this.router.navigate(['app-register'])
-// }
+goToAppRegister() {
+  this.router.navigate(['/app-register'])
+}
   
 }
 

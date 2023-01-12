@@ -1,21 +1,32 @@
 <div class='demo-app-main'>
 
-  <div class="search">
-    <input type="text"  placeholder="Search User....." >
-  <button type="submit" class="searchButton">
-    <i class="fa fa-search"></i>
- </button>
+  <div class="sb-example-1">
+    <div class="search">
+       <input type="text" class="searchTerm" placeholder="Search Employee...">
+       <button type="submit" class="searchButton">
+         <i class="fa fa-search"></i>
+      </button>
+    </div>
+ </div>
+
+<div class="add">
+    <button class="add-app-button" (click)="goToAppRegister()" ><span>Add Appointment</span></button>
+
+<span class="memTad">
+    <a href="#"><i class="fa fa-trash" style="font-size: 14px;"></i>Remove Member</a>
+    <a href="#"><i class="fa fa-chevron-left" style="font-size: 14px;"></i>Previous Member</a>
+    <a href="#">Next Member <i class="fa fa-chevron-right" style="font-size: 14px;"></i></a>
+</span>
 </div>
-          <a href="#">Remove Member</a><a href="#"><i class="material-icons">arrow_back_ios</i> Previous Member</a><a href="#">Next Member <i class="material-icons">arrow_forward_ios</i></a>
   <td>
-    <div style="padding-left: 10px; font-weight: bold;">{{user.name}}</div>
-<div #calendar #eventContent style="margin-top:10px; margin-left:30px; width: 520px; display: inline-block;">
+    <div class="name"> Name : {{user.name}}</div>
+<div #calendar #eventContent style="margin-top:10px; margin-left:10px; width: 520px; display: inline-block;">
     
 </div>
 </td>
 <td>
-  <div style="padding-left: 10px; padding-bottom: 10px; font-weight: bold;">Searched Name</div>
-  <div #calendar2 #eventContent style=" margin-top:0px;width: 520px; display: inline-block;">
+  <div  class="name" >Searched Name</div>
+  <div #calendar2 #eventContent style="margin-left:10px; margin-top:10px;width: 520px; display: inline-block;">
       
   </div>
   </td>

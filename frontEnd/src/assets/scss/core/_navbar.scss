@@ -113,7 +113,7 @@
   // give correct size to ripple container
   .navbar-brand {
       position: relative;
-      color: #435d7d;
+      color: #fff;
       height: 50px;
       font-size: 1.4rem;
       line-height: 30px;
@@ -153,7 +153,7 @@
   }
 
   &.navbar-transparent{
-      background-color: transparent !important;
+      background-color: #435d7d !important;
       box-shadow: none;
       padding-top: 25px;
 
@@ -219,6 +219,7 @@
             top: 0px;
             position: relative;
             margin-right: 3px;
+            color: #fff;
         }
         .notification{
           top: 0px;

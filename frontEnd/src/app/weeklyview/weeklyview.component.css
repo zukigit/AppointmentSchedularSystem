@@ -53,3 +53,59 @@ h2 {
     cursor: pointer;
     padding: 10px;
   }
+
+  .sb-example-1 .search {
+    margin-top: 100px;
+    width: 30%;
+    position: relative;
+    display: flex;
+    height: 30px;
+  }
+  .sb-example-1 .searchTerm {
+    width: 100%;
+    border: 3px solid #435d7d;
+    border-right: none;
+    padding: 5px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #9DBFAF;
+  }
+  .sb-example-1 .searchTerm:focus{
+    border: 5px solid #435d7d;
+  }
+  .sb-example-1 .searchButton {
+    width: 40px;
+    height: 50px;
+    border: 1px solid #212f41;
+    background: #435d7d;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+    height: 30px;
+  }
+
+  .sb-example-1 .searchButton:hover{
+    background: #ffcc33;
+  }
+  
+  .add-app-button{
+    margin-top: 10px;
+    border-radius: 4%;
+    background: #435d7d;
+    border: none;
+    height: 35px;
+    width: auto;
+    color: #fff;
+  }
+  .memTad{
+    margin-top: 15px;
+    float: right;
+  }
+  .name{
+  text-align: center; 
+  margin-top: 10px; 
+  font-size: 18px; 
+  font-weight: bold; 
+}
