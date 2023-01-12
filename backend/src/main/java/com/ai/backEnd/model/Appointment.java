@@ -27,7 +27,6 @@ public class Appointment implements Serializable  {
 	@Enumerated(EnumType.STRING)
 	private AppointmentType type;
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JsonIgnore
 	@JoinTable(
 	  name = "user_appointment", 
 	  joinColumns = @JoinColumn(name = "appointment_id"), 

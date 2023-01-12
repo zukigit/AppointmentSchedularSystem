@@ -31,7 +31,6 @@ public class User implements Serializable{
 	private boolean isCredentialsNonExpired = true;
 	private boolean isEnabled = true;
 	@ManyToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
-	@JsonIgnore
 	private List<Appointment> appointments;
 	
 	public User() {
