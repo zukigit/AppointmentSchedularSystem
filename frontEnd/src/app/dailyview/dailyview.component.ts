@@ -21,18 +21,20 @@ export class DailyviewComponent implements OnInit {
   loginId : string ;
   user!:User;
 
+  showUser : boolean = false;
+  view : boolean = true;
+
   constructor(private changeDetector: ChangeDetectorRef,private router:Router, private userService : UserService) {
     
 };
 header: any;
-calendarVisible = true;
+calendarVisible = false;
 
 
   @ViewChild('calendar', { static: true }) calendar: ElementRef<any>;
   @ViewChild('calendar2', { static: true }) calendar2: ElementRef<any>;
 
 name = 'Angular ' + VERSION.major;
-
 
 ngOnInit() {
   this.loginId = localStorage.getItem("loggedInUserId");
@@ -136,8 +138,9 @@ handleDateSelect(selectInfo: DateSelectArg) {
   this.router.navigate(['app-register'])
 }
 
-// goToApp() {
-//   this.router.navigate(['app-register'])
-// }
-  
+toggleTag(){
+  this.showUser = !this.showUser;
+  this.view = !this.view;
+}
+
 }
