@@ -3,8 +3,6 @@ package com.ai.backEnd.service;
 import java.util.List;
 import com.ai.backEnd.model.Appointment;
 
-
-
 public interface AppointmentService {
 
     Appointment saveAppointment(Appointment appointment);
@@ -15,4 +13,5 @@ public interface AppointmentService {
 
 	List<Appointment> getAll();
     
+	List<Appointment> getByUserList(List<String> user_ids);
 }

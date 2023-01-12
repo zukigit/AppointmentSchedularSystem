@@ -2,11 +2,7 @@ package com.ai.backEnd.model;
 
 import java.io.Serializable;
 import java.util.List;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 @Entity
 public class User implements Serializable{
@@ -30,8 +26,8 @@ public class User implements Serializable{
 	private boolean isAccountNonLocked = true;
 	private boolean isCredentialsNonExpired = true;
 	private boolean isEnabled = true;
-	@ManyToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
-	private List<Appointment> appointments;
+//	@ManyToMany(mappedBy = "employee", cascade = CascadeType.REMOVE)
+//	private List<Appointment> appointments;
 	
 	public User() {
 		
@@ -55,14 +51,6 @@ public class User implements Serializable{
 		this.isAccountNonLocked = isAccountNonLocked;
 		this.isCredentialsNonExpired = isCredentialsNonExpired;
 		this.isEnabled = isEnabled;
-		this.appointments = appointments;
-	}
-
-	public List<Appointment> getAppointments() {
-		return appointments;
-	}
-	public void setAppointments(List<Appointment> appointments) {
-		this.appointments = appointments;
 	}
 	public UserImage getUserImage() {
 		return userImage;

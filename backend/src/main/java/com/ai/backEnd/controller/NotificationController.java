@@ -1,17 +1,13 @@
 package com.ai.backEnd.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.ai.backEnd.model.Notification;
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.serviceImpl.NotificationImpl;
@@ -39,7 +35,4 @@ public class NotificationController {
 	public Notification addNoti(Notification notification){
 		return notiService.addNoti(notification);
 	}
-
-
-
 }
