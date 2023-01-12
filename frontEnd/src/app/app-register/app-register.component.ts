@@ -19,7 +19,7 @@ export class AppRegisterComponent implements OnInit {
   currentDate: any = new Date();
   sDate: any = new Date()
   sTime:any = new Date()
-  
+
 
   loginId = localStorage.getItem("loggedInUserId")
 
@@ -163,12 +163,32 @@ export class AppRegisterComponent implements OnInit {
   }
   //date
   onSelect(event) {
-  
+
     console.log(this.app.start_date);
-   
+
     this.sDate = new Date(this.app.start_date)
     // do something with the selected text here
   }
+
+
+
+  // onFileChanged(event) {
+  //   let files = event.target.files;
+  //   let sizeLimit = 5000000; // 5MB
+  //   for (let i = 0; i < files.length; i++) {
+  //     if (files[i].size > sizeLimit) {
+  //         // Display error message to user
+  //         // console.log("File too large: " + files[i].name);
+  //         alert('File size should be less than 5MB!!');
+  //     } else {
+  //         // Handle valid file
+  //         this.app.attached = event.target.files;
+  //     }
+  //   }
+  // }
+
+
+
 
   addFiles(event) {
     this.files = event.target.files;
@@ -182,11 +202,35 @@ export class AppRegisterComponent implements OnInit {
       error=>console.log("No")
     );
 
-    if (event.target.files[0].size > 5000000) {
-      alert('File size should be less than 5MB!!');
-    } else {
-      this.app.attached = event.target.files;
+
+
+    let files = event.target.files;
+    let sizeLimit = 5000000; // 5MB
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].size > sizeLimit) {
+          // Display error message to user
+          console.log("File too large: " + files[i].name);
+          // alert('File size should be less than 5MB!!');
+      } else {
+          // Handle valid file
+          console.log("File is inserted: " + files[i].name);
+          this.app.attached = event.target.files;
+
+
+      }
     }
+
+
+
+
+
+
+
+    // if (event.target.files[0].size > 5000000) {
+    //   alert('File size should be less than 5MB!!');
+    // } else {
+    //   this.app.attached = event.target.files;
+    // }
   }
 }
 export class AssignedDeviceCode {

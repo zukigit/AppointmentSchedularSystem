@@ -25,6 +25,7 @@ import { LoginAuthGuard } from './security/login-auth.guard';
 import { DailyviewComponent } from './dailyview/dailyview.component';
 import { WeeklyviewComponent } from './weeklyview/weeklyview.component';
 import { NotifierModule,NotifierService } from 'angular-notifier';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   imports: [
@@ -39,7 +40,9 @@ import { NotifierModule,NotifierService } from 'angular-notifier';
     FullCalendarModule,
     AngularDualListBoxModule,
     DatePipe,
-    NotifierModule
+    NotifierModule,
+    MatFormFieldModule
+
   ],
   declarations: [
     AppComponent,
