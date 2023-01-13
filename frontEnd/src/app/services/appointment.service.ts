@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AppointmentRegister } from 'app/model/appointment-register';
 import { Schdule } from 'app/model/schdule';
+import { ShowAppointment } from 'app/model/show-appointment';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -24,6 +25,10 @@ export class AppointmentService {
 
   getAllAppointment() {
     return this.http.get("http://localhost:8080/api/v1/getSchedules",this.header);
+  }
+
+  getAppointmentById(id: string): Observable<ShowAppointment[]> {  
+    return this.http.get<ShowAppointment[]>(`${this.baseUrl}/getAppById/${id}`, this.header);  
   }
 
   uploadFiles(files : FormData):Observable<Object> {

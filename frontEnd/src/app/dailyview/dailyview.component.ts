@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { FixedScaleAxis } from 'chartist';
 import { User } from 'app/model/user';
 import { UserService } from 'app/services/user.service';
+import { AppointmentService } from 'app/services/appointment.service';
 //import { INITIAL_EVENTS, createEventId } from './event-utils';
 
 @Component({
@@ -24,7 +25,7 @@ export class DailyviewComponent implements OnInit {
   showUser : boolean = false;
   view : boolean = true;
 
-  constructor(private changeDetector: ChangeDetectorRef,private router:Router, private userService : UserService) {
+  constructor(private changeDetector: ChangeDetectorRef,private router:Router, private userService : UserService,private appService: AppointmentService) {
     
 };
 header: any;
@@ -38,14 +39,20 @@ name = 'Angular ' + VERSION.major;
 
 ngOnInit() {
   this.loginId = localStorage.getItem("loggedInUserId");
-  this.user = new User();
-    this.userService.getUserById(this.loginId)
-    .subscribe({
-      next : (data) => {
-        this.user = data;
-       },
-      error: (e) => console.log("profile error")
-    })
+  // this.user = new User();
+  //   this.userService.getUserById(this.loginId)
+  //   .subscribe({
+  //     next : (data) => {
+  //       this.user = data;
+  //      },
+  //     error: (e) => console.log("profile error")
+  //   })
+
+  //getAppointment
+
+  this.appService.getAppointmentById(this.loginId).subscribe(
+    data=>console.log("app data " + data)
+  )
     
 
   var calendarEl = this.calendar.nativeElement;
