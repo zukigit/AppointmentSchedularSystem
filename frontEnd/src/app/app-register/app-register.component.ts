@@ -36,6 +36,13 @@ export class AppRegisterComponent implements OnInit {
     { value: '19', label: '19' }, 
   ];
 
+  minutesOptions =[ 
+    { value: '00', label: '00' },
+    { value: '15', label: '15' },
+    { value: '30', label: '30' },
+    { value: '45', label: '45' }
+  ]
+
   loginId = localStorage.getItem("loggedInUserId")
 
   department: any = [];
@@ -101,7 +108,12 @@ export class AppRegisterComponent implements OnInit {
   }
 
   isOptionDisabled(value: string): boolean {   
-    return this.startHour>=value ;
+    return this.startHour>value ;
+  
+  }
+
+  minuteDisable (value: string):boolean{
+    return this.startMinute >= value;
   }
 
   onSelectDept(department) {

@@ -12,7 +12,7 @@
                         <p class="card-category"></p>
                     </div>
                     <div class="card-body table-responsive">
-                        <form (ngModel)="getSchedules()">
+                        <form (ngModel)="getSchedulesById()">
                         <table class="table table-hover">
                             <thead class="text-warning">
                                 <th>Title</th>
@@ -21,13 +21,14 @@
                                 <th>End Time</th>
                                 <th>Date</th>
                             </thead>
-                            <tbody *ngFor="let data of schedules">
-                                <tr>
+                            <tbody *ngFor="let data of showDataApp">
+                                <tr *ngFor="let d of data.schedules">
                                     <td>{{data.title}}</td>
                                     <td>{{data.description}}</td>
-                                    <td>{{data.start_time}}</td>
-                                    <td>{{data.end_time}}</td>
-                                    <td>{{data.date}}</td>
+                                    <td>{{d.start_time}}</td>
+                                    <td>{{d.end_time}}</td>
+                                    <td>{{d.date}}</td>
+                                    
                                 </tr>
                                 
                             </tbody>

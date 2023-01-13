@@ -59,7 +59,7 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
     DailyviewComponent,
     WeeklyviewComponent,
   ],
-  providers: [AdminAuthGuard, DatePipe, LoginAuthGuard],
+  providers: [AdminAuthGuard, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

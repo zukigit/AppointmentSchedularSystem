@@ -1,5 +1,8 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Schdule } from 'app/model/schdule';
+import { ShowAppointment } from 'app/model/show-appointment';
+import { User } from 'app/model/user';
 import { AppointmentService } from 'app/services/appointment.service';
 import { UserService } from 'app/services/user.service';
 import * as Chartist from 'chartist';
@@ -12,14 +15,25 @@ import { data } from 'jquery';
 })
 export class DashboardComponent implements OnInit {
 
+
   constructor(private router: Router, private userServices : UserService , private appService : AppointmentService) { }
 
   departmentAndTeam : any ;
+  userSearch: any;
   department : any;
   team : any;
   teamArr : any ;
 
-  schedules : any;
+  loginId : string ;
+  user :any;
+  schedule : any;
+  appointment : any;
+
+  currentDate : any;
+
+  showDataApp : ShowAppointment[];
+
+  userDataDetails : any ;
 
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
@@ -78,13 +92,18 @@ export class DashboardComponent implements OnInit {
       seq2 = 0;
   };
   ngOnInit() {
+    this.loginId = localStorage.getItem("loggedInUserId");
+    this.user = new User();
+    this.schedule = new Schdule();
+    this.appointment = new ShowAppointment();
 
-   // this.getDepartmentAndTeam();
-    this.getSchedules();
-   // console.log(this.departmentAndTeam);
-    console.log("app is"+this.schedules);
-      /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
+    this.userDataDetails = this.userServices.getUserDetails().subscribe(data=>this.userDataDetails = data);
 
+    this.currentDate = new Date();
+
+    this.getSchedulesById();
+
+  
       const dataDailySalesChart: any = {
           labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
           series: [
@@ -164,12 +183,9 @@ export class DashboardComponent implements OnInit {
       this.startAnimationForBarChart(websiteViewsChart);
   }
 
-  getDepartmentAndTeam(){
-    this.team = this.userServices.getTeam().subscribe(data=> this.team = data);
-  }
-
-  getSchedules(){
-    this.schedules = this.appService.getAllAppointment().subscribe(data => this.schedules =data)
+  getSchedulesById(){
+     this.appService.getAppointmentById(this.loginId).subscribe(data => 
+      this.showDataApp = data);
   }
 
 }

@@ -60,11 +60,13 @@
             </select>
 
             <select style="width: calc(100% /2  );" [(ngModel)]="endMinute">
-              <option selected disabled> minutes </option>
+              <!-- <option selected disabled> minutes </option>
               <option value="00">00</option>
               <option value="15">15</option>
               <option value="30">30</option>
-              <option value="45">45</option>
+              <option value="45">45</option> -->
+              <option *ngFor="let option of minutesOptions" [value]="option.value" 
+                [disabled]="minuteDisable(option.value)">{{ option.label }}</option>
             </select>
 
           </div>

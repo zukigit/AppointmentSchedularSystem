@@ -10,5 +10,4 @@ export class ShowAppointment {
     createUser:User;
     schedules:Schdule[];
 
-
 }

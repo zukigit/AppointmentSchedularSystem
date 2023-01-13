@@ -21,6 +21,9 @@ export class WeeklyviewComponent implements OnInit {
   loginId : string;
   user!: User;
 
+  userDataDetails : any;
+  userSearch : any;
+
   constructor(private changeDetector: ChangeDetectorRef,private router:Router,private userService : UserService) {
     this.header = {
       left: 'prev,next today',
@@ -48,6 +51,8 @@ ngOnInit() {
        },
       error: (e) => console.log("profile error")
     })
+
+    this.userDataDetails = this.userService.getUserDetails().subscribe(data=> this.userDataDetails = data);
   
 
   var calendarEl = this.calendar.nativeElement;
@@ -151,5 +156,12 @@ goToAppRegister() {
   this.router.navigate(['/app-register'])
 }
   
+  
+Search(){
+  this.userDataDetails = this.userDataDetails.filter(res=>{
+    return res.name.toLocaleLowerCase().match(this.userSearch.toLocalLowerCase())
+  })
+}
+
 }
 
