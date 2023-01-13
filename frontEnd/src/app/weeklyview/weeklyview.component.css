@@ -55,10 +55,11 @@ h2 {
   }
 
   .sb-example-1 .search {
-    margin-top: 100px;
+    margin-top: 70px;
+    margin-right: 10px;
     width: 30%;
     position: relative;
-    display: flex;
+    display: inline-flex;
     height: 30px;
   }
   .sb-example-1 .searchTerm {
@@ -92,6 +93,7 @@ h2 {
   
   .add-app-button{
     margin-top: 10px;
+    text-align: center;
     border-radius: 4%;
     background: #435d7d;
     border: none;
@@ -100,12 +102,13 @@ h2 {
     color: #fff;
   }
   .memTad{
-    margin-top: 15px;
     float: right;
+    margin-top: 75px;
   }
   .name{
   text-align: center; 
   margin-top: 10px; 
+  margin-bottom: 0px;
   font-size: 18px; 
   font-weight: bold; 
 }
