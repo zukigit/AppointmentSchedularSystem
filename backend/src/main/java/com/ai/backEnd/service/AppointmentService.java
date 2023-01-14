@@ -1,7 +1,9 @@
 package com.ai.backEnd.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import com.ai.backEnd.model.Appointment;
+import com.ai.backEnd.model.Schedule;
 
 public interface AppointmentService {
 
@@ -14,4 +16,6 @@ public interface AppointmentService {
 	List<Appointment> getAll();
     
 	List<Appointment> getByUserList(List<String> user_ids);
+	
+	List<Appointment> getByScheduleList(List<Schedule> schedules);
 }

@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("loggedInUserRole", this.jwtResponse.role);
 
         if (this.jwtResponse.role == "ROLE_ADMIN") {
+          console.log("token " + localStorage.getItem("jwtToken"));
           this.goToAdmin() 
         } else if (this.jwtResponse.role == "ROLE_USER") {
           this.goToUser()

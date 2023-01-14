@@ -93,12 +93,8 @@ export class DashboardComponent implements OnInit {
   };
   ngOnInit() {
     this.loginId = localStorage.getItem("loggedInUserId");
-    this.user = new User();
     this.schedule = new Schdule();
     this.appointment = new ShowAppointment();
-
-    this.userDataDetails = this.userServices.getUserDetails().subscribe(data=>this.userDataDetails = data);
-
     this.currentDate = new Date();
 
     this.getSchedulesById();
