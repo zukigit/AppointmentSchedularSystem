@@ -55,8 +55,9 @@
             <span class="details" style="width: calc(100% /2  - 20px);">End Time</span>
 
               <select  style="width: calc(100% /2  );" [(ngModel)]="endHour">
+                <option selected="true" disabled>Select end hour</option>
                 <option *ngFor="let option of options" [value]="option.value" 
-                [disabled]="isOptionDisabled(option.value)">{{ option.label }}</option>
+                [disabled]="isOptionDisabled(option.value)" (change)="onSelectHour()">{{ option.label }}</option>
             </select>
 
             <select style="width: calc(100% /2  );" [(ngModel)]="endMinute">

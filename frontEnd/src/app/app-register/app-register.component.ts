@@ -6,6 +6,7 @@ import { Team } from 'app/model/team';
 import { User } from 'app/model/user';
 import { AppointmentService } from 'app/services/appointment.service';
 import { UserService } from 'app/services/user.service';
+import { retry } from 'rxjs';
 
 
 @Component({
@@ -112,8 +113,17 @@ export class AppRegisterComponent implements OnInit {
   
   }
 
+  onSelectHour(){
+    
+  }
+
   minuteDisable (value: string):boolean{
-    return this.startMinute >= value;
+    if(this.startHour == this.endHour){
+      return this.startMinute >= value;
+    }
+    else{
+    return value != value;
+  }
   }
 
   onSelectDept(department) {
