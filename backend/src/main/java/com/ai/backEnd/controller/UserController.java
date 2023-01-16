@@ -1,6 +1,7 @@
 package com.ai.backEnd.controller;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -134,7 +135,11 @@ public class UserController {
 	@PostMapping("/getAvaliableEmployees")
 	public List<UserDetail> getAvaliableEmployee(@RequestBody List<Schedule> schedules) {
 		List<Appointment> appointments = appointmentService.getByScheduleList(schedules);
-		System.out.println("appointments size " + appointments.size());
-		return userService.userDetail();
+		List<User> unavaliUsers = new ArrayList<>();
+		for(Appointment appointment : appointments) {
+			unavaliUsers.addAll(appointment.getEmployee());
+		}
+		
+		return userService.getAvaliableUsers(unavaliUsers);
 	}
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ai.backEnd.dto.ShowAppointment;
 import com.ai.backEnd.model.Appointment;
+import com.ai.backEnd.model.Schedule;
 import com.ai.backEnd.serviceImpl.AppointmentImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -34,6 +35,7 @@ public class AppointmentController {
 
 	@PostMapping("/addAppointment")
 	public ResponseEntity<String> registerAppointmnet(@RequestBody Appointment appointment ){
+		List<Schedule> schedules = appointment.getSchedules();
 		appointmentService.saveAppointment(appointment);
 		return new ResponseEntity<>(appointment.getAppointment_id().toString(), HttpStatus.OK);
 	}

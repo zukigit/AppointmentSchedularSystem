@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import com.ai.backEnd.model.Appointment;
 import com.ai.backEnd.model.Schedule;
+import com.ai.backEnd.model.User;
 
 public interface AppointmentService {
 

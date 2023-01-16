@@ -2,10 +2,13 @@ package com.ai.backEnd.serviceImpl;
 
 import com.ai.backEnd.model.Appointment;
 import com.ai.backEnd.model.Schedule;
+import com.ai.backEnd.model.User;
 import com.ai.backEnd.repository.AppointmentRepository;
 import com.ai.backEnd.service.AppointmentService;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +44,16 @@ public class AppointmentImpl implements AppointmentService {
 	}
 	@Override
 	public List<Appointment> getByScheduleList(List<Schedule> schedules) {
-		return repo.getByScheduleList(schedules);
-	} 
+		List<LocalDate> dates = new ArrayList<>();
+		LocalTime start_time = schedules.get(0).getStart_time();
+		LocalTime end_time = schedules.get(0).getEnd_time();
+		
+		
+
+		for(Schedule schedule : schedules) {
+			dates.add(schedule.getDate());
+		}
+		
+		return repo.getByScheduleList(dates, start_time, end_time);
+	}
 }

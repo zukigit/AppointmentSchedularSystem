@@ -67,4 +67,9 @@ public class UserImpl implements UserService{
 	public UserDetailForUpdate searchById(String searchKey) {
 		return repo.searchById(searchKey);
 	}
+
+	@Override
+	public List<UserDetail> getAvaliableUsers(List<User> users) {
+		return repo.getAvaliableUsers(users);
+	}
 }

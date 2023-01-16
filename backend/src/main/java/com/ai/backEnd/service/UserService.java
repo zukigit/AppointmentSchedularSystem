@@ -24,4 +24,6 @@ public interface UserService {
 	List<UserDetail> searchByTeamName(String searchKey);
 
 	Boolean isUserExist(String userId);
+	
+	List<UserDetail> getAvaliableUsers(List<User> users);
 }
