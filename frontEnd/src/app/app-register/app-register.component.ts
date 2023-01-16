@@ -83,8 +83,8 @@ export class AppRegisterComponent implements OnInit {
   disabled = false;
   sourceLeft = true;
   files:File[] = [];
+  schedules: Schdule[] = [];
   format: any = { add: 'Add Selected Member', remove: 'Remove Selected Member', all: 'Select All', none: 'Unselect All', direction: 'right-to-left', draggable: true, locale: undefined };
-
   constructor(private userServices: UserService, private datePipe: DatePipe, private appService: AppointmentService) { }
 
   ngOnInit(): void {
@@ -98,14 +98,13 @@ export class AppRegisterComponent implements OnInit {
         }
       });
 
-    this.userServices.getUserDetails().subscribe(
-      {
-        next: (data) => {
-          this.user = data;
-        }
-      }
-    )
-
+    // this.userServices.getUserDetails().subscribe(
+    //   {
+    //     next: (data) => {
+    //       this.user = data;
+    //     }
+    //   }
+    // )
   }
 
   isOptionDisabled(value: string): boolean {   
@@ -167,35 +166,12 @@ export class AppRegisterComponent implements OnInit {
   private showLabel(item: any) {
     return item.deviceCode;
   }
-  schedules: Schdule[] = [];
   addAppointment() {
-    this.app.start_date = new Date(this.app.start_date);
-    this.app.end_date = new Date(this.app.end_date);
-
-    console.log("start hour" + this.startHour);
-    console.log("end hour" + this.endHour);
-
-
-    for (let d = this.app.start_date; d <= this.app.end_date; d.setDate(d.getDate() + 1)) {
-
-      this.schedule = new Schdule()
-      this.schedule.date = this.datePipe.transform(d, 'dd/MM/yyyy');
-      this.app.start_time = this.startHour + ":" + this.startMinute;
-      this.app.end_time = this.endHour + ":" + this.endMinute;
-      this.schedule.start_time = this.app.start_time
-      this.schedule.end_time = this.app.end_time
-      console.log("time " + this.app.start_time)
-      this.schedules.push(this.schedule)
-
-      console.log("starttime is " + this.schedule.start_time);
-      console.log("end time is " + this.schedule.end_time);
-    }
+    this.generateSchedules();
     this.app.created_date = this.datePipe.transform(this.currentDate, 'dd/MM/yyyy');
     this.app.schedules = this.schedules
-    console.log("Sche " + this.app.schedules)
     this.app.employee = this.confirmedUsers;
     this.app.createUser = {employee_id:this.loginId}
-      
 
     this.appService.createAppointment(this.app).subscribe(
       data => console.log("Ok na sarrrrrr"),
@@ -204,32 +180,9 @@ export class AppRegisterComponent implements OnInit {
   }
   //date
   onSelect(event) {
-
-    console.log(this.app.start_date);
-
     this.sDate = new Date(this.app.start_date)
     // do something with the selected text here
   }
-
-
-
-  // onFileChanged(event) {
-  //   let files = event.target.files;
-  //   let sizeLimit = 5000000; // 5MB
-  //   for (let i = 0; i < files.length; i++) {
-  //     if (files[i].size > sizeLimit) {
-  //         // Display error message to user
-  //         // console.log("File too large: " + files[i].name);
-  //         alert('File size should be less than 5MB!!');
-  //     } else {
-  //         // Handle valid file
-  //         this.app.attached = event.target.files;
-  //     }
-  //   }
-  // }
-
-
-
 
   addFiles(event) {
     this.files = event.target.files;
@@ -243,8 +196,6 @@ export class AppRegisterComponent implements OnInit {
       error=>console.log("No")
     );
 
-
-
     let files = event.target.files;
     let sizeLimit = 5000000; // 5MB
     for (let i = 0; i < files.length; i++) {
@@ -256,22 +207,35 @@ export class AppRegisterComponent implements OnInit {
           // Handle valid file
           console.log("File is inserted: " + files[i].name);
           this.app.attached = event.target.files;
-
-
       }
     }
+  }
 
+  generateSchedules() {
+    this.app.start_date = new Date(this.app.start_date);
+    this.app.end_date = new Date(this.app.end_date);
 
+    for (let d = this.app.start_date; d <= this.app.end_date; d.setDate(d.getDate() + 1)) {
+      this.schedule = new Schdule();
+      this.schedule.date = this.datePipe.transform(d, 'dd/MM/yyyy');
+      this.app.start_time = this.startHour + ":" + this.startMinute;
+      this.app.end_time = this.endHour + ":" + this.endMinute;
+      this.schedule.start_time = this.app.start_time;
+      this.schedule.end_time = this.app.end_time;
+      this.schedules.push(this.schedule);
+    }
+  }
 
-
-
-
-
-    // if (event.target.files[0].size > 5000000) {
-    //   alert('File size should be less than 5MB!!');
-    // } else {
-    //   this.app.attached = event.target.files;
-    // }
+  getAvaliables() {
+    this.user.length = 0;
+    this.generateSchedules();
+    this.userServices.getAvaliables(this.schedules).subscribe(
+      {
+        next: (data) => {
+          this.user = data;
+        }
+      }
+    );
   }
 }
 export class AssignedDeviceCode {

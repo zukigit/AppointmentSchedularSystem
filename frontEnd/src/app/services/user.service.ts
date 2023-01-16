@@ -5,6 +5,7 @@ import { User } from '../model/user';
 import { Team } from '../model/team';
 import { RegisterationRequestModel } from '../model/registeration-request-model';
 import { ChangePass } from 'app/model/change-pass';
+import { Schdule } from 'app/model/schdule';
 
 @Injectable({
   providedIn: 'root'
@@ -75,7 +76,6 @@ getUserDetails(){
   }
 
   chgPass(pass: ChangePass):Observable<Object>{
-    console.log("service data "+ pass.newPassword)
     return this.http.post("http://localhost:8080/api/v1/changePassword/", pass, this.header);
   }
 
@@ -84,5 +84,9 @@ getUserDetails(){
     const headers = new HttpHeaders()
                                     .set('Authorization',  `Bearer ${this.jwtToken}`);
     return this.http.delete(`http://localhost:8080/api/v1/images/${userId}`, {headers, responseType: 'text'});
+  }
+
+  getAvaliables(schdules:Schdule[]) {
+    return this.http.post(`${this.baseUrl}/getAvaliableEmployees`, schdules, this.header);
   }
 }
