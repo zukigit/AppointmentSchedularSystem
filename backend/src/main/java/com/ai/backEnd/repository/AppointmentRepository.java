@@ -1,11 +1,7 @@
 package com.ai.backEnd.repository;
 
 import com.ai.backEnd.model.Appointment;
-import com.ai.backEnd.model.Schedule;
-import com.ai.backEnd.model.User;
-
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
