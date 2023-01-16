@@ -47,13 +47,23 @@ public class AppointmentImpl implements AppointmentService {
 		List<LocalDate> dates = new ArrayList<>();
 		LocalTime start_time = schedules.get(0).getStart_time();
 		LocalTime end_time = schedules.get(0).getEnd_time();
+		List<Appointment> timeCheckedAppointments = new ArrayList<>();
 		
-		
-
 		for(Schedule schedule : schedules) {
 			dates.add(schedule.getDate());
 		}
 		
-		return repo.getByScheduleList(dates, start_time, end_time);
+		List<Appointment> timeUncheckedAppointments = repo.getByScheduleList(dates);
+		
+		for(Appointment appointment : timeUncheckedAppointments) {
+			List<Schedule> tempSchedules = appointment.getSchedules();
+			LocalTime temp_start_time = tempSchedules.get(0).getStart_time();
+			LocalTime temp_end_time = tempSchedules.get(0).getEnd_time();
+			
+			if(temp_end_time.isAfter(start_time) && temp_start_time.isBefore(end_time)) {
+				timeCheckedAppointments.add(appointment);
+			}
+		}
+		return timeCheckedAppointments;
 	}
 }

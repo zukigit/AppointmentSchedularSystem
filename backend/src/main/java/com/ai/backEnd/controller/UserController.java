@@ -140,6 +140,10 @@ public class UserController {
 			unavaliUsers.addAll(appointment.getEmployee());
 		}
 		
-		return userService.getAvaliableUsers(unavaliUsers);
+		if(appointments.size() == 0) {
+			return userService.userDetail();
+		} else {
+			return userService.getAvaliableUsers(unavaliUsers);
+		}
 	}
 }
