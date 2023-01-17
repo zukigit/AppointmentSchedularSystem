@@ -141,6 +141,8 @@ public class UserController {
 		if(appointments.size() == 0) {
 			return userService.userDetail();
 		} else {
+			List<UserDetail> users = userService.getAvaliableUsers(unavaliUsers);
+			System.out.println("users size " + users.size());
 			return userService.getAvaliableUsers(unavaliUsers);
 		}
 	}

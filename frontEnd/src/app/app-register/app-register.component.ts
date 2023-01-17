@@ -232,7 +232,9 @@ export class AppRegisterComponent implements OnInit {
     this.userServices.getAvaliables(this.schedules).subscribe(
       {
         next: (data) => {
+          this.schedules.length = 0;
           this.user = data;
+          console.log("user size" + this.user.length);
         }
       }
     );
