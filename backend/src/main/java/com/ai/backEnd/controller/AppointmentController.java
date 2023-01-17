@@ -1,6 +1,8 @@
 package com.ai.backEnd.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,20 +52,21 @@ public class AppointmentController {
 		List<ShowAppointment> showAppointments = new ArrayList<ShowAppointment>();
 		List<String> user_ids = new ArrayList<>(List.of(employee_id));
 		List<Appointment> appointments = appointmentService.getByUserList(user_ids);
+		
 		for(Appointment appointment : appointments) {
 			ShowAppointment showAppointment = new ShowAppointment();
 			showAppointment.setTitle(appointment.getTitle());
+			List<LocalDate> compareDateList = new ArrayList<>();
 			showAppointment.setDescription(appointment.getDescription());
 			showAppointment.setType(appointment.getType());
 			showAppointment.setCreateUser(appointment.getCreateUser());
-			for (Schedule sc : appointment.getSchedules()) {
-				showAppointment.setDate(sc.getDate());
-				showAppointment.setStart_date(sc.getDate());
-				showAppointment.setEnd_date(sc.getDate());
-				showAppointment.setStart_time(sc.getStart_time());
-				showAppointment.setEnd_time(sc.getEnd_time());
-				//showAppointments.add(showAppointment);
+			
+			for (Schedule schedule : appointment.getSchedules()) {
+				compareDateList.add(schedule.getDate());
 			}
+			showAppointment.setStart_date(Collections.min(compareDateList));
+			showAppointment.setEnd_date(Collections.max(compareDateList));
+			
 			showAppointments.add(showAppointment);
 		}
 		return new ResponseEntity<List<ShowAppointment>>(showAppointments, HttpStatus.OK);
