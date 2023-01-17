@@ -8,6 +8,10 @@ export class ShowAppointment {
     description:string;
     type:string;
     createUser:User;
+    start_time:string;
+    end_time:string;
+    start_date:string;
+    end_date:string;
     schedules:Schdule[];
 
 }

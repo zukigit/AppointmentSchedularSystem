@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ai.backEnd.dto.ShowAppointment;
 import com.ai.backEnd.model.Appointment;
+import com.ai.backEnd.model.Schedule;
 import com.ai.backEnd.serviceImpl.AppointmentImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -55,7 +56,13 @@ public class AppointmentController {
 			showAppointment.setDescription(appointment.getDescription());
 			showAppointment.setType(appointment.getType());
 			showAppointment.setCreateUser(appointment.getCreateUser());
-			showAppointment.setSchedules(appointment.getSchedules());
+			for (Schedule sc : appointment.getSchedules()) {
+				showAppointment.setStart_date(sc.getDate());
+				showAppointment.setEnd_date(sc.getDate());
+				showAppointment.setStart_time(sc.getStart_time());
+				showAppointment.setEnd_time(sc.getEnd_time());
+				//showAppointments.add(showAppointment);
+			}
 			showAppointments.add(showAppointment);
 		}
 		return new ResponseEntity<List<ShowAppointment>>(showAppointments, HttpStatus.OK);
