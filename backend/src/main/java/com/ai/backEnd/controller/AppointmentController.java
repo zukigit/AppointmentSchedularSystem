@@ -60,13 +60,17 @@ public class AppointmentController {
 			showAppointment.setDescription(appointment.getDescription());
 			showAppointment.setType(appointment.getType());
 			showAppointment.setCreateUser(appointment.getCreateUser());
+			List<Schedule> schedules = appointment.getSchedules();
+			showAppointment.setStart_time(schedules.get(0).getStart_time());
+			showAppointment.setEnd_time(schedules.get(0).getEnd_time());
 			
-			for (Schedule schedule : appointment.getSchedules()) {
+			for (Schedule schedule : schedules) {
 				compareDateList.add(schedule.getDate());
+				
 			}
+	
 			showAppointment.setStart_date(Collections.min(compareDateList));
 			showAppointment.setEnd_date(Collections.max(compareDateList));
-			
 			showAppointments.add(showAppointment);
 		}
 		return new ResponseEntity<List<ShowAppointment>>(showAppointments, HttpStatus.OK);
