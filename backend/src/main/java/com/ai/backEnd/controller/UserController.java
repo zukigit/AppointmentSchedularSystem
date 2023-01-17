@@ -3,6 +3,7 @@ package com.ai.backEnd.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -69,13 +70,27 @@ public class UserController {
 	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<Map<String, Boolean>> deleteUser(@PathVariable String employee_id) {
 		User dto = userService.getUserById(employee_id);
+		
 		if (dto.getRole() == UserRole.ADMIN) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Admin can't be deleted");
 		} else {
+			deleteUserAppointmentRecords(employee_id);
 			userService.deleteUserById(employee_id);
 			Map<String, Boolean> response = new HashMap<>();
 			response.put("deleted", Boolean.TRUE);
 			return ResponseEntity.ok(response);
+		}
+	}
+	
+	private void deleteUserAppointmentRecords(String employee_id) {
+		List<Appointment> appointments = appointmentService.getByUserList(List.of(employee_id));
+		for(Appointment appointment : appointments) {
+			ListIterator<User> usersItr = appointment.getEmployee().listIterator();
+			while(usersItr.hasNext()) {
+				if(usersItr.next().getEmployee_id() == employee_id) {
+					usersItr.remove();
+				}
+			}
 		}
 	}
 
