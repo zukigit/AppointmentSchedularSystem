@@ -1,9 +1,7 @@
 package com.ai.backEnd.dto;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 import com.ai.backEnd.model.AppointmentType;
-import com.ai.backEnd.model.Schedule;
 import com.ai.backEnd.model.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -16,9 +14,11 @@ public class ShowAppointment {
     private String description;
     private AppointmentType type;
     private User createUser;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
+    private LocalDate date;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
     private LocalDate start_date;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
     private LocalDate end_date;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime start_time;
@@ -26,8 +26,14 @@ public class ShowAppointment {
     private LocalTime end_time;
     
     
+  
     
-    
+	public LocalDate getDate() {
+		return date;
+	}
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
 	public LocalDate getStart_date() {
 		return start_date;
 	}

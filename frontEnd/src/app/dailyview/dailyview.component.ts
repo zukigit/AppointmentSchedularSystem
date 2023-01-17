@@ -12,6 +12,7 @@ import { AppointmentService } from 'app/services/appointment.service';
 import { ShowAppointment } from 'app/model/show-appointment';
 import { resolveSoa } from 'dns';
 import { Schdule } from 'app/model/schdule';
+import { event } from 'jquery';
 //import { INITIAL_EVENTS, createEventId } from './event-utils';
 
 @Component({
@@ -20,7 +21,7 @@ import { Schdule } from 'app/model/schdule';
   styleUrls: ['./dailyview.component.css']
 })
 export class DailyviewComponent implements OnInit {
-  Events: any[] =[{title:"event",date:new Date()}];
+  Events: any[] = [];
   startDate = new Date();
   loginId: string;
   user!: User;
@@ -52,48 +53,78 @@ export class DailyviewComponent implements OnInit {
     var calendarEl = this.calendar.nativeElement;
     var calendarEl2 = this.calendar2.nativeElement;
     console.log("Events is " + this.Events)
-    for(let a of this.Events) {
-     console.log("a is " +  a.title);
+    for (let a of this.Events) {
+      console.log("a is " + a.title);
     }
 
-    var calendar = new Calendar(calendarEl, {
-      initialView: 'timeGridDay',
-      plugins: [timeGridPlugin],
-      views: {
-        timeGridDay: {
-          type: 'timeGridDay',
-          allDaySlot: false,
-          slotMinTime: "07:00:00",
-          slotMaxTime: "20:00:00",
-          contentHeight: 550,
-          selectable: true,
+    setTimeout(() => {
+      this.appService.getAppointmentById(this.loginId).subscribe(
+        (res: any) => {
+          this.showApp = res;
+          for (let result of res) {
+            let dateStr: string = result.start_date+" "+result.start_time+":00";
+            let myDate = new Date(dateStr);
+
+            let dateStr2: string = result.end_date+" "+result.end_time+":00";
+            let myDate2 = new Date(dateStr2);
+            //myDate.setHours(result.start_date.getHours());
+
+            this.Events.push({ title: result.title, start: myDate, end: myDate2})
+          }
+
+          console.log(this.Events);
         }
-      },
-      // events:this.Events,
-      
 
-      events: [
-        {
-          title: "showTitle",
-          date:new Date().getTime()
+      )
+    }, 2200);
+
+
+    setTimeout(() => {
+      var calendar = new Calendar(calendarEl, {
+        initialView: 'timeGridDay',
+        plugins: [timeGridPlugin],
+        views: {
+          timeGridDay: {
+            type: 'timeGridDay',
+            allDaySlot: false,
+            slotMinTime: "07:00:00",
+            slotMaxTime: "20:00:00",
+            contentHeight: 550,
+            selectable: true,
+          }
         },
+        events: this.Events,
 
 
-        {
-          title: 'Meeting',
-          start: '2023-01-16T16:40:00',
-          end: '2023-01-16T18:50:00',
+        // events: [
+        //   {
+        //     title: "showTitle",
+        //     start:new Date(),
+        //     end:new Date()
+        //   },
+
+
+        //   {
+        //     title: 'Meeting',
+        //     start: '2023-01-16',
+        //     end: '2023-01-16',
+        //   },
+
+
+        //  ],
+
+        headerToolbar: {
+          left: 'title',
+          center: '',
+          right: 'today prev,next',
         },
+      });
+      calendar.render();
+
+    }, 2500);
 
 
-      ],
 
-      headerToolbar: {
-        left: 'title',
-        center: '',
-        right: 'today prev,next',
-      },
-    });
     var calendar2 = new Calendar(calendarEl2, {
       initialView: 'timeGridDay',
       plugins: [timeGridPlugin],
@@ -129,7 +160,7 @@ export class DailyviewComponent implements OnInit {
 
     });
 
-    calendar.render();
+
     calendar2.render();
   }
 
@@ -147,16 +178,6 @@ export class DailyviewComponent implements OnInit {
     this.router.navigate(['/app-register'])
   }
   getAppointment() {
-    this.appService.getAppointmentById(this.loginId).subscribe(
-      data => {
-        this.showApp = data;
 
-        for (let result of this.showApp) {
-         
-        }
-
-      }
-
-    )
   }
 }

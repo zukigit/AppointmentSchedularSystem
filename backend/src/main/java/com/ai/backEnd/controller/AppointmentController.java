@@ -57,6 +57,7 @@ public class AppointmentController {
 			showAppointment.setType(appointment.getType());
 			showAppointment.setCreateUser(appointment.getCreateUser());
 			for (Schedule sc : appointment.getSchedules()) {
+				showAppointment.setDate(sc.getDate());
 				showAppointment.setStart_date(sc.getDate());
 				showAppointment.setEnd_date(sc.getDate());
 				showAppointment.setStart_time(sc.getStart_time());
