@@ -85,6 +85,7 @@ export class AppRegisterComponent implements OnInit {
   files:File[] = [];
   schedules: Schdule[] = [];
   format: any = { add: 'Add Selected Member', remove: 'Remove Selected Member', all: 'Select All', none: 'Unselect All', direction: 'right-to-left', draggable: true, locale: undefined };
+  
   constructor(private userServices: UserService, private datePipe: DatePipe, private appService: AppointmentService) { }
 
   ngOnInit(): void {
@@ -167,6 +168,7 @@ export class AppRegisterComponent implements OnInit {
   private showLabel(item: any) {
     return item.deviceCode;
   }
+
   addAppointment() {
     this.generateSchedules();
     this.app.created_date = this.datePipe.transform(this.currentDate, 'MM/dd/yyyy');
@@ -175,7 +177,9 @@ export class AppRegisterComponent implements OnInit {
     this.app.createUser = {employee_id:this.loginId}
 
     this.appService.createAppointment(this.app).subscribe(
-      data => {Swal.fire('Added Appointment!!', 'Appointment Added Succesfully!', 'success');console.log("Ok na sarrrrrr")},
+      data => {
+        this.uploadFiles(data);
+      },
       error => console.log("Error appointment responseee ")
     )
   }
@@ -185,32 +189,35 @@ export class AppRegisterComponent implements OnInit {
     // do something with the selected text here
   }
 
-  addFiles(event) {
-    // this.files = event.target.files;
-    // const formdata = new FormData();
-    // formdata.append("userId", this.loginId);
-    // for(let i = 0; i < this.files.length; i++) {
-    //   formdata.append("files", this.files[i]);
-    // }
-    // this.appService.uploadFiles(formdata).subscribe(
-    //   data=>console.log("Yes"),
-    //   error=>console.log("No")
-    // );
-
-    let files = event.target.files;
+  checkFiles(event) {
+    this.files = [];
+    let checkFiles = event.target.files;
     let sizeLimit = 5000000; // 5MB
-    for (let i = 0; i < files.length; i++) {
-      if (files[i].size > sizeLimit) {
+    for (let i = 0; i < checkFiles.length; i++) {
+      if (checkFiles[i].size > sizeLimit) {
           // Display error message to user
-          console.log("File too large: " + files[i].name);
-          event.target.value = 0;
+          console.log("File too large: " + checkFiles[i].name);
           alert('File size should be less than 5MB!!');
       } else {
-          // Handle valid file
-          console.log("File is inserted: " + files[i].name);
-          this.app.attached = event.target.files;
+          this.files.push(checkFiles[i]);
       }
     }
+  }
+
+  uploadFiles(appointmentId:any) {
+    const formdata = new FormData();
+    formdata.append("appointmentId", appointmentId);
+    for(let i = 0; i < this.files.length; i++) {
+      formdata.append("files", this.files[i]);
+    }
+    this.appService.uploadFiles(formdata).subscribe(
+      data=>{
+        Swal.fire('Added Appointment!!', 'Appointment Added Succesfully!', 'success');
+      },
+      error=>{
+        Swal.fire('Failed!!', 'Appointment Added Was Failed!', 'fail');
+      }
+    );
   }
 
   generateSchedules() {
