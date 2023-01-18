@@ -95,12 +95,12 @@ export class DailyviewComponent implements OnInit {
         views: {
           timeGridDay: {
             type: 'timeGridDay',
-            // allDaySlot: false,
+            allDaySlot: false,
             slotMinTime: "07:00:00",
             slotMaxTime: "20:00:00",
             contentHeight: 550,
             selectable: true,
-            // slotLabelFormat: {hour: 'numeric', minute: '2-digit', hour12: false}
+            slotLabelFormat: {hour: 'numeric', minute: '2-digit', hour12: false}
           }
         },
         events: this.Events,
