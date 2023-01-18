@@ -107,13 +107,14 @@ export class AppRegisterComponent implements OnInit {
     // )
   }
 
-  isOptionDisabled(value: string): boolean {
-    return this.startHour>value ;
-
-  }
-
-  onSelectHour(){
-
+  isOptionDisabled(value: string): boolean {   
+    // return this.startHour>value ;
+    if(this.startMinute === "45"){
+      return this.startHour >= value
+    }
+    else{
+      return this.startHour > value
+    }
   }
 
   minuteDisable (value: string):boolean{
