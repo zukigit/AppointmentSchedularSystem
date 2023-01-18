@@ -19,18 +19,15 @@
                                 <th>Description</th>
                                 <th>Start Time</th>
                                 <th>End Time</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
+                                <th>Date</th>
                             </thead>
                             <tbody *ngFor="let data of showDataApp">
-                                <tr>
+                                <tr *ngFor="let d of data.schedules">
                                     <td>{{data.title}}</td>
                                     <td>{{data.description}}</td>
-                                    <td>{{data.start_time}}</td>
-                                    <td>{{data.end_time}}</td>
-                                    <td>{{data.start_date}}</td>
-                                    <td>{{data.end_date}}</td>
-                                    
+                                    <td>{{d.start_time}}</td>
+                                    <td>{{d.end_time}}</td>
+                                    <td>{{d.date}}</td>
                                 </tr>
                                 
                             </tbody>

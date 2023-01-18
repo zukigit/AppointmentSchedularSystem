@@ -103,7 +103,7 @@ body{
   text-decoration: underline;
   text-decoration-color: #025186;
   text-decoration-thickness: 25%;
-  text-underline-offset: 20%;
+  text-underline-offset: 30%;
 
 
 }
@@ -125,7 +125,7 @@ body{
   margin: 20px 0 12px 0;
 }
 form .user-details .input-box{
-  margin-bottom: 20px;
+  margin-bottom: 4%;
   width: calc(100% / 2 - 20px);
 }
 form .input-box span.details{
@@ -299,4 +299,3 @@ form .user-details .input-box{
     flex-direction: column;
   }
 }
-

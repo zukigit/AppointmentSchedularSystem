@@ -24,6 +24,8 @@ export class WeeklyviewComponent implements OnInit {
   userDataDetails : any;
   userSearch : any;
 
+  show : boolean = true;
+
   constructor(private changeDetector: ChangeDetectorRef,private router:Router,private userService : UserService) {
     this.header = {
       left: 'prev,next today',
@@ -56,7 +58,7 @@ ngOnInit() {
   
 
   var calendarEl = this.calendar.nativeElement;
-  var calendarEl2 = this.calendar2.nativeElement;
+  
 
   var calendar = new Calendar(calendarEl, {
     initialView: 'timeGridWeek',
@@ -109,6 +111,7 @@ ngOnInit() {
       right: 'today prev,next',
     },
   });
+  var calendarEl2 = this.calendar2.nativeElement;
   var calendar2 = new Calendar(calendarEl2, {
     initialView: 'timeGridWeek',
     plugins: [timeGridPlugin],
