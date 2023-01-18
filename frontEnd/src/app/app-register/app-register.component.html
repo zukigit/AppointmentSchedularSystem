@@ -1,10 +1,6 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' rel='stylesheet' type='text/css'>
-
 <body>
   <div class="container">
     <div class="title">Appointment Registration Form</div>
@@ -13,20 +9,20 @@
         <div class="user-details">
 
           <div class="input-box">
-            <span class="details" style="width: calc(100% /2  - 20px); font-weight: 650;" >Title</span>
+            <span class="details" style="width: calc(100% /2  - 20px);" >Title</span>
             <textarea name="comments" [(ngModel)]="app.title" id="comments"
-            style="font-family:sans-serif;font-size: 15px; font-weight: 600;">
+            style="font-family:sans-serif;font: size 1.5em; font-weight: bold;">
             </textarea>
           </div>
           <div class="input-box">
-            <span class="details" style="width: calc(100% /2  - 20px); font-weight: 650;">Description</span>
+            <span class="details" style="width: calc(100% /2  - 20px);"s>Description</span>
             <textarea name="comments" [(ngModel)]="app.description" id="comments"
-            style="font-family:sans-serif;font-size: 15px; font-weight: 600;">
+            style="font-family:sans-serif;font: size 1.5em; font-weight: bold;">
             </textarea>
           </div>
 
            <div class="input-box">
-            <span class="details" style="width: calc(100% /2  - 20px); font-weight: 650;">Start Time</span>
+            <span class="details" style="width: calc(100% /2  - 20px);">Start Time</span>
 
               <select [(ngModel)]="startHour" style="width: calc(100% /2  );" >
               <option selected disabled> hour </option>
@@ -56,12 +52,12 @@
           </div>
 
           <div class="input-box">
-            <span class="details" style="width: calc(100% /2  - 20px); font-weight: 650;">End Time</span>
+            <span class="details" style="width: calc(100% /2  - 20px);">End Time</span>
 
               <select  style="width: calc(100% /2  );" [(ngModel)]="endHour">
                 <option selected="true" disabled>Select end hour</option>
-                <option *ngFor="let option of options" [value]="option.value"
-                [disabled]="isOptionDisabled(option.value)" >{{ option.label }}</option>
+                <option *ngFor="let option of options" [value]="option.value" 
+                [disabled]="isOptionDisabled(option.value)" (change)="onSelectHour()">{{ option.label }}</option>
             </select>
 
             <select style="width: calc(100% /2  );" [(ngModel)]="endMinute">
@@ -70,7 +66,7 @@
               <option value="15">15</option>
               <option value="30">30</option>
               <option value="45">45</option> -->
-              <option *ngFor="let option of minutesOptions" [value]="option.value"
+              <option *ngFor="let option of minutesOptions" [value]="option.value" 
                 [disabled]="minuteDisable(option.value)">{{ option.label }}</option>
             </select>
 
@@ -78,11 +74,11 @@
 
 
           <div class="input-box">
-            <span class="details" style="font-weight: 650;">Start Date</span>
+            <span class="details">Start Date</span>
             <input type="date" (change)="onSelect($event)" min="{{currentDate | date:'yyyy-MM-dd'}}"  [(ngModel)]="app.start_date" name="date" required>
           </div>
           <div class="input-box">
-            <span class="details" style="font-weight: 650;">End Date</span>
+            <span class="details">End Date</span>
             <input type="date"  min="{{sDate | date:'yyyy-MM-dd'}}" [(ngModel)]="app.end_date" name="date" required>
           </div>
 
@@ -99,7 +95,7 @@
 
 
           <div class="input-box">
-            <span class="details" style="font-weight: 650; margin-top: 50px;">Department</span>
+            <span class="details">Department</span>
             <select class="selectDept" (change)="onSelectDept($event)">
               <option selected="true" disabled>Select Department</option>
               <option *ngFor="let departments of department" value="{{departments.department_id}}">
@@ -107,44 +103,31 @@
             </select>
           </div>
           <div class="input-box">
-            <span class="details" style="font-weight: 650; margin-top: 50px;">Team</span>
+            <span class="details">Team</span>
             <select [(ngModel)]="user.team_id" class="selectTeam" (change)="onSelectTeam($event)">
               <option selected>Select Team</option>
               <option *ngFor="let teams of tempTeam" value="{{teams.team_id}}" selected="false">{{teams.team_name}}</option>
             </select>
           </div>
 
-
-
-            <div class="input-boxx">
-              <div class="detailss" style="font-weight: 650; margin-top: 30px;">Attendees
-
-                <div class="w3-show-inline-block" style="display: inline; margin-bottom: 20px; float:right;margin-left:36px;">
-                  <div class="w3-bar">
-                <input type="button" (click)="getAvaliables()" class="w3-btn " value="Check Avaliable Employee" style="background-color: #435d7d; color:white; border-radius: 3px; width:250px;" >
-                  </div>
-                </div>
-
-              </div></div>
-
-
-
+          <div class="input-boxx">
+            <div class="detailss" style="font-weight: 600;">Attendees</div></div>
           <dual-list [sort]="keepSorted" [source]="source" [key]="key" [display]="display" [filter]="filter"
           [destination]="confirmed" style=" color: balck;font-weight: bold;font-display: #435d7d;  width:100%" [format]="format" [disabled]="disabled">
           </dual-list>
 
           <div class="form-item" style="width: calc(100%  - 20px);">
-            <label  class="details" for="gender" style="font-weight: 600; margin-top: 50px;">Set Privacy:</label>
+            <label  class="details" for="gender" style="font-weight: 600;">Set Privacy:</label>
             <div class="genders">
-              <p style="font-size: 14px; font-weight: 600;">Public</p> <input type="radio" [(ngModel)]="app.type" name="gender" id="gender" value="PUBLIC" style="margin: 10px;
-              margin-bottom: 19px; font-size: 17px; font-weight: 500;" required>
-              <p style="font-size: 14px; font-weight: 600;">Private</p> <input type="radio" [(ngModel)]="app.type" name="gender" id="gender" value="PRIVATE" style="margin: 10px;
-              margin-bottom: 19px; font-size: 17px; font-weight: 500;">
+              <p>Public</p> <input type="radio" [(ngModel)]="app.type" name="gender" id="gender" value="PUBLIC" style="margin: 10px;
+              margin-bottom: 19px;" required>
+              <p>Private</p> <input type="radio" [(ngModel)]="app.type" name="gender" id="gender" value="PRIVATE" style="margin: 10px;
+              margin-bottom: 19px;">
 
             </div>
           </div>
           <div class="input-box">
-            <span class="details" style="font-weight: 650; margin-top: 25px;">Attached File</span>
+            <span class="details" style="font-weight: 600;">Attached File</span>
             <input type="file" multiple (change)="addFiles($event)" name="attachedfile" id="attachedfile" style="width: 75%; font-size: 14px;"
             required multiple>
           <p><b style="font-size: 13px; font-weight: bold;">(Maximum File Size: 5 Mb)</b></p>
@@ -183,7 +166,7 @@
             <!-- <input type="submit" class="w3-btn" value="Add"> -->
             <!-- <input type="submit" class="register" value="Add">
         <input type="button" class="cancel" data-dismiss="modal" value="Cancel"> -->
-        <input type="button" (click)="getAvaliables()" class="w3-btn w3-red" value="Cancel"  style=" border-radius: 3px; margin-right: 10px; width:250px;">
+        <input type="button" (click)="getAvaliables()" class="w3-btn w3-red" value="Cancle"  style=" border-radius: 3px; margin-right: 10px; width:250px;">
         <input type="submit" class="w3-btn " value="Add" style="background-color: #435d7d; color:white; border-radius: 3px; width:250px;" >
           </div>
         </div>
