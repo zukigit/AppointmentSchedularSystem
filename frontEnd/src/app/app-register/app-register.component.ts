@@ -186,16 +186,16 @@ export class AppRegisterComponent implements OnInit {
   }
 
   addFiles(event) {
-    this.files = event.target.files;
-    const formdata = new FormData();
-    formdata.append("userId", this.loginId);
-    for(let i = 0; i < this.files.length; i++) {
-      formdata.append("files", this.files[i]);
-    }
-    this.appService.uploadFiles(formdata).subscribe(
-      data=>console.log("Yes"),
-      error=>console.log("No")
-    );
+    // this.files = event.target.files;
+    // const formdata = new FormData();
+    // formdata.append("userId", this.loginId);
+    // for(let i = 0; i < this.files.length; i++) {
+    //   formdata.append("files", this.files[i]);
+    // }
+    // this.appService.uploadFiles(formdata).subscribe(
+    //   data=>console.log("Yes"),
+    //   error=>console.log("No")
+    // );
 
     let files = event.target.files;
     let sizeLimit = 5000000; // 5MB
@@ -203,6 +203,7 @@ export class AppRegisterComponent implements OnInit {
       if (files[i].size > sizeLimit) {
           // Display error message to user
           console.log("File too large: " + files[i].name);
+          event.target.value = 0;
           alert('File size should be less than 5MB!!');
       } else {
           // Handle valid file
