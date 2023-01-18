@@ -169,7 +169,7 @@ export class AppRegisterComponent implements OnInit {
   }
   addAppointment() {
     this.generateSchedules();
-    this.app.created_date = this.datePipe.transform(this.currentDate, 'dd/MM/yyyy');
+    this.app.created_date = this.datePipe.transform(this.currentDate, 'MM/dd/yyyy');
     this.app.schedules = this.schedules
     this.app.employee = this.confirmedUsers;
     this.app.createUser = {employee_id:this.loginId}
@@ -219,7 +219,7 @@ export class AppRegisterComponent implements OnInit {
 
     for (let d = this.app.start_date; d <= this.app.end_date; d.setDate(d.getDate() + 1)) {
       this.schedule = new Schdule();
-      this.schedule.date = this.datePipe.transform(d, 'dd/MM/yyyy');
+      this.schedule.date = this.datePipe.transform(d, 'MM/dd/yyyy');
       this.app.start_time = this.startHour + ":" + this.startMinute;
       this.app.end_time = this.endHour + ":" + this.endMinute;
       this.schedule.start_time = this.app.start_time;

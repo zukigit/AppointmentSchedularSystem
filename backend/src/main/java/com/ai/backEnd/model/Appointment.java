@@ -13,7 +13,7 @@ public class Appointment {
 	private Integer appointment_id;
 	private String title;
 	private String description;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM/dd/yyyy")
 	private LocalDate created_date;
 	private boolean isDeleted;
 	@Enumerated(EnumType.STRING)
