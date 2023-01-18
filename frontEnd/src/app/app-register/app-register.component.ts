@@ -7,7 +7,7 @@ import { User } from 'app/model/user';
 import { AppointmentService } from 'app/services/appointment.service';
 import { UserService } from 'app/services/user.service';
 import { retry } from 'rxjs';
-
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-app-register',
@@ -34,10 +34,10 @@ export class AppRegisterComponent implements OnInit {
     { value: '16', label: '16' },
     { value: '17', label: '17' },
     { value: '18', label: '18' },
-    { value: '19', label: '19' }, 
+    { value: '19', label: '19' },
   ];
 
-  minutesOptions =[ 
+  minutesOptions =[
     { value: '00', label: '00' },
     { value: '15', label: '15' },
     { value: '30', label: '30' },
@@ -107,13 +107,13 @@ export class AppRegisterComponent implements OnInit {
     // )
   }
 
-  isOptionDisabled(value: string): boolean {   
+  isOptionDisabled(value: string): boolean {
     return this.startHour>value ;
-  
+
   }
 
   onSelectHour(){
-    
+
   }
 
   minuteDisable (value: string):boolean{
@@ -174,7 +174,7 @@ export class AppRegisterComponent implements OnInit {
     this.app.createUser = {employee_id:this.loginId}
 
     this.appService.createAppointment(this.app).subscribe(
-      data => console.log("Ok na sarrrrrr"),
+      data => {Swal.fire('Added Appointment!!', 'Appointment Added Succesfully!', 'success');console.log("Ok na sarrrrrr")},
       error => console.log("Error appointment responseee ")
     )
   }
@@ -202,7 +202,7 @@ export class AppRegisterComponent implements OnInit {
       if (files[i].size > sizeLimit) {
           // Display error message to user
           console.log("File too large: " + files[i].name);
-          // alert('File size should be less than 5MB!!');
+          alert('File size should be less than 5MB!!');
       } else {
           // Handle valid file
           console.log("File is inserted: " + files[i].name);

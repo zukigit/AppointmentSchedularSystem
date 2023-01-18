@@ -7,6 +7,9 @@
   width: 280px;
 }
 
+
+
+
 .genders {
   display: flex;
   align-items: center;
@@ -89,21 +92,31 @@ body{
   margin-top: 30px;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+  margin-top: 5%;
 }
 .container .title{
   font-size: 25px;
   font-weight: 500;
   position: relative;
+  margin-bottom: 5%;
+  text-align: center;
+  text-decoration: underline;
+  text-decoration-color: #025186;
+  text-decoration-thickness: 25%;
+  text-underline-offset: 20%;
+
+
 }
 .container .title::before{
   content: "";
-  position: absolute;
-  left: 0;
+  // position: absolute;
+  left: 50px;
   bottom: 0;
   height: 3px;
   width: 30px;
   border-radius: 5px;
   background: linear-gradient(135deg, #025186, #2d027e);
+
 }
 .content form .user-details{
   display: flex;
@@ -112,7 +125,7 @@ body{
   margin: 20px 0 12px 0;
 }
 form .user-details .input-box{
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   width: calc(100% / 2 - 20px);
 }
 form .input-box span.details{
@@ -126,10 +139,16 @@ form .input-boxx div.detailss{
   font-weight: 500;
   margin-bottom: 5px;
 }
+
+
+// privacy
+
 form .form-item label.details{
   display: block;
   font-weight: 500;
   margin-bottom: 5px;
+  font-size: 16px;
+  color: #435d7d;
 }
 
 .user-details .input-box input{
@@ -190,7 +209,7 @@ span {
   font-size: 16px;
   border-radius: 5px;
   padding-left: 15px;
-  
+
   border: 1px solid #ccc;
   border-bottom-width: 4px;
   transition: all 0.3s ease;
@@ -229,6 +248,7 @@ span {
  #dot-3:checked ~ .category label .three{
    background: #435d7d;
    border-color: #d9d9d9;
+   font-weight: bold;
  }
  form input[type="radio"]{
    /* display: none; */
@@ -240,7 +260,7 @@ span {
  form .button input{
    height: 100%;
    width: 50%;
-  
+
    border-radius: 5px;
    border: none;
    color: #fff;
