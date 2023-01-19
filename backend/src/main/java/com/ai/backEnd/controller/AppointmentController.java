@@ -45,6 +45,7 @@ public class AppointmentController {
 	@PostMapping("/addAppointment")
 	public ResponseEntity<String> registerAppointmnet(@RequestBody Appointment appointment ){
 		List<User> users = appointment.getEmployee();
+		appointmentService.saveAppointment(appointment);
 		for(User user : users) {
 			Notification noti = new Notification();
 			noti.setAppointment(appointment);
@@ -53,7 +54,6 @@ public class AppointmentController {
 			noti.setDeleteStatus(false);
 			notiService.addNoti(noti);
 		}
-		appointmentService.saveAppointment(appointment);
 		return new ResponseEntity<>(appointment.getAppointment_id().toString(), HttpStatus.OK);
 	}
 	
