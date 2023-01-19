@@ -1,6 +1,8 @@
 package com.ai.backEnd.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.ai.backEnd.dto.ShowAppointment;
 import com.ai.backEnd.model.Appointment;
+import com.ai.backEnd.model.Notification;
+import com.ai.backEnd.model.User;
 import com.ai.backEnd.serviceImpl.AppointmentImpl;
+import com.ai.backEnd.serviceImpl.NotificationImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -24,6 +29,11 @@ public class AppointmentController {
 
     @Autowired
     private AppointmentImpl appointmentService;
+    
+    
+    
+    @Autowired
+    private NotificationImpl notiService;
 
 	@GetMapping("/getApp")
 	public ResponseEntity<List<Appointment>> getAppoint(){
@@ -34,6 +44,15 @@ public class AppointmentController {
 
 	@PostMapping("/addAppointment")
 	public ResponseEntity<String> registerAppointmnet(@RequestBody Appointment appointment ){
+		List<User> users = appointment.getEmployee();
+		for(User user : users) {
+			Notification noti = new Notification();
+			noti.setAppointment(appointment);
+			noti.setUser(user);
+			noti.setDescription(appointment.getDescription());
+			noti.setDeleteStatus(false);
+			notiService.addNoti(noti);
+		}
 		appointmentService.saveAppointment(appointment);
 		return new ResponseEntity<>(appointment.getAppointment_id().toString(), HttpStatus.OK);
 	}

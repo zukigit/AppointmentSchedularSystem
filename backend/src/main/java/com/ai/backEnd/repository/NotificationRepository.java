@@ -14,4 +14,6 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 	@Query(value = "select * from notification where employee_id=?1 and delete_status='false'",nativeQuery = true)
 	List<Notification> getNoti(String employee_id);
 
+	
+
 }
