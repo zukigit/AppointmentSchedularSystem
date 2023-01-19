@@ -61,22 +61,31 @@ export class DailyviewComponent implements OnInit {
       this.appService.getAppointmentById(this.loginId).subscribe(
         (res: any) => {
           this.showApp = res;
-          for (let result of res) {
-            let dateStr: string = result.start_date+" "+result.start_time+":00";
-            let myDate = new Date(dateStr);
+          for (let result of this.showApp) {
+            for (let r of result.schedules){
 
-            let dateStr2: string = result.end_date+" "+result.end_time+":00";
-            let myDate2 = new Date(dateStr2);
-            //myDate.setHours(result.start_date.getHours());
+              console.log("date " + r.date)
+              // console.log("time " + result.start_ti)
 
-            this.Events.push({ title: result.title, start: myDate, end: myDate2})
+              let dateStr: string = r.date+" "+r.start_time+":00";
+              let myDate = new Date(dateStr);
+
+              let dateStr2: string = r.date+" "+r.end_time+":00";
+              let myDate2 = new Date(dateStr2);
+              //myDate.setHours(result.start_date.getHours());
+
+            this.Events.push({ title: result.title, start:myDate,end:myDate2})
+              
+            }
+            console.log("sch " + result.schedules)
+            
           }
 
           console.log(this.Events);
         }
 
       )
-    }, 2200);
+    }, 1000);
 
 
     setTimeout(() => {
@@ -122,9 +131,7 @@ export class DailyviewComponent implements OnInit {
       });
       calendar.render();
 
-    }, 2500);
-
-
+    }, 1500);
 
     var calendar2 = new Calendar(calendarEl2, {
       initialView: 'timeGridDay',
@@ -144,11 +151,11 @@ export class DailyviewComponent implements OnInit {
       events: [
 
 
-
+ 
         {
           title: 'Meeting',
           start: '2023-01-11T18:40:00',
-          end: '2023-01-11T18:50:00',
+          end: '2023-01-12T18:50:00',
         },
 
 
