@@ -20,8 +20,7 @@ export class AppRegisterComponent implements OnInit {
   schedule: Schdule;
   currentDate: any = new Date();
   sDate: any = new Date()
-  sTime:any = new Date()
-
+  sTime:any = new Date();
   options = [
     { value: '07', label: '07' },
     { value: '08', label: '08' },
