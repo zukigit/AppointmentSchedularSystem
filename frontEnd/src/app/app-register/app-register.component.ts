@@ -8,6 +8,7 @@ import { AppointmentService } from 'app/services/appointment.service';
 import { UserService } from 'app/services/user.service';
 import { retry } from 'rxjs';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-app-register',
@@ -86,7 +87,7 @@ export class AppRegisterComponent implements OnInit {
   schedules: Schdule[] = [];
   format: any = { add: 'Add Selected Member', remove: 'Remove Selected Member', all: 'Select All', none: 'Unselect All', direction: 'right-to-left', draggable: true, locale: undefined };
   
-  constructor(private userServices: UserService, private datePipe: DatePipe, private appService: AppointmentService) { }
+  constructor(private userServices: UserService, private datePipe: DatePipe, private appService: AppointmentService,private router: Router ,) { }
 
   ngOnInit(): void {
 
@@ -179,6 +180,8 @@ export class AppRegisterComponent implements OnInit {
     this.appService.createAppointment(this.app).subscribe(
       data => {
         this.uploadFiles(data);
+        Swal.fire('Appointment Created!!', 'Appointment added succesfully!', 'success');
+        this.router.navigate(['admin/dashboard']);
       },
       error => console.log("Error appointment responseee ")
     )

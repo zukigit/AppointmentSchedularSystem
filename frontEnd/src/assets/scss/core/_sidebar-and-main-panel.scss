@@ -134,8 +134,9 @@
             > a{
               &:hover,
               &:focus{
-                  background-color: transparent;
-                  outline: none;
+                  background-color: #435d7d;
+                  color:#FFFFFF;
+                //   outline: none;
               }
             }
 
@@ -147,8 +148,8 @@
             & .dropdown-menu a:hover,
             & .dropdown-menu a:focus,
             &.active > [data-toggle="collapse"]{
-                background-color: rgba(200, 200, 200, 0.2);
-                color: $black-color;
+                background-color: #435d7d;
+                color: $white-color;
                 box-shadow: none;
             }
 
