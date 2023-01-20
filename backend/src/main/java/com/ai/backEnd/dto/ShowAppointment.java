@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class ShowAppointment {
 
+	private int appointment_id;
     private String title;
     private String description;
     private AppointmentType type;
@@ -25,6 +26,12 @@ public class ShowAppointment {
     private LocalTime end_time;
     private List<Schedule> schedules;
     
+	public int getAppointment_id() {
+		return appointment_id;
+	}
+	public void setAppointment_id(int appointment_id) {
+		this.appointment_id = appointment_id;
+	}
 	public List<Schedule> getSchedules() {
 		return schedules;
 	}

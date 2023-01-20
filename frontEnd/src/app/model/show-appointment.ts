@@ -1,4 +1,3 @@
-import { type } from "os";
 import { Schdule } from "./schdule";
 import { User } from "./user";
 
