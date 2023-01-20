@@ -3,7 +3,7 @@ import { Schdule } from "./schdule";
 import { User } from "./user";
 
 export class ShowAppointment {
-
+    appointment_id:number;
     title:string;
     description:string;
     type:string;

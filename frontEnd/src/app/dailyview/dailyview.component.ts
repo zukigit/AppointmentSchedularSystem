@@ -13,6 +13,7 @@ import { ShowAppointment } from 'app/model/show-appointment';
 import { resolveSoa } from 'dns';
 import { Schdule } from 'app/model/schdule';
 import { event } from 'jquery';
+import { aR } from '@fullcalendar/core/internal-common';
 //import { INITIAL_EVENTS, createEventId } from './event-utils';
 
 @Component({
@@ -52,33 +53,29 @@ export class DailyviewComponent implements OnInit {
 
     var calendarEl = this.calendar.nativeElement;
     var calendarEl2 = this.calendar2.nativeElement;
-    console.log("Events is " + this.Events)
-    for (let a of this.Events) {
-      console.log("a is " + a.title);
-    }
 
     setTimeout(() => {
       this.appService.getAppointmentById(this.loginId).subscribe(
         (res: any) => {
           this.showApp = res;
           for (let result of this.showApp) {
-            for (let r of result.schedules){
+            for (let r of result.schedules) {
 
               console.log("date " + r.date)
               // console.log("time " + result.start_ti)
 
-              let dateStr: string = r.date+" "+r.start_time+":00";
+              let dateStr: string = r.date + " " + r.start_time + ":00";
               let myDate = new Date(dateStr);
 
-              let dateStr2: string = r.date+" "+r.end_time+":00";
+              let dateStr2: string = r.date + " " + r.end_time + ":00";
               let myDate2 = new Date(dateStr2);
               //myDate.setHours(result.start_date.getHours());
 
-            this.Events.push({ title: result.title, start:myDate,end:myDate2})
-              
+              this.Events.push({ title: result.title, start: myDate, end: myDate2 ,id:result.appointment_id})
+
             }
             console.log("sch " + result.schedules)
-            
+
           }
 
           console.log(this.Events);
@@ -100,12 +97,10 @@ export class DailyviewComponent implements OnInit {
             slotMaxTime: "20:00:00",
             contentHeight: 550,
             selectable: true,
-            slotLabelFormat: {hour: 'numeric', minute: '2-digit', hour12: false}
+            slotLabelFormat: { hour: 'numeric', minute: '2-digit', hour12: false }
           }
         },
         events: this.Events,
-
-
         // events: [
         //   {
         //     title: "showTitle",
@@ -123,11 +118,16 @@ export class DailyviewComponent implements OnInit {
 
         //  ],
 
+        eventClick: function (arg) {
+          console.log("event click " + arg.event.id)
+        },  
+
         headerToolbar: {
           left: 'title',
           center: '',
           right: 'today prev,next',
         },
+
       });
       calendar.render();
 
@@ -144,14 +144,12 @@ export class DailyviewComponent implements OnInit {
           slotMaxTime: "20:00:00",
           contentHeight: 550,
           selectable: true,
-          slotLabelFormat: {hour: 'numeric', minute: '2-digit', hour12: false}
+          slotLabelFormat: { hour: 'numeric', minute: '2-digit', hour12: false }
         }
       },
-
+     
       events: [
 
-
- 
         {
           title: 'Meeting',
           start: '2023-01-11T18:40:00',
@@ -165,6 +163,7 @@ export class DailyviewComponent implements OnInit {
         center: '',
         right: 'today prev,next',
       },
+     
 
     });
 
@@ -188,4 +187,5 @@ export class DailyviewComponent implements OnInit {
   getAppointment() {
 
   }
+
 }

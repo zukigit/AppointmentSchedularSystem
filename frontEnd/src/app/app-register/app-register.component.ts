@@ -223,6 +223,7 @@ export class AppRegisterComponent implements OnInit {
   }
 
   generateSchedules() {
+
     const start_date = new Date(this.app.start_date);
     const end_date = new Date(this.app.end_date);
 
