@@ -12,7 +12,7 @@ import { AppointmentService } from 'app/services/appointment.service';
 import { ShowAppointment } from 'app/model/show-appointment';
 import { resolveSoa } from 'dns';
 import { Schdule } from 'app/model/schdule';
-import { event } from 'jquery';
+import { data, error, event } from 'jquery';
 //import { INITIAL_EVENTS, createEventId } from './event-utils';
 
 @Component({
@@ -29,7 +29,9 @@ export class DailyviewComponent implements OnInit {
   view: boolean = true;
 
   showApp: ShowAppointment[];
-
+  searchedApp: ShowAppointment[];
+  searchedUser: User = new User();
+  searchedUserId: string;
 
 
   constructor(private changeDetector: ChangeDetectorRef, private router: Router, private userService: UserService, private appService: AppointmentService) {
@@ -170,6 +172,33 @@ export class DailyviewComponent implements OnInit {
 
 
     calendar2.render();
+  }
+
+  searchAppByUserId(userId:string) {
+    this.userService.getUserById(userId).subscribe(
+      (data : any) => {
+        if (data != null) {
+          this.searchedUser = data;
+          this.appService.getAppointmentById(userId).subscribe(
+            (appData :any) => {
+              if(appData == null) {
+                alert("this user has no appointments")
+              } else {
+                this.searchedApp = appData;
+              }
+            }, error => {
+              console.log("appointment search error")
+            }
+          )
+        }else {
+          this.searchedUser = new User();
+          this.searchedUser.name = "";
+          alert("user not exist")
+        }
+      }, error => {
+        alert("user doesn't exist")
+      }
+    );
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
