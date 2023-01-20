@@ -51,6 +51,7 @@ export class DailyviewComponent implements OnInit {
 
   ngOnInit() {
     this.loginId = localStorage.getItem("loggedInUserId");
+    
     //getAppointment
     this.getAppointment();
 
@@ -122,7 +123,10 @@ export class DailyviewComponent implements OnInit {
         //  ],
 
         eventClick: function (arg) {
-          console.log("event click " + arg.event.id)
+         
+          let id = arg.event.id;
+          console.log("event click appointment id " + id)
+          this.router.navigate(['view_only_appointment',id])
         },  
 
         headerToolbar: {

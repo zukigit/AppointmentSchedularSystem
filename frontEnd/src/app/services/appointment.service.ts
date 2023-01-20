@@ -38,4 +38,9 @@ export class AppointmentService {
 
     return this.http.post("http://localhost:8080/api/v1/uploadFile", files, {headers, responseType: 'text'});
   }
+  
+  
+  viewOnlyAppointmentById(id: string): Observable<ShowAppointment[]> {  
+    return this.http.get<ShowAppointment[]>(`${this.baseUrl}/getViewApp/${id}`, this.header);  
+  }
 }
