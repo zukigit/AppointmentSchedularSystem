@@ -57,12 +57,6 @@ public class AppointmentController {
 		return new ResponseEntity<>(appointment.getAppointment_id().toString(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/getAppId/{id}")
-	public Appointment getAppById(@PathVariable Integer id) {
-		return appointmentService.getAppById(id);
-	}
-	
-	
 	@GetMapping("/getAppById/{employee_id}")
 	public ResponseEntity<List<ShowAppointment>> getShowApp(@PathVariable String employee_id)throws JsonProcessingException {
 		List<ShowAppointment> showAppointments = new ArrayList<ShowAppointment>();

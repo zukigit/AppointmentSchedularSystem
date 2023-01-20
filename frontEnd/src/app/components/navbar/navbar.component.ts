@@ -38,6 +38,8 @@ export class NavbarComponent implements OnInit {
     private sidebarVisible: boolean;
     appointment: ShowAppointment = new ShowAppointment();
 
+    // notificationCount$ = this.notiService.notificationCount$;
+
     constructor(location: Location,  private element: ElementRef, private router: Router,private notiService : NotiService) {
       this.location = location;
           this.sidebarVisible = false;
@@ -46,7 +48,7 @@ export class NavbarComponent implements OnInit {
     noti :any=[];
     loginId : string;
     user : User = new User();
-    count : number = 0;
+     count : number = 0;
 
     ngOnInit(){
       this.loginId = localStorage.getItem("loggedInUserId");
