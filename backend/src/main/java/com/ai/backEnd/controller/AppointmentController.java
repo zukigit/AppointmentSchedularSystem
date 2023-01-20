@@ -65,6 +65,7 @@ public class AppointmentController {
 		
 		for(Appointment appointment : appointments) {
 			ShowAppointment showAppointment = new ShowAppointment();
+			showAppointment.setAppointment_id(appointment.getAppointment_id());
 			showAppointment.setTitle(appointment.getTitle());
 			showAppointment.setDescription(appointment.getDescription());
 			showAppointment.setType(appointment.getType());
