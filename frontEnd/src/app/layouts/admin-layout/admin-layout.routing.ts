@@ -17,9 +17,10 @@ import { AppointmentComponent } from 'app/appointment/appointment.component';
 import { AppRegisterComponent } from 'app/app-register/app-register.component';
 import { DailyviewComponent } from 'app/dailyview/dailyview.component';
 import { WeeklyviewComponent } from 'app/weeklyview/weeklyview.component';
+import { ViewOnlyAppointmentComponent } from 'app/view-only-appointment/view-only-appointment.component';
 
 export const AdminLayoutRoutes: Routes = [
-    
+
     { path: 'admin/dashboard', component: DashboardComponent, canActivate:[AdminAuthGuard]},
     { path: 'admin/user-profile', component: UserProfileComponent, canActivate:[AdminAuthGuard]},
     { path: 'admin/user-details', component: TableListComponent, canActivate:[AdminAuthGuard]},
@@ -36,5 +37,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'appointment', component:AppointmentComponent},
     { path: 'app-register',component:AppRegisterComponent},
     { path: 'dailyview', component: DailyviewComponent},
-    { path: 'weeklyview', component: WeeklyviewComponent}
+    { path: 'weeklyview', component: WeeklyviewComponent},
+    { path: 'view_only_appointment', component: ViewOnlyAppointmentComponent}
 ];
