@@ -30,8 +30,6 @@ public class AppointmentController {
     @Autowired
     private AppointmentImpl appointmentService;
     
-    
-    
     @Autowired
     private NotificationImpl notiService;
 
@@ -40,7 +38,6 @@ public class AppointmentController {
 		List<Appointment> app = appointmentService.getAppointment();
 		return ResponseEntity.ok(app);
 	}
-	
 
 	@PostMapping("/addAppointment")
 	public ResponseEntity<String> registerAppointmnet(@RequestBody Appointment appointment ){
@@ -57,7 +54,7 @@ public class AppointmentController {
 		return new ResponseEntity<>(appointment.getAppointment_id().toString(), HttpStatus.OK);
 	}
 	
-	@GetMapping("/getAppById/{employee_id}")
+	@GetMapping("/getAppByEmpId/{employee_id}")
 	public ResponseEntity<List<ShowAppointment>> getShowApp(@PathVariable String employee_id)throws JsonProcessingException {
 		List<ShowAppointment> showAppointments = new ArrayList<ShowAppointment>();
 		List<String> user_ids = new ArrayList<>(List.of(employee_id));
@@ -77,11 +74,17 @@ public class AppointmentController {
 		return new ResponseEntity<List<ShowAppointment>>(showAppointments, HttpStatus.OK);
 	}
 
-	
-
 	@GetMapping("/getAll")
 	public List<Appointment> getAll(){
 		return appointmentService.getAll();
+	}
+	
+	@GetMapping("/getAppByEmpId/{appointment_id}")
+	public ResponseEntity<Appointment> getShowAppById(@PathVariable String appointment_id) {
+		Appointment appointments = appointmentService.getAppById(Integer.parseInt(appointment_id));
+		
+		
+		return new ResponseEntity<Appointment>(appointments, HttpStatus.OK);
 	}
 }
 

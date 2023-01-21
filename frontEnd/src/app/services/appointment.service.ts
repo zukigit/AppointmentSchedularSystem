@@ -28,7 +28,7 @@ export class AppointmentService {
   }
 
   getAppointmentById(id: string): Observable<ShowAppointment[]> {  
-    return this.http.get<ShowAppointment[]>(`${this.baseUrl}/getAppById/${id}`, this.header);  
+    return this.http.get<ShowAppointment[]>(`${this.baseUrl}/getAppByEmpId/${id}`, this.header);  
   }
 
   uploadFiles(files : FormData):Observable<Object> {
