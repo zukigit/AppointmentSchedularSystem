@@ -18,7 +18,8 @@ export class TraineeAuthGuard implements CanActivate {
     if(this.userRole == "ROLE_TRAINEE" && !this.jwtHelper.isTokenExpired(this.token)) {
         return true;
       } else {
-        alert("log in again");  
+        alert("log in again");
+        localStorage.clear();
         this.router.navigate(['/login']).then(()=>{
           window.location.reload();
         }); 

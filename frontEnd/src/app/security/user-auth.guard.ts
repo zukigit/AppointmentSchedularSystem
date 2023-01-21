@@ -19,6 +19,7 @@ export class UserAuthGuard implements CanActivate {
         return true;
       } else {
         alert("log in again");  
+        localStorage.clear();
         this.router.navigate(['/login']).then(()=>{
           window.location.reload();
         }); 

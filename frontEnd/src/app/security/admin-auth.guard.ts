@@ -17,7 +17,8 @@ export class AdminAuthGuard implements CanActivate {
       if(this.userRole == "ROLE_ADMIN" && !this.jwtHelper.isTokenExpired(this.token)) {
         return true;
       } else {
-        alert("log in again");  
+        alert("log in again");
+        localStorage.clear();  
         this.router.navigate(['/login']).then(()=>{
           window.location.reload();
         }); 
