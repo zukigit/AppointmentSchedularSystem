@@ -18,6 +18,8 @@ import { AppRegisterComponent } from 'app/app-register/app-register.component';
 import { DailyviewComponent } from 'app/dailyview/dailyview.component';
 import { WeeklyviewComponent } from 'app/weeklyview/weeklyview.component';
 import { ViewOnlyAppointmentComponent } from 'app/view-only-appointment/view-only-appointment.component';
+import { UserAuthGuard } from 'app/security/user-auth.guard';
+import { TraineeAuthGuard } from 'app/security/trainee-auth.guard';
 
 export const AdminLayoutRoutes: Routes = [
 
@@ -29,11 +31,11 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'maps', component: MapsComponent },
     { path: 'notifications', component: NotificationsComponent },
     { path: 'upgrade', component: UpgradeComponent },
-    { path: 'user/test', component: UserComponent},
-    { path: 'trainee/test', component: TraineeComponent},
-    { path: 'admin/addEmployeeModal', component: RegisterComponent,canActivate:[AdminAuthGuard]},
-    { path: 'admin/updateuser/:id', component: UpdateComponent,canActivate:[AdminAuthGuard]},
-    { path: 'admin/change_pass',component:ChangePassComponent,canActivate:[AdminAuthGuard]},
+    { path: 'user/test', component: UserComponent, canActivate:[UserAuthGuard]},
+    { path: 'trainee/test', component: TraineeComponent, canActivate:[TraineeAuthGuard]},
+    { path: 'admin/addEmployeeModal', component: RegisterComponent, canActivate:[AdminAuthGuard]},
+    { path: 'admin/updateuser/:id', component: UpdateComponent, canActivate:[AdminAuthGuard]},
+    { path: 'admin/change_pass',component:ChangePassComponent, canActivate:[AdminAuthGuard]},
     { path: 'appointment', component:AppointmentComponent},
     { path: 'app-register',component:AppRegisterComponent},
     { path: 'dailyview', component: DailyviewComponent},

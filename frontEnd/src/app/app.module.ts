@@ -21,11 +21,12 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { AppRegisterComponent } from './app-register/app-register.component';
 import { AngularDualListBoxModule } from 'angular-dual-listbox';
 import { DatePipe } from '@angular/common';
-import { LoginAuthGuard } from './security/login-auth.guard';
 import { DailyviewComponent } from './dailyview/dailyview.component';
 import { WeeklyviewComponent } from './weeklyview/weeklyview.component';
 import { NotifierModule,NotifierService } from 'angular-notifier';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { UserAuthGuard } from './security/user-auth.guard';
+import { TraineeAuthGuard } from './security/trainee-auth.guard';
 
 @NgModule({
   imports: [
@@ -59,7 +60,7 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
     DailyviewComponent,
     WeeklyviewComponent,
   ],
-  providers: [AdminAuthGuard, DatePipe],
+  providers: [AdminAuthGuard, DatePipe, UserAuthGuard, TraineeAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
