@@ -79,7 +79,7 @@ public class AppointmentController {
 		return appointmentService.getAll();
 	}
 	
-	@GetMapping("/getAppByEmpId/{appointment_id}")
+	@GetMapping("/getAppById/{appointment_id}")
 	public ResponseEntity<Appointment> getShowAppById(@PathVariable String appointment_id) {
 		Appointment appointments = appointmentService.getAppById(Integer.parseInt(appointment_id));
 		
