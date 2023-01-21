@@ -90,6 +90,8 @@ export class RegisterComponent implements OnInit {
       }
     )
 
+    console.log(this.teamArray)
+
   }
   //gotodashbord with router link
   goToDashboard() {

@@ -8,6 +8,7 @@ import { UserService } from 'app/services/user.service';
 import * as Chartist from 'chartist';
 import { data } from 'jquery';
 import { DatePipe } from '@angular/common';
+import * as e from 'express';
 
 @Component({
   selector: 'app-dashboard',
@@ -27,14 +28,15 @@ export class DashboardComponent implements OnInit {
 
   loginId : string ;
   user :any;
-  schedule : any;
-  appointment : any;
+  schedules : any;
+  appointment : ShowAppointment= new ShowAppointment();
 
   currentDate : any;
   todayDate : Date = new Date();
 
-  showDataApp : any =[];
-  todayApp : any = [];
+  DataApp : ShowAppointment[];
+  showDataApp : ShowAppointment[];
+  todayApp : ShowAppointment[];
 
 
   userDataDetails : any ;
@@ -97,7 +99,7 @@ export class DashboardComponent implements OnInit {
   };
   ngOnInit() {
     this.loginId = localStorage.getItem("loggedInUserId");
-    this.schedule = new Schdule();
+    this.schedules = new Schdule();
     this.appointment = new ShowAppointment();
     this.currentDate = new Date();
 
@@ -105,7 +107,7 @@ export class DashboardComponent implements OnInit {
     console.log("today app are "+this.todayApp);
 
    
-    this.currentDate = this.datePipe.transform(this.todayDate, 'dd/MM/yyyy');
+    this.currentDate = this.datePipe.transform(this.currentDate, 'MM/dd/yyyy');
     // console.log("today date "+this.todayDate)
     console.log("current date "+this.currentDate)
 
@@ -194,7 +196,8 @@ export class DashboardComponent implements OnInit {
   getSchedulesById(){
     this.appService.getAppointmentById(this.loginId).subscribe(data => 
       this.showDataApp = data);
-      console.log("aaa "+this.showDataApp.value)
+
+      console.log(this.showDataApp+"app date");
 
   }
 
