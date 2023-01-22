@@ -76,7 +76,7 @@ export class DailyviewComponent implements OnInit {
               let myDate2 = new Date(dateStr2);
               //myDate.setHours(result.start_date.getHours());
 
-              this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id})
+              this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id,groupId:result.type })
 
             }
             console.log("sch " + result.schedules)
@@ -124,11 +124,11 @@ export class DailyviewComponent implements OnInit {
         //  ],
 
         eventClick: (arg) => {
-        
-
           let id = arg.event.id;
+          let type = arg.event.groupId;
+          console.log("Type is " + type)
           console.log("event click appointment id " + id);
-          this.router.navigate(['/view_only_appointment',id])
+          this.router.navigate(['/view_only_appointment', id])
 
         },
 
@@ -142,7 +142,7 @@ export class DailyviewComponent implements OnInit {
       calendar.render();
 
     }, 1500);
-    
+
 
 
     var calendar2 = new Calendar(calendarEl2, {
@@ -177,10 +177,11 @@ export class DailyviewComponent implements OnInit {
       },
 
 
+
     });
-
-
     calendar2.render();
+
+
   }
 
 
