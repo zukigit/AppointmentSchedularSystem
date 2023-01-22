@@ -9,10 +9,10 @@
     <title>Student Registration Form In Bootstrap 5 </title>
 
   </head>
-  <body>
+  <body (ngModel)="getAppbyId()">
     <div class="container">
 
-      <form class="bg-light p-4 m-auto" action="#">
+      <form class="bg-light p-4 m-auto" action="#" >
         <div class="title">Registered Appointment</div>
 
         <div class="icons text-center">
@@ -29,7 +29,7 @@
             <p>Title</p>
           </div>
           <div class="col-lg-5">
-            <span>Department Level Meeting</span>
+            <span>{{appDatas.title}}</span>
           </div>
 
         </div>
@@ -40,19 +40,18 @@
             <p>Description</p>
           </div>
           <div class="col-lg-5">
-            <span>Let's discuss the best way to set a new project!</span>
+            <span>{{appDatas.description}}</span>
           </div>
         </div>
 
         <!-- Start Time&End Time -->
 
-
-        <div class="row mb-3" style="margin-bottom: 30px;">
+         <div class="row mb-3" style="margin-bottom: 30px;" >
           <div class="col-lg-2">
             <p>Start Time</p>
           </div>
           <div class="col-lg-5">
-            <span>7:00AM</span>
+            <span>{{appDatas.start_time}}</span>
           </div>
 
           </div>
@@ -63,7 +62,9 @@
               <p>End Time</p>
             </div>
             <div class="col-lg-5">
-              <span>9:00AM</span>
+              <span *ngFor="let d of appDatas.schedules">
+              <span >{{d.end_time}}</span>
+            </span>
             </div>
 
             </div>
@@ -77,7 +78,7 @@
                 <p>Start Date</p>
               </div>
               <div class="col-lg-5">
-                <span>1.2.2023</span>
+                <span>{{appDatas.created_date}}</span>
               </div>
 
               </div>
@@ -90,16 +91,15 @@
                   <span>1.2.2023</span>
                 </div>
 
-                </div>
-
+              </div>
                 <!-- Privacy -->
 
                 <div class="row mb-3">
                   <div class="col-lg-2">
                     <p>Privacy</p>
                   </div>
-                  <div class="col-lg-5">
-                    <span>Public</span>
+                  <div class="col-lg-5" >
+                    <span>{{appDatas.type}}</span>
                   </div>
 
                   </div>
@@ -126,7 +126,7 @@
           </div>
           <div class="col-lg-9">
             <div class="bg-custom table-responsive" style="margin-top: 30px;">
-              <table class="table" >
+              <table class="table" (ngModel)="getAppbyId()">
                 <thead>
 
                   <tr>
@@ -139,13 +139,13 @@
 
                 </thead>
 
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
+                <tbody *ngFor="let data of appDatas">
+                  <tr *ngFor="let d of data.user">
+                    <td >{{d.user_id}}</td>
                     <td class="circular--portrait" >   <img src="/assets/img/userImage1.jpg" style="border-radius: 100%;"/></td>
-                     <td>Selena</td>
-                    <td> Offshore</td>
-                    <td>TEAM-1</td>
+                     <td>{{d.name}}</td>
+                    <td> {{d.department.department_name}}</td>
+                    <td>{{d.team_name}}-1</td>
                   </tr>
                 </tbody>
 
