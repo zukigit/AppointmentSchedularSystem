@@ -43,4 +43,8 @@ export class AppointmentService {
   viewOnlyAppointmentById(id: string): Observable<ShowAppointment[]> {  
     return this.http.get<ShowAppointment[]>(`${this.baseUrl}/getViewApp/${id}`, this.header);  
   }
+
+  checkUserInclude(id: string, appoointmentId : number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseUrl}/isUserIncludeInAppointment?employeeId=${id}&appointmentId=${appoointmentId}`, this.header);
+  }
 }

@@ -44,7 +44,6 @@ export class DailyviewComponent implements OnInit {
   header: any;
   calendarVisible = false;
 
-  s
   @ViewChild('calendar', { static: true }) calendar: ElementRef<any>;
   @ViewChild('calendar2', { static: true }) calendar2: ElementRef<any>;
 
@@ -126,11 +125,21 @@ export class DailyviewComponent implements OnInit {
 
         eventClick: (arg) => {
           let id = arg.event.id;
-          let type = arg.event.groupId;
-          console.log("Type is " + type)
-          console.log("event click appointment id " + id);
-          this.router.navigate(['/view_only_appointment', id])
-
+          let appType = arg.event.groupId;
+          
+          if(appType != "PUBLIC") {
+            this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
+              (data : any) => {
+                if(data) {
+                  this.router.navigate(['/view_only_appointment',id]);
+                }
+              }, error => {
+                alert("this appointment is private and you are not in there")
+              }
+            );
+          } else {
+            this.router.navigate(['/view_only_appointment',id])
+          }
         },
 
         headerToolbar: {
