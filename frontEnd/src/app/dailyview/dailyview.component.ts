@@ -25,6 +25,7 @@ import { info } from 'console';
 })
 export class DailyviewComponent implements OnInit {
   Events: any[] = [];
+  Events2: any[] = [];
   startDate = new Date();
   loginId: string;
   user!: User;
