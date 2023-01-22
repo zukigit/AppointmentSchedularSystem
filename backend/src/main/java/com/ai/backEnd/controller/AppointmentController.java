@@ -1,8 +1,6 @@
 package com.ai.backEnd.controller;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,7 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ResponseStatusException;
+
 import com.ai.backEnd.dto.ShowAppointment;
 import com.ai.backEnd.model.Appointment;
 import com.ai.backEnd.model.Notification;
@@ -81,10 +82,22 @@ public class AppointmentController {
 	
 	@GetMapping("/getAppById/{appointment_id}")
 	public ResponseEntity<Appointment> getShowAppById(@PathVariable String appointment_id) {
-		Appointment appointments = appointmentService.getAppById(Integer.parseInt(appointment_id));
+		Appointment appointment = appointmentService.getAppById(Integer.parseInt(appointment_id));
 		
+		return new ResponseEntity<Appointment>(appointment, HttpStatus.OK);
+	}
+	
+	@GetMapping("/isUserIncludeInAppointment")
+	public ResponseEntity<Boolean> checkEmployeeInclude(@RequestParam String employeeId, @RequestParam int appointmentId) {
+		Appointment appointment = appointmentService.getAppById(appointmentId);
+		List<User> users = appointment.getEmployee();
+		Boolean isUserInclude = users.stream().anyMatch(value -> employeeId.equals(value.getEmployee_id()));
 		
-		return new ResponseEntity<Appointment>(appointments, HttpStatus.OK);
+		if(!isUserInclude) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user not found in requested appointment!");
+		} else {
+			return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+		}
 	}
 }
 
