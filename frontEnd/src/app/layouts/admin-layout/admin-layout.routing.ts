@@ -40,5 +40,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'app-register',component:AppRegisterComponent},
     { path: 'dailyview', component: DailyviewComponent},
     { path: 'weeklyview', component: WeeklyviewComponent},
-    { path: 'view_only_appointment', component: ViewOnlyAppointmentComponent}
+    { path: 'view_only_appointment/:id', component: ViewOnlyAppointmentComponent}
 ];

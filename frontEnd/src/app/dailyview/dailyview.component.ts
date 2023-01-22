@@ -14,6 +14,7 @@ import { resolveSoa } from 'dns';
 import { Schdule } from 'app/model/schdule';
 
 import { data, error, event } from 'jquery';
+import { info } from 'console';
 
 //import { INITIAL_EVENTS, createEventId } from './event-utils';
 
@@ -42,7 +43,7 @@ export class DailyviewComponent implements OnInit {
   header: any;
   calendarVisible = false;
 
-
+  s
   @ViewChild('calendar', { static: true }) calendar: ElementRef<any>;
   @ViewChild('calendar2', { static: true }) calendar2: ElementRef<any>;
 
@@ -51,7 +52,7 @@ export class DailyviewComponent implements OnInit {
 
   ngOnInit() {
     this.loginId = localStorage.getItem("loggedInUserId");
-    
+
     //getAppointment
     this.getAppointment();
 
@@ -75,7 +76,7 @@ export class DailyviewComponent implements OnInit {
               let myDate2 = new Date(dateStr2);
               //myDate.setHours(result.start_date.getHours());
 
-              this.Events.push({ title: result.title, start: myDate, end: myDate2 ,id:result.appointment_id})
+              this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id})
 
             }
             console.log("sch " + result.schedules)
@@ -122,12 +123,14 @@ export class DailyviewComponent implements OnInit {
 
         //  ],
 
-        eventClick: function (arg) {
-         
+        eventClick: (arg) => {
+        
+
           let id = arg.event.id;
-          console.log("event click appointment id " + id)
-          this.router.navigate(['view_only_appointment',id])
-        },  
+          console.log("event click appointment id " + id);
+          this.router.navigate(['/view_only_appointment',id])
+
+        },
 
         headerToolbar: {
           left: 'title',
@@ -139,6 +142,8 @@ export class DailyviewComponent implements OnInit {
       calendar.render();
 
     }, 1500);
+    
+
 
     var calendar2 = new Calendar(calendarEl2, {
       initialView: 'timeGridDay',
@@ -154,7 +159,7 @@ export class DailyviewComponent implements OnInit {
           slotLabelFormat: { hour: 'numeric', minute: '2-digit', hour12: false }
         }
       },
-     
+
       events: [
 
         {
@@ -170,7 +175,7 @@ export class DailyviewComponent implements OnInit {
         center: '',
         right: 'today prev,next',
       },
-     
+
 
     });
 
@@ -178,14 +183,15 @@ export class DailyviewComponent implements OnInit {
     calendar2.render();
   }
 
-  searchAppByUserId(userId:string) {
+
+  searchAppByUserId(userId: string) {
     this.userService.getUserById(userId).subscribe(
-      (data : any) => {
+      (data: any) => {
         if (data != null) {
           this.searchedUser = data;
           this.appService.getAppointmentById(userId).subscribe(
-            (appData :any) => {
-              if(appData == null) {
+            (appData: any) => {
+              if (appData == null) {
                 alert("this user has no appointments")
               } else {
                 this.searchedApp = appData;
@@ -194,7 +200,7 @@ export class DailyviewComponent implements OnInit {
               console.log("appointment search error")
             }
           )
-        }else {
+        } else {
           this.searchedUser = new User();
           this.searchedUser.name = "";
           alert("user not exist")
@@ -221,5 +227,4 @@ export class DailyviewComponent implements OnInit {
   getAppointment() {
 
   }
-
 }
