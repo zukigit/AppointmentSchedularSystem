@@ -43,7 +43,6 @@ export class DailyviewComponent implements OnInit {
   header: any;
   calendarVisible = false;
 
-  s
   @ViewChild('calendar', { static: true }) calendar: ElementRef<any>;
   @ViewChild('calendar2', { static: true }) calendar2: ElementRef<any>;
 
@@ -76,7 +75,7 @@ export class DailyviewComponent implements OnInit {
               let myDate2 = new Date(dateStr2);
               //myDate.setHours(result.start_date.getHours());
 
-              this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id})
+              this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id,groupId:result.type })
 
             }
             console.log("sch " + result.schedules)
@@ -124,12 +123,22 @@ export class DailyviewComponent implements OnInit {
         //  ],
 
         eventClick: (arg) => {
-        
-
           let id = arg.event.id;
-          console.log("event click appointment id " + id);
-          this.router.navigate(['/view_only_appointment',id])
-
+          let appType = arg.event.groupId;
+          
+          if(appType != "PUBLIC") {
+            this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
+              (data : any) => {
+                if(data) {
+                  this.router.navigate(['/view_only_appointment',id]);
+                }
+              }, error => {
+                alert("this appointment is private and you are not in there")
+              }
+            );
+          } else {
+            this.router.navigate(['/view_only_appointment',id])
+          }
         },
 
         headerToolbar: {
@@ -142,7 +151,7 @@ export class DailyviewComponent implements OnInit {
       calendar.render();
 
     }, 1500);
-    
+
 
 
     var calendar2 = new Calendar(calendarEl2, {
@@ -177,10 +186,11 @@ export class DailyviewComponent implements OnInit {
       },
 
 
+
     });
-
-
     calendar2.render();
+
+
   }
 
 

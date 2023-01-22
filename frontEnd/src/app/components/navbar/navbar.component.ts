@@ -7,6 +7,8 @@ import { data } from 'jquery';
 import { NotiModel } from 'app/model/noti-model';
 import { ShowAppointment } from 'app/model/show-appointment';
 import { User } from 'app/model/user';
+import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
+import { Subject } from 'rxjs';
 // import { NotiModel } from 'app/model/noti-model';
 
 
@@ -43,18 +45,22 @@ export class NavbarComponent implements OnInit {
     constructor(location: Location,  private element: ElementRef, private router: Router,private notiService : NotiService) {
       this.location = location;
           this.sidebarVisible = false;
+
     }
 
     noti :any=[];
     loginId : string;
     user : User = new User();
-     count : number = 0;
 
+    count = 0;
+    
     ngOnInit(){
       this.loginId = localStorage.getItem("loggedInUserId");
 
       this.getNotification();
-        // this.menuItems = ROUTES.filter(menuItem => menuItem);
+      this.notiCount();
+
+      // this.menuItems = ROUTES.filter(menuItem => menuItem);
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
@@ -80,12 +86,10 @@ export class NavbarComponent implements OnInit {
         console.log(this.noti);
     }
 
-    countNoti(count : number){
-        if(this.noti+1){
-            return count=+1;
-        }else{
-            return count;
-        }
+    notiCount(){
+        this.notiService.getNoti(this.loginId).subscribe(data=>this.noti = data);
+
+        return this.noti.length == this.count;
     }
 
     sidebarOpen() {

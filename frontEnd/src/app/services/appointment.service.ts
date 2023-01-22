@@ -47,4 +47,8 @@ export class AppointmentService {
   getAppointmentByAppId(id:string) : Observable<Object[]>{
     return this.http.get<Object[]>(`http://localhost:8080/api/v1/getAppById/${id}`,this.header);
   }
+
+  checkUserInclude(id: string, appoointmentId : number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseUrl}/isUserIncludeInAppointment?employeeId=${id}&appointmentId=${appoointmentId}`, this.header);
+  }
 }

@@ -9,7 +9,7 @@
     <title>Student Registration Form In Bootstrap 5 </title>
 
   </head>
-  <body (ngModel)="getAppbyId()">
+  <body (ngModel)="getApp()">
     <div class="container">
 
       <form class="bg-light p-4 m-auto" action="#" >
@@ -29,7 +29,7 @@
             <p>Title</p>
           </div>
           <div class="col-lg-5">
-            <span>{{appDatas.title}}</span>
+            <span>{{res.title}}</span>
           </div>
 
         </div>
@@ -40,7 +40,7 @@
             <p>Description</p>
           </div>
           <div class="col-lg-5">
-            <span>{{appDatas.description}}</span>
+            <span>{{res.description}}</span>
           </div>
         </div>
 
@@ -51,7 +51,7 @@
             <p>Start Time</p>
           </div>
           <div class="col-lg-5">
-            <span>{{appDatas.start_time}}</span>
+            <span>{{res.start_time}}</span>
           </div>
 
           </div>
@@ -62,9 +62,7 @@
               <p>End Time</p>
             </div>
             <div class="col-lg-5">
-              <span *ngFor="let d of appDatas.schedules">
-              <span >{{d.end_time}}</span>
-            </span>
+              <!-- <span >{{res.schdules.end_time}}</span> -->
             </div>
 
             </div>
@@ -78,7 +76,7 @@
                 <p>Start Date</p>
               </div>
               <div class="col-lg-5">
-                <span>{{appDatas.created_date}}</span>
+                <span>{{res.date}}</span>
               </div>
 
               </div>
@@ -99,7 +97,7 @@
                     <p>Privacy</p>
                   </div>
                   <div class="col-lg-5" >
-                    <span>{{appDatas.type}}</span>
+                    <span>{{res.type}}</span>
                   </div>
 
                   </div>
@@ -110,7 +108,7 @@
                     <p>Attached File</p>
                   </div>
                   <div class="col-lg-5">
-                    <span>meeting.pptx</span>
+                    <!-- <span>{{res.file}}</span> -->
                   </div>
 
                   </div>
@@ -126,7 +124,7 @@
           </div>
           <div class="col-lg-9">
             <div class="bg-custom table-responsive" style="margin-top: 30px;">
-              <table class="table" (ngModel)="getAppbyId()">
+              <table class="table" >
                 <thead>
 
                   <tr>
@@ -139,13 +137,13 @@
 
                 </thead>
 
-                <tbody *ngFor="let data of appDatas">
-                  <tr *ngFor="let d of data.user">
-                    <td >{{d.user_id}}</td>
+                <tbody >
+                  <tr >
+                    <td >1</td>
                     <td class="circular--portrait" >   <img src="/assets/img/userImage1.jpg" style="border-radius: 100%;"/></td>
-                     <td>{{d.name}}</td>
-                    <td> {{d.department.department_name}}</td>
-                    <td>{{d.team_name}}-1</td>
+                     <td>{{res.createUser.name}}</td>
+                    <td> {{res.createUser.department_name}}</td>
+                    <td>{{res.createUser.team_name}}</td>
                   </tr>
                 </tbody>
 
