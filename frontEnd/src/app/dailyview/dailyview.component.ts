@@ -15,6 +15,7 @@ import { Schdule } from 'app/model/schdule';
 
 import { data, error, event } from 'jquery';
 import { info } from 'console';
+import { TestBed } from '@angular/core/testing';
 
 //import { INITIAL_EVENTS, createEventId } from './event-utils';
 
@@ -25,6 +26,7 @@ import { info } from 'console';
 })
 export class DailyviewComponent implements OnInit {
   Events: any[] = [];
+  calEvent:any[] = [];
   startDate = new Date();
   loginId: string;
   user!: User;
@@ -47,6 +49,7 @@ export class DailyviewComponent implements OnInit {
   @ViewChild('calendar2', { static: true }) calendar2: ElementRef<any>;
 
   name = 'Angular ' + VERSION.major;
+  cal:any;
 
 
   ngOnInit() {
@@ -56,7 +59,7 @@ export class DailyviewComponent implements OnInit {
     this.getAppointment();
 
     var calendarEl = this.calendar.nativeElement;
-    var calendarEl2 = this.calendar2.nativeElement;
+    
 
     setTimeout(() => {
       this.appService.getAppointmentById(this.loginId).subscribe(
@@ -76,6 +79,7 @@ export class DailyviewComponent implements OnInit {
               //myDate.setHours(result.start_date.getHours());
 
               this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id,groupId:result.type })
+               //console.log("search event is " + this.Events)
 
             }
             console.log("sch " + result.schedules)
@@ -152,46 +156,10 @@ export class DailyviewComponent implements OnInit {
 
     }, 1500);
 
-
-
-    var calendar2 = new Calendar(calendarEl2, {
-      initialView: 'timeGridDay',
-      plugins: [timeGridPlugin],
-      views: {
-        timeGridDay: {
-          type: 'timeGridDay',
-          allDaySlot: false,
-          slotMinTime: "07:00:00",
-          slotMaxTime: "20:00:00",
-          contentHeight: 550,
-          selectable: true,
-          slotLabelFormat: { hour: 'numeric', minute: '2-digit', hour12: false }
-        }
-      },
-
-      events: [
-
-        {
-          title: 'Meeting',
-          start: '2023-01-11T18:40:00',
-          end: '2023-01-12T18:50:00',
-        },
-
-
-      ],
-      headerToolbar: {
-        left: 'title',
-        center: '',
-        right: 'today prev,next',
-      },
-
-
-
-    });
-    calendar2.render();
-
+    console.log("222222 "+this.Events);
 
   }
+
 
 
   searchAppByUserId(userId: string) {
@@ -199,17 +167,104 @@ export class DailyviewComponent implements OnInit {
       (data: any) => {
         if (data != null) {
           this.searchedUser = data;
+          var calendarEl2 = this.calendar2.nativeElement;
+          setTimeout(() => {
+            var calendar2 = new Calendar(calendarEl2, {
+              initialView: 'timeGridDay',
+              plugins: [timeGridPlugin],
+              views: {
+                timeGridDay: {
+                  type: 'timeGridDay',
+                  allDaySlot: false,
+                  slotMinTime: "07:00:00",
+                  slotMaxTime: "20:00:00",
+                  contentHeight: 550,
+                  selectable: true,
+                  slotLabelFormat: { hour: 'numeric', minute: '2-digit', hour12: false }
+                }
+              },
+              events:this.calEvent,
+
+              eventClick: (arg) => {
+                let id = arg.event.id;
+                let appType = arg.event.groupId;
+                
+                if(appType != "PUBLIC") {
+                  this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
+                    (data : any) => {
+                      if(data) {
+                        this.router.navigate(['/view_only_appointment',id]);
+                      }
+                    }, error => {
+                      alert("this appointment is private and you are not in there")
+                    }
+                  );
+                } else {
+                  this.router.navigate(['/view_only_appointment',id])
+                }
+              },
+        
+              // events: [
+        
+              //   {
+              //     title: 'Meeting',
+              //     start: '2023-01-22T18:40:00',
+              //     end: '2023-01-22T18:50:00',
+              //   },
+        
+        
+              // ],
+              // headerToolbar: {
+              //   left: 'title',
+              //   center: '',
+              //   right: 'today prev,next',
+              // },
+        
+        
+        
+            });
+            calendar2.render()
+            
+          }, 1500);
+          
+         setTimeout(() => {
           this.appService.getAppointmentById(userId).subscribe(
             (appData: any) => {
               if (appData == null) {
                 alert("this user has no appointments")
               } else {
                 this.searchedApp = appData;
+                for (let result of this.searchedApp) {
+                  for (let r of result.schedules) {
+      
+                    console.log("date " + r.date)
+                    // console.log("time " + result.start_ti)
+      
+                    let dateStr: string = r.date + " " + r.start_time + ":00";
+                    let myDate = new Date(dateStr);
+      
+                    let dateStr2: string = r.date + " " + r.end_time + ":00";
+                    let myDate2 = new Date(dateStr2);
+                    //myDate.setHours(result.start_date.getHours());
+                    console.log("title searc is " + myDate)
+      
+                    this.calEvent.push({title: result.title, start: myDate, end: myDate2, id: result.appointment_id,groupId:result.type})
+      
+
+                  }
+      
+                }
+                //  console.log("search event is " + this.calEvent)
+        
+               
               }
-            }, error => {
-              console.log("appointment search error")
+              console.log(this.calEvent);
             }
+            
+            
           )
+          
+         }, 1000);
         } else {
           this.searchedUser = new User();
           this.searchedUser.name = "";
@@ -219,6 +274,7 @@ export class DailyviewComponent implements OnInit {
         alert("user doesn't exist")
       }
     );
+    
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
