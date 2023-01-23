@@ -214,7 +214,7 @@ export class AppRegisterComponent implements OnInit {
     }
     this.appService.uploadFiles(formdata).subscribe(
       data=>{
-        Swal.fire('Added Appointment!!', 'Appointment Added Succesfully!', 'success');
+        // Swal.fire('Added Appointment!!', 'Appointment Added Succesfully!', 'success');
       },
       error=>{
         Swal.fire('Failed!!', 'Appointment Added Was Failed!', 'fail');
