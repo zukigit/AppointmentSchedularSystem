@@ -27,7 +27,7 @@ import { TestBed } from '@angular/core/testing';
 })
 export class DailyviewComponent implements OnInit {
   Events: any[] = [];
-  calEvent:any[] = [];
+  calEvent: any[] = [];
   startDate = new Date();
   loginId: string;
   user!: User;
@@ -39,12 +39,12 @@ export class DailyviewComponent implements OnInit {
   searchedUser: User = new User();
   searchedUserId: string;
 
-  currentDate:Date = new Date();
-  todayDate:Date = new Date("01/23/2023");
-  
+  currentDate: Date = new Date();
+  todayDate: Date = new Date("01/23/2023");
 
 
-  constructor(private datePipe: DatePipe,private changeDetector: ChangeDetectorRef, private router: Router, private userService: UserService, private appService: AppointmentService) {
+
+  constructor(private datePipe: DatePipe, private changeDetector: ChangeDetectorRef, private router: Router, private userService: UserService, private appService: AppointmentService) {
 
   };
   header: any;
@@ -54,7 +54,7 @@ export class DailyviewComponent implements OnInit {
   @ViewChild('calendar2', { static: true }) calendar2: ElementRef<any>;
 
   name = 'Angular ' + VERSION.major;
-  cal:any;
+  cal: any;
 
 
   ngOnInit() {
@@ -63,16 +63,16 @@ export class DailyviewComponent implements OnInit {
     console.log("current  date  " + this.currentDate)
     console.log("today   date  " + this.todayDate)
 
-   
 
-   
+
+
 
 
     //getAppointment
     this.getAppointment();
 
     var calendarEl = this.calendar.nativeElement;
-    
+
 
     setTimeout(() => {
       this.appService.getAppointmentById(this.loginId).subscribe(
@@ -91,8 +91,8 @@ export class DailyviewComponent implements OnInit {
               let myDate2 = new Date(dateStr2);
               //myDate.setHours(result.start_date.getHours());
 
-              this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id,groupId:result.type, })
-               //console.log("search event is " + this.Events)
+              this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type, })
+              //console.log("search event is " + this.Events)
 
             }
             console.log("sch " + result.schedules)
@@ -146,24 +146,26 @@ export class DailyviewComponent implements OnInit {
 
 
 
-          
-          if(appType != "PUBLIC") {
+
+          if (appType != "PUBLIC") {
             this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
-              (data : any) => {
-               
+              (data: any) => {
+                if (data) {
+                  this.router.navigate(['/view_only_appointment', id]);
+                }
               }, error => {
                 alert("this appointment is private and you are not in there")
               }
             );
           } else {
-            if(data) {
-              
-              if (arg.event.end <= this.currentDate) {
-                console.log("Input date is less than current date.");
-              } else {
-                this.router.navigate(['/view_only_appointment',id]);
-              }
+
+
+            if (arg.event.end <= this.currentDate) {
+              console.log("Input date is less than current date.");
+            } else {
+              this.router.navigate(['/view_only_appointment', id]);
             }
+
             //this.router.navigate(['/view_only_appointment',id])
           }
         },
@@ -179,7 +181,7 @@ export class DailyviewComponent implements OnInit {
 
     }, 1500);
 
-    console.log("222222 "+this.Events);
+    console.log("222222 " + this.Events);
 
   }
 
@@ -206,88 +208,93 @@ export class DailyviewComponent implements OnInit {
                   slotLabelFormat: { hour: 'numeric', minute: '2-digit', hour12: false }
                 }
               },
-              events:this.calEvent,
+              events: this.calEvent,
 
               eventClick: (arg) => {
                 let id = arg.event.id;
                 let appType = arg.event.groupId;
-                
-                if(appType != "PUBLIC") {
+
+                if (appType != "PUBLIC") {
                   this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
-                    (data : any) => {
-                      if(data) {
-                        this.router.navigate(['/view_only_appointment',id]);
+                    (data: any) => {
+                      if (data) {
+                        this.router.navigate(['/view_only_appointment', id]);
                       }
                     }, error => {
                       alert("this appointment is private and you are not in there")
                     }
                   );
                 } else {
-                  this.router.navigate(['/view_only_appointment',id])
+                  if (arg.event.end <= this.currentDate) {
+                    console.log("Input date is less than current date.");
+                  } else {
+                    this.router.navigate(['/view_only_appointment', id]);
+                  }
+                  //this.router.navigate(['/view_only_appointment', id])
                 }
               },
-        
+
               // events: [
-        
+
               //   {
               //     title: 'Meeting',
               //     start: '2023-01-22T18:40:00',
               //     end: '2023-01-22T18:50:00',
               //   },
-        
-        
+
+
               // ],
               // headerToolbar: {
               //   left: 'title',
               //   center: '',
               //   right: 'today prev,next',
               // },
-        
-        
-        
+
+
+
             });
             calendar2.render()
-            
+
           }, 1500);
-          
-         setTimeout(() => {
-          this.appService.getAppointmentById(userId).subscribe(
-            (appData: any) => {
-              if (appData == null) {
-                alert("this user has no appointments")
-              } else {
-                this.searchedApp = appData;
-                for (let result of this.searchedApp) {
-                  for (let r of result.schedules) {
-      
-                    console.log("date " + r.date)
-                    // console.log("time " + result.start_ti)
-      
-                    let dateStr: string = r.date + " " + r.start_time + ":00";
-                    let myDate = new Date(dateStr);
-      
-                    let dateStr2: string = r.date + " " + r.end_time + ":00";
-                    let myDate2 = new Date(dateStr2);
-                    //myDate.setHours(result.start_date.getHours());
-                    console.log("title searc is " + myDate)
-      
-                    this.calEvent.push({title: result.title, start: myDate, end: myDate2, id: result.appointment_id,groupId:result.type})
-      
+
+          setTimeout(() => {
+            this.appService.getAppointmentById(userId).subscribe(
+              (appData: any) => {
+                if (appData == null) {
+                  alert("this user has no appointments")
+                } else {
+                  this.searchedApp = appData;
+                  for (let result of this.searchedApp) {
+                    for (let r of result.schedules) {
+
+                      console.log("date " + r.date)
+                      // console.log("time " + result.start_ti)
+
+                      let dateStr: string = r.date + " " + r.start_time + ":00";
+                      let myDate = new Date(dateStr);
+
+                      let dateStr2: string = r.date + " " + r.end_time + ":00";
+                      let myDate2 = new Date(dateStr2);
+                      //myDate.setHours(result.start_date.getHours());
+                      console.log("title searc is " + myDate)
+
+                      this.calEvent.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type })
+
+
+                    }
 
                   }
-      
+                  //  console.log("search event is " + this.calEvent)
+
+
                 }
-                //  console.log("search event is " + this.calEvent)
-        
-               
+                console.log(this.calEvent);
               }
-              console.log(this.calEvent);
-            }
-            
-            
-          )
-          
-         }, 1000);
+
+
+            )
+
+          }, 1000);
         } else {
           this.searchedUser = new User();
           this.searchedUser.name = "";
@@ -297,7 +304,7 @@ export class DailyviewComponent implements OnInit {
         alert("user doesn't exist")
       }
     );
-    
+
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
