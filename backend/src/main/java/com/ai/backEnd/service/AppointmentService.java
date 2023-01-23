@@ -1,6 +1,8 @@
 package com.ai.backEnd.service;
 
 import java.util.List;
+
+import com.ai.backEnd.dto.ShowAppointment;
 import com.ai.backEnd.model.Appointment;
 import com.ai.backEnd.model.Schedule;
 
@@ -17,4 +19,6 @@ public interface AppointmentService {
 	List<Appointment> getByUserList(List<String> user_ids);
 	
 	List<Appointment> getByScheduleList(List<Schedule> schedules);
+
+    void updateAppointment(Appointment app);
 }
