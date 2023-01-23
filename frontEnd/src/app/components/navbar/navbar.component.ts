@@ -3,14 +3,9 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
 import { NotiService } from 'app/services/noti.service';
-import { data } from 'jquery';
-import { NotiModel } from 'app/model/noti-model';
 import { ShowAppointment } from 'app/model/show-appointment';
 import { User } from 'app/model/user';
-import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
 import { Subject, Subscription, switchMap, timer } from 'rxjs';
-import { constrainPoint } from '@fullcalendar/core/internal';
-import React from 'react';
 // import { NotiModel } from 'app/model/noti-model';
 
 

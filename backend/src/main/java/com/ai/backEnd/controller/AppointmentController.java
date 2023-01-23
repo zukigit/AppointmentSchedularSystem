@@ -1,6 +1,8 @@
 package com.ai.backEnd.controller;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.ai.backEnd.dto.ShowAppointment;
 import com.ai.backEnd.model.Appointment;
 import com.ai.backEnd.model.Notification;
+import com.ai.backEnd.model.Schedule;
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.serviceImpl.AppointmentImpl;
 import com.ai.backEnd.serviceImpl.NotificationImpl;
@@ -98,6 +101,29 @@ public class AppointmentController {
 		} else {
 			return new ResponseEntity<Boolean>(true, HttpStatus.OK);
 		}
+	}
+	
+	@GetMapping("/appointmentDetail")
+	public ResponseEntity<ShowAppointment> getAppointmentDetail(@PathVariable String appointment_id) {
+		Appointment appointment = appointmentService.getAppById(Integer.parseInt(appointment_id));
+		ShowAppointment showAppointment = new ShowAppointment();
+		List<LocalDate> dates = new ArrayList<>();
+		
+		for(Schedule schedule : appointment.getSchedules()) {
+			dates.add(schedule.getDate());
+		}
+		
+		showAppointment.setAppointment_id(appointment.getAppointment_id());
+		showAppointment.setTitle(appointment.getTitle());
+		showAppointment.setDescription(appointment.getDescription());
+		showAppointment.setType(appointment.getType());
+		showAppointment.setCreateUser(appointment.getCreateUser());
+		showAppointment.setStart_date(Collections.min(dates));
+		showAppointment.setStart_date(Collections.max(dates));
+		showAppointment.setEmployee(appointment.getEmployee());
+		showAppointment.setFiles(appointment.getFiles());
+			
+		return new ResponseEntity<ShowAppointment>(showAppointment, HttpStatus.OK);
 	}
 }
 
