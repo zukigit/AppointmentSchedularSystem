@@ -3,7 +3,7 @@
   <div class="sb-example-1">
     
       <form #form="ngForm" class="search"(submit)="searchAppByUserId(searchedUserId)">
-       <input type="text" [(ngModel)] = "searchedUserId" class="searchTerm" placeholder="Search Employee...">
+       <input type="text" [(ngModel)] = "searchedUserId" class="searchTerm" placeholder="Search by Employee ID">
        <button  type="submit" class="searchButton">
          <i class="fa fa-search"></i>
       </button>
@@ -18,16 +18,16 @@
     
  </div>
 
-
+ <span  class="containerLoader">
+  <span  class="loader"></span>
+  </span>
   <td>
     <div class="name">{{user.name}}</div>
-    
     <div #calendar #eventContent style="margin-top:20px; margin-left:10px; width: 520px; display: inline-block;">
     
 </div>
 </td>
 <td>
-
   <div  class="name" >{{searchedUser.name}}</div>
   <div  #calendar2 #eventContent style="margin-left:10px; margin-top:10px;width: 520px; display: inline-block;">
       
