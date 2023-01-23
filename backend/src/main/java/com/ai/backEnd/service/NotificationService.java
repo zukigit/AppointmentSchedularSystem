@@ -11,5 +11,6 @@ public interface NotificationService {
 
        Notification addNoti(Notification notification);
 
+       void deleteNoti(int id);
 
 }

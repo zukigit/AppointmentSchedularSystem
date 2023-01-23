@@ -1,11 +1,17 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotiService {
+
+  private count = 0;
+  private countSubject = new Subject<number>();
+  count$ = this.countSubject.asObservable();
+  private socket$ : WebSocketSubject<any>;
 
   private notificationCountSource = new BehaviorSubject<number>(0);
   notificationCount$ = this.notificationCountSource.asObservable();

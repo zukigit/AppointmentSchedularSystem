@@ -3,6 +3,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+import com.ai.backEnd.model.AppointmentFile;
 import com.ai.backEnd.model.AppointmentType;
 import com.ai.backEnd.model.Schedule;
 import com.ai.backEnd.model.User;
@@ -13,9 +17,11 @@ public class ShowAppointment {
 	private int appointment_id;
     private String title;
     private String description;
+	@Enumerated(EnumType.STRING)
     private AppointmentType type;
     private User createUser;
-    
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM/dd/yyyy")
+	private LocalDate created_date;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
     private LocalDate start_date;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
@@ -25,7 +31,27 @@ public class ShowAppointment {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
     private LocalTime end_time;
     private List<Schedule> schedules;
+	private List<User> employee;
+	private List<AppointmentFile> files;
     
+	public LocalDate getCreated_date() {
+		return created_date;
+	}
+	public void setCreated_date(LocalDate created_date) {
+		this.created_date = created_date;
+	}
+	public List<User> getEmployee() {
+		return employee;
+	}
+	public void setEmployee(List<User> employee) {
+		this.employee = employee;
+	}
+	public List<AppointmentFile> getFiles() {
+		return files;
+	}
+	public void setFiles(List<AppointmentFile> files) {
+		this.files = files;
+	}
 	public int getAppointment_id() {
 		return appointment_id;
 	}

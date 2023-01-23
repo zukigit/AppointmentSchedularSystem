@@ -3,10 +3,9 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
 import { NotiService } from 'app/services/noti.service';
-import { data } from 'jquery';
-import { NotiModel } from 'app/model/noti-model';
 import { ShowAppointment } from 'app/model/show-appointment';
 import { User } from 'app/model/user';
+import { Subject, Subscription, switchMap, timer } from 'rxjs';
 // import { NotiModel } from 'app/model/noti-model';
 
 
@@ -37,24 +36,35 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
     appointment: ShowAppointment = new ShowAppointment();
+    
+    bindData: any;
+    temData: any;
+    notiCount: number = 0;
 
     // notificationCount$ = this.notiService.notificationCount$;
 
     constructor(location: Location,  private element: ElementRef, private router: Router,private notiService : NotiService) {
       this.location = location;
           this.sidebarVisible = false;
+
+          
     }
 
-    noti :any=[];
+    notiNew : ["new", "0"];
+    notiArray: any [];
     loginId : string;
     user : User = new User();
-     count : number = 0;
 
+    count :number =0;
+
+    realTimeDataSubscription$: Subscription;
+
+    
     ngOnInit(){
       this.loginId = localStorage.getItem("loggedInUserId");
 
-      this.getNotification();
-        // this.menuItems = ROUTES.filter(menuItem => menuItem);
+      this.realTimeData();
+
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
@@ -67,25 +77,21 @@ export class NavbarComponent implements OnInit {
          }
      });
     }
-    //go to dashboard with router
+
+    realTimeData() {
+        this.realTimeDataSubscription$ = timer(0, 100)
+          .pipe(switchMap(_ => this.notiService.getNoti(this.loginId)))
+          .subscribe(res => {
+            this.temData = res;
+            if(this.temData.length > this.notiCount) {
+                this.bindData = res;
+                this.notiCount = this.temData.length;
+            }
+          });
+      }
+
     goToDashboard(){
         this.router.navigate(['admin/dashboard'])
-    }
-
-    getNotification(){
-        this.notiService.getNoti(this.loginId).subscribe(data=>this.noti = data);
-
-        // this.noti = this.appointment.createUser.name + " created the appointment" ;
-        
-        console.log(this.noti);
-    }
-
-    countNoti(count : number){
-        if(this.noti+1){
-            return count=+1;
-        }else{
-            return count;
-        }
     }
 
     sidebarOpen() {
@@ -106,8 +112,6 @@ export class NavbarComponent implements OnInit {
         body.classList.remove('nav-open');
     };
     sidebarToggle() {
-        // const toggleButton = this.toggleButton;
-        // const body = document.getElementsByTagName('body')[0];
         var $toggle = document.getElementsByClassName('navbar-toggler')[0];
 
         if (this.sidebarVisible === false) {

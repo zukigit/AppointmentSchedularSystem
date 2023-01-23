@@ -46,4 +46,6 @@ public interface UserRespositroy extends JpaRepository<User, String>{
 	@Query("SELECT new com.ai.backEnd.dto.UserDetail(u.employee_id, u.name,u.role, t.team_name, d.department_name, t.team_id) FROM User u join Team t on u.team.team_id = t.team_id join Department d on d.department_id = t.department.department_id"
 			+ " WHERE u NOT IN (:users)")
 	List<UserDetail> getAvaliableUsers(List<User> users);
+
+	
 }

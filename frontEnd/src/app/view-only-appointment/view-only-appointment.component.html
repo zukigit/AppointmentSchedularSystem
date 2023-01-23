@@ -9,25 +9,18 @@
     <title>Student Registration Form In Bootstrap 5 </title>
 
   </head>
-  <body>
+  <body >
     <div class="container">
 
       <form class="bg-light p-4 m-auto" action="#">
         <div class="title">Appointment Detail</div>
 
-
-
-
-
-
-
-            <!-- Title -->
         <div class="row mb-3" style="margin-bottom: 30px;">
           <div class="col-lg-2">
             <p>Title</p>
           </div>
           <div class="col-lg-5">
-            <span>Department Level Meeting</span>
+            <span>{{res.title}}</span>
           </div>
 
         </div>
@@ -38,19 +31,18 @@
             <p>Description</p>
           </div>
           <div class="col-lg-5">
-            <span>Let's discuss the best way to set a new project!</span>
+            <span>{{res.description}}</span>
           </div>
         </div>
 
         <!-- Start Time&End Time -->
 
-
-        <div class="row mb-3" style="margin-bottom: 30px;">
+         <div class="row mb-3" style="margin-bottom: 30px;" >
           <div class="col-lg-2">
             <p>Start Time</p>
           </div>
           <div class="col-lg-5">
-            <span>7:00AM</span>
+            <span>{{start_time}}</span>
           </div>
 
           </div>
@@ -61,7 +53,7 @@
               <p>End Time</p>
             </div>
             <div class="col-lg-5">
-              <span>9:00AM</span>
+              <span >{{end_time}}</span>
             </div>
 
             </div>
@@ -75,7 +67,7 @@
                 <p>Start Date</p>
               </div>
               <div class="col-lg-5">
-                <span>1.2.2023</span>
+                <!-- <span>{{res.date}}</span> -->
               </div>
 
               </div>
@@ -88,16 +80,15 @@
                   <span>1.2.2023</span>
                 </div>
 
-                </div>
-
+              </div>
                 <!-- Privacy -->
 
                 <div class="row mb-3">
                   <div class="col-lg-2">
                     <p>Privacy</p>
                   </div>
-                  <div class="col-lg-5">
-                    <span>Public</span>
+                  <div class="col-lg-5" >
+                    <span>{{res.type}}</span>
                   </div>
 
                   </div>
@@ -108,7 +99,7 @@
                     <p>Attached File</p>
                   </div>
                   <div class="col-lg-5">
-                    <span>meeting.pptx</span>
+                    <!-- <span>{{res.file}}</span> -->
                   </div>
 
                   </div>

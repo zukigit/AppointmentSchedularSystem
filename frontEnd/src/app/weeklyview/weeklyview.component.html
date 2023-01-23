@@ -1,12 +1,14 @@
 <div class='demo-app-main'>
 
   <div class="sb-example-1">
-    <span class="search">
-       <input type="text" class="searchTerm" placeholder="Search Employee...">
-       <button type="submit" class="searchButton">
+    <div class="search">
+      <form #form="ngForm" (submit)="searchAppByUserId(searchedUserId)">
+       <input type="text" [(ngModel)] = "searchedUserId" class="searchTerm" placeholder="Search Employee...">
+       <button  type="submit" class="searchButton">
          <i class="fa fa-search"></i>
       </button>
-    </span>
+      </form>
+    </div>
     
     <span class="memTad">
       <a href="#"><i class="fa fa-trash" style="font-size: 14px;"></i>Remove Member</a>
@@ -28,7 +30,7 @@
   <table>
     <tr>
       <td>
-        <div class="name">Name : {{user.name}}</div>
+        <!-- <div class="name">Name : {{user.name}}</div> -->
         <div #calendar style="width: 1000px; display: inline-block;">
           <ng-template #eventContent  let-arg>
           </ng-template>
@@ -37,7 +39,7 @@
     </tr>
     <tr >
       <td>
-        <div class="name">Searched Name </div>
+        <div  class="name" >{{searchedUser.name}}</div>
         <div #calendar2 >
           <ng-template #eventContent  let-arg>
           </ng-template>

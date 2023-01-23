@@ -1,5 +1,6 @@
 package com.ai.backEnd.serviceImpl;
 
+import com.ai.backEnd.dto.ShowAppointment;
 import com.ai.backEnd.model.Appointment;
 import com.ai.backEnd.model.Schedule;
 import com.ai.backEnd.repository.AppointmentRepository;
@@ -40,6 +41,8 @@ public class AppointmentImpl implements AppointmentService {
 	public List<Appointment> getByUserList(List<String> user_ids) {
 		return repo.getByUserList(user_ids);
 	}
+
+	
 	@Override
 	public List<Appointment> getByScheduleList(List<Schedule> schedules) {
 		List<LocalDate> dates = new ArrayList<>();
@@ -63,5 +66,9 @@ public class AppointmentImpl implements AppointmentService {
 			}
 		}
 		return timeCheckedAppointments;
+	}
+	@Override
+	public void updateAppointment(Appointment app) {
+		repo.save(app);
 	}
 }

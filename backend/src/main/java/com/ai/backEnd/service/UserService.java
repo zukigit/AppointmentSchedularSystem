@@ -17,8 +17,11 @@ public interface UserService {
 	void deleteUserById(String employee_id);
 	
 	List<UserDetail> userDetail();
+
 	UserDetailForUpdate searchById(String searchKey);
+
 	List<UserDetail> searchByNameOrId(String searchKey);
+	
 	List<UserDetail> seacrhByDepartmentName(String searchKey);
 
 	List<UserDetail> searchByTeamName(String searchKey);

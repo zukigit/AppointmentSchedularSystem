@@ -75,9 +75,9 @@
         </div>
         <h3 class="gender-details">Select your Gender</h3>
         <div  class="category">
-          Male<input type="radio" class="gender" name="gender" [(ngModel)]="user.gender" value="Male" required>
-          Female<input type="radio" class="gender" name="gender" [(ngModel)]="user.gender" value="Female" required>
-          Other<input type="radio" class="gender" name="gender" [(ngModel)]="user.gender" value="Other" required>
+         <input type="radio" class="gender" name="gender" [(ngModel)]="user.gender" value="Male" required> Male
+          <input type="radio" class="gender" name="gender" [(ngModel)]="user.gender" value="Female" required>Female
+          <input type="radio" class="gender" name="gender" [(ngModel)]="user.gender" value="Other" required>Other
         </div>
         <span
             *ngIf="form.controls['gender'].invalid && (form.controls['gender'].dirty || form.controls['gender'].touched)"></span>
