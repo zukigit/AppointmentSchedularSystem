@@ -17,7 +17,6 @@ import com.ai.backEnd.dto.NotificationDTO;
 import com.ai.backEnd.model.Notification;
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.serviceImpl.NotificationImpl;
-import com.ai.backEnd.serviceImpl.UserImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -27,9 +26,6 @@ public class NotificationController {
 	
 	@Autowired
 	private NotificationImpl notiService;
-	
-	@Autowired
-	private UserImpl userService;
 	
 	// @GetMapping(value ="/getNoti/{employee_id}")
 	// public List<Notification> getNoti(@PathVariable String employee_id){
@@ -59,9 +55,14 @@ public class NotificationController {
 			nf.setId(notification.getId());
 			nf.setTitle(notification.getAppointment().getTitle());
 			nf.setCreateUser(createUser);
+			nf.setNotiType(notification.getNoti_type());
 			notify.add(nf);
 		}
 		return new ResponseEntity<List<NotificationDTO>>(notify, HttpStatus.OK);
+	}
+
+	public void deleteNoti(int id){
+		notiService.deleteNoti(id);
 	}
 		
 }

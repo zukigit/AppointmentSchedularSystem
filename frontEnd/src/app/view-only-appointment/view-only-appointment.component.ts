@@ -13,7 +13,6 @@ import { AppointmentService } from 'app/services/appointment.service';
 export class ViewOnlyAppointmentComponent implements OnInit {
   id:string ;
 
-  app_id : string = "9";
   res :ShowAppointment;
  
   user : User [];  
@@ -21,35 +20,20 @@ export class ViewOnlyAppointmentComponent implements OnInit {
   appointment : ShowAppointment[];
   employee : any = [];
 
+  new_Date: Date = new Date();
+  start_time : string;
+  end_time: string ;
+
   constructor(private route: ActivatedRoute,private appService:AppointmentService) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
 
-    console.log(this.res.employees+"dte")
-
-    this.employee = new User()
-
-    this.appService.viewOnlyAppointmentById(this.id).subscribe(
-      (res : any) => {console.log("get app data is " + res),this.res = res},
-      error => console.log("get app error " + error))
-     
-
-    this.getApp();
+    this.employee = new User();
+      this.appService.viewOnlyAppointmentById(this.id).subscribe(
+        (res : any) => {console.log("get app data is " + res),this.res = res},
+        error => console.log("get app error " + error))
+      // this.res.end_time.toLocaleString() = this.end_time;
   }
-
-  getApp(){
-    this.appService.viewOnlyAppointmentById(this.id).subscribe(
-    (res : any) => {console.log("get app data is " + res),this.res = res},
-    error => console.log("get app error " + error))
-    console.log(this.res.employees+"dte")
-
-    // this.appService.viewOnlyAppointmentById(this.id).subscribe(this.res.employees = this.employee );
-  }
-
-  // getAppbyId(){
-  //   this.appService.getAppointmentByAppId(this.app_id).subscribe( data=> this.appDatas =data);
-   
-  // }
 
 }

@@ -1,5 +1,6 @@
 package com.ai.backEnd.repository;
 
+import com.ai.backEnd.dto.ShowAppointment;
 import com.ai.backEnd.model.Appointment;
 import java.time.LocalDate;
 import java.util.List;
@@ -19,4 +20,5 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 //	@Query("SELECT a FROM Appointment a JOIN a.schedules s WHERE s.date IN (:dates) AND s.end_time > :start_time AND s.start_time < :end_time")
 	@Query("SELECT a FROM Appointment a JOIN a.schedules s WHERE s.date IN (:dates)")
 	List<Appointment> getByScheduleList(List<LocalDate> dates);
+
 }

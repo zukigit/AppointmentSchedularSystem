@@ -9,11 +9,12 @@
     <title>Student Registration Form In Bootstrap 5 </title>
 
   </head>
-  <body (ngModel)="getApp()">
+  <body >
     <div class="container">
+
       <form class="bg-light p-4 m-auto" action="#">
         <div class="title">Appointment Detail</div>
-            <!-- Title -->
+
         <div class="row mb-3" style="margin-bottom: 30px;">
           <div class="col-lg-2">
             <p>Title</p>
@@ -41,7 +42,7 @@
             <p>Start Time</p>
           </div>
           <div class="col-lg-5">
-            <!-- <span>{{res.schedules.start_time}}</span> -->
+            <span>{{start_time}}</span>
           </div>
 
           </div>
@@ -52,7 +53,7 @@
               <p>End Time</p>
             </div>
             <div class="col-lg-5">
-              <!-- <span >{{res.schedules.end_time}}</span> -->
+              <span >{{end_time}}</span>
             </div>
 
             </div>
@@ -126,6 +127,7 @@
                   </tr>
 
                 </thead>
+
                 <tbody>
                   <tr>
                     <th scope="row">1</th>

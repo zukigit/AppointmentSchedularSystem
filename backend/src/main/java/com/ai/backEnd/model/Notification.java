@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +24,9 @@ public class Notification implements Serializable
 	@Column(length=8129)
 	private String description;
 
+	@Enumerated(EnumType.STRING)
+	private NotificationType noti_type;
+
 	@Column(columnDefinition = "tinyint(1) default 0")
     private boolean deleteStatus ;
 	
@@ -34,25 +39,10 @@ public class Notification implements Serializable
     private Appointment Appointment;
     
 
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-	// public String getUid() {
-	// 	return uid;
-	// }
-
-	// public void setUid(String uid) {
-	// 	this.uid = uid;
-	// }
-
-	// public Integer getPid() {
-	// 	return pid;
-	// }
-
-	// public void setPid(Integer pid) {
-	// 	this.pid = pid;
-	// }
 
 	private String status;
 	
@@ -103,9 +93,14 @@ public class Notification implements Serializable
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
 
-	
+	public NotificationType getNoti_type() {
+		return noti_type;
+	}
+
+	public void setNoti_type(NotificationType noti_type) {
+		this.noti_type = noti_type;
+	}
 	
 	
 }

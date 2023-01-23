@@ -3,11 +3,7 @@ package com.ai.backEnd.serviceImpl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
-import com.ai.backEnd.model.Appointment;
 import com.ai.backEnd.model.Notification;
-import com.ai.backEnd.model.User;
 import com.ai.backEnd.repository.NotificationRepository;
 import com.ai.backEnd.service.NotificationService;
 
@@ -46,6 +42,12 @@ public class NotificationImpl implements NotificationService{
 @Override
 public List<Notification> getNotiByUser(List<String> user_ids) {
 	return repo.getNotiByUser(user_ids);
+}
+
+@Override
+public void deleteNoti(int id) {
+     repo.deleteById(id);
+	
 }
 
 }
