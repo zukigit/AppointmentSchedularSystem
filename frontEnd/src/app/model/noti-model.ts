@@ -8,5 +8,6 @@ export class NotiModel {
 
     description : string;
     id : string;
+    type : string;
 
 }

@@ -103,7 +103,7 @@ public class AppointmentController {
 		}
 	}
 	
-	@GetMapping("/appointmentDetail")
+	@GetMapping("/appointmentDetail/{appointment_id}")
 	public ResponseEntity<ShowAppointment> getAppointmentDetail(@PathVariable String appointment_id) {
 		Appointment appointment = appointmentService.getAppById(Integer.parseInt(appointment_id));
 		ShowAppointment showAppointment = new ShowAppointment();
@@ -119,7 +119,7 @@ public class AppointmentController {
 		showAppointment.setType(appointment.getType());
 		showAppointment.setCreateUser(appointment.getCreateUser());
 		showAppointment.setStart_date(Collections.min(dates));
-		showAppointment.setStart_date(Collections.max(dates));
+		showAppointment.setEnd_date(Collections.max(dates));
 		showAppointment.setEmployee(appointment.getEmployee());
 		showAppointment.setFiles(appointment.getFiles());
 			
