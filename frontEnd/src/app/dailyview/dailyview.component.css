@@ -67,13 +67,13 @@ h2 {
   .sb-example-1 .search {
     margin-top: 100px;
     margin-bottom: 0px;
-    width: 30%;
+    width: 100%;
     position: relative;
     display: flex;
     height: 30px;
   }
   .sb-example-1 .searchTerm {
-    width: 100%;
+    width: 30%;
     border: 3px solid #435d7d;
     border-right: none;
     padding: 5px;

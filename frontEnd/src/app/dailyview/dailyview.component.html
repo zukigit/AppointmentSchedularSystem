@@ -1,28 +1,27 @@
 <div class='demo-app-main'>
 
   <div class="sb-example-1">
-    <div class="search">
-      <form #form="ngForm" (submit)="searchAppByUserId(searchedUserId)">
+    
+      <form #form="ngForm" class="search"(submit)="searchAppByUserId(searchedUserId)">
        <input type="text" [(ngModel)] = "searchedUserId" class="searchTerm" placeholder="Search Employee...">
        <button  type="submit" class="searchButton">
          <i class="fa fa-search"></i>
       </button>
+      <span class="memTad">
+        <a href="#"><i class="fa fa-trash" style="font-size: 14px;"></i>Remove Member</a>
+        <a href="#"><i class="fa fa-chevron-left" style="font-size: 14px;"></i>Previous Member</a>
+        <a href="#">Next Member <i class="fa fa-chevron-right" style="font-size: 14px;"></i></a>
+    </span>
       </form>
-    </div>
+
+      
+    
  </div>
 
-<div class="add">
-    <!-- <button class="add-app-button" (click)="goToAppRegister()" ><span>Add Appointment</span></button> -->
 
-<span class="memTad">
-    <a href="#"><i class="fa fa-trash" style="font-size: 14px;"></i>Remove Member</a>
-    <a href="#"><i class="fa fa-chevron-left" style="font-size: 14px;"></i>Previous Member</a>
-    <a href="#">Next Member <i class="fa fa-chevron-right" style="font-size: 14px;"></i></a>
-</span>
-</div>
   <td>
-    <!-- <h1 class="name">Name : {{user.name}}</h1> -->
-    <!-- <div> {{user.name}}</div> -->
+    <div class="name">{{user.name}}</div>
+    
     <div #calendar #eventContent style="margin-top:20px; margin-left:10px; width: 520px; display: inline-block;">
     
 </div>
