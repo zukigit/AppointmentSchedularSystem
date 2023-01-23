@@ -8,7 +8,9 @@ import { NotiModel } from 'app/model/noti-model';
 import { ShowAppointment } from 'app/model/show-appointment';
 import { User } from 'app/model/user';
 import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
-import { Subject } from 'rxjs';
+import { Subject, Subscription, switchMap, timer } from 'rxjs';
+import { constrainPoint } from '@fullcalendar/core/internal';
+import React from 'react';
 // import { NotiModel } from 'app/model/noti-model';
 
 
@@ -39,6 +41,8 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
     appointment: ShowAppointment = new ShowAppointment();
+    
+    bindData: any;
 
     // notificationCount$ = this.notiService.notificationCount$;
 
@@ -46,21 +50,24 @@ export class NavbarComponent implements OnInit {
       this.location = location;
           this.sidebarVisible = false;
 
+          
     }
 
-    noti :any=[];
+    notiNew : ["new", "0"];
+    notiArray: any [];
     loginId : string;
     user : User = new User();
 
-    count = 0;
+    count :number =0;
+
+    realTimeDataSubscription$: Subscription;
+
     
     ngOnInit(){
       this.loginId = localStorage.getItem("loggedInUserId");
 
-      this.getNotification();
-      this.notiCount();
+      this.realTimeData();
 
-      // this.menuItems = ROUTES.filter(menuItem => menuItem);
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
@@ -73,23 +80,17 @@ export class NavbarComponent implements OnInit {
          }
      });
     }
-    //go to dashboard with router
+
+    realTimeData() {
+        this.realTimeDataSubscription$ = timer(0, 100)
+          .pipe(switchMap(_ => this.notiService.getNoti(this.loginId)))
+          .subscribe(res => {
+            this.bindData = res;
+          });
+      }
+
     goToDashboard(){
         this.router.navigate(['admin/dashboard'])
-    }
-
-    getNotification(){
-        this.notiService.getNoti(this.loginId).subscribe(data=>this.noti = data);
-
-        // this.noti = this.appointment.createUser.name + " created the appointment" ;
-        
-        console.log(this.noti);
-    }
-
-    notiCount(){
-        this.notiService.getNoti(this.loginId).subscribe(data=>this.noti = data);
-
-        return this.noti.length == this.count;
     }
 
     sidebarOpen() {
@@ -110,8 +111,6 @@ export class NavbarComponent implements OnInit {
         body.classList.remove('nav-open');
     };
     sidebarToggle() {
-        // const toggleButton = this.toggleButton;
-        // const body = document.getElementsByTagName('body')[0];
         var $toggle = document.getElementsByClassName('navbar-toggler')[0];
 
         if (this.sidebarVisible === false) {

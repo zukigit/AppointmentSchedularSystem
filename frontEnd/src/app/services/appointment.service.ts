@@ -41,11 +41,7 @@ export class AppointmentService {
   
   
   viewOnlyAppointmentById(id: string): Observable<ShowAppointment[]> {  
-    return this.http.get<ShowAppointment[]>(`${this.baseUrl}/getViewApp/${id}`, this.header);  
-  }
-
-  getAppointmentByAppId(id:string) : Observable<Object[]>{
-    return this.http.get<Object[]>(`http://localhost:8080/api/v1/getAppById/${id}`,this.header);
+    return this.http.get<ShowAppointment[]>(`${this.baseUrl}/getAppById/${id}`, this.header);  
   }
 
   checkUserInclude(id: string, appoointmentId : number): Observable<boolean> {

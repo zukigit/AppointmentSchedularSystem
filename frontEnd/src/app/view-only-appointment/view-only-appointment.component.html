@@ -51,7 +51,7 @@
             <p>Start Time</p>
           </div>
           <div class="col-lg-5">
-            <span>{{res.start_time}}</span>
+            <!-- <span>{{res.schedules.start_time}}</span> -->
           </div>
 
           </div>
@@ -62,7 +62,7 @@
               <p>End Time</p>
             </div>
             <div class="col-lg-5">
-              <!-- <span >{{res.schdules.end_time}}</span> -->
+              <!-- <span >{{res.schedules.end_time}}</span> -->
             </div>
 
             </div>
@@ -76,7 +76,7 @@
                 <p>Start Date</p>
               </div>
               <div class="col-lg-5">
-                <span>{{res.date}}</span>
+                <!-- <span>{{res.date}}</span> -->
               </div>
 
               </div>
@@ -139,11 +139,11 @@
 
                 <tbody >
                   <tr >
-                    <td >1</td>
+                    <td >{{res.employees.employee_id}}</td>
                     <td class="circular--portrait" >   <img src="/assets/img/userImage1.jpg" style="border-radius: 100%;"/></td>
-                     <td>{{res.createUser.name}}</td>
-                    <td> {{res.createUser.department_name}}</td>
-                    <td>{{res.createUser.team_name}}</td>
+                     <td>{{res.employees.name}}</td>
+                    <td> {{res.createUser.team.department.department_name}}</td>
+                    <td>{{res.createUser.team.team_name}}</td>
                   </tr>
                 </tbody>
 

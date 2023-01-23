@@ -22,19 +22,7 @@ export class NotiService {
       .set('Authorization',  `Bearer ${this.jwtToken}`)
   }
 
-  constructor(private http:HttpClient) { 
-    this.socket$ = webSocket('ws://localhost:8080/ws');
-    this.socket$.subscribe(
-      (message)=> {
-        if(message.type === 'new_data'){
-          this.count = message.count;
-          this.countSubject.next(this.count);
-        }
-      },
-      (err) => console.log(err),
-      () => console.log('complete')
-    );
-   }
+  constructor(private http:HttpClient) { }
 
   private baseUrl = `http://localhost:8080/api/v1`;
 

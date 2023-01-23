@@ -54,6 +54,7 @@
     "moment": "^2.29.4",
     "perfect-scrollbar": "1.5.5",
     "popper.js": "1.16.1",
+    "react": "^18.2.0",
     "rxjs": "~7.5.0",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^11.6.16",

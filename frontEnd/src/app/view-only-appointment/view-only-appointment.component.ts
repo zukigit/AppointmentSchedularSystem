@@ -19,13 +19,21 @@ export class ViewOnlyAppointmentComponent implements OnInit {
   user : User [];  
   schedule : Schdule[];
   appointment : ShowAppointment[];
-
-
+  employee : any = [];
 
   constructor(private route: ActivatedRoute,private appService:AppointmentService) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
+
+    console.log(this.res.employees+"dte")
+
+    this.employee = new User()
+
+    this.appService.viewOnlyAppointmentById(this.id).subscribe(
+      (res : any) => {console.log("get app data is " + res),this.res = res},
+      error => console.log("get app error " + error))
+     
 
     this.getApp();
   }
@@ -34,7 +42,9 @@ export class ViewOnlyAppointmentComponent implements OnInit {
     this.appService.viewOnlyAppointmentById(this.id).subscribe(
     (res : any) => {console.log("get app data is " + res),this.res = res},
     error => console.log("get app error " + error))
-    console.log(this.res)
+    console.log(this.res.employees+"dte")
+
+    // this.appService.viewOnlyAppointmentById(this.id).subscribe(this.res.employees = this.employee );
   }
 
   // getAppbyId(){
