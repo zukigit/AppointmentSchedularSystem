@@ -20,6 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.ai.backEnd.dto.ShowAppointment;
 import com.ai.backEnd.model.Appointment;
 import com.ai.backEnd.model.Notification;
+import com.ai.backEnd.model.NotificationType;
 import com.ai.backEnd.model.Schedule;
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.serviceImpl.AppointmentImpl;
@@ -53,6 +54,7 @@ public class AppointmentController {
 			noti.setUser(user);
 			noti.setDescription(appointment.getDescription());
 			noti.setDeleteStatus(false);
+			noti.setNoti_type(NotificationType.CREATE_APP);
 			notiService.addNoti(noti);
 		}
 		return new ResponseEntity<>(appointment.getAppointment_id().toString(), HttpStatus.OK);
