@@ -12,6 +12,7 @@ import { AppointmentService } from 'app/services/appointment.service';
 import { ShowAppointment } from 'app/model/show-appointment';
 import { resolveSoa } from 'dns';
 import { Schdule } from 'app/model/schdule';
+import { DatePipe } from '@angular/common';
 
 import { data, error, event } from 'jquery';
 import { info } from 'console';
@@ -38,8 +39,12 @@ export class DailyviewComponent implements OnInit {
   searchedUser: User = new User();
   searchedUserId: string;
 
+  currentDate:Date = new Date();
+  todayDate:Date = new Date("01/23/2023");
+  
 
-  constructor(private changeDetector: ChangeDetectorRef, private router: Router, private userService: UserService, private appService: AppointmentService) {
+
+  constructor(private datePipe: DatePipe,private changeDetector: ChangeDetectorRef, private router: Router, private userService: UserService, private appService: AppointmentService) {
 
   };
   header: any;
@@ -54,6 +59,14 @@ export class DailyviewComponent implements OnInit {
 
   ngOnInit() {
     this.loginId = localStorage.getItem("loggedInUserId");
+    // this.todayDate = this.datePipe.transform(this.currentDate, 'MM/dd/yyyy');
+    console.log("current  date  " + this.currentDate)
+    console.log("today   date  " + this.todayDate)
+
+   
+
+   
+
 
     //getAppointment
     this.getAppointment();
@@ -78,12 +91,11 @@ export class DailyviewComponent implements OnInit {
               let myDate2 = new Date(dateStr2);
               //myDate.setHours(result.start_date.getHours());
 
-              this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id,groupId:result.type })
+              this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id,groupId:result.type, })
                //console.log("search event is " + this.Events)
 
             }
             console.log("sch " + result.schedules)
-
           }
 
           console.log(this.Events);
@@ -129,19 +141,30 @@ export class DailyviewComponent implements OnInit {
         eventClick: (arg) => {
           let id = arg.event.id;
           let appType = arg.event.groupId;
+          console.log("event click date is " + arg.event.end)
+          console.log("current click date is " + this.currentDate)
+
+
+
           
           if(appType != "PUBLIC") {
             this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
               (data : any) => {
-                if(data) {
-                  this.router.navigate(['/view_only_appointment',id]);
-                }
+               
               }, error => {
                 alert("this appointment is private and you are not in there")
               }
             );
           } else {
-            this.router.navigate(['/view_only_appointment',id])
+            if(data) {
+              
+              if (arg.event.end <= this.currentDate) {
+                console.log("Input date is less than current date.");
+              } else {
+                this.router.navigate(['/view_only_appointment',id]);
+              }
+            }
+            //this.router.navigate(['/view_only_appointment',id])
           }
         },
 
