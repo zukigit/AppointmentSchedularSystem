@@ -11,18 +11,8 @@
   </head>
   <body (ngModel)="getApp()">
     <div class="container">
-
-      <form class="bg-light p-4 m-auto" action="#" >
-        <div class="title">Registered Appointment</div>
-
-        <div class="icons text-center">
-          <i class="fa fa-calendar" aria-hidden="true" style="color: #F4BE2C; font-size:60px; "></i>
-        </div>
-
-
-
-
-
+      <form class="bg-light p-4 m-auto" action="#">
+        <div class="title">Appointment Detail</div>
             <!-- Title -->
         <div class="row mb-3" style="margin-bottom: 30px;">
           <div class="col-lg-2">
@@ -136,14 +126,21 @@
                   </tr>
 
                 </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td class="circular--portrait" >   <img class="thumbnail" height="100" width="100" src="/assets/img/userImage1.jpg" style="border-radius: 100%;"/></td>
+                     <td>Selena</td>
+                    <td> Offshore</td>
+                    <td>TEAM-1</td>
+                  </tr>
 
-                <tbody >
-                  <tr >
-                    <td >{{res.employees.employee_id}}</td>
-                    <td class="circular--portrait" >   <img src="/assets/img/userImage1.jpg" style="border-radius: 100%;"/></td>
-                     <td>{{res.employees.name}}</td>
-                    <td> {{res.createUser.team.department.department_name}}</td>
-                    <td>{{res.createUser.team.team_name}}</td>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td class="circular--portrait" >   <img class="thumbnail" height="100" width="100" src="/assets/img/userImage2.jpg" style="border-radius: 100%;"/></td>
+                     <td>Selena</td>
+                    <td> Offshore</td>
+                    <td>TEAM-1</td>
                   </tr>
                 </tbody>
 
@@ -154,6 +151,7 @@
 
 
 <!-- button -->
+<div style="text-align:center;">
 
         <p class="btn" style="  background-color:#0d6efd; text-align: right; color: white; text-align: center;">
           <span>Update Appointment</span>
@@ -164,7 +162,7 @@
         <p class="btn" style="  background-color:#d42c34;color: white; text-align: center;">
           <span>Delete Appointment</span>
         </p>
-
+      </div>
 
         <!-- <button type="button" class="btn btn-custom btn-lg btn-block">Send Now</button> -->
       </form>
