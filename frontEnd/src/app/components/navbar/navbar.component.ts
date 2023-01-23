@@ -38,6 +38,8 @@ export class NavbarComponent implements OnInit {
     appointment: ShowAppointment = new ShowAppointment();
     
     bindData: any;
+    temData: any;
+    notiCount: number = 0;
 
     // notificationCount$ = this.notiService.notificationCount$;
 
@@ -80,7 +82,11 @@ export class NavbarComponent implements OnInit {
         this.realTimeDataSubscription$ = timer(0, 100)
           .pipe(switchMap(_ => this.notiService.getNoti(this.loginId)))
           .subscribe(res => {
-            this.bindData = res;
+            this.temData = res;
+            if(this.temData.length > this.notiCount) {
+                this.bindData = res;
+                this.notiCount = this.temData.length;
+            }
           });
       }
 
