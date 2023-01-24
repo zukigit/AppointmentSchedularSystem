@@ -69,6 +69,12 @@ export class AppRegisterComponent implements OnInit {
   endHour: string;
   endMinute: string;
 
+  temStartHour: string;
+  temStartMinute: string;
+
+  temEndHour: string;
+  temEndMinute: string;
+
   name = 'Angular';
   private sourceDevice: AssignedDeviceCode[] = [];
   private confirmedUsers: Array<any>;
@@ -139,7 +145,6 @@ export class AppRegisterComponent implements OnInit {
     this.AssignDevice = this.user.filter(f => {
       return f.team_id == team.target.value
     });
-    console.log(this.AssignDevice);
     this.doReset();
   }
 
@@ -162,11 +167,6 @@ export class AppRegisterComponent implements OnInit {
     console.log(this.confirmedUsers);
     this.populateList();
 
-  }
-
-
-  private showLabel(item: any) {
-    return item.deviceCode;
   }
 
   addAppointment() {
@@ -226,15 +226,15 @@ export class AppRegisterComponent implements OnInit {
 
     const start_date = new Date(this.app.start_date);
     const end_date = new Date(this.app.end_date);
+    const startHour = this.startHour;
+    const endHour = this.endHour;
 
     for (let d = start_date; d <= end_date; d.setDate(d.getDate() + 1)) {
-      this.schedule = new Schdule();
-      this.schedule.date = this.datePipe.transform(d, 'MM/dd/yyyy');
-      this.app.start_time = this.startHour + ":" + this.startMinute;
-      this.app.end_time = this.endHour + ":" + this.endMinute;
-      this.schedule.start_time = this.app.start_time;
-      this.schedule.end_time = this.app.end_time;
-      this.schedules.push(this.schedule);
+      const schedule = new Schdule();
+      schedule.date = this.datePipe.transform(d, 'MM/dd/yyyy');
+      schedule.start_time = startHour + ":" + this.startMinute;
+      schedule.end_time = endHour + ":" + this.endMinute;
+      this.schedules.push(schedule);
     }
   }
 
