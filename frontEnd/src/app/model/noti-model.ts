@@ -8,6 +8,7 @@ export class NotiModel {
 
     description : string;
     id : string;
-    type : string;
+    notiType : any;
 
+    text: "";
 }

@@ -31,18 +31,18 @@
             
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="margin-left:10px; margin-top:10px display inline-block;">
-                       
+                
                     <table>
                         <thead>
                             <th >Notification</th>
                         </thead>
                         <span *ngIf="bindData != null || bindData != undefined">
                         <tbody *ngFor="let data of bindData">
-                            <td class="dropdown-item">{{data.createUser.name}} created a appointment : {{data.title}} </td>
+                            <td class="dropdown-item">{{data.createUser.name}} {{data.notiType}} : {{data.title}}</td>
                         </tbody>
                         </span>
                     </table>
-                        
+              
                     </div>
                 </li>
                 <li class="nav-item dropdown">
