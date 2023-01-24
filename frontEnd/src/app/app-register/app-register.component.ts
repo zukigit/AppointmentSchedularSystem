@@ -6,7 +6,6 @@ import { Team } from 'app/model/team';
 import { User } from 'app/model/user';
 import { AppointmentService } from 'app/services/appointment.service';
 import { UserService } from 'app/services/user.service';
-import { retry } from 'rxjs';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { Route, Router } from '@angular/router';
 
@@ -49,7 +48,7 @@ export class AppRegisterComponent implements OnInit {
   department: any = [];
   team: any = [];
   user: any = [];
-
+  showUserLength : string = "+ Avaliable Employee : " + `${this.user.length}`;
   startTime: string;
   endTime: string;
 
@@ -228,12 +227,15 @@ export class AppRegisterComponent implements OnInit {
     const end_date = new Date(this.app.end_date);
     const startHour = this.startHour;
     const endHour = this.endHour;
+    const startMinute = this.startMinute;
+    const endMinute = this.endMinute;
+    let schedule : Schdule;
 
     for (let d = start_date; d <= end_date; d.setDate(d.getDate() + 1)) {
-      const schedule = new Schdule();
+      schedule = new Schdule();
       schedule.date = this.datePipe.transform(d, 'MM/dd/yyyy');
-      schedule.start_time = startHour + ":" + this.startMinute;
-      schedule.end_time = endHour + ":" + this.endMinute;
+      schedule.start_time = startHour + ":" + startMinute;
+      schedule.end_time = endHour + ":" + endMinute;
       this.schedules.push(schedule);
     }
   }
@@ -246,6 +248,7 @@ export class AppRegisterComponent implements OnInit {
         next: (data) => {
           this.schedules.length = 0;
           this.user = data;
+          this.showUserLength = "+ Avaliable Employee : " + `${this.user.length}`;
           console.log("user size" + this.user.length);
         }
       }

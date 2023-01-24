@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppointmentService } from 'app/services/appointment.service';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-appointment-detail-view',
@@ -10,24 +11,33 @@ import { AppointmentService } from 'app/services/appointment.service';
 export class AppointmentDetailViewComponent implements OnInit {
 
   res:any;
-id:string;
+  id:string;
+  files = [];
   constructor(private route: ActivatedRoute,private appService:AppointmentService) { }
-   HEROES = [
-    {id: 1, name:'Superman'},
-    {id: 2, name:'Batman'},
-    {id: 5, name:'BatGirl'},
-    {id: 3, name:'Robin'},
-    {id: 4, name:'Flash'}
-];
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.appService.viewOnlyAppointmentById(this.id).subscribe(
-      (res : any) => {console.log("get app data is " + res.employee),this.res = res;
-      console.log(this.res.employee)
-},
+      (res : any) => {
+        this.res = res;
+        this.files = res.files;
+        console.log(this.files);
+      },
       error => console.log("get app error " + error))
-
     }
 
+    downloadFile(fileId:number, type:string, fileName:string) {
+      let binaryData:any;
+      this.appService.fileDownload(407).subscribe(
+        data => {
+          let blob = new Blob([data], { type: type});
+          let downloadLink = document.createElement('a');
+          downloadLink.href = window.URL.createObjectURL(blob);
+          if (fileName)
+                downloadLink.setAttribute('download', fileName);
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+        }
+      )
+    }
 }

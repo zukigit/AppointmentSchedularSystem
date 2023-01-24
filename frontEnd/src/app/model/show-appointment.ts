@@ -12,5 +12,6 @@ export class ShowAppointment {
     start_date:string;
     end_date:string;
     schedules:Schdule[];
-    employee : User[]=[]
+    employee : User[]=[];
+    files = [];
 }

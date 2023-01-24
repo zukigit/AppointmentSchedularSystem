@@ -47,4 +47,10 @@ export class AppointmentService {
   checkUserInclude(id: string, appoointmentId : number): Observable<boolean> {
     return this.http.get<boolean>(`${this.baseUrl}/isUserIncludeInAppointment?employeeId=${id}&appointmentId=${appoointmentId}`, this.header);
   }
+
+  fileDownload(fileId:number) : Observable<Blob> {
+    const headers = new HttpHeaders()
+                                    .set('Authorization',  `Bearer ${this.jwtToken}`);
+    return this.http.get(`${this.baseUrl}/downloadFile?fileId=${fileId}`, { headers, responseType: 'blob'});
+  }
 }
