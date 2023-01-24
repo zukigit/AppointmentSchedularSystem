@@ -161,7 +161,7 @@ export class DailyviewComponent implements OnInit {
 
 
             if (arg.event.end <= this.currentDate) {
-              console.log("Input date is less than current date.");
+              alert("Schedule are finished,can't edit!!!");
             } else {
               this.router.navigate(['/view_only_appointment', id]);
             }
@@ -226,7 +226,7 @@ export class DailyviewComponent implements OnInit {
                   );
                 } else {
                   if (arg.event.end <= this.currentDate) {
-                    console.log("Input date is less than current date.");
+                    alert("Schedule are finished,can't edit!!!");
                   } else {
                     this.router.navigate(['/view_only_appointment', id]);
                   }
