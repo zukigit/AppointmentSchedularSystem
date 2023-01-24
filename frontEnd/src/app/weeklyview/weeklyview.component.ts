@@ -35,6 +35,7 @@ export class WeeklyviewComponent implements OnInit {
 
   showApp: ShowAppointment[];
   Events: any[] = []
+  currentDate:Date = new Date()
 
   constructor(private changeDetector: ChangeDetectorRef, private router: Router, private userService: UserService, private appService: AppointmentService) {
     this.header = {
@@ -145,7 +146,12 @@ export class WeeklyviewComponent implements OnInit {
               }
             );
           } else {
-            this.router.navigate(['/view_only_appointment', id])
+            if (arg.event.end <= this.currentDate) {
+              alert("Schedule are finished,can't edit!!!");
+            } else {
+              this.router.navigate(['/view_only_appointment', id]);
+            }
+            //this.router.navigate(['/view_only_appointment', id])
           }
         },
 
@@ -195,6 +201,31 @@ export class WeeklyviewComponent implements OnInit {
               },
 
              events:this.calEvent,
+              
+        eventClick: (arg) => {
+          let id = arg.event.id;
+          let appType = arg.event.groupId;
+
+          if (appType != "PUBLIC") {
+            this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
+              (data: any) => {
+                if (data) {
+                  this.router.navigate(['/view_only_appointment', id]);
+                }
+              }, error => {
+                alert("this appointment is private and you are not in there")
+              }
+            );
+          } else {
+            if (arg.event.end <= this.currentDate) {
+              alert("Schedule are finished,can't edit!!!");
+            } else {
+              this.router.navigate(['/view_only_appointment', id]);
+            }
+            //this.router.navigate(['/view_only_appointment', id])
+          }
+        },
+
               headerToolbar: {
                 left: 'title',
                 center: '',
