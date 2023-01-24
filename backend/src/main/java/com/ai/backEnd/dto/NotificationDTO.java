@@ -9,7 +9,7 @@ public class NotificationDTO {
 	private String title;
 	private User createUser;
 	private NotificationType notiType;
-
+    private User removeUser;
 	
 	public int getId() {
 		return id;
@@ -34,6 +34,12 @@ public class NotificationDTO {
 	}
 	public void setNotiType(NotificationType notiType) {
 		this.notiType = notiType;
+	}
+	public User getRemoveUser() {
+		return removeUser;
+	}
+	public void setRemoveUser(User removeUser) {
+		this.removeUser = removeUser;
 	}
 	
 	

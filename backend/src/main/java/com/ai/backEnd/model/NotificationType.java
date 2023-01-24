@@ -11,5 +11,7 @@ public enum NotificationType {
     @JsonValue
     DELETE_APP,
     @JsonValue
-    USER_REMOVED
+    USER_REMOVED,
+    @JsonValue
+    USER_ADD
 }
