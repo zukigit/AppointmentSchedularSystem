@@ -27,6 +27,8 @@ import { NotifierModule,NotifierService } from 'angular-notifier';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { UserAuthGuard } from './security/user-auth.guard';
 import { TraineeAuthGuard } from './security/trainee-auth.guard';
+import { CommonModule } from '@angular/common';
+import { TesingComponent } from './tesing/tesing.component';
 
 @NgModule({
   imports: [
@@ -42,7 +44,8 @@ import { TraineeAuthGuard } from './security/trainee-auth.guard';
     AngularDualListBoxModule,
     DatePipe,
     NotifierModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    CommonModule
 
   ],
   declarations: [
@@ -59,6 +62,7 @@ import { TraineeAuthGuard } from './security/trainee-auth.guard';
     AppRegisterComponent,
     DailyviewComponent,
     WeeklyviewComponent,
+    TesingComponent
   ],
   providers: [AdminAuthGuard, DatePipe, UserAuthGuard, TraineeAuthGuard],
   bootstrap: [AppComponent]
