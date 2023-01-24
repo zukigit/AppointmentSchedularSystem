@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit {
     
     bindData: any;
     temData: any;
-    notiCount: number = 0;
+    readedNoti: number;
 
     // notificationCount$ = this.notiService.notificationCount$;
 
@@ -55,27 +55,34 @@ export class NavbarComponent implements OnInit {
     loginId : string;
     user : User = new User();
 
-    count :number =0;
+    unreadNoti :number;
 
     realTimeDataSubscription$: Subscription;
 
     
     ngOnInit(){
-      this.loginId = localStorage.getItem("loggedInUserId");
+        this.unreadNoti = Number(localStorage.getItem("unreadNoti"));
+        this.loginId = localStorage.getItem("loggedInUserId");
+        this.readedNoti = Number(localStorage.getItem("totalNoti"));
+        this.getNotiFirstTime();
+        this.realTimeData();
 
-      this.realTimeData();
+        this.listTitles = ROUTES.filter(listTitle => listTitle);
+        const navbar: HTMLElement = this.element.nativeElement;
+        this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
+        this.router.events.subscribe((event) => {
+            this.sidebarClose();
+            var $layer: any = document.getElementsByClassName('close-layer')[0];
+            if ($layer) {
+            $layer.remove();
+            this.mobile_menu_visible = 0;
+            }
+        });
+    }
 
-      this.listTitles = ROUTES.filter(listTitle => listTitle);
-      const navbar: HTMLElement = this.element.nativeElement;
-      this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
-      this.router.events.subscribe((event) => {
-        this.sidebarClose();
-         var $layer: any = document.getElementsByClassName('close-layer')[0];
-         if ($layer) {
-           $layer.remove();
-           this.mobile_menu_visible = 0;
-         }
-     });
+    removeReadCount() {
+        localStorage.setItem("unreadNoti", '0');
+         this.unreadNoti = 0;
     }
 
     realTimeData() {
@@ -83,12 +90,24 @@ export class NavbarComponent implements OnInit {
           .pipe(switchMap(_ => this.notiService.getNoti(this.loginId)))
           .subscribe(res => {
             this.temData = res;
-            if(this.temData.length > this.notiCount) {
+            if(this.temData.length > this.readedNoti) {
+                this.unreadNoti = this.temData.length - this.readedNoti;
                 this.bindData = res;
-                this.notiCount = this.temData.length;
+                this.readedNoti = this.temData.length;
+                localStorage.setItem("unreadNoti", `${this.unreadNoti}`);
+                localStorage.setItem("totalNoti", `${this.readedNoti}`);
             }
-          });
-      }
+        });
+    }
+
+    getNotiFirstTime() {
+        this.notiService.getNoti(this.loginId).subscribe(
+            (data) => {
+                console.log("data" + data);
+                this.bindData = data;
+            }
+        )
+    }
 
     goToDashboard(){
         this.router.navigate(['admin/dashboard'])
