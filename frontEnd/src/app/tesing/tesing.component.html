@@ -14,6 +14,7 @@
 
       <form class="bg-light p-4 m-auto" action="#">
         <div class="title">Appointment Detail</div>
+        
 
         <div class="row mb-3" style="margin-bottom: 30px;">
           <div class="col-lg-2">
@@ -106,9 +107,6 @@
 
 
 
-        <!-- Attendees -->
-
-
         <div class="row mb-3">
           <div class="col-lg-2">
             <p>Attendees</p>
@@ -129,13 +127,14 @@
                 </thead>
 
                 <tbody>
-                  
-                  <tr *ngFor="let x of HEROES">
-                  <td >{{x.name}}</td>
-                    <!-- <td>{{e.file}}</td>
-                    <td >{{e.name}}</td>
-                    <td>{{e.team.department.department_name}}</td>
-                    <td>{{e.team.team_name}}</td> -->
+                  <div></div>
+                    <tr *ngFor="let x of res.employee">
+                        <td >{{x.employee_id}}</td>
+                        <td ></td>
+                        <td >{{x.name}}</td>
+                        <td >{{x.team.department.department_name}}</td>
+                        <td >{{x.team.team_name}}</td>
+    
                   </tr>
 
                 </tbody>

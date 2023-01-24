@@ -4,6 +4,7 @@ import { Schdule } from 'app/model/schdule';
 import { ShowAppointment } from 'app/model/show-appointment';
 import { User } from 'app/model/user';
 import { AppointmentService } from 'app/services/appointment.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-view-only-appointment',
@@ -24,10 +25,21 @@ export class ViewOnlyAppointmentComponent implements OnInit {
   end_time: string ;
 
 
+
+   
+
+
   constructor(private route: ActivatedRoute,private appService:AppointmentService) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
+    let HEROES = [
+      {id: 1, name:'Superman'},
+      {id: 2, name:'Batman'},
+      {id: 5, name:'BatGirl'},
+      {id: 3, name:'Robin'},
+      {id: 4, name:'Flash'}
+  ];
     
      this.appService.viewOnlyAppointmentById(this.id).subscribe(
         (res : any) => {console.log("get app data is " + res.employee),this.res = res;
