@@ -23,26 +23,28 @@ import { TraineeAuthGuard } from 'app/security/trainee-auth.guard';
 import { TesingComponent } from 'app/tesing/tesing.component';
 import { AppointmentDetailViewComponent } from 'app/appointment-detail-view/appointment-detail-view.component';
 
+
 export const AdminLayoutRoutes: Routes = [
 
-    { path: 'admin/dashboard', component: DashboardComponent, canActivate:[AdminAuthGuard]},
-    { path: 'admin/user-profile', component: UserProfileComponent, canActivate:[AdminAuthGuard]},
-    { path: 'admin/user-details', component: TableListComponent, canActivate:[AdminAuthGuard]},
+    { path: 'dashboard', component: DashboardComponent, canActivate:[AdminAuthGuard]},
+    { path: 'user-profile', component: UserProfileComponent, canActivate:[AdminAuthGuard]},
+    { path: 'user-details', component: TableListComponent, canActivate:[AdminAuthGuard]},
     { path: 'typography', component: TypographyComponent },
     { path: 'icons', component: IconsComponent },
     { path: 'maps', component: MapsComponent },
     { path: 'notifications', component: NotificationsComponent },
     { path: 'upgrade', component: UpgradeComponent },
-    { path: 'user/test', component: UserComponent, canActivate:[UserAuthGuard]},
-    { path: 'trainee/test', component: TraineeComponent, canActivate:[TraineeAuthGuard]},
-    { path: 'admin/addEmployeeModal', component: RegisterComponent, canActivate:[AdminAuthGuard]},
-    { path: 'admin/updateuser/:id', component: UpdateComponent, canActivate:[AdminAuthGuard]},
-    { path: 'admin/change_pass',component:ChangePassComponent, canActivate:[AdminAuthGuard]},
+    //{ path: 'user/test', component: UserComponent, canActivate:[UserAuthGuard]},
+    //{ path: 'trainee/test', component: TraineeComponent, canActivate:[TraineeAuthGuard]},
+    { path: 'addEmployeeModal', component: RegisterComponent, canActivate:[AdminAuthGuard]},
+    { path: 'updateuser/:id', component: UpdateComponent, canActivate:[AdminAuthGuard]},
+    { path: 'change_pass',component:ChangePassComponent, canActivate:[AdminAuthGuard]},
     { path: 'appointment', component:AppointmentComponent},
     { path: 'app-register',component:AppRegisterComponent},
     { path: 'dailyview', component: DailyviewComponent},
     { path: 'weeklyview', component: WeeklyviewComponent},
     { path: 'view_only_appointment/:id', component: ViewOnlyAppointmentComponent},
+
     { path: 'testing/:id', component: TesingComponent},
     { path: 'appointment_detail_view/:id', component:AppointmentDetailViewComponent}
 ];
