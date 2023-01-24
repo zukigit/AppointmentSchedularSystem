@@ -42,7 +42,7 @@
             <p>Start Time</p>
           </div>
           <div class="col-lg-5">
-            <span>{{start_time}}</span>
+            <span>{{res.start_time}}</span>
           </div>
 
           </div>
@@ -53,7 +53,7 @@
               <p>End Time</p>
             </div>
             <div class="col-lg-5">
-              <span >{{end_time}}</span>
+              <span >{{res.end_time}}</span>
             </div>
 
             </div>
@@ -67,7 +67,7 @@
                 <p>Start Date</p>
               </div>
               <div class="col-lg-5">
-                <!-- <span>{{res.date}}</span> -->
+                <span>{{res.start_date}}</span>
               </div>
 
               </div>
@@ -77,7 +77,7 @@
                   <p>End Date</p>
                 </div>
                 <div class="col-lg-5">
-                  <span>1.2.2023</span>
+                  <span>{{res.end_date}}</span>
                 </div>
 
               </div>
@@ -99,7 +99,7 @@
                     <p>Attached File</p>
                   </div>
                   <div class="col-lg-5">
-                    <!-- <span>{{res.file}}</span> -->
+                    <!-- <span>{{res.employee.employee_id}}</span> -->
                   </div>
 
                   </div>
@@ -115,7 +115,7 @@
           </div>
           <div class="col-lg-9">
             <div class="bg-custom table-responsive" style="margin-top: 30px;">
-              <table class="table" >
+              <table class="table">
                 <thead>
 
                   <tr>
@@ -130,20 +130,16 @@
 
                 <tbody>
                   <tr>
-                    <th scope="row">1</th>
-                    <td class="circular--portrait" >   <img class="thumbnail" height="100" width="100" src="/assets/img/userImage1.jpg" style="border-radius: 100%;"/></td>
-                     <td>Selena</td>
-                    <td> Offshore</td>
-                    <td>TEAM-1</td>
+                    <td>Fhhhf</td>
+                  </tr>
+                  <tr *ngFor="let e of res.employee">
+                  <td >{{e.employee_id}} </td>
+                    <td>{{e.file}}</td>
+                    <td >{{e.name}}</td>
+                    <td>{{e.team.department.department_name}}</td>
+                    <td>{{e.team.team_name}}</td>
                   </tr>
 
-                  <tr>
-                    <th scope="row">1</th>
-                    <td class="circular--portrait" >   <img class="thumbnail" height="100" width="100" src="/assets/img/userImage2.jpg" style="border-radius: 100%;"/></td>
-                     <td>Selena</td>
-                    <td> Offshore</td>
-                    <td>TEAM-1</td>
-                  </tr>
                 </tbody>
 
               </table>
