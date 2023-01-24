@@ -116,7 +116,7 @@ export class DailyviewComponent implements OnInit {
             this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
               (data: any) => {
                 if (data) {
-                  this.router.navigate(['/view_only_appointment', id]);
+                  this.router.navigate(['/appointment_detail_view', id]);
                 }
               }, error => {
                 alert("this appointment is private and you are not in there")
@@ -126,7 +126,7 @@ export class DailyviewComponent implements OnInit {
             if (arg.event.end <= this.currentDate) {
               alert("Schedule are finished,can't edit!!!");
             } else {
-              this.router.navigate(['/view_only_appointment', id]);
+              this.router.navigate(['/appointment_detail_view', id]);
             }
 
             //this.router.navigate(['/view_only_appointment',id])

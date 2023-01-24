@@ -21,6 +21,7 @@ import { ViewOnlyAppointmentComponent } from 'app/view-only-appointment/view-onl
 import { UserAuthGuard } from 'app/security/user-auth.guard';
 import { TraineeAuthGuard } from 'app/security/trainee-auth.guard';
 import { TesingComponent } from 'app/tesing/tesing.component';
+import { AppointmentDetailViewComponent } from 'app/appointment-detail-view/appointment-detail-view.component';
 
 export const AdminLayoutRoutes: Routes = [
 
@@ -42,5 +43,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'dailyview', component: DailyviewComponent},
     { path: 'weeklyview', component: WeeklyviewComponent},
     { path: 'view_only_appointment/:id', component: ViewOnlyAppointmentComponent},
-    { path: 'testing/:id', component: TesingComponent}
+    { path: 'testing/:id', component: TesingComponent},
+    { path: 'appointment_detail_view/:id', component:AppointmentDetailViewComponent}
 ];

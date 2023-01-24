@@ -29,6 +29,7 @@ import { UserAuthGuard } from './security/user-auth.guard';
 import { TraineeAuthGuard } from './security/trainee-auth.guard';
 import { CommonModule } from '@angular/common';
 import { TesingComponent } from './tesing/tesing.component';
+import { AppointmentDetailViewComponent } from './appointment-detail-view/appointment-detail-view.component';
 
 @NgModule({
   imports: [
@@ -62,7 +63,8 @@ import { TesingComponent } from './tesing/tesing.component';
     AppRegisterComponent,
     DailyviewComponent,
     WeeklyviewComponent,
-    TesingComponent
+    TesingComponent,
+    AppointmentDetailViewComponent
   ],
   providers: [AdminAuthGuard, DatePipe, UserAuthGuard, TraineeAuthGuard],
   bootstrap: [AppComponent]
