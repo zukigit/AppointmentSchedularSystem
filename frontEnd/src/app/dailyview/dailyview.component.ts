@@ -30,15 +30,14 @@ export class DailyviewComponent implements OnInit {
   calEvent: any[] = [];
   startDate = new Date();
   loginId: string;
-  user!: User;
   showUser: boolean = false;
   view: boolean = true;
-
   showApp: ShowAppointment[];
   searchedApp: ShowAppointment[];
   searchedUser: User = new User();
+  searchedUserName: string = "";
   searchedUserId: string;
-
+  loginUser: User;
   currentDate: Date = new Date();
   todayDate: Date = new Date("01/23/2023");
 
@@ -62,6 +61,14 @@ export class DailyviewComponent implements OnInit {
     this.isLoad = true;
     this.loginId = localStorage.getItem("loggedInUserId");
     var calendarEl = this.calendar.nativeElement;
+
+    this.userService.getUserById(this.loginId).subscribe(
+      (data) => {
+        if(data != null || data != undefined) {
+          this.loginUser = data;
+        }
+      }
+    )
 
     setTimeout(() => {
       this.appService.getAppointmentById(this.loginId).subscribe(
@@ -105,9 +112,6 @@ export class DailyviewComponent implements OnInit {
           console.log("event click date is " + arg.event.end)
           console.log("current click date is " + this.currentDate)
 
-
-
-
           if (appType != "PUBLIC") {
             this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
               (data: any) => {
@@ -119,8 +123,6 @@ export class DailyviewComponent implements OnInit {
               }
             );
           } else {
-
-
             if (arg.event.end <= this.currentDate) {
               alert("Schedule are finished,can't edit!!!");
             } else {
@@ -149,6 +151,7 @@ export class DailyviewComponent implements OnInit {
 
 
   searchAppByUserId(userId: string) {
+    this.isLoad = true;
     this.userService.getUserById(userId).subscribe(
       (data: any) => {
         if (data != null) {
@@ -194,28 +197,10 @@ export class DailyviewComponent implements OnInit {
                   //this.router.navigate(['/view_only_appointment', id])
                 }
               },
-
-              // events: [
-
-              //   {
-              //     title: 'Meeting',
-              //     start: '2023-01-22T18:40:00',
-              //     end: '2023-01-22T18:50:00',
-              //   },
-
-
-              // ],
-              // headerToolbar: {
-              //   left: 'title',
-              //   center: '',
-              //   right: 'today prev,next',
-              // },
-
-
-
             });
             calendar2.render()
-
+            this.searchedUserName = this.searchedUser.name;
+            this.isLoad = false;
           }, 1500);
 
           setTimeout(() => {
@@ -240,19 +225,12 @@ export class DailyviewComponent implements OnInit {
                       console.log("title searc is " + myDate)
 
                       this.calEvent.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type })
-
-
                     }
-
                   }
                   //  console.log("search event is " + this.calEvent)
-
-
                 }
                 console.log(this.calEvent);
               }
-
-
             )
 
           }, 1000);
