@@ -30,6 +30,15 @@ import { TraineeAuthGuard } from './security/trainee-auth.guard';
 import { CommonModule } from '@angular/common';
 import { TesingComponent } from './tesing/tesing.component';
 import { AppointmentDetailViewComponent } from './appointment-detail-view/appointment-detail-view.component';
+import { UserLayoutComponent } from './layouts/user-layout/user-layout.component';
+import { TraineeLayoutComponent } from './layouts/trainee-layout/trainee-layout.component';
+//import { UsernavComponent } from './user_role/usernav/usernav.component';
+//import { TraineenavComponent } from './trainee_role/traineenav/traineenav.component';
+import { TraineesidebarComponent } from './trainee_role/traineesidebar/traineesidebar.component';
+import { UsersidebarComponent } from './user_role/usersidebar/usersidebar.component';
+import { UsernavbarComponent } from './user_role/usernavbar/usernavbar.component';
+import { TraineenavbarComponent } from './trainee_role/traineenavbar/traineenavbar.component';
+import { AppRegisterbyuserComponent } from './app-registerbyuser/app-registerbyuser.component';
 
 @NgModule({
   imports: [
@@ -64,7 +73,16 @@ import { AppointmentDetailViewComponent } from './appointment-detail-view/appoin
     DailyviewComponent,
     WeeklyviewComponent,
     TesingComponent,
-    AppointmentDetailViewComponent
+    AppointmentDetailViewComponent,
+    UserLayoutComponent,
+    TraineeLayoutComponent,
+    //UsernavComponent,
+    //TraineenavComponent,
+    TraineesidebarComponent,
+    UsersidebarComponent,
+    UsernavbarComponent,
+    TraineenavbarComponent,
+    AppRegisterbyuserComponent,
   ],
   providers: [AdminAuthGuard, DatePipe, UserAuthGuard, TraineeAuthGuard],
   bootstrap: [AppComponent]

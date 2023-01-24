@@ -68,13 +68,13 @@ export class LoginComponent implements OnInit {
   }
 
   goToUser() {
-    this.router.navigate(['/user/test']).then (() => window.location.reload()),10000;
+    this.router.navigate(['/user/dashboard']).then (() => window.location.reload()),10000;
   }
   goToAdmin() {
     this.router.navigate(['/admin/dashboard']).then (() => window.location.reload()),10000;
   }
   goToTrainee() {
-    this.router.navigate(['/trainee/test']).then (() => window.location.reload()),5000;
+    this.router.navigate(['/trainee/dashboard']).then (() => window.location.reload()),5000;
   }
 
 }

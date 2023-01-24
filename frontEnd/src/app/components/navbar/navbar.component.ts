@@ -6,6 +6,7 @@ import { NotiService } from 'app/services/noti.service';
 import { ShowAppointment } from 'app/model/show-appointment';
 import { User } from 'app/model/user';
 import { Subject, Subscription, switchMap, timer } from 'rxjs';
+import { NotiModel } from 'app/model/noti-model';
 // import { NotiModel } from 'app/model/noti-model';
 
 
@@ -49,11 +50,13 @@ export class NavbarComponent implements OnInit {
 
           
     }
-
-    notiNew : ["new", "0"];
+    notiModel : NotiModel;
+    dataByNoti : any=[];
+    Notis: any
     notiArray: any [];
     loginId : string;
     user : User = new User();
+    // text : string;
 
     unreadNoti :number;
 
@@ -66,6 +69,7 @@ export class NavbarComponent implements OnInit {
         this.readedNoti = Number(localStorage.getItem("totalNoti"));
         this.getNotiFirstTime();
         this.realTimeData();
+        //  this.getNotiByType();
 
         this.listTitles = ROUTES.filter(listTitle => listTitle);
         const navbar: HTMLElement = this.element.nativeElement;
@@ -103,10 +107,26 @@ export class NavbarComponent implements OnInit {
     getNotiFirstTime() {
         this.notiService.getNoti(this.loginId).subscribe(
             (data) => {
+                let mydata ; 
+
                 console.log("data" + data);
-                this.bindData = data;
-            }
+                mydata=this.bindData=data;
+                for(var noti of mydata){
+          
+                if(this.bindData.notiType = "CREATE_APP"){
+                   this.bindData.text = "created the appointment :"
+                   console.log(this.bindData)
+                }else if(this.bindData.notiType = "EDIT_APP"){
+                    this.bindData.text="edited the appointment :"
+                }else if(this.bindData.notiType = "DELETE_APP")
+                    this.bindData.text="deleted the appointment :"
+            
+        
+                console.log(this.bindData.length + "amount")
+           }
+        }
         )
+        
     }
 
     goToDashboard(){

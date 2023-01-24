@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+
 declare const $: any;
 declare interface RouteInfo {
     path: string;
@@ -9,18 +10,19 @@ declare interface RouteInfo {
     class: string;
 }
 export const ROUTES: RouteInfo[] = [
-    { path: 'admin/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
-    { path: 'admin/user-profile', title: 'User Profile',  icon:'person', class: '' },
-    { path: 'admin/user-details', title: 'User Details',  icon:'content_paste', class: '' }
+    // { path: 'user/dashboard', title: 'Dashboard',  icon: 'dashboard', class: '' },
+    // { path: 'user/user-profile', title: 'User Profile',  icon:'person', class: '' },
+    // { path: 'user/user-details', title: 'User Details',  icon:'content_paste', class: '' }
     
 ];
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  selector: 'app-usersidebar',
+  templateUrl: './usersidebar.component.html',
+  styleUrls: ['./usersidebar.component.scss']
 })
-export class SidebarComponent implements OnInit {
+export class UsersidebarComponent implements OnInit {
+
   menuItems: any[];
 
   constructor(private router: Router) { }
@@ -35,6 +37,7 @@ export class SidebarComponent implements OnInit {
       return true;
   };
   goToAppRegister() {
-    this.router.navigate(['/admin/app-register'])
+    this.router.navigate(['/user/app-registerbyuser'])
   }
+
 }

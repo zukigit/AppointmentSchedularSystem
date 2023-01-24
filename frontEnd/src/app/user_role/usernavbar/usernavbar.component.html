@@ -21,28 +21,26 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" (click)="removeReadCount()" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="material-icons" >notifications</i>
                            
-                          <span class="notification" >{{unreadNoti}}</span>
+                          <span class="notification" >{{count}}</span>
                         <p>
                             <span class="d-lg-none d-md-block">Some Actions</span>
                         </p>
             
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="margin-left:10px; margin-top:10px display inline-block;">
-                
-                    <table>
+                       
+                    <table (ngModel)="realTimeData()">
                         <thead>
                             <th >Notification</th>
                         </thead>
-                        <span *ngIf="bindData != null || bindData != undefined">
                         <tbody *ngFor="let data of bindData">
-                            <td class="dropdown-item">{{data.createUser.name}} {{data.notiType}} : {{data.title}}</td>
-                        </tbody>
-                        </span>
+                            <td class="dropdown-item">{{data.createUser.name}} created a appointment : {{data.title}} </td>
+                    </tbody>
                     </table>
-              
+                        
                     </div>
                 </li>
                 <li class="nav-item dropdown">
