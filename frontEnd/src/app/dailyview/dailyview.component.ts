@@ -49,6 +49,7 @@ export class DailyviewComponent implements OnInit {
   };
   header: any;
   calendarVisible = false;
+  isLoad: boolean = false;
 
   @ViewChild('calendar', { static: true }) calendar: ElementRef<any>;
   @ViewChild('calendar2', { static: true }) calendar2: ElementRef<any>;
@@ -58,21 +59,9 @@ export class DailyviewComponent implements OnInit {
 
 
   ngOnInit() {
+    this.isLoad = true;
     this.loginId = localStorage.getItem("loggedInUserId");
-    // this.todayDate = this.datePipe.transform(this.currentDate, 'MM/dd/yyyy');
-    console.log("current  date  " + this.currentDate)
-    console.log("today   date  " + this.todayDate)
-
-
-
-
-
-
-    //getAppointment
-    this.getAppointment();
-
     var calendarEl = this.calendar.nativeElement;
-
 
     setTimeout(() => {
       this.appService.getAppointmentById(this.loginId).subscribe(
@@ -80,27 +69,15 @@ export class DailyviewComponent implements OnInit {
           this.showApp = res;
           for (let result of this.showApp) {
             for (let r of result.schedules) {
-
-              console.log("date " + r.date)
-              // console.log("time " + result.start_ti)
-
               let dateStr: string = r.date + " " + r.start_time + ":00";
               let myDate = new Date(dateStr);
 
               let dateStr2: string = r.date + " " + r.end_time + ":00";
               let myDate2 = new Date(dateStr2);
-              //myDate.setHours(result.start_date.getHours());
-
               this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type, })
-              //console.log("search event is " + this.Events)
-
             }
-            console.log("sch " + result.schedules)
           }
-
-          console.log(this.Events);
         }
-
       )
     }, 1000);
 
@@ -121,22 +98,6 @@ export class DailyviewComponent implements OnInit {
           }
         },
         events: this.Events,
-        // events: [
-        //   {
-        //     title: "showTitle",
-        //     start:new Date(),
-        //     end:new Date()
-        //   },
-
-
-        //   {
-        //     title: 'Meeting',
-        //     start: '2023-01-16',
-        //     end: '2023-01-16',
-        //   },
-
-
-        //  ],
 
         eventClick: (arg) => {
           let id = arg.event.id;
@@ -178,7 +139,7 @@ export class DailyviewComponent implements OnInit {
 
       });
       calendar.render();
-
+      this.isLoad = false;
     }, 1500);
 
     console.log("222222 " + this.Events);
@@ -319,8 +280,5 @@ export class DailyviewComponent implements OnInit {
 
   goToAppRegister() {
     this.router.navigate(['/app-register'])
-  }
-  getAppointment() {
-
   }
 }
