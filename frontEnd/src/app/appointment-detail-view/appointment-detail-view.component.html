@@ -112,7 +112,7 @@
             <p style="font-size:100%;font-weight:bolder;">Attendees</p>
           </div>
           <div class="col-lg-9">
-            <div class="bg-custom table-responsive" style="margin-top: 30px; margin-left:15%;">
+            <div class="bg-custom table-responsive" style="margin-top: 30px;">
               <table class="table">
                 <thead>
 
@@ -130,7 +130,8 @@
                   <div></div>
                     <tr *ngFor="let x of res.employee">
                         <td >{{x.employee_id}}</td>
-                        <td ></td>
+
+                        <td class="circular--portrait" >   <img class="thumbnail" src="/assets/img/userImage1.jpg" style="width:40px; height:40px;"/></td>
                         <td >{{x.name}}</td>
                         <td >{{x.team.department.department_name}}</td>
                         <td >{{x.team.team_name}}</td>
