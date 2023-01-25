@@ -17,7 +17,6 @@ import { AppointmentComponent } from 'app/appointment/appointment.component';
 import { AppRegisterComponent } from 'app/app-register/app-register.component';
 import { DailyviewComponent } from 'app/dailyview/dailyview.component';
 import { WeeklyviewComponent } from 'app/weeklyview/weeklyview.component';
-import { ViewOnlyAppointmentComponent } from 'app/view-only-appointment/view-only-appointment.component';
 import { UserAuthGuard } from 'app/security/user-auth.guard';
 import { TraineeAuthGuard } from 'app/security/trainee-auth.guard';
 import { AppRegisterbyuserComponent } from 'app/app-registerbyuser/app-registerbyuser.component';
@@ -30,6 +29,5 @@ export const UserLayoutRoutes: Routes = [
             { path: 'app-registerbyuser',component:AppRegisterbyuserComponent,canActivate:[UserAuthGuard]},
             { path: 'dailyview', component: DailyviewComponent,canActivate:[UserAuthGuard]},
             { path: 'weeklyview', component: WeeklyviewComponent,canActivate:[UserAuthGuard]},
-            { path: 'view_only_appointment/:id', component: ViewOnlyAppointmentComponent,canActivate:[UserAuthGuard]},
             //{ path: 'test', component: UserComponent, canActivate:[UserAuthGuard]},
 ];
