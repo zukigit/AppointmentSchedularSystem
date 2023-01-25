@@ -39,6 +39,10 @@ import { UsersidebarComponent } from './user_role/usersidebar/usersidebar.compon
 import { UsernavbarComponent } from './user_role/usernavbar/usernavbar.component';
 import { TraineenavbarComponent } from './trainee_role/traineenavbar/traineenavbar.component';
 import { AppRegisterbyuserComponent } from './app-registerbyuser/app-registerbyuser.component';
+import { DailyviewbyuserComponent } from './dailyviewbyuser/dailyviewbyuser.component';
+import { DailyviewbytraineeComponent } from './dailyviewbytrainee/dailyviewbytrainee.component';
+import { WeeklyviewbyuserComponent } from './weeklyviewbyuser/weeklyviewbyuser.component';
+import { WeeklyviewbytraineeComponent } from './weeklyviewbytrainee/weeklyviewbytrainee.component';
 
 @NgModule({
   imports: [
@@ -83,6 +87,10 @@ import { AppRegisterbyuserComponent } from './app-registerbyuser/app-registerbyu
     UsernavbarComponent,
     TraineenavbarComponent,
     AppRegisterbyuserComponent,
+    DailyviewbyuserComponent,
+    DailyviewbytraineeComponent,
+    WeeklyviewbyuserComponent,
+    WeeklyviewbytraineeComponent,
   ],
   providers: [AdminAuthGuard, DatePipe, UserAuthGuard, TraineeAuthGuard],
   bootstrap: [AppComponent]

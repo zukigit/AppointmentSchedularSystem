@@ -21,6 +21,9 @@ import { ViewOnlyAppointmentComponent } from 'app/view-only-appointment/view-onl
 import { UserAuthGuard } from 'app/security/user-auth.guard';
 import { TraineeAuthGuard } from 'app/security/trainee-auth.guard';
 import { AppRegisterbyuserComponent } from 'app/app-registerbyuser/app-registerbyuser.component';
+import { DailyviewbyuserComponent } from 'app/dailyviewbyuser/dailyviewbyuser.component';
+import { ApplicationRef } from '@angular/core';
+import { AppointmentDetailViewComponent } from 'app/appointment-detail-view/appointment-detail-view.component';
 
 export const UserLayoutRoutes: Routes = [
             { path: 'dashboard', component: DashboardComponent, canActivate:[UserAuthGuard]},
@@ -28,8 +31,9 @@ export const UserLayoutRoutes: Routes = [
             { path: 'notifications', component: NotificationsComponent,canActivate:[UserAuthGuard] },
             { path: 'change_pass',component:ChangePassComponent, canActivate:[UserAuthGuard]},
             { path: 'app-registerbyuser',component:AppRegisterbyuserComponent,canActivate:[UserAuthGuard]},
-            { path: 'dailyview', component: DailyviewComponent,canActivate:[UserAuthGuard]},
+            { path: 'dailyviewbyuser', component: DailyviewbyuserComponent,canActivate:[UserAuthGuard]},
             { path: 'weeklyview', component: WeeklyviewComponent,canActivate:[UserAuthGuard]},
             { path: 'view_only_appointment/:id', component: ViewOnlyAppointmentComponent,canActivate:[UserAuthGuard]},
+            { path: 'appointment_detail_view/:id', component:AppointmentDetailViewComponent,canActivate:[UserAuthGuard]}
             //{ path: 'test', component: UserComponent, canActivate:[UserAuthGuard]},
 ];

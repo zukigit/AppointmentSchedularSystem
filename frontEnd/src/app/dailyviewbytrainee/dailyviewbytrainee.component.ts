@@ -14,18 +14,13 @@ import { resolveSoa } from 'dns';
 import { Schdule } from 'app/model/schdule';
 import { DatePipe } from '@angular/common';
 
-import { data, error, event } from 'jquery';
-import { info } from 'console';
-import { TestBed } from '@angular/core/testing';
-
-//import { INITIAL_EVENTS, createEventId } from './event-utils';
-
 @Component({
-  selector: 'app-dailyview',
-  templateUrl: './dailyview.component.html',
-  styleUrls: ['./dailyview.component.css']
+  selector: 'app-dailyviewbytrainee',
+  templateUrl: './dailyviewbytrainee.component.html',
+  styleUrls: ['./dailyviewbytrainee.component.scss']
 })
-export class DailyviewComponent implements OnInit {
+export class DailyviewbytraineeComponent implements OnInit {
+
   Events: any[] = [];
   calEvent: any[] = [];
   startDate = new Date();
@@ -116,7 +111,7 @@ export class DailyviewComponent implements OnInit {
             this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
               (data: any) => {
                 if (data) {
-                  this.router.navigate(['/admin/appointment_detail_view', id]);
+                  this.router.navigate(['/trainee/appointment_detail_view', id]);
                 }
               }, error => {
                 alert("this appointment is private and you are not in there")
@@ -126,7 +121,7 @@ export class DailyviewComponent implements OnInit {
             if (arg.event.end <= this.currentDate) {
               alert("Schedule are finished,can't edit!!!");
             } else {
-              this.router.navigate(['/admin/appointment_detail_view', id]);
+              this.router.navigate(['/trainee/appointment_detail_view', id]);
             }
 
             //this.router.navigate(['/view_only_appointment',id])
@@ -182,7 +177,7 @@ export class DailyviewComponent implements OnInit {
                   this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
                     (data: any) => {
                       if (data) {
-                        this.router.navigate(['/admin/appointment_detail_view', id]);
+                        this.router.navigate(['/trainee/appointment_detail_view', id]);
                       }
                     }, error => {
                       alert("this appointment is private and you are not in there")
@@ -192,7 +187,7 @@ export class DailyviewComponent implements OnInit {
                   if (arg.event.end <= this.currentDate) {
                     alert("Schedule are finished,can't edit!!!");
                   } else {
-                    this.router.navigate(['/admin/appointment_detail_view', id]);
+                    this.router.navigate(['/trainee/appointment_detail_view', id]);
                   }
                   //this.router.navigate(['/view_only_appointment', id])
                 }
@@ -247,7 +242,7 @@ export class DailyviewComponent implements OnInit {
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
-    this.router.navigate(['app-register'])
+    this.router.navigate(['/user/app-register'])
   }
 
   toggleTag() {
@@ -257,6 +252,6 @@ export class DailyviewComponent implements OnInit {
 
 
   goToAppRegister() {
-    this.router.navigate(['/admin/app-register'])
+    this.router.navigate(['/user/app-register'])
   }
 }

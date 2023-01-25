@@ -1,14 +1,15 @@
+
 <div class='demo-app-main'>
 
   <div class="sb-example-1">
-    <div class="search">
-      <form #form="ngForm" (submit)="searchAppByUserId(searchedUserId)">
-       <input type="text" [(ngModel)] = "searchedUserId" class="searchTerm" placeholder="Search Employee...">
+    
+      <form #form="ngForm" class="search" (submit)="searchAppByUserId(searchedUserId)">
+       <input type="text" [(ngModel)] = "searchedUserId" class="searchTerm" placeholder="Search by EmployeeID...">
        <button  type="submit" class="searchButton">
          <i class="fa fa-search"></i>
       </button>
       </form>
-    </div>
+    
     
     <span class="memTad">
       <a href="#"><i class="fa fa-trash" style="font-size: 14px;"></i>Remove Member</a>
@@ -25,7 +26,10 @@
     <a href="#">Next Member <i class="fa fa-chevron-right" style="font-size: 14px;"></i></a>
 </span>
 </div>  -->
-
+<span  class="containerLoader">
+  <!-- *ngIf="isLoad == true" -->
+  <span  class="loader"></span>
+  </span>
 <span >
   <table>
     <tr>

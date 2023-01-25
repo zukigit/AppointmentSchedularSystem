@@ -37,34 +37,45 @@ h2 {
     padding: 2em;
   }
   
-
   .demo-app-main {
     flex-grow: 1;
     padding: 1em;
     padding-top: 1em;
     background: #ffffff;
-    height: 650px;
+    height: 130%;
+    margin-left: 2%;
+    margin-left:0%;
   }
   
   .fc { /* the calendar root */
     max-width: 1100px;
     margin: 0 auto;
+    
   }
   a {
     cursor: pointer;
     padding: 10px;
   }
+  .search{
+    margin-bottom: 30px;
+    margin-top:100px;
+    border-radius: 3%;
+    border-color: #435d7d;
+  }
+  tr{
+    width:100%;
+  }
 
   .sb-example-1 .search {
-    margin-top: 70px;
-    margin-right: 10px;
-    width: 30%;
+    margin-top: 100px;
+    margin-bottom: 0px;
+    width: 100%;
     position: relative;
-    display: inline-flex;
+    display: flex;
     height: 30px;
   }
   .sb-example-1 .searchTerm {
-    width: 100%;
+    width: 30%;
     border: 3px solid #435d7d;
     border-right: none;
     padding: 5px;
@@ -91,10 +102,11 @@ h2 {
   .sb-example-1 .searchButton:hover{
     background: #ffcc33;
   }
-  
+  .add{
+    margin-top: 1px;
+  }
   .add-app-button{
     margin-top: 10px;
-    text-align: center;
     border-radius: 4%;
     background: #435d7d;
     border: none;
@@ -103,16 +115,17 @@ h2 {
     color: #fff;
   }
   .memTad{
+    margin-top: 15px;
     float: right;
-    margin-top: 75px;
   }
   .name{
   text-align: center; 
   margin-top: 10px; 
-  margin-bottom: 0px;
   font-size: 18px; 
   font-weight: bold; 
 }
+
+
 
 @-webkit-keyframes spin {
 	from {-webkit-transform:rotate(0deg);}
@@ -144,3 +157,7 @@ h2 {
     animation: spin 2s linear infinite;
     z-index:9999;
 }
+
+
+
+  
