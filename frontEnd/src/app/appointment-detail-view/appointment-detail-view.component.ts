@@ -26,6 +26,15 @@ export class AppointmentDetailViewComponent implements OnInit {
       error => console.log("get app error " + error))
     }
 
+    //update
+    updateApp(id:string) {
+      alert("Ok nrr sarrr")
+    }
+    //delete
+    deleteApp(id:string){
+      alert("Okayy")
+    }
+
     downloadFile(file) {      
       this.appService.fileDownload(file.file_id).subscribe(
         data => {
