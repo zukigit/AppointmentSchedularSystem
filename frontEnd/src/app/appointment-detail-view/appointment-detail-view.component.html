@@ -134,9 +134,9 @@
 
               <tbody>
                 <div></div>
-                <tr *ngFor="let x of res.employee">
+                <tr *ngFor="let x of employee">
                   <td>{{x.employee_id}}</td>
-                  <td class="circular--portrait"> <img class="thumbnail" src="/assets/img/userImage1.jpg"
+                  <td class="circular--portrait"> <img class="thumbnail" [src]="x.userImage.data"
                       style="width:40px; height:40px;" /></td>
                   <td>{{x.name}}</td>
                   <td>{{x.team.department.department_name}}</td>

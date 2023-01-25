@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AppointmentService } from 'app/services/appointment.service';
+import { UserService } from 'app/services/user.service';
 import { data } from 'jquery';
 
 @Component({
@@ -13,7 +14,10 @@ export class AppointmentDetailViewComponent implements OnInit {
   res:any;
   id:string;
   files = [];
-  constructor(private route: ActivatedRoute,private appService:AppointmentService) { }
+  employee = [];
+  urls: any[] = [];
+
+  constructor(private route: ActivatedRoute,private appService:AppointmentService, private userService:UserService) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -21,9 +25,10 @@ export class AppointmentDetailViewComponent implements OnInit {
       (res : any) => {
         this.res = res;
         this.files = res.files;
-        console.log(this.files);
+        this.employee = res.employee;
+        this.generatePhotos();
       },
-      error => console.log("get app error " + error))
+      error => console.log("get app error " + error));
     }
 
     //update
@@ -48,4 +53,19 @@ export class AppointmentDetailViewComponent implements OnInit {
         }
       )
     }
+
+    generatePhotos() {
+      for(let i = 0 ; i < this.employee.length; i++) {
+        this.userService.getImage(this.employee[i].employee_id).subscribe(response => {
+          const reader = new FileReader();
+          reader.addEventListener('load', () => {
+            this.employee[i].userImage.data = reader.result;
+          }, false);
+          if (response) {
+            reader.readAsDataURL(response);
+          }
+        });
+      }
+    }
+  
 }
