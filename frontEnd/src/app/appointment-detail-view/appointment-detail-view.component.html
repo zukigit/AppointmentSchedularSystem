@@ -153,17 +153,17 @@
 
 
       <!-- button -->
-      <div *ngFor="let x of res.employee">
+      <div>
 
 
         <p class="btn" style="  background-color:#0d6efd; text-align: right; color: white; text-align: center;">
-          <span (click)="updateApp(x.employee_id)">Update Appointment</span>
+          <span (click)="updateApp()">Update Appointment</span>
         </p>
 
 
 
         <p class="btn" style="  background-color:#d42c34;color: white; text-align: center;">
-          <span (click)="deleteApp(x.employee_id)">Delete Appointment</span>
+          <span (click)="deleteApp()">Delete Appointment</span>
         </p>
       </div>
 
