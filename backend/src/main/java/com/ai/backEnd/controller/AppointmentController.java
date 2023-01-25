@@ -42,9 +42,6 @@ public class AppointmentController {
     
     @Autowired
     private NotificationImpl notiService;
-
-	@Autowired
-	private UserService userService;
     
 
 	@GetMapping("/getApp")
@@ -82,9 +79,9 @@ public class AppointmentController {
 			showAppointment.setAppointment_id(appointment.getAppointment_id());
 			showAppointment.setTitle(appointment.getTitle());
 			showAppointment.setDescription(appointment.getDescription());
-			showAppointment.setType(appointment.getType());
-			showAppointment.setCreateUser(appointment.getCreateUser());
-			showAppointment.setSchedules(appointment.getSchedules());
+			// showAppointment.setType(appointment.getType());
+			// showAppointment.setCreateUser(appointment.getCreateUser());
+			// showAppointment.setSchedules(appointment.getSchedules());
 			showAppointments.add(showAppointment);
 		}
 		return new ResponseEntity<List<ShowAppointment>>(showAppointments, HttpStatus.OK);
@@ -156,31 +153,61 @@ public class AppointmentController {
 		   }
 		}
 		Appointment savedAppointment = appointmentService.saveAppointment(appointment);
+		List<User> newSaveUsers = appointment.getEmployee();
+
 		for (User user : deletedUsers) {
-			Notification noti = new Notification();
-			noti.setAppointment(savedAppointment);
-			noti.setUser(user);
-			noti.setDescription(savedAppointment.getDescription());
-			noti.setDeleteStatus(false);
-			noti.setNoti_type(NotificationType.USER_REMOVED);
-			notiService.addNoti(noti);
+			postNotification(user, savedAppointment, NotificationType.USER_REMOVED);
 		}
 		for (User user : addedUsers) {
-			Notification noti = new Notification();
-			noti.setAppointment(savedAppointment);
-			noti.setUser(user);
-			noti.setDescription(savedAppointment.getDescription());
-			noti.setDeleteStatus(false);
-			noti.setNoti_type(NotificationType.USER_ADD);
-			notiService.addNoti(noti);
+			postNotification(user, savedAppointment, NotificationType.USER_ADD);
 		}
+
+		if(addedUsers.size() == 0 && deletedUsers.size() == 0){
+			for (User user : savedUsers) {
+				postNotification(user, savedAppointment, NotificationType.EDIT_APP);
+			}
+		}
+		if(addedUsers.size() != 0){
+            for(User user : addedUsers) {
+				if(!newSaveUsers.stream().anyMatch(value -> user.getEmployee_id().equals(value.getEmployee_id()))){
+					postNotification(user, savedAppointment, NotificationType.EDIT_APP);
+				}
+			}
+		} 
+		if(deletedUsers.size() != 0){
+			for (User user : newSaveUsers) {
+				postNotification(user, savedAppointment, NotificationType.EDIT_APP);
+			}
+		}
+
+
+
 		return savedAppointment;
 	}
 
 	@DeleteMapping("/deleteAppById/{appointment_id}")
-	public void deleteAppById(@PathVariable Integer appointment_id){
-		appointmentService.deleteAppointmentById(appointment_id);
+	public void deleteAppById(@PathVariable String appointment_id){
+		Appointment appointment = appointmentService.getAppById(Integer.parseInt(appointment_id));
+		List<User> deletedUsers = appointment.getEmployee();
+		appointment.setDeleted(true);
+		Appointment savedAppointment = appointmentService.saveAppointment(appointment);
+		for (User user : deletedUsers) {
+			postNotification(user, savedAppointment, NotificationType.DELETE_APP);
+		}
+
 	}
+
+	public void postNotification(User user,Appointment appointment,NotificationType notiType){
+		Notification noti = new Notification();
+			noti.setAppointment(appointment);
+			noti.setUser(user);
+			noti.setDescription(appointment.getDescription());
+			noti.setDeleteStatus(false);
+			noti.setNoti_type(notiType);
+			notiService.addNoti(noti);
+	}
+
+
 
 }
 
