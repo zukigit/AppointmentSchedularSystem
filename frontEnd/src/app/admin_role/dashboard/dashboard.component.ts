@@ -111,6 +111,7 @@ export class DashboardComponent implements OnInit {
     // console.log("today date "+this.todayDate)
     console.log("current date "+this.currentDate)
 
+  
     this.getSchedulesById();
 
   
@@ -194,11 +195,12 @@ export class DashboardComponent implements OnInit {
   }
 
   getSchedulesById(){
-    this.appService.getAppointmentById(this.loginId).subscribe(data => 
-      this.showDataApp = data);
-
-      console.log(this.showDataApp.length+"app date");
-
+    
+        this.appService.getAppointmentById(this.loginId).subscribe(data => 
+          this.showDataApp = data);
+    
+          console.log(this.showDataApp.length+"app date");
+    
   }
 
 }

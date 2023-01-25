@@ -68,16 +68,16 @@ export class NavbarComponent implements OnInit {
         this.unreadNoti = Number(localStorage.getItem("unreadNoti"));
         this.loginId = localStorage.getItem("loggedInUserId");
         this.readedNoti = Number(localStorage.getItem("totalNoti"));
-        setTimeout(() => {
-            this.getNotiFirstTime();
+        // setTimeout(() => {
+        //     this.getNotiFirstTime();
 
-        }, 1200);
+        // }, 1200);
 
-        setTimeout(() => {
-            this.realTimeData();
-        }, 1000);
-
-        //this.realTimeData();
+        // setTimeout(() => {
+        //     this.realTimeData();
+        // }, 1000);
+        this.getNotiFirstTime();
+        this.realTimeData();
         //  this.getNotiByType();
 
         console.log(this.bindData)
@@ -127,28 +127,31 @@ export class NavbarComponent implements OnInit {
                 for (var noti of mydata) {
                     if
                         (noti.notiType == "CREATE_APP") {
-                        this.bindData.push(noti.createUser.name + " created the appointment :" + noti.title)
-                        console.log("create app " + this.showData)
+                        this.showData.push(noti.createUser.name + " created the appointment :" + noti.title)
+                        // console.log("create app " + this.showData)
                     }
                     else if (noti.notiType == "EDIT_APP") {
-                        this.bindData.push(noti.createUser.name + " edited the appointment :" + noti.title);
+                        this.showData.push(noti.createUser.name + " edited the appointment :" + noti.title );
                     }
                     else if (noti.notiType == "DELETE_APP") {
-                        this.bindData.push(noti.createUser.name + " deleted the appointment :" + noti.title);
+                        this.showData.push(noti.createUser.name + " deleted the appointment :" + noti.title);
                     }
                     else if(noti.notiType == "USER_REMOVED" && noti.employee_id == this.loginId){
-                        this.bindData.push("You are removed from the appointment!");
+                        this.showData.push("You are removed from the appointment!");
                     }
                     else if(noti.notiType == "USER_ADD" && noti.employee_id == this.loginId){
-                        this.bindData.push("You are added the appointment :" + noti.title);
+                        this.showData.push("You are added the appointment :" + noti.title);
                     }
                 }
                 for (let x of this.bindData) {
-                    console.log(x + "data")
+                    // console.log(x + "data")
+                    // x = this.bindData
 
                 }
-                // this.bindData.push(this.showData)
-                console.log(this.bindData.length + "length")
+                this.bindData.push(this.showData)
+                this.bindData = this.showData.map(data=>data)
+               
+                // console.log(this.bindData.length + "length")
             }
         )
     }
