@@ -27,11 +27,11 @@ export class AppointmentDetailViewComponent implements OnInit {
     }
 
     //update
-    updateApp(id:string) {
+    updateApp() {
       alert("Ok nrr sarrr")
     }
     //delete
-    deleteApp(id:string){
+    deleteApp(){
       alert("Okayy")
     }
 
