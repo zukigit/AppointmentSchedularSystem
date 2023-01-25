@@ -26,17 +26,16 @@ export class AppointmentDetailViewComponent implements OnInit {
       error => console.log("get app error " + error))
     }
 
-    downloadFile(fileId:number, type:string, fileName:string) {
-      let binaryData:any;
-      this.appService.fileDownload(407).subscribe(
+    downloadFile(file) {      
+      this.appService.fileDownload(file.file_id).subscribe(
         data => {
-          let blob = new Blob([data], { type: type});
+          let blob = new Blob([data], { type: file.type});
           let downloadLink = document.createElement('a');
           downloadLink.href = window.URL.createObjectURL(blob);
-          if (fileName)
-                downloadLink.setAttribute('download', fileName);
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
+          if (file.file_name)
+                downloadLink.setAttribute('download', file.file_name);
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
         }
       )
     }

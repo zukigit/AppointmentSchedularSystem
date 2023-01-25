@@ -100,7 +100,7 @@
                     <p>Attached File</p>
                   </div>
                   <div *ngFor="let file of files" class="col-lg-5">
-                    <a (click)="downloadFile(file.file_id, file.file_content_type, file.file_name)" >{{file.file_name}}</a>
+                    <a (click)="downloadFile(file)" >{{file.file_name}}</a>
                   </div>
 
                   </div>
