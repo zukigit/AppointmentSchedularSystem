@@ -28,7 +28,7 @@
 </div>  -->
 <span  class="containerLoader">
   <!-- *ngIf="isLoad == true" -->
-  <span  class="loader"></span>
+  <span *ngIf="isLoad == true" class="loader"></span>
   </span>
 <span >
   <table>
@@ -43,7 +43,7 @@
     </tr>
     <tr >
       <td>
-        <div  class="name" >{{searchedUser.name}}</div>
+        <div  class="name" >{{searchedUserName}}</div>
         <div #calendar2 >
           <ng-template #eventContent  let-arg>
           </ng-template>

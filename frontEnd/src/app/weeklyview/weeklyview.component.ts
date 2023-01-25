@@ -22,13 +22,13 @@ export class WeeklyviewComponent implements OnInit {
   startDate = new Date();
   loginId: string;
   user!: User;
-
+  isLoad: boolean = false;
   userDataDetails: any;
   userSearch: any;
   searchedApp: ShowAppointment[];
   searchedUser: User = new User();
   searchedUserId: string;
-
+  searchedUserName: string;
   calEvent: any[] = [];
 
   show: boolean = true;
@@ -55,6 +55,7 @@ export class WeeklyviewComponent implements OnInit {
 
 
   ngOnInit() {
+    this.isLoad = true;
     this.loginId = localStorage.getItem("loggedInUserId");
     this.user = new User();
     this.userService.getUserById(this.loginId)
@@ -162,11 +163,8 @@ export class WeeklyviewComponent implements OnInit {
         },
       });
       calendar.render();
-
+      this.isLoad = false;
     }, 1200);
-
-
-
   }
 
   //search
@@ -174,15 +172,13 @@ export class WeeklyviewComponent implements OnInit {
     this.calEvent = [];
    }
  
-
   searchAppByUserId(userId: string) {
+    this.isLoad = true;
     this.userService.getUserById(userId).subscribe(
       (data: any) => {
         if (data != null) {
           this.searchedUser = data;
           var calendarEl2 = this.calendar2.nativeElement;
-
-
           setTimeout(() => {
             var calendar2 = new Calendar(calendarEl2, {
               initialView: 'timeGridWeek',
@@ -238,7 +234,8 @@ export class WeeklyviewComponent implements OnInit {
 
             });
             calendar2.render();
-
+            this.searchedUserName = this.searchedUser.name;
+            this.isLoad = false;
           }, 1500);
 
           setTimeout(() => {
@@ -282,10 +279,12 @@ export class WeeklyviewComponent implements OnInit {
         } else {
           this.searchedUser = new User();
           this.searchedUser.name = "";
-          alert("user not exist")
+          alert("user not exist");
+          this.isLoad = false;
         }
       }, error => {
         alert("user doesn't exist")
+        this.isLoad = false;
       }
     );
     this.afterClick()

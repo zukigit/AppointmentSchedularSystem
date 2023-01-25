@@ -240,10 +240,12 @@ export class DailyviewComponent implements OnInit {
         } else {
           this.searchedUser = new User();
           this.searchedUser.name = "";
-          alert("user not exist")
+          alert("user not exist");
+          this.isLoad = false;
         }
       }, error => {
-        alert("user doesn't exist")
+        alert("user doesn't exist");
+        this.isLoad = false;
       }
     );
     this.afterClick()
