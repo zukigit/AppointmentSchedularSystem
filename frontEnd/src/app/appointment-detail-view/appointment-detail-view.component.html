@@ -14,12 +14,12 @@
 <body>
   <div class="container">
 
-    <form class="bg-light p-4 m-auto" action="#">
+    <form class="box" action="#">
       <div class="title">Appointment Detail</div>
 
 
       <div class="row mb-3" style="margin-bottom: 30px;">
-        <div class="col-lg-2">
+        <div class="col-lg-2" style="margin-left:7%;">
           <p>Title</p>
         </div>
         <div class="col-lg-5">
@@ -30,7 +30,7 @@
 
       <!-- Description -->
       <div class="row mb-3" style="margin-bottom: 30px;">
-        <div class="col-lg-2">
+        <div class="col-lg-2" style="margin-left:7%;">
           <p>Description</p>
         </div>
         <div class="col-lg-5">
@@ -41,7 +41,7 @@
       <!-- Start Time&End Time -->
 
       <div class="row mb-3" style="margin-bottom: 30px;">
-        <div class="col-lg-2">
+        <div class="col-lg-2" style="margin-left:7%;">
           <p>Start Time</p>
         </div>
         <div class="col-lg-5">
@@ -52,7 +52,7 @@
 
 
       <div class="row mb-3" style="margin-bottom: 30px;">
-        <div class="col-lg-2">
+        <div class="col-lg-2" style="margin-left:7%;">
           <p>End Time</p>
         </div>
         <div class="col-lg-5">
@@ -66,7 +66,7 @@
       <!-- Date -->
 
       <div class="row mb-3">
-        <div class="col-lg-2">
+        <div class="col-lg-2" style="margin-left:7%;">
           <p>Start Date</p>
         </div>
         <div class="col-lg-5">
@@ -76,7 +76,7 @@
       </div>
 
       <div class="row mb-3">
-        <div class="col-lg-2">
+        <div class="col-lg-2" style="margin-left:7%;">
           <p>End Date</p>
         </div>
         <div class="col-lg-5">
@@ -87,7 +87,7 @@
       <!-- Privacy -->
 
       <div class="row mb-3">
-        <div class="col-lg-2">
+        <div class="col-lg-2" style="margin-left:7%;">
           <p>Privacy</p>
         </div>
         <div class="col-lg-5">
@@ -98,13 +98,13 @@
 
 
       <div class="row mb-3">
-        <div class="col-lg-2">
+        <div class="col-lg-2" style="margin-left:7%;">
           <p>Attached File</p>
         </div>
 
         <tr class="col-lg-5" style="margin-top:0%;">
           <div *ngFor="let file of files">
-            <a (click)="downloadFile(file)">{{file.file_name}}</a>
+            <a style="text-decoration: underline;text-decoration-color: blue; text-underline-offset: 5%; font-weight:500;" (click)="downloadFile(file)">{{file.file_name}}</a>
           </div>
         </tr>
 
@@ -114,7 +114,7 @@
 
 
       <div class="row mb-3">
-        <div class="col-lg-2">
+        <div class="col-lg-2"  style="margin-left:7%;">
           <p style="font-size:100%;font-weight:bolder;">Attendees</p>
         </div>
         <div class="col-lg-9">
@@ -137,7 +137,7 @@
                 <tr *ngFor="let x of employee">
                   <td>{{x.employee_id}}</td>
                   <td class="circular--portrait"> <img class="thumbnail" [src]="x.userImage.data"
-                      style="width:40px; height:40px;" /></td>
+                    style="border-radius: 100%;" /></td>
                   <td>{{x.name}}</td>
                   <td>{{x.team.department.department_name}}</td>
                   <td>{{x.team.team_name}}</td>
@@ -153,18 +153,17 @@
 
 
       <!-- button -->
-      <div>
+       <!-- <div *ngFor="let x of res.employee"> -->
+        <div style="text-align: center;">
 
 
-        <p class="btn" style="  background-color:#0d6efd; text-align: right; color: white; text-align: center;">
-          <span (click)="updateApp()">Update Appointment</span>
-        </p>
-
-
-
-        <p class="btn" style="  background-color:#d42c34;color: white; text-align: center;">
+        <a class="btn" style="  background-color:#d42c34;color: white; text-align: center;margin-right:20px;margin-bottom: 3%;">
           <span (click)="deleteApp()">Delete Appointment</span>
-        </p>
+        </a>
+          <a class="btn" style="  background-color: #435d7d; text-align: right; color: white; text-align: center;margin-bottom: 3%;">
+            <span (click)="updateApp()">Update Appointment</span>
+          </a>
+
       </div>
 
       <!-- <button type="button" class="btn btn-custom btn-lg btn-block">Send Now</button> -->
