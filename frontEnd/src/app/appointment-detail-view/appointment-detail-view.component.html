@@ -99,9 +99,12 @@
                   <div class="col-lg-2">
                     <p>Attached File</p>
                   </div>
-                  <div *ngFor="let file of files" class="col-lg-5">
+
+                  <tr class="col-lg-5" style="margin-top:0%;"> <div *ngFor="let file of files" >
                     <a (click)="downloadFile(file)" >{{file.file_name}}</a>
                   </div>
+                </tr>
+
 
                   </div>
 
@@ -130,7 +133,6 @@
                   <div></div>
                     <tr *ngFor="let x of res.employee">
                         <td >{{x.employee_id}}</td>
-
                         <td class="circular--portrait" >   <img class="thumbnail" src="/assets/img/userImage1.jpg" style="width:40px; height:40px;"/></td>
                         <td >{{x.name}}</td>
                         <td >{{x.team.department.department_name}}</td>
@@ -147,7 +149,7 @@
 
 
 <!-- button -->
-<div *ngFor="let x of res.employee" style="text-align:center;">
+
 
         <p   class="btn"  style="  background-color:#0d6efd; text-align: right; color: white; text-align: center;">
           <span (click)="updateApp(x.employee_id)" >Update Appointment</span>
