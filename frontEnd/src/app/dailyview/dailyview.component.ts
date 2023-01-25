@@ -148,6 +148,14 @@ export class DailyviewComponent implements OnInit {
 
   }
 
+  beforeClick() {
+   
+  }
+
+  afterClick() {
+   this.calEvent = [];
+  }
+
 
 
   searchAppByUserId(userId: string) {
@@ -182,7 +190,7 @@ export class DailyviewComponent implements OnInit {
                   this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
                     (data: any) => {
                       if (data) {
-                        this.router.navigate(['/view_only_appointment', id]);
+                        this.router.navigate(['/appointment_detail_view', id]);
                       }
                     }, error => {
                       alert("this appointment is private and you are not in there")
@@ -192,7 +200,7 @@ export class DailyviewComponent implements OnInit {
                   if (arg.event.end <= this.currentDate) {
                     alert("Schedule are finished,can't edit!!!");
                   } else {
-                    this.router.navigate(['/view_only_appointment', id]);
+                    this.router.navigate(['/appointment_detail_view', id]);
                   }
                   //this.router.navigate(['/view_only_appointment', id])
                 }
@@ -212,22 +220,17 @@ export class DailyviewComponent implements OnInit {
                   this.searchedApp = appData;
                   for (let result of this.searchedApp) {
                     for (let r of result.schedules) {
-
                       console.log("date " + r.date)
-                      // console.log("time " + result.start_ti)
-
                       let dateStr: string = r.date + " " + r.start_time + ":00";
                       let myDate = new Date(dateStr);
-
                       let dateStr2: string = r.date + " " + r.end_time + ":00";
                       let myDate2 = new Date(dateStr2);
-                      //myDate.setHours(result.start_date.getHours());
-                      console.log("title searc is " + myDate)
-
+                      console.log("title searc is " + myDate);
                       this.calEvent.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type })
+                      
                     }
                   }
-                  //  console.log("search event is " + this.calEvent)
+              
                 }
                 console.log(this.calEvent);
               }
@@ -243,6 +246,8 @@ export class DailyviewComponent implements OnInit {
         alert("user doesn't exist")
       }
     );
+    this.afterClick()
+    
 
   }
 
@@ -260,3 +265,7 @@ export class DailyviewComponent implements OnInit {
     this.router.navigate(['/app-register'])
   }
 }
+function beforeClick() {
+  throw new Error('Function not implemented.');
+}
+
