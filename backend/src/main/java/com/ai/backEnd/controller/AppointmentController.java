@@ -79,9 +79,10 @@ public class AppointmentController {
 			showAppointment.setAppointment_id(appointment.getAppointment_id());
 			showAppointment.setTitle(appointment.getTitle());
 			showAppointment.setDescription(appointment.getDescription());
-			// showAppointment.setType(appointment.getType());
-			// showAppointment.setCreateUser(appointment.getCreateUser());
-			// showAppointment.setSchedules(appointment.getSchedules());
+			showAppointment.setType(appointment.getType());
+			showAppointment.setCreateUser(appointment.getCreateUser());
+			showAppointment.setSchedules(appointment.getSchedules());
+			
 			showAppointments.add(showAppointment);
 		}
 		return new ResponseEntity<List<ShowAppointment>>(showAppointments, HttpStatus.OK);
