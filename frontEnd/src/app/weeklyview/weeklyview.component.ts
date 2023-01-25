@@ -170,6 +170,10 @@ export class WeeklyviewComponent implements OnInit {
   }
 
   //search
+  afterClick() {
+    this.calEvent = [];
+   }
+ 
 
   searchAppByUserId(userId: string) {
     this.userService.getUserById(userId).subscribe(
@@ -284,6 +288,7 @@ export class WeeklyviewComponent implements OnInit {
         alert("user doesn't exist")
       }
     );
+    this.afterClick()
 
   }
 
