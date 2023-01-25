@@ -15,7 +15,7 @@ export class AppointmentDetailViewComponent implements OnInit {
   id:string;
   files = [];
   employee = [];
-  urls: any[] = [];
+  urls = [];
 
   constructor(private route: ActivatedRoute,private appService:AppointmentService, private userService:UserService) { }
 
@@ -56,15 +56,22 @@ export class AppointmentDetailViewComponent implements OnInit {
 
     generatePhotos() {
       for(let i = 0 ; i < this.employee.length; i++) {
-        this.userService.getImage(this.employee[i].employee_id).subscribe(response => {
-          const reader = new FileReader();
-          reader.addEventListener('load', () => {
-            this.employee[i].userImage.data = reader.result;
-          }, false);
-          if (response) {
-            reader.readAsDataURL(response);
-          }
-        });
+        if(this.employee[i].userImage == null) {
+          this.employee[i].userImage = new Image();
+          this.employee[i].userImage.data = "./assets/img/default.jpg";
+        } else {
+          this.userService.getImage(this.employee[i].employee_id).subscribe(response => {
+            const reader = new FileReader();
+            reader.addEventListener('load', () => {
+              this.employee[i].userImage.data = reader.result;
+            }, false);
+            if (response) {
+              reader.readAsDataURL(response);
+            } else{
+              this.employee[i].userImage.data = "./assets/img/default.jpg";
+            }
+          });
+        }
       }
     }
   
