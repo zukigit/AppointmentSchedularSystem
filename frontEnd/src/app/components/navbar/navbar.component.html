@@ -39,8 +39,8 @@
                         <thead>
                             <th style="padding-left: 10px;" >Notifications</th>
                         </thead>
-                        <span *ngIf="bindData != null || bindData != undefined" >
-                        <tbody *ngFor="let data of bindData" >
+                        <span *ngIf="showNoti != null || showNoti != undefined" >
+                        <tbody *ngFor="let data of showNoti" >
                             <td class="dropdown-item">{{data}} </td>
                         </tbody>
                         </span>

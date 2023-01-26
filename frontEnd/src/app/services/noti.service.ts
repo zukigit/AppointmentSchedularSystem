@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { WebSocketSubject, webSocket } from 'rxjs/webSocket';
 
 @Injectable({
@@ -30,13 +30,11 @@ export class NotiService {
     return this.http.get(`http://localhost:8080/api/v1/getNoti/${id}`,this.header);
   }
 
-  // async fetchNotification(id : string){
-  //   try{
-  //     const {count} = await this.http.get<{count:number}>
-  //   (`http://localhost:8080/api/v1/getNoti/${id}`,this.header).toPromise();
-  //   this.notificationCountSource.next(count);
-  //   }catch(error){
-  //     console.error(error);
-  //   }
-  // }
+  getTotalNotiCount(userId : string) {
+    return this.http.get(`${this.baseUrl}/getTotalNoti/${userId}`,this.header);
+  }
+
+  getUnreadedNotiCount(userId : string) {
+    return this.http.get(`${this.baseUrl}/getUnreadNoti/${userId}`,this.header);
+  }
 }
