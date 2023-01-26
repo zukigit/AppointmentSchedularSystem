@@ -21,6 +21,7 @@ import { UserAuthGuard } from 'app/security/user-auth.guard';
 import { TraineeAuthGuard } from 'app/security/trainee-auth.guard';
 import { DailyviewbytraineeComponent } from 'app/dailyviewbytrainee/dailyviewbytrainee.component';
 import { AppointmentDetailViewComponent } from 'app/appointment-detail-view/appointment-detail-view.component';
+import { AppointmentDetailViewBytraineeComponent } from 'app/appointment-detail-view-bytrainee/appointment-detail-view-bytrainee.component';
 
 export const TraineeLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate:[TraineeAuthGuard]},
@@ -29,6 +30,6 @@ export const TraineeLayoutRoutes: Routes = [
     { path: 'change_pass',component:ChangePassComponent, canActivate:[TraineeAuthGuard]},
     { path: 'dailyviewbytrainee', component: DailyviewbytraineeComponent,canActivate:[TraineeAuthGuard]},
     { path: 'weeklyview', component: WeeklyviewComponent,canActivate:[TraineeAuthGuard]},
-    { path: 'appointment_detail_view/:id', component:AppointmentDetailViewComponent,canActivate:[TraineeAuthGuard]}
+    { path: 'appointment_detail_view_bytrainee/:id', component:AppointmentDetailViewBytraineeComponent,canActivate:[TraineeAuthGuard]}
     //{ path: 'test', component: TraineeComponent, canActivate:[TraineeAuthGuard]},
 ];

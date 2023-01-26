@@ -112,7 +112,7 @@ export class DailyviewbyuserComponent implements OnInit {
             this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
               (data: any) => {
                 if (data) {
-                  this.router.navigate(['/user/appointment_detail_view', id]);
+                  this.router.navigate(['/user/appointment_detail_view_byuser', id]);
                 }
               }, error => {
                 alert("this appointment is private and you are not in there")
@@ -122,7 +122,7 @@ export class DailyviewbyuserComponent implements OnInit {
             if (arg.event.end <= this.currentDate) {
               alert("Schedule are finished,can't edit!!!");
             } else {
-              this.router.navigate(['/user/appointment_detail_view', id]);
+              this.router.navigate(['/user/appointment_detail_view_byuser', id]);
             }
 
             //this.router.navigate(['/view_only_appointment',id])
@@ -178,7 +178,7 @@ export class DailyviewbyuserComponent implements OnInit {
                   this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
                     (data: any) => {
                       if (data) {
-                        this.router.navigate(['/user/appointment_detail_view', id]);
+                        this.router.navigate(['/user/appointment_detail_view_byuser', id]);
                       }
                     }, error => {
                       alert("this appointment is private and you are not in there")
@@ -188,7 +188,7 @@ export class DailyviewbyuserComponent implements OnInit {
                   if (arg.event.end <= this.currentDate) {
                     alert("Schedule are finished,can't edit!!!");
                   } else {
-                    this.router.navigate(['/user/appointment_detail_view', id]);
+                    this.router.navigate(['/user/appointment_detail_view_byuser', id]);
                   }
                   //this.router.navigate(['/view_only_appointment', id])
                 }
