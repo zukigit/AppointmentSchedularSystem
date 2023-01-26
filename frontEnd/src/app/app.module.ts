@@ -43,6 +43,8 @@ import { DailyviewbyuserComponent } from './dailyviewbyuser/dailyviewbyuser.comp
 import { DailyviewbytraineeComponent } from './dailyviewbytrainee/dailyviewbytrainee.component';
 import { WeeklyviewbyuserComponent } from './weeklyviewbyuser/weeklyviewbyuser.component';
 import { WeeklyviewbytraineeComponent } from './weeklyviewbytrainee/weeklyviewbytrainee.component';
+import { AppointmentDetailViewByuserComponent } from './appointment-detail-view-byuser/appointment-detail-view-byuser.component';
+import { AppointmentDetailViewBytraineeComponent } from './appointment-detail-view-bytrainee/appointment-detail-view-bytrainee.component';
 
 @NgModule({
   imports: [
@@ -91,6 +93,8 @@ import { WeeklyviewbytraineeComponent } from './weeklyviewbytrainee/weeklyviewby
     DailyviewbytraineeComponent,
     WeeklyviewbyuserComponent,
     WeeklyviewbytraineeComponent,
+    AppointmentDetailViewByuserComponent,
+    AppointmentDetailViewBytraineeComponent,
   ],
   providers: [AdminAuthGuard, DatePipe, UserAuthGuard, TraineeAuthGuard],
   bootstrap: [AppComponent]
