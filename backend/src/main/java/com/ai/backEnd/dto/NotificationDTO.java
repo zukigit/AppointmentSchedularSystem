@@ -1,5 +1,6 @@
 package com.ai.backEnd.dto;
 
+import com.ai.backEnd.model.Appointment;
 import com.ai.backEnd.model.NotificationType;
 import com.ai.backEnd.model.User;
 
@@ -10,7 +11,16 @@ public class NotificationDTO {
 	private User createUser;
 	private NotificationType notiType;
     private User removeUser;
+    private Appointment appointment_id;
+    
+    
 	
+	public Appointment getAppointment_id() {
+		return appointment_id;
+	}
+	public void setAppointment_id(Appointment appointment_id) {
+		this.appointment_id = appointment_id;
+	}
 	public int getId() {
 		return id;
 	}

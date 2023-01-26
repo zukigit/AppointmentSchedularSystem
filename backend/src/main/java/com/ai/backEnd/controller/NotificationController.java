@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ai.backEnd.dto.NotificationDTO;
+import com.ai.backEnd.model.Appointment;
 import com.ai.backEnd.model.Notification;
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.serviceImpl.NotificationImpl;
@@ -42,9 +43,13 @@ public class NotificationController {
 			NotificationDTO nf = new NotificationDTO();
 			User createUser = new User();
 			User user = notification.getAppointment().getCreateUser();
+			Appointment app = new Appointment();
+			Appointment appointment = notification.getAppointment();
+			app.setAppointment_id(appointment.getAppointment_id());
 			createUser.setEmployee_id(user.getEmployee_id());
 			createUser.setName(user.getName());
 			createUser.setUserImage(user.getUserImage());
+			nf.setAppointment_id(app);
 			nf.setId(notification.getId());
 			nf.setTitle(notification.getAppointment().getTitle());
 			nf.setCreateUser(createUser);
