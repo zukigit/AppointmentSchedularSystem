@@ -68,14 +68,14 @@ export class NavbarComponent implements OnInit {
         this.unreadNoti = Number(localStorage.getItem("unreadNoti"));
         this.loginId = localStorage.getItem("loggedInUserId");
         this.readedNoti = Number(localStorage.getItem("totalNoti"));
-        // setTimeout(() => {
-        //     this.getNotiFirstTime();
+        setTimeout(() => {
+            this.getNotiFirstTime();
 
-        // }, 1200);
+        }, 1200);
 
-        // setTimeout(() => {
-        //     this.realTimeData();
-        // }, 1000);
+        setTimeout(() => {
+            this.realTimeData();
+        }, 1000);
         this.getNotiFirstTime();
         this.realTimeData();
         //  this.getNotiByType();
@@ -98,6 +98,8 @@ export class NavbarComponent implements OnInit {
     removeReadCount() {
         localStorage.setItem("unreadNoti", '0');
         this.unreadNoti = 0;
+
+        this.getNotiFirstTime()
     }
 
     realTimeData() {
