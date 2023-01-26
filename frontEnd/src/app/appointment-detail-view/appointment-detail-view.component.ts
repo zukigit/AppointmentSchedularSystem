@@ -60,7 +60,7 @@ export class AppointmentDetailViewComponent implements OnInit {
   deleteApp(){
     this.appService.deleteApp(this.id).subscribe(
       data => {Swal.fire('Appointment Delete!!', 'Appointment Delete succesfully!', 'success');
-      this.router.navigate(['admin/dailyview'])
+      this.router.navigate(['admin/dashboard'])
     },
       error => console.log("fail delete")
     )
