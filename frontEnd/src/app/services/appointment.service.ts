@@ -57,4 +57,10 @@ export class AppointmentService {
   updateApp(app:AppointmentRegister): Observable<any> {
     return this.http.put(`${this.baseUrl}/updateAppointment/`, app, this.header);
   }
+
+  //delete
+  deleteApp(id: string): Observable<Object> {
+    return this.http.delete(`${this.baseUrl}/deleteAppById/${id}`, this.header);
+  }
+
 }

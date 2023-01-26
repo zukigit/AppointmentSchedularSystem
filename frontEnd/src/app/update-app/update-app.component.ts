@@ -188,8 +188,8 @@ export class UpdateAppComponent implements OnInit {
     this.appService.updateApp(this.app).subscribe(
       data => {
         // this.uploadFiles(data);
-        Swal.fire('Appointment Created!!', 'Appointment added succesfully!', 'success');
-        this.router.navigate(['admin/dashboard']);
+        Swal.fire('Appointment Update!!', 'Appointment Update succesfully!', 'success');
+        this.router.navigate(['admin/appointment_detail_view',this.id]);
       },
       error => console.log("Error appointment responseee ")
     )

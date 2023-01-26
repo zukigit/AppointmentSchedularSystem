@@ -3,6 +3,8 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AppointmentService } from 'app/services/appointment.service';
 import { UserService } from 'app/services/user.service';
 import { data } from 'jquery';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+
 
 @Component({
   selector: 'app-appointment-detail-view',
@@ -56,7 +58,12 @@ export class AppointmentDetailViewComponent implements OnInit {
    
   //delete
   deleteApp(){
-    alert("Okayy")
+    this.appService.deleteApp(this.id).subscribe(
+      data => {Swal.fire('Appointment Delete!!', 'Appointment Delete succesfully!', 'success');
+      this.router.navigate(['admin/dailyview'])
+    },
+      error => console.log("fail delete")
+    )
   }
 
   downloadFile(file) {      
