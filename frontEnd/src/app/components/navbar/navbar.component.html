@@ -30,20 +30,25 @@
                         </p>
             
                     </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="margin-left:10px; margin-top:10px display inline-block;">
-                
-                    <table>
+                    <div>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="margin-left:10px; margin-top:10px;">
+                        
+                    <table style="display: block;
+                    height: 140px;
+                    overflow-y: scroll;">
                         <thead>
-                            <th >Notification</th>
+                            <th style="padding-left: 10px;" >Notifications</th>
                         </thead>
-                        <span *ngIf="bindData != null || bindData != undefined">
-                        <tbody *ngFor="let data of bindData">
+                        <span *ngIf="bindData != null || bindData != undefined" >
+                        <tbody *ngFor="let data of bindData" >
                             <td class="dropdown-item">{{data}} </td>
                         </tbody>
                         </span>
                     </table>
+                    
               
                     </div>
+                </div>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link"  href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

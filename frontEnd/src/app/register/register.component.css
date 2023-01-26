@@ -23,7 +23,7 @@
   font-family: 'Poppins',sans-serif;
 }
 body{
-  height: 100vh;
+  height: 110 vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,6 +31,7 @@ body{
   background: linear-gradient(135deg, #d1e0f3, #cdc1e6);
 }
 .container{
+  margin-top: 40px;
   max-width: 700px;
   width: 100%;
   background-color: #fff;

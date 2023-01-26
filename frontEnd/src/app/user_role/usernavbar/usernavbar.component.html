@@ -32,9 +32,11 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="margin-left:10px; margin-top:10px display inline-block;">
                 
-                    <table>
-                        <thead>
-                            <th >Notification</th>
+                        <table style="display: block;
+                        height: 140px;
+                        overflow-y: scroll;">
+                            <thead>
+                                <th style="padding-left: 10px;" >Notifications</th>
                         </thead>
                         <span *ngIf="bindData != null || bindData != undefined">
                         <tbody *ngFor="let data of bindData">

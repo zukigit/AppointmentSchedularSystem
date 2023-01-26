@@ -117,7 +117,7 @@
   a:focus,
   a:active {
     @include shadow-small-color($brand-primary);
-    background-color: $brand-primary;
+    background-color: #435d7d;
     color: #FFFFFF;
   }
 }
