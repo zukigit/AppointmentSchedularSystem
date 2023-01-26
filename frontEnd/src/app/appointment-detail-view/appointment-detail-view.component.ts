@@ -16,15 +16,17 @@ export class AppointmentDetailViewComponent implements OnInit {
   files = [];
   employee = [];
   urls = [];
+  loginId: string;
 
   constructor(private route: ActivatedRoute,private appService:AppointmentService, private userService:UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
+    this.loginId = localStorage.getItem("loggedInUserId");
     this.appService.viewOnlyAppointmentById(this.id).subscribe(
       (res : any) => {
         if(res.type != "PUBLIC") {
-          this.appService.checkUserInclude(this.id, res.appointment_id).subscribe(
+          this.appService.checkUserInclude(this.loginId, res.appointment_id).subscribe(
             (data: any) => {
               if (data) {
                 this.res = res;
