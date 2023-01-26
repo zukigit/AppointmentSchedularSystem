@@ -21,6 +21,8 @@ import { UserAuthGuard } from 'app/security/user-auth.guard';
 import { TraineeAuthGuard } from 'app/security/trainee-auth.guard';
 import { TesingComponent } from 'app/tesing/tesing.component';
 import { AppointmentDetailViewComponent } from 'app/appointment-detail-view/appointment-detail-view.component';
+import { UpdateAppComponent } from 'app/update-app/update-app.component';
+
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -44,5 +46,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'weeklyview', component: WeeklyviewComponent},
 
     { path: 'testing/:id', component: TesingComponent},
-    { path: 'appointment_detail_view/:id', component:AppointmentDetailViewComponent}
+    { path: 'appointment_detail_view/:id', component:AppointmentDetailViewComponent},
+    {path : 'update-app/:id',component:UpdateAppComponent}
+    
 ];

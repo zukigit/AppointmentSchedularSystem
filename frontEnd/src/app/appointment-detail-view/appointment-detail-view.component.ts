@@ -51,8 +51,9 @@ export class AppointmentDetailViewComponent implements OnInit {
 
   //update
   updateApp() {
-    alert("Ok nrr sarrr")
+      this.router.navigate(['admin/update-app',this.id])
   }
+   
   //delete
   deleteApp(){
     alert("Okayy")

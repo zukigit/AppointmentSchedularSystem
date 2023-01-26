@@ -45,6 +45,9 @@ import { WeeklyviewbyuserComponent } from './weeklyviewbyuser/weeklyviewbyuser.c
 import { WeeklyviewbytraineeComponent } from './weeklyviewbytrainee/weeklyviewbytrainee.component';
 import { AppointmentDetailViewByuserComponent } from './appointment-detail-view-byuser/appointment-detail-view-byuser.component';
 import { AppointmentDetailViewBytraineeComponent } from './appointment-detail-view-bytrainee/appointment-detail-view-bytrainee.component';
+import { UpdateAppComponent } from './update-app/update-app.component';
+
+
 
 @NgModule({
   imports: [
@@ -95,6 +98,7 @@ import { AppointmentDetailViewBytraineeComponent } from './appointment-detail-vi
     WeeklyviewbytraineeComponent,
     AppointmentDetailViewByuserComponent,
     AppointmentDetailViewBytraineeComponent,
+    UpdateAppComponent,
   ],
   providers: [AdminAuthGuard, DatePipe, UserAuthGuard, TraineeAuthGuard],
   bootstrap: [AppComponent]

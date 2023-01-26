@@ -53,4 +53,8 @@ export class AppointmentService {
                                     .set('Authorization',  `Bearer ${this.jwtToken}`);
     return this.http.get(`${this.baseUrl}/downloadFile?fileId=${fileId}`, { headers, responseType: 'blob'});
   }
+  //update
+  updateApp(app:AppointmentRegister): Observable<any> {
+    return this.http.put(`${this.baseUrl}/updateAppointment/`, app, this.header);
+  }
 }

@@ -3,6 +3,7 @@ import { Schdule } from "./schdule";
 import { Team } from "./team";
 
 export class AppointmentRegister {
+    employee_id:number;
     start_date : Date;
     end_date : Date;
     start_time : string;
@@ -17,5 +18,7 @@ export class AppointmentRegister {
     listbox_key:string;
     employee:any=[];
     schedules:Schdule[]=[];
+    appointment_id:number;
+    files = [];
 
 }
