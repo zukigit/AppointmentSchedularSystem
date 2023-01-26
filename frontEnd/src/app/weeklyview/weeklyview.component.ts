@@ -89,7 +89,12 @@ export class WeeklyviewComponent implements OnInit {
               let myDate2 = new Date(dateStr2);
               //myDate.setHours(result.start_date.getHours());
 
-              this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type })
+              if (myDate2 <= this.currentDate) {
+                //alert("Schedule are finished,can't edit!!!");
+                this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type,color:"#6e6b6c" })
+              } else {
+                this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type, })
+              }
 
             }
             console.log("sch " + result.schedules)
@@ -280,7 +285,12 @@ export class WeeklyviewComponent implements OnInit {
                       //myDate.setHours(result.start_date.getHours());
                       console.log("title searc is " + myDate)
 
-                      this.calEvent.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type })
+                      if (myDate2 <= this.currentDate) {
+                        //alert("Schedule are finished,can't edit!!!");
+                        this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type,color:"#6e6b6c" })
+                      } else {
+                        this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type, })
+                      }
 
 
                     }
