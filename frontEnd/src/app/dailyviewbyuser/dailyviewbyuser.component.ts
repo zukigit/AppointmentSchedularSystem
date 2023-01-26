@@ -13,6 +13,7 @@ import { ShowAppointment } from 'app/model/show-appointment';
 import { resolveSoa } from 'dns';
 import { Schdule } from 'app/model/schdule';
 import { DatePipe } from '@angular/common';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 
 @Component({
@@ -20,9 +21,7 @@ import { DatePipe } from '@angular/common';
   templateUrl: './dailyviewbyuser.component.html',
   styleUrls: ['./dailyviewbyuser.component.scss']
 })
-export class DailyviewbyuserComponent implements OnInit {
-
-  Events: any[] = [];
+export class DailyviewbyuserComponent implements OnInit {Events: any[] = [];
   calEvent: any[] = [];
   startDate = new Date();
   loginId: string;
@@ -77,7 +76,13 @@ export class DailyviewbyuserComponent implements OnInit {
 
               let dateStr2: string = r.date + " " + r.end_time + ":00";
               let myDate2 = new Date(dateStr2);
-              this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type, })
+              if (myDate2 <= this.currentDate) {
+                //alert("Schedule are finished,can't edit!!!");
+                this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type,color:"#6e6b6c" })
+              } else {
+                this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type, })
+              }
+             
             }
           }
         }
@@ -97,7 +102,8 @@ export class DailyviewbyuserComponent implements OnInit {
             slotMaxTime: "20:00:00",
             contentHeight: 550,
             selectable: true,
-            slotLabelFormat: { hour: 'numeric', minute: '2-digit', hour12: false }
+            slotLabelFormat: { hour: 'numeric', minute: '2-digit', hour12: false },
+            theme: true,
           }
         },
         events: this.Events,
@@ -115,12 +121,22 @@ export class DailyviewbyuserComponent implements OnInit {
                   this.router.navigate(['/user/appointment_detail_view_byuser', id]);
                 }
               }, error => {
-                alert("this appointment is private and you are not in there")
+                Swal.fire({  
+                  icon: 'error',  
+                  title: 'Assess Denied',  
+                  text: 'This appointment is private and you are not in there',   
+                }) 
+                //alert("this appointment is private and you are not in there")
               }
             );
           } else {
             if (arg.event.end <= this.currentDate) {
-              alert("Schedule are finished,can't edit!!!");
+              //alert("Schedule are finished,can't edit!!!");
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Assess Denied',  
+                text: 'Appointment is over, Can not edit!!!',   
+              }) 
             } else {
               this.router.navigate(['/user/appointment_detail_view_byuser', id]);
             }
@@ -142,6 +158,14 @@ export class DailyviewbyuserComponent implements OnInit {
 
     console.log("222222 " + this.Events);
 
+  }
+
+  beforeClick() {
+   
+  }
+
+  afterClick() {
+   this.calEvent = [];
   }
 
 
@@ -181,12 +205,22 @@ export class DailyviewbyuserComponent implements OnInit {
                         this.router.navigate(['/user/appointment_detail_view_byuser', id]);
                       }
                     }, error => {
-                      alert("this appointment is private and you are not in there")
+                      //alert("this appointment is private and you are not in there")
+                      Swal.fire({  
+                        icon: 'error',  
+                        title: 'Assess Denied',  
+                        text: 'This appointment is private and you are not in there.',   
+                      }) 
                     }
                   );
                 } else {
                   if (arg.event.end <= this.currentDate) {
-                    alert("Schedule are finished,can't edit!!!");
+                    //alert("Schedule are finished,can't edit!!!");
+                    Swal.fire({  
+                      icon: 'error',  
+                      title: 'Assess Denied',  
+                      text: 'Appointment is over. Can not edit!!!',   
+                    }) 
                   } else {
                     this.router.navigate(['/user/appointment_detail_view_byuser', id]);
                   }
@@ -203,27 +237,32 @@ export class DailyviewbyuserComponent implements OnInit {
             this.appService.getAppointmentById(userId).subscribe(
               (appData: any) => {
                 if (appData == null) {
-                  alert("this user has no appointments")
+                  // alert("this user has no appointments");
+                  Swal.fire({  
+                    icon: 'error',  
+                    title: 'No Appointment',  
+                    text: 'This user has no appointment.',   
+                  })
                 } else {
                   this.searchedApp = appData;
                   for (let result of this.searchedApp) {
                     for (let r of result.schedules) {
-
                       console.log("date " + r.date)
-                      // console.log("time " + result.start_ti)
-
                       let dateStr: string = r.date + " " + r.start_time + ":00";
                       let myDate = new Date(dateStr);
-
                       let dateStr2: string = r.date + " " + r.end_time + ":00";
                       let myDate2 = new Date(dateStr2);
-                      //myDate.setHours(result.start_date.getHours());
-                      console.log("title searc is " + myDate)
-
-                      this.calEvent.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type })
+                      console.log("title searc is " + myDate);
+                      if (myDate2 <= this.currentDate) {
+                        //alert("Schedule are finished,can't edit!!!");
+                        this.calEvent.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type,color:"#6e6b6c" })
+                      } else {
+                        this.calEvent.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type, })
+                      }
+                      
                     }
                   }
-                  //  console.log("search event is " + this.calEvent)
+              
                 }
                 console.log(this.calEvent);
               }
@@ -233,17 +272,31 @@ export class DailyviewbyuserComponent implements OnInit {
         } else {
           this.searchedUser = new User();
           this.searchedUser.name = "";
-          alert("user not exist")
+          //alert("user not exist");
+          Swal.fire({  
+            icon: 'error',  
+            title: 'No User',  
+            text: 'User does not exist',   
+          })
+          this.isLoad = false;
         }
       }, error => {
-        alert("user doesn't exist")
+        // alert("user doesn't exist");
+        Swal.fire({  
+          icon: 'error',  
+          title: 'No User',  
+          text: 'User does not exist',   
+        })
+        this.isLoad = false;
       }
     );
+    this.afterClick()
+    
 
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
-    this.router.navigate(['/user/app-register'])
+    this.router.navigate(['app-register'])
   }
 
   toggleTag() {
@@ -255,4 +308,7 @@ export class DailyviewbyuserComponent implements OnInit {
   goToAppRegister() {
     this.router.navigate(['/user/app-register'])
   }
+}
+function beforeClick() {
+  throw new Error('Function not implemented.');
 }

@@ -1,35 +1,35 @@
-<div class='demo-app-main'>
+<div class='demo-app-main' >
 
-    <div class="sb-example-1">
-      
-        <form #form="ngForm" class="search"(submit)="searchAppByUserId(searchedUserId)">
-         <input type="text" [(ngModel)] = "searchedUserId" class="searchTerm" placeholder="Search by Employee ID">
-         <button  type="submit" class="searchButton">
-           <i class="fa fa-search"></i>
-        </button>
-        <a href="#"><i class="fa fa-trash" style="font-size: 18px; font-weight: bold;"></i>Remove Searched Employee</a>
-        <!-- <span class="memTad">
-          <a href="#"><i class="fa fa-trash" style="font-size: 14px;"></i>Remove Member</a>
-          <a href="#"><i class="fa fa-chevron-left" style="font-size: 14px;"></i>Previous Member</a>
-          <a href="#">Next Member <i class="fa fa-chevron-right" style="font-size: 14px;"></i></a>
-      </span> -->
-        </form>
-   </div>
-  
-   <span  class="containerLoader">
-    <span *ngIf="isLoad == true" class="loader"></span>
-    </span>
-    <td>
-      <div class="name">{{loginUser.name}}</div>
-      <div #calendar #eventContent style="margin-top:20px; margin-left:10px; width: 520px; display: inline-block;">
-      
-  </div>
-  </td>
+  <div class="sb-example-1">
+
+      <form #form="ngForm" class="search"(submit)="searchAppByUserId(searchedUserId)">
+       <input type="text" [(ngModel)] = "searchedUserId" class="searchTerm" placeholder="Search by Employee ID">
+       <button  type="submit" class="searchButton">
+         <i class="fa fa-search"></i>
+      </button>
+      <a href="#"><i class="fa fa-trash" style="font-size: 18px; font-weight: bold;"></i>Remove Searched Employee</a>
+      <!-- <span class="memTad">
+        <a href="#"><i class="fa fa-trash" style="font-size: 18px; font-weight: bold;"></i>Remove Member</a>
+        <a href="#"><i class="fa fa-chevron-left" style="font-size: 18px; font-weight: bold;"></i>Previous Member</a>
+        <a href="#">Next Member <i class="fa fa-chevron-right" style="font-size: 18px; font-weight: bold;"></i></a>
+    </span> -->
+      </form>
+ </div>
+
+ <span  class="containerLoader">
+  <span *ngIf="isLoad == true" class="loader"></span>
+  </span>
   <td>
-    <div  class="name" >{{searchedUserName}}</div>
-    <div  #calendar2 #eventContent style="margin-left:10px; margin-top:20px;width: 520px; display: inline-block;">
-        
-   </div>
-    </td>
-  
-  </div>
+    <div class="name">{{loginUser.name}}</div>
+    <div #calendar #eventContent style="font-size:14px; margin-top:0px; margin-left:10px; width: 520px; display: inline-block;">
+
+</div>
+</td>
+<td>
+  <div  class="name" >{{searchedUserName}} </div>
+  <div  #calendar2 #eventContent style="font-size:14px; margin-left:10px; margin-top:0px;width: 520px; display: inline-block;">
+    
+ </div>
+  </td>
+
+</div>

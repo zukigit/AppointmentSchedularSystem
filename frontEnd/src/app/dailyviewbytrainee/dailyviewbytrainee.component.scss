@@ -1,163 +1,166 @@
 
 h2 {
-    margin: 0;
-    font-size: 16px;
-  }
-  
-  ul {
-    margin: 0;
-    padding: 0 0 0 1.5em;
-  }
-  
-  li {
-    margin: 1.5em 0;
-    padding: 0;
-  }
-  
-  b { /* used for event dates/times */
-    margin-right: 3px;
-  }
-  
-  .demo-app {
-    padding-top: 70px;
-    display: flex;
-    min-height: 100%;
-    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 14px;
-  }
-  
-  .demo-app-sidebar {
-    width: 300px;
-    line-height: 1.5;
-    background: #eaf9ff;
-    border-right: 1px solid #d3e2e8;
-  }
-  
-  .demo-app-sidebar-section {
-    padding: 2em;
-  }
-  
-  .demo-app-main {
-    flex-grow: 1;
-    padding: 1em;
-    padding-top: 1em;
-    background: #ffffff;
-    height: 130%;
-    margin-left: 2%;
-    margin-left:0%;
-  }
-  
-  .fc { /* the calendar root */
-    max-width: 1100px;
-    margin: 0 auto;
-    
-  }
-  a {
-    cursor: pointer;
-    padding: 10px;
-  }
-  .search{
-    margin-bottom: 30px;
-    margin-top:100px;
-    border-radius: 3%;
-    border-color: #435d7d;
-  }
-  tr{
-    width:100%;
-  }
+  margin: 0;
+  font-size: 16px;
+}
 
-  .sb-example-1 .search {
-    margin-top: 100px;
-    margin-bottom: 0px;
-    width: 100%;
-    position: relative;
-    display: flex;
-    height: 30px;
-  }
-  .sb-example-1 .searchTerm {
-    width: 30%;
-    border: 3px solid #435d7d;
-    border-right: none;
-    padding: 5px;
-    border-radius: 5px 0 0 5px;
-    outline: none;
-    color: #9DBFAF;
-  }
-  .sb-example-1 .searchTerm:focus{
-    border: 5px solid #435d7d;
-  }
-  .sb-example-1 .searchButton {
-    width: 40px;
-    height: 50px;
-    border: 1px solid #212f41;
-    background: #435d7d;
-    text-align: center;
-    color: #fff;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-    font-size: 20px;
-    height: 30px;
-  }
+ul {
+  margin: 0;
+  padding: 0 0 0 1.5em;
+}
 
-  .sb-example-1 .searchButton:hover{
-    background: #ffcc33;
-  }
-  .add{
-    margin-top: 1px;
-  }
-  .add-app-button{
-    margin-top: 10px;
-    border-radius: 4%;
-    background: #435d7d;
-    border: none;
-    height: 35px;
-    width: auto;
-    color: #fff;
-  }
-  .memTad{
-    margin-top: 15px;
-    float: right;
-  }
-  .name{
-  text-align: center; 
-  margin-top: 10px; 
-  font-size: 18px; 
-  font-weight: bold; 
+li {
+  margin: 1.5em 0;
+  padding: 0;
+}
+
+b { /* used for event dates/times */
+  margin-right: 3px;
+}
+
+.demo-app {
+  padding-top: 70px;
+  display: flex;
+  min-height: 100%;
+  font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+.demo-app-sidebar {
+  width: 300px;
+  line-height: 1.5;
+  background: #eaf9ff;
+  border-right: 1px solid #d3e2e8;
+}
+
+.demo-app-sidebar-section {
+  padding: 2em;
+}
+
+.demo-app-main {
+  flex-grow: 1;
+  padding: 1em;
+  padding-top: 1em;
+  background: #ffffff;
+  height: 130%;
+  margin-left: 2%;
+  margin-left:0%;
+}
+
+.fc { /* the calendar root */
+  max-width: 1100px;
+  margin: 0 auto;
+
+}
+a {
+  cursor: pointer;
+  padding: 10px;
+}
+.search{
+  margin-bottom: 30px;
+  margin-top:100px;
+  border-radius: 3%;
+  border-color: #435d7d;
+}
+tr{
+  width:100%;
+}
+
+.sb-example-1 .search {
+  margin-top: 70px;
+  margin-bottom: 0px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  height: 30px;
+}
+.sb-example-1 .searchTerm {
+  width: 30%;
+  border: 3px solid #435d7d;
+  border-right: none;
+  padding: 5px;
+  border-radius: 5px 0 0 5px;
+  outline: none;
+  color: #9DBFAF;
+}
+.sb-example-1 .searchTerm:focus{
+  border: 5px solid #435d7d;
+}
+.sb-example-1 .searchButton {
+  width: 40px;
+  height: 50px;
+  border: 1px solid #212f41;
+  background: #435d7d;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+  height: 30px;
+}
+
+.sb-example-1 .searchButton:hover{
+  background: #ffcc33;
+}
+.add{
+  margin-top: 1px;
+}
+.add-app-button{
+  margin-top: 10px;
+  border-radius: 4%;
+  background: #435d7d;
+  border: none;
+  height: 35px;
+  width: auto;
+  color: #fff;
+}
+.memTad{
+  margin-top: 15px;
+  float: right;
+}
+.name{
+text-align: center;
+margin-top: 40px;
+font-size: 18px;
+font-weight: bold;
 }
 
 
 
 @-webkit-keyframes spin {
-	from {-webkit-transform:rotate(0deg);}
-	to {-webkit-transform:rotate(360deg);}
+from {-webkit-transform:rotate(0deg);}
+to {-webkit-transform:rotate(360deg);}
 }
 
 @keyframes spin {
-	from {transform:rotate(0deg);}
-	to {transform:rotate(360deg);}
+from {transform:rotate(0deg);}
+to {transform:rotate(360deg);}
 }
 
 
 
 
 .loader {
-    content:'';
-    display:block;
-    position:absolute;
-    left: 42%;
-    top: 50%;
-    width:130px;height:130px;
-    border-style:solid;
-    border: 4px solid #5e7899;
-    border-bottom-color: #f5d77c;
-    border-top-color:transparent;
-    border-width: 13px;
-    border-radius:50%;
-    -webkit-animation: spin 2s linear infinite;
-    animation: spin 2s linear infinite;
-    z-index:9999;
+  content:'';
+  display:block;
+  position:absolute;
+  left: 42%;
+  top: 50%;
+  width:130px;height:130px;
+  border-style:solid;
+  border: 4px solid #5e7899;
+  border-bottom-color: #f5d77c;
+  border-top-color:transparent;
+  border-width: 13px;
+  border-radius:50%;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+  z-index:9999;
+}
+
+::placeholder {
+color: #435d7d;
+opacity: 1; /* Firefox */
 }
 
 
-
-  

@@ -87,6 +87,11 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                 <li routerLinkActive="active" class="nav-item">
+                    <a class="nav-link" type="button" (click)="goToAppRegister()" style="font-size: 14px;">
+                        <i class="material-icons">event_available</i><span style="padding-top: 10px;">Add Appointment</span> 
+                    </a>
+                </li>
+                <li routerLinkActive="active" class="nav-item">
                     <a class="nav-link" [routerLink]="['/user/dailyviewbyuser']" style="font-size: 14px;">
                         <i class="material-icons">event_available</i><span style="padding-top: 10px;">DailyView</span> 
                     </a>
@@ -96,11 +101,7 @@
                         <i class="material-icons">event_available</i><span style="padding-top: 10px;">WeeklyView</span> 
                     </a>
                 </li>
-                <li routerLinkActive="active" class="nav-item">
-                    <a class="nav-link" type="button" (click)="goToAppRegister()" style="font-size: 14px;">
-                        <i class="material-icons">event_available</i><span style="padding-top: 10px;">Add Appointment</span> 
-                    </a>
-                </li>
+                
                 
                 
             </div>
