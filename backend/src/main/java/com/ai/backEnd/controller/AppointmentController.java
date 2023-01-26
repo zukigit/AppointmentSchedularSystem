@@ -3,9 +3,7 @@ package com.ai.backEnd.controller;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,14 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-
 import com.ai.backEnd.dto.ShowAppointment;
 import com.ai.backEnd.model.Appointment;
 import com.ai.backEnd.model.Notification;
 import com.ai.backEnd.model.NotificationType;
 import com.ai.backEnd.model.Schedule;
 import com.ai.backEnd.model.User;
-import com.ai.backEnd.service.UserService;
 import com.ai.backEnd.serviceImpl.AppointmentImpl;
 import com.ai.backEnd.serviceImpl.NotificationImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -60,7 +56,7 @@ public class AppointmentController {
 			noti.setAppointment(appointment);
 			noti.setUser(user);
 			noti.setDescription(appointment.getDescription());
-			noti.setDeleteStatus(false);
+			
 			noti.setNoti_type(NotificationType.CREATE_APP);
 			notiService.addNoti(noti);
 		}
@@ -181,8 +177,6 @@ public class AppointmentController {
 			}
 		}
 
-
-
 		return savedAppointment;
 	}
 
@@ -203,7 +197,6 @@ public class AppointmentController {
 			noti.setAppointment(appointment);
 			noti.setUser(user);
 			noti.setDescription(appointment.getDescription());
-			noti.setDeleteStatus(false);
 			noti.setNoti_type(notiType);
 			notiService.addNoti(noti);
 	}

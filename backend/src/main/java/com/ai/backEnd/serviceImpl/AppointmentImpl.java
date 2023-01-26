@@ -1,6 +1,4 @@
 package com.ai.backEnd.serviceImpl;
-
-import com.ai.backEnd.dto.ShowAppointment;
 import com.ai.backEnd.model.Appointment;
 import com.ai.backEnd.model.Schedule;
 import com.ai.backEnd.repository.AppointmentRepository;

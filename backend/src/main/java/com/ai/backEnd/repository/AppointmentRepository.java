@@ -1,6 +1,6 @@
 package com.ai.backEnd.repository;
 
-import com.ai.backEnd.dto.ShowAppointment;
+
 import com.ai.backEnd.model.Appointment;
 import java.time.LocalDate;
 import java.util.List;

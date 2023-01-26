@@ -26,13 +26,6 @@ public class NotificationController {
 	
 	@Autowired
 	private NotificationImpl notiService;
-	
-	// @GetMapping(value ="/getNoti/{employee_id}")
-	// public List<Notification> getNoti(@PathVariable String employee_id){
-	// 	String  id = employee_id;
-    //     User user = userService.getUserById(id);
-	// 	return notiService.getNoti(user.getEmployee_id());	
-	// }
 
 	@PostMapping("/SaveNoti")
 	public Notification addNoti(@RequestBody Notification noti){
@@ -40,7 +33,7 @@ public class NotificationController {
 	}
 
 	@GetMapping(value ="/getNoti/{employee_id}")
-	public ResponseEntity<List<NotificationDTO>> getShowApp(@PathVariable String employee_id)throws JsonProcessingException {
+	public ResponseEntity<List<NotificationDTO>> getNotiByEmpId(@PathVariable String employee_id)throws JsonProcessingException {
 		List<NotificationDTO> notify = new ArrayList<NotificationDTO>();
 		List<String> user_ids = new ArrayList<>(List.of(employee_id));
 		List<Notification> noti = notiService.getNotiByUser(user_ids);
@@ -51,18 +44,28 @@ public class NotificationController {
 			User user = notification.getAppointment().getCreateUser();
 			createUser.setEmployee_id(user.getEmployee_id());
 			createUser.setName(user.getName());
-			createUser.setUserImage(user.getUserImage());
+			//createUser.setUserImage(user.getUserImage());
 			nf.setId(notification.getId());
 			nf.setTitle(notification.getAppointment().getTitle());
-			nf.setCreateUser(createUser);
+			//nf.setCreateUser(createUser);
 			nf.setNotiType(notification.getNoti_type());
 			notify.add(nf);
 		}
 		return new ResponseEntity<List<NotificationDTO>>(notify, HttpStatus.OK);
 	}
 
-	public void deleteNoti(int id){
-		notiService.deleteNoti(id);
+	@GetMapping("/getTotalNoti/{employee_id}")
+	public int totalNoti(@PathVariable String employee_id){
+		List<String> user_ids = new ArrayList<>(List.of(employee_id));
+        List<Notification> totalNoti = notiService.getNotiByUser(user_ids);
+		return totalNoti.size();
+	}
+
+	@GetMapping("/getUnreadNoti/{employee_id}")
+	public int unReadNoti(@PathVariable String employee_id){
+		List<String> user_ids = new ArrayList<>(List.of(employee_id));
+        List<Notification> unreadNoti = notiService.getUnreadNoti(user_ids);
+		return unreadNoti.size();
 	}
 		
 }

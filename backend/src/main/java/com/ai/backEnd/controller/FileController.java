@@ -2,12 +2,8 @@ package com.ai.backEnd.controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import com.ai.backEnd.model.Appointment;
 import com.ai.backEnd.model.AppointmentFile;
-import com.ai.backEnd.model.UserImage;
+
 import com.ai.backEnd.repository.FileRepository;
 import com.ai.backEnd.service.AppointmentService;
 

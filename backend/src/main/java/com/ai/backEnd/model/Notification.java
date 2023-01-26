@@ -24,11 +24,10 @@ public class Notification implements Serializable
 	@Column(length=8129)
 	private String description;
 
+	private boolean isReaded=false;
+
 	@Enumerated(EnumType.STRING)
 	private NotificationType noti_type;
-
-	@Column(columnDefinition = "tinyint(1) default 0")
-    private boolean deleteStatus ;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id")
@@ -38,6 +37,8 @@ public class Notification implements Serializable
     @JoinColumn(name="appointment_id")
     private Appointment Appointment;
     
+
+	
 
 	
 	public static long getSerialversionuid() {
@@ -78,14 +79,7 @@ public class Notification implements Serializable
 		this.description = description;
 	}
 
-	public boolean isDeleteStatus() {
-		return deleteStatus;
-	}
-
-	public void setDeleteStatus(boolean deleteStatus) {
-		this.deleteStatus = deleteStatus;
-	}
-
+	
 	public User getUser() {
 		return user;
 	}
@@ -100,6 +94,14 @@ public class Notification implements Serializable
 
 	public void setNoti_type(NotificationType noti_type) {
 		this.noti_type = noti_type;
+	}
+
+	public boolean isReaded() {
+		return isReaded;
+	}
+
+	public void setReaded(boolean isReaded) {
+		this.isReaded = isReaded;
 	}
 	
 	

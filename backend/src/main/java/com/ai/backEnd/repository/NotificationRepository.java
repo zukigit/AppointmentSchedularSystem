@@ -10,9 +10,12 @@ import com.ai.backEnd.model.Notification;
 @Repository
 public interface NotificationRepository extends JpaRepository<Notification, Integer>{
 	
-//	@Query(value = "select * from notification where employee_id=?1 and delete_status='false'",nativeQuery = true)
-//	List<Notification> getNoti(String employee_id);
+	
+
 	@Query("SELECT n FROM Notification n JOIN n.user u WHERE u.employee_id IN (:user_ids)")
 	List<Notification> getNotiByUser(List<String> user_ids);
+
+	@Query("SELECT n FROM Notification n JOIN n.user u WHERE u.employee_id IN (:user_ids) AND n.isReaded = false ")
+	List<Notification> getUnreadNoti(List<String> user_ids);
 
 }

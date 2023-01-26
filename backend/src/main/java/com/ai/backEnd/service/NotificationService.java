@@ -13,4 +13,8 @@ public interface NotificationService {
 
        void deleteNoti(int id);
 
+      
+
+       List<Notification> getUnreadNoti(List<String> user_ids);
+
 }
