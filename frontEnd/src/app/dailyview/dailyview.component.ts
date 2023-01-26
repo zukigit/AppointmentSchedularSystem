@@ -13,6 +13,7 @@ import { ShowAppointment } from 'app/model/show-appointment';
 import { resolveSoa } from 'dns';
 import { Schdule } from 'app/model/schdule';
 import { DatePipe } from '@angular/common';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 import { data, error, event } from 'jquery';
 import { info } from 'console';
@@ -101,7 +102,8 @@ export class DailyviewComponent implements OnInit {
             slotMaxTime: "20:00:00",
             contentHeight: 550,
             selectable: true,
-            slotLabelFormat: { hour: 'numeric', minute: '2-digit', hour12: false }
+            slotLabelFormat: { hour: 'numeric', minute: '2-digit', hour12: false },
+            theme: true,
           }
         },
         events: this.Events,
@@ -119,12 +121,22 @@ export class DailyviewComponent implements OnInit {
                   this.router.navigate(['/admin/appointment_detail_view', id]);
                 }
               }, error => {
-                alert("this appointment is private and you are not in there")
+                Swal.fire({  
+                  icon: 'error',  
+                  title: 'Assess Denied',  
+                  text: 'This appointment is private and you are not in there',   
+                }) 
+                //alert("this appointment is private and you are not in there")
               }
             );
           } else {
             if (arg.event.end <= this.currentDate) {
-              alert("Schedule are finished,can't edit!!!");
+              //alert("Schedule are finished,can't edit!!!");
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Assess Denied',  
+                text: 'Appointment is over, Can not edit!!!',   
+              }) 
             } else {
               this.router.navigate(['/admin/appointment_detail_view', id]);
             }
@@ -193,12 +205,22 @@ export class DailyviewComponent implements OnInit {
                         this.router.navigate(['/admin/appointment_detail_view', id]);
                       }
                     }, error => {
-                      alert("this appointment is private and you are not in there")
+                      //alert("this appointment is private and you are not in there")
+                      Swal.fire({  
+                        icon: 'error',  
+                        title: 'Assess Denied',  
+                        text: 'This appointment is private and you are not in there.',   
+                      }) 
                     }
                   );
                 } else {
                   if (arg.event.end <= this.currentDate) {
-                    alert("Schedule are finished,can't edit!!!");
+                    //alert("Schedule are finished,can't edit!!!");
+                    Swal.fire({  
+                      icon: 'error',  
+                      title: 'Assess Denied',  
+                      text: 'Appointment is over. Can not edit!!!',   
+                    }) 
                   } else {
                     this.router.navigate(['/admin/appointment_detail_view', id]);
                   }
@@ -215,7 +237,12 @@ export class DailyviewComponent implements OnInit {
             this.appService.getAppointmentById(userId).subscribe(
               (appData: any) => {
                 if (appData == null) {
-                  alert("this user has no appointments")
+                  // alert("this user has no appointments");
+                  Swal.fire({  
+                    icon: 'error',  
+                    title: 'No Appointment',  
+                    text: 'This user has no appointment.',   
+                  })
                 } else {
                   this.searchedApp = appData;
                   for (let result of this.searchedApp) {
@@ -240,11 +267,21 @@ export class DailyviewComponent implements OnInit {
         } else {
           this.searchedUser = new User();
           this.searchedUser.name = "";
-          alert("user not exist");
+          //alert("user not exist");
+          Swal.fire({  
+            icon: 'error',  
+            title: 'No User',  
+            text: 'User does not exist',   
+          })
           this.isLoad = false;
         }
       }, error => {
-        alert("user doesn't exist");
+        // alert("user doesn't exist");
+        Swal.fire({  
+          icon: 'error',  
+          title: 'No User',  
+          text: 'User does not exist',   
+        })
         this.isLoad = false;
       }
     );

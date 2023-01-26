@@ -67,7 +67,7 @@ h2 {
   }
 
   .sb-example-1 .search {
-    margin-top: 100px;
+    margin-top: 70px;
     margin-bottom: 0px;
     width: 100%;
     position: relative;
@@ -120,7 +120,7 @@ h2 {
   }
   .name{
   text-align: center;
-  margin-top: 10px;
+  margin-top: 40px;
   font-size: 18px;
   font-weight: bold;
 }
