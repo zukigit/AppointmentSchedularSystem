@@ -112,8 +112,6 @@ export class DailyviewComponent implements OnInit {
         eventClick: (arg) => {
           let id = arg.event.id;
           let appType = arg.event.groupId;
-          console.log("event click date is " + arg.event.end)
-          console.log("current click date is " + this.currentDate)
 
           if (appType != "PUBLIC") {
             this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(

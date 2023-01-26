@@ -37,4 +37,9 @@ export class NotiService {
   getUnreadedNotiCount(userId : string) {
     return this.http.get(`${this.baseUrl}/getUnreadNoti/${userId}`,this.header);
   }
+
+  makeNotiReaded(notiId : number) {
+    console.log("noti make is called")
+    return this.http.put(`${this.baseUrl}/makeReaded/${notiId}`,this.header);
+  }
 }

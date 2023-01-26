@@ -21,7 +21,7 @@
                     </a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link" (click)="removeReadCount()" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link" href="javascript:void(0)" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="material-icons" >notifications</i>
                            
                           <span class="notification" >{{unreadNoti}}</span>
@@ -41,7 +41,10 @@
                         </thead>
                         <span *ngIf="showNoti != null || showNoti != undefined" >
                         <tbody *ngFor="let data of showNoti" >
-                            <td class="dropdown-item">{{data}} </td>
+                            <td>
+                                <button (click)="goAppDetail(data.appId, data.notiId)" *ngIf="!data.isReaded" style="background-color: yellow" class="dropdown-item">{{data.message}} </button>
+                                <button *ngIf="data.isReaded" class="dropdown-item">{{data}} </button>
+                            </td>
                         </tbody>
                         </span>
                     </table>

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -49,11 +50,12 @@ public class NotificationController {
 			createUser.setEmployee_id(user.getEmployee_id());
 			createUser.setName(user.getName());
 			createUser.setUserImage(user.getUserImage());
-			nf.setAppointment_id(app);
+			nf.setAppointment_id(app.getAppointment_id());
 			nf.setId(notification.getId());
 			nf.setTitle(notification.getAppointment().getTitle());
 			nf.setCreateUser(createUser);
 			nf.setNotiType(notification.getNoti_type());
+			nf.setIsReaded(notification.isReaded());
 			notify.add(nf);
 		}
 		return new ResponseEntity<List<NotificationDTO>>(notify, HttpStatus.OK);
@@ -72,5 +74,12 @@ public class NotificationController {
         List<Notification> unreadNoti = notiService.getUnreadNoti(user_ids);
 		return unreadNoti.size();
 	}
-		
+	
+	@PutMapping("/makeReaded/{notiId}")
+	public void makeReaded(@PathVariable int notiId) {
+		System.out.println("controller make readed is called");
+		Notification notification = notiService.getNotiById(notiId);
+		notification.setReaded(true);
+		notiService.addNoti(notification);
+	}
 }

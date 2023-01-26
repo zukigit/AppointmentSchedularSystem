@@ -20,24 +20,24 @@ public class NotificationImpl implements NotificationService{
 
 	}
 
-@Override
-public List<Notification> getNotiByUser(List<String> user_ids) {
-	return repo.getNotiByUser(user_ids);
-}
+	@Override
+	public List<Notification> getNotiByUser(List<String> user_ids) {
+		return repo.getNotiByUser(user_ids);
+	}
 
-@Override
-public void deleteNoti(int id) {
-     repo.deleteById(id);
-	
-}
+	@Override
+	public void deleteNoti(int id) {
+	     repo.deleteById(id);
+		
+	}
 
+	@Override
+	public List<Notification> getUnreadNoti(List<String> user_ids) {
+		return repo.getUnreadNoti(user_ids);
+	}
 
-
-@Override
-public List<Notification> getUnreadNoti(List<String> user_ids) {
-	return repo.getUnreadNoti(user_ids);
-}
-
-
-
+	@Override
+	public Notification getNotiById(int id) {
+		return repo.findById(id).get();
+	}
 }
