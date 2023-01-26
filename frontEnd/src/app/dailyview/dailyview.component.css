@@ -158,5 +158,9 @@ h2 {
     z-index:9999;
 }
 
+::placeholder {
+  color: #435d7d;
+  opacity: 1; /* Firefox */
+}
 
 

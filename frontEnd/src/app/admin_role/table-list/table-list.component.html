@@ -69,35 +69,14 @@
 
 
                 <!-- Navigation Bar -->
-                <nav class="navbar navbar-expand-sm
+                <!-- <nav class="navbar navbar-expand-sm
             bg-dark navbar-dark"
-                    style="background-color: #21212100 !important; margin-bottom: 20px; box-shadow: none;">
+                    style="background-color: #21212100 !important; margin-bottom: 20px; box-shadow: none;"> -->
 
 
 
-                    <ul class="navbar nav ml-auto" style="box-shadow: none;">
-                        <form>
-                            <ul class="navbar nav ml-auto" style="border:none;">
-                                <!-- Dropdown list -->
-                                <li class="nav-item dropdown" style="box-shadow: none;"> <i class="fa fa-caret-down"
-                                        aria-hidden="true" style="float: right; width:14px;"> </i>
-                                    <select (change)="onSelect($event)" ng-model="type" style="font-size:14px; font: 400 14px/20px Roboto, 'Helvetica Neue', sans-serif; 
-                                    color: #435d7d; border: none;">
-
-                                        <option value="default" selected>By Name</option>
-                                        <option value="searchByDepartment">By Department</option>
-                                        <option value="searchByTeam">By Team</option>
-                                    </select>
-                                </li>
-                                <li>
-                                    <!-- Search Box -->
-                                    <input type="text" [(ngModel)]="userSearch" (input)="SearchUser()"
-                                        placeholder="Search....." style="font-size: large;">
-                                </li>
-                            </ul>
-                        </form>
-                    </ul>
-                </nav>
+                    
+                <!-- </nav> -->
 
 
                 <!-- search end -->
@@ -105,16 +84,44 @@
 
                 <div class="table-title">
                     <div class="row">
-                        <div class="col-sm-6">
+                        <div class="">
                             <h2>Manage <b>Employees</b></h2>
                         </div>
-                        <div class="col-sm-6">
+                        
+                        <div class="">
                             <a (click)="goToAddEmployee()"
                                  class="btn btn-success" data-toggle="modal"><i
                                     class="material-icons"></i><span>Add New Employee</span></a>
                             <!-- <a href="#deleteEmployeeModal" class="btn btn-danger" data-toggle="modal"><i
                                     class="material-icons">&#xE15C;</i> <span>Delete</span></a> -->
                         </div>
+
+
+                        <ul class="navbar nav ml-auto" style="box-shadow: none;">
+                            <form>
+                                <ul class="navbar nav ml-auto" style="border:none;">
+                                    <!-- Dropdown list -->
+                                    <li class="nav-item dropdown" style="box-shadow: none;"> <i class="fa fa-caret-down"
+                                            aria-hidden="true" style=" width:14px;"> </i>
+                                        <select (change)="onSelect($event)" ng-model="type" style="font-size:14px; font: 400 14px/20px Roboto, 'Helvetica Neue', sans-serif; 
+                                        color: #435d7d; border: none;">
+    
+                                            <option value="default" selected>By Name</option>
+                                            <option value="searchByDepartment">By Department</option>
+                                            <option value="searchByTeam">By Team</option>
+                                        </select>
+                                    </li>
+                                    <li>
+                                        <!-- Search Box -->
+                                        <input type="text" [(ngModel)]="userSearch" (input)="SearchUser()"
+                                            placeholder="Search....." style="font-size: large;">
+                                    </li>
+                                </ul>
+                            </form>
+                        </ul>
+
+
+                        
                     </div>
                 </div>
                 <form (ngModel)="getUserDetails()">

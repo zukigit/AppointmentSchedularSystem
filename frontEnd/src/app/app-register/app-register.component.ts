@@ -198,7 +198,14 @@ export class AppRegisterComponent implements OnInit {
       if (checkFiles[i].size > sizeLimit) {
           // Display error message to user
           console.log("File too large: " + checkFiles[i].name);
-          alert('File size should be less than 5MB!!');
+          //alert('File size should be less than 5MB!!');
+          
+          Swal.fire({  
+            icon: 'error',  
+            title: 'Failed ',  
+            text: 'File size should be less than 5MB!!',   
+          })
+          
       } else {
           this.files.push(checkFiles[i]);
       }
@@ -216,7 +223,12 @@ export class AppRegisterComponent implements OnInit {
         // Swal.fire('Added Appointment!!', 'Appointment Added Succesfully!', 'success');
       },
       error=>{
-        Swal.fire('Failed!!', 'Appointment Added Was Failed!', 'fail');
+        //Swal.fire('Failed!!', 'Appointment Added Was Failed!', 'fail');
+        Swal.fire({  
+          icon: 'error',  
+          title: 'Failed ',  
+          text: 'Appointment Added Was Failed!',   
+        })
       }
     );
   }

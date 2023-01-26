@@ -69,15 +69,16 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                 <li routerLinkActive="active" class="nav-item" style="width: 100%;">
-                    <a class="nav-link" [routerLink]="['user-details']" style="font-size: 14px;">
-                        <i class="material-icons">content_paste</i><span style="padding-top: 7px;">User Details</span>
+                    <a class="nav-link" [routerLink]="['addEmployeeModal']" style="font-size: 14px;">
+                        <i class="material-icons">person_add</i><span style="padding-top: 7px;">Employee Add</span>
                     </a>
                 </li>
                 <li routerLinkActive="active" class="nav-item" style="width: 100%;">
-                    <a class="nav-link" [routerLink]="['addEmployeeModal']" style="font-size: 14px;">
-                        <i class="material-icons">person_add</i><span style="padding-top: 7px;">User Add</span>
+                    <a class="nav-link" [routerLink]="['user-details']" style="font-size: 14px;">
+                        <i class="material-icons">content_paste</i><span style="padding-top: 7px;">Employee Details</span>
                     </a>
                 </li>
+                
             </div>
         </li>
         
@@ -86,6 +87,11 @@
                 <i class="material-icons" >event_available</i><span style="padding-top: 10px">Appointments</span>  <i class="fa fa-caret-down" style="float: right;"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                <li routerLinkActive="active" class="nav-item">
+                    <a class="nav-link" type="button" (click)="goToAppRegister()" style="font-size: 14px;">
+                        <i class="material-icons">event_available</i><span style="padding-top: 10px;">Add Appointment</span> 
+                    </a>
+                </li>
                 <li routerLinkActive="active" class="nav-item">
                     <a class="nav-link" [routerLink]="['dailyview']" style="font-size: 14px;">
                         <i class="material-icons">event_available</i><span style="padding-top: 10px;">DailyView</span> 
@@ -96,11 +102,7 @@
                         <i class="material-icons">event_available</i><span style="padding-top: 10px;">WeeklyView</span> 
                     </a>
                 </li>
-                <li routerLinkActive="active" class="nav-item">
-                    <a class="nav-link" type="button" (click)="goToAppRegister()" style="font-size: 14px;">
-                        <i class="material-icons">event_available</i><span style="padding-top: 10px;">Add Appointment</span> 
-                    </a>
-                </li>
+                
                 
                 
             </div>
