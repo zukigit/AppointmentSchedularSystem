@@ -115,7 +115,8 @@ export class RegisterComponent implements OnInit {
     this.userServices.getUserById(id)
       .subscribe(
         data => {
-          this.userlist = data
+          this.userlist = data;
+          Swal.fire('Updated your Employee!!', 'Updated succesfully!', 'success');
         },
         error => console.log(error));
   }
@@ -137,7 +138,12 @@ export class RegisterComponent implements OnInit {
                 },
             error => {console.log("Not create same userid");
             this.router.navigate(['admin/addEmployeeModal']);
-            alert("Can't create same userid");
+            //alert("Can't create same userid");
+            Swal.fire({  
+              icon: 'error',  
+              title: 'Failed Create',  
+              text: 'Can not create same userid',   
+            }) 
            }
     );
     

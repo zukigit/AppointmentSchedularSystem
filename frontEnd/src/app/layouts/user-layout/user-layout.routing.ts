@@ -23,6 +23,7 @@ import { AppRegisterbyuserComponent } from 'app/app-registerbyuser/app-registerb
 import { DailyviewbyuserComponent } from 'app/dailyviewbyuser/dailyviewbyuser.component';
 import { ApplicationRef } from '@angular/core';
 import { AppointmentDetailViewComponent } from 'app/appointment-detail-view/appointment-detail-view.component';
+import { WeeklyviewbyuserComponent } from 'app/weeklyviewbyuser/weeklyviewbyuser.component';
 
 export const UserLayoutRoutes: Routes = [
             { path: 'dashboard', component: DashboardComponent, canActivate:[UserAuthGuard]},
@@ -31,7 +32,7 @@ export const UserLayoutRoutes: Routes = [
             { path: 'change_pass',component:ChangePassComponent, canActivate:[UserAuthGuard]},
             { path: 'app-registerbyuser',component:AppRegisterbyuserComponent,canActivate:[UserAuthGuard]},
             { path: 'dailyviewbyuser', component: DailyviewbyuserComponent,canActivate:[UserAuthGuard]},
-            { path: 'weeklyview', component: WeeklyviewComponent,canActivate:[UserAuthGuard]},
+            { path: 'weeklyviewbyuser', component: WeeklyviewbyuserComponent,canActivate:[UserAuthGuard]},
             { path: 'appointment_detail_view/:id', component:AppointmentDetailViewComponent,canActivate:[UserAuthGuard]}
             //{ path: 'test', component: UserComponent, canActivate:[UserAuthGuard]},
 ];
