@@ -44,10 +44,10 @@ public class NotificationController {
 			User user = notification.getAppointment().getCreateUser();
 			createUser.setEmployee_id(user.getEmployee_id());
 			createUser.setName(user.getName());
-			//createUser.setUserImage(user.getUserImage());
+			createUser.setUserImage(user.getUserImage());
 			nf.setId(notification.getId());
 			nf.setTitle(notification.getAppointment().getTitle());
-			//nf.setCreateUser(createUser);
+			nf.setCreateUser(createUser);
 			nf.setNotiType(notification.getNoti_type());
 			notify.add(nf);
 		}
