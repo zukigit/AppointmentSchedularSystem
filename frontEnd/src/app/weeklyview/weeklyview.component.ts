@@ -11,6 +11,7 @@ import { UserService } from 'app/services/user.service';
 import { AppointmentService } from 'app/services/appointment.service';
 import { ShowAppointment } from 'app/model/show-appointment';
 //import { INITIAL_EVENTS, createEventId } from './event-utils';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-weeklyview',
@@ -143,12 +144,22 @@ export class WeeklyviewComponent implements OnInit {
                   this.router.navigate(['/admin/appointment_detail_view', id]);
                 }
               }, error => {
-                alert("this appointment is private and you are not in there")
+                // alert("this appointment is private and you are not in there");
+                Swal.fire({  
+                  icon: 'error',  
+                  title: 'Assess Denied',  
+                  text: 'This appointment is private and you are not in there',   
+                }) 
               }
             );
           } else {
             if (arg.event.end <= this.currentDate) {
-              alert("Schedule are finished,can't edit!!!");
+              // alert("Schedule are finished,can't edit!!!");
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Assess Denied',  
+                text: 'Schedule are finished, Can not edit!!!',   
+              }) 
             } else {
               this.router.navigate(['/admin/appointment_detail_view', id]);
             }
@@ -213,12 +224,22 @@ export class WeeklyviewComponent implements OnInit {
                   this.router.navigate(['/admin/appointment_detail_view', id]);
                 }
               }, error => {
-                alert("this appointment is private and you are not in there")
+                // alert("this appointment is private and you are not in there")
+                Swal.fire({  
+                  icon: 'error',  
+                  title: 'Assess Denied',  
+                  text: 'This appointment is private and you are not in there',   
+                }) 
               }
             );
           } else {
             if (arg.event.end <= this.currentDate) {
-              alert("Schedule are finished,can't edit!!!");
+              // alert("Schedule are finished,can't edit!!!");
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Assess Denied',  
+                text: 'Schedule are finished, Can not edit!!!',   
+              }) 
             } else {
               this.router.navigate(['/admin/appointment_detail_view', id]);
             }
@@ -279,11 +300,21 @@ export class WeeklyviewComponent implements OnInit {
         } else {
           this.searchedUser = new User();
           this.searchedUser.name = "";
-          alert("user not exist");
+          // alert("user not exist");
+          Swal.fire({  
+            icon: 'error',  
+            title: 'Not Exist',  
+            text: 'User not exist',   
+          }) 
           this.isLoad = false;
         }
       }, error => {
-        alert("user doesn't exist")
+        // alert("user doesn't exist")
+        Swal.fire({  
+          icon: 'error',  
+          title: 'Not Exist',  
+          text: 'User not exist',   
+        }) 
         this.isLoad = false;
       }
     );
