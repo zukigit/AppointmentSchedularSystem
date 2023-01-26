@@ -12,7 +12,7 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
 	
 	
 
-	@Query("SELECT n FROM Notification n JOIN n.user u WHERE u.employee_id IN (:user_ids)")
+	@Query("SELECT n FROM Notification n JOIN n.user u WHERE u.employee_id IN (:user_ids) ORDER BY n.id DESC ")
 	List<Notification> getNotiByUser(List<String> user_ids);
 
 	@Query("SELECT n FROM Notification n JOIN n.user u WHERE u.employee_id IN (:user_ids) AND n.isReaded = false ")
