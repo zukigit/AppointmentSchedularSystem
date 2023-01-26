@@ -4,6 +4,7 @@ import { UserService } from 'app/services/user.service';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { RegisterationRequestModel } from 'app/model/registeration-request-model';
 import { Team } from 'app/model/team';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-update',
@@ -78,8 +79,17 @@ export class UpdateComponent implements OnInit {
     this.registerModel.team = this.team;
     this.registerModel.userImage = this.user.userImage;
     this.userServices.updateUser(this.id, this.registerModel).subscribe ( data => {
+      Swal.fire({  
+        icon: 'success',  
+        title: 'Successfully Updated',  
+        text: 'Updating Employee Information is successed',   
+      })
       this.goToUserDetails();
-    },error => alert("Fail Update!") )
+    },error => Swal.fire({  
+      icon: 'error',  
+      title: 'Failed Updated',  
+      text: 'Updating Employee Information is failed',   
+    }) )
   }
 
   goToUserDetails() {
