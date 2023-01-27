@@ -22,12 +22,15 @@ export class AppointmentDetailViewComponent implements OnInit {
   urls = [];
   loginId: string;
   app:any = new AppointmentRegister();
+  eventClickDate:string;
 
   constructor(private route: ActivatedRoute,private appService:AppointmentService, private userService:UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.loginId = localStorage.getItem("loggedInUserId");
+    this.eventClickDate = localStorage.getItem("eventClickDate")
+    console.log(this.eventClickDate)
     this.appService.viewOnlyAppointmentById(this.id).subscribe(
       (res : any) => {
         if(res.type != "PUBLIC") {

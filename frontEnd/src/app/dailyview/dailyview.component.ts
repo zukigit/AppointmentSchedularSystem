@@ -41,7 +41,7 @@ export class DailyviewComponent implements OnInit {
   searchedUserId: string;
   loginUser: User;
   currentDate: Date = new Date();
-  todayDate: Date = new Date("01/23/2023");
+  eventClickDate:any;
 
 
 
@@ -118,11 +118,13 @@ export class DailyviewComponent implements OnInit {
         eventClick: (arg) => {
           let id = arg.event.id;
           let appType = arg.event.groupId;
+          let start = this.datePipe.transform(arg.event.start, 'MM/dd/yyyy');
 
           if (appType != "PUBLIC") {
             this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
               (data: any) => {
                 if (data) {
+                  this.eventClickDate=localStorage.setItem("eventClickDate",start)
                   this.router.navigate(['/admin/appointment_detail_view', id]);
                 }
               }, error => {
@@ -143,6 +145,7 @@ export class DailyviewComponent implements OnInit {
                 text: 'Appointment is over, Can not edit!!!',   
               }) 
             } else {
+              this.eventClickDate=localStorage.setItem("eventClickDate",start)
               this.router.navigate(['/admin/appointment_detail_view', id]);
             }
 
@@ -202,11 +205,15 @@ export class DailyviewComponent implements OnInit {
               eventClick: (arg) => {
                 let id = arg.event.id;
                 let appType = arg.event.groupId;
+                let start = this.datePipe.transform(arg.event.start, 'MM/dd/yyyy');
+                console.log("event click date " + arg.event.start)
+
 
                 if (appType != "PUBLIC") {
                   this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
                     (data: any) => {
                       if (data) {
+                        this.eventClickDate=localStorage.setItem("eventClickDate",start)
                         this.router.navigate(['/admin/appointment_detail_view', id]);
                       }
                     }, error => {
@@ -227,6 +234,7 @@ export class DailyviewComponent implements OnInit {
                       text: 'Appointment is over. Can not edit!!!',   
                     }) 
                   } else {
+                    this.eventClickDate=localStorage.setItem("eventClickDate",start)
                     this.router.navigate(['/admin/appointment_detail_view', id]);
                   }
                   //this.router.navigate(['/view_only_appointment', id])

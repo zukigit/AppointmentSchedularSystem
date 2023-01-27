@@ -12,6 +12,7 @@ import { AppointmentService } from 'app/services/appointment.service';
 import { ShowAppointment } from 'app/model/show-appointment';
 //import { INITIAL_EVENTS, createEventId } from './event-utils';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-weeklyview',
@@ -37,8 +38,9 @@ export class WeeklyviewComponent implements OnInit {
   showApp: ShowAppointment[];
   Events: any[] = []
   currentDate:Date = new Date()
+  eventClickDate:any;
 
-  constructor(private changeDetector: ChangeDetectorRef, private router: Router, private userService: UserService, private appService: AppointmentService) {
+  constructor(private changeDetector: ChangeDetectorRef,private datePipe: DatePipe, private router: Router, private userService: UserService, private appService: AppointmentService) {
     this.header = {
       left: 'prev,next today',
       center: 'title',
@@ -141,11 +143,13 @@ export class WeeklyviewComponent implements OnInit {
         eventClick: (arg) => {
           let id = arg.event.id;
           let appType = arg.event.groupId;
+          let start = this.datePipe.transform(arg.event.start, 'MM/dd/yyyy');
 
           if (appType != "PUBLIC") {
             this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
               (data: any) => {
                 if (data) {
+                  this.eventClickDate=localStorage.setItem("eventClickDate",start)
                   this.router.navigate(['/admin/appointment_detail_view', id]);
                 }
               }, error => {
@@ -166,6 +170,7 @@ export class WeeklyviewComponent implements OnInit {
                 text: 'Schedule are finished, Can not edit!!!',   
               }) 
             } else {
+              this.eventClickDate=localStorage.setItem("eventClickDate",start)
               this.router.navigate(['/admin/appointment_detail_view', id]);
             }
             //this.router.navigate(['/view_only_appointment', id])
@@ -221,11 +226,13 @@ export class WeeklyviewComponent implements OnInit {
         eventClick: (arg) => {
           let id = arg.event.id;
           let appType = arg.event.groupId;
+          let start = this.datePipe.transform(arg.event.start, 'MM/dd/yyyy');
 
           if (appType != "PUBLIC") {
             this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
               (data: any) => {
                 if (data) {
+                  this.eventClickDate=localStorage.setItem("eventClickDate",start)
                   this.router.navigate(['/admin/appointment_detail_view', id]);
                 }
               }, error => {
@@ -246,6 +253,7 @@ export class WeeklyviewComponent implements OnInit {
                 text: 'Schedule are finished, Can not edit!!!',   
               }) 
             } else {
+              this.eventClickDate=localStorage.setItem("eventClickDate",start)
               this.router.navigate(['/admin/appointment_detail_view', id]);
             }
             //this.router.navigate(['/view_only_appointment', id])
