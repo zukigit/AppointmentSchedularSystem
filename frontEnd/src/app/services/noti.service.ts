@@ -39,7 +39,6 @@ export class NotiService {
   }
 
   makeNotiReaded(notiId : number) {
-    console.log("noti make is called")
-    return this.http.put(`${this.baseUrl}/makeReaded/${notiId}`,this.header);
+    return this.http.get(`${this.baseUrl}/makeReaded/${notiId}`, this.header);
   }
 }

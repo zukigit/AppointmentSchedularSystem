@@ -42,8 +42,8 @@
                         <span *ngIf="showNoti != null || showNoti != undefined" >
                         <tbody *ngFor="let data of showNoti" >
                             <td>
-                                <button (click)="goAppDetail(data.appId, data.notiId)" *ngIf="!data.isReaded" style="background-color: yellow" class="dropdown-item">{{data.message}} </button>
-                                <button *ngIf="data.isReaded" class="dropdown-item">{{data}} </button>
+                                <button (click)="goAppDetailWithMakeRead(data.appId, data.notiId)" *ngIf="data.isReaded == false" style="background-color: yellow" class="dropdown-item">{{data.message}} </button>
+                                <button (click)="goAppDetail(data.appId, data.notiId)" *ngIf="data.isReaded == true" class="dropdown-item">{{data.message}} </button>
                             </td>
                         </tbody>
                         </span>

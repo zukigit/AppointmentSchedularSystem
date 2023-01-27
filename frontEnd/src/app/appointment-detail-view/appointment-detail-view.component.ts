@@ -12,7 +12,9 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 })
 export class AppointmentDetailViewComponent implements OnInit {
 
-  res:any;
+  res:any = {
+    "title" : ""
+  };
   id:string;
   files = [];
   employee = [];

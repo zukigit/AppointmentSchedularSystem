@@ -7,6 +7,7 @@ import { ShowAppointment } from 'app/model/show-appointment';
 import { User } from 'app/model/user';
 import { Subject, Subscription, switchMap, timer } from 'rxjs';
 import { NotiModel } from 'app/model/noti-model';
+import { data } from 'jquery';
 // import { NotiModel } from 'app/model/noti-model';
 
 
@@ -67,12 +68,7 @@ export class NavbarComponent implements OnInit {
     ngOnInit() {
         this.loginId = localStorage.getItem("loggedInUserId");
         this.getNoti();
-        this.notiService.getTotalNotiCount(this.loginId).subscribe(
-            data => this.readedNoti = Number(data)
-        )
-        this.notiService.getUnreadedNotiCount(this.loginId).subscribe(
-            data => this.unreadNoti = Number(data)
-        )
+        this.checkNotiCounts();
 
         setTimeout(() => {
             this.realTimeData();
@@ -95,8 +91,17 @@ export class NavbarComponent implements OnInit {
     }
 
     goAppDetail(appId:Number, notiId:number) {
-        this.notiService.makeNotiReaded(notiId);
-        this.router.navigate(['/admin/appointment_detail_view', appId]);
+        this.router.navigate(['/admin/appointment_detail_view', appId]).then (() => window.location.reload()),10000;;
+    }
+
+    goAppDetailWithMakeRead(appId:Number, notiId:number) {
+        this.notiService.makeNotiReaded(notiId).subscribe(
+            data=>{
+                this.getNoti();
+            },
+            error=> console.log("error " + error.message)
+        );
+        this.router.navigate(['/admin/appointment_detail_view', appId]).then (() => window.location.reload()),10000;;
     }
 
     realTimeData() {
@@ -105,11 +110,20 @@ export class NavbarComponent implements OnInit {
             .subscribe(res => {
                 this.temData = res;
                 if (this.temData.length > this.readedNoti) {
+                    this.checkNotiCounts();
                     this.changeNotiText(res);
                 }
             });
     }
 
+    checkNotiCounts() {
+        this.notiService.getTotalNotiCount(this.loginId).subscribe(
+            data => this.readedNoti = Number(data)
+        )
+        this.notiService.getUnreadedNotiCount(this.loginId).subscribe(
+            data => this.unreadNoti = Number(data)
+        )
+    }
     getNoti() {
         this.notiService.getNoti(this.loginId).subscribe(
             data => this.changeNotiText(data)
@@ -119,15 +133,15 @@ export class NavbarComponent implements OnInit {
         this.showNoti.length = 0;
         for(var noti of res) {
             if(noti.notiType == "CREATE_APP") {
-                this.showNoti.push({"message" : noti.createUser.name + " created the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id})
+                this.showNoti.push({"message" : noti.createUser.name + " created the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded})
             } else if(noti.notiType == "EDIT_APP") {
-                this.showNoti.push({"message" : noti.createUser.name + " edited the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id})
+                this.showNoti.push({"message" : noti.createUser.name + " edited the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded})
             } else if(noti.notiType == "DELETE_APP") {
-                this.showNoti.push({"message" : noti.createUser.name + " deleted the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id})
+                this.showNoti.push({"message" : noti.createUser.name + " deleted the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded})
             } else if(noti.notiType == "USER_REMOVED" && noti.employee_id == this.loginId) {
-                this.showNoti.push({"message" : "You are removed from the " + noti.title + " appointment", "appId" : noti.appointment_id, "notiId" : noti.id})
+                this.showNoti.push({"message" : "You are removed from the " + noti.title + " appointment", "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded})
             } else if(noti.notiType == "USER_ADD" && noti.employee_id == this.loginId) {
-                this.showNoti.push({"message" : "You are added the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id})
+                this.showNoti.push({"message" : "You are added the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded})
             }
         }
     }
