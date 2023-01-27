@@ -40,4 +40,9 @@ public class NotificationImpl implements NotificationService{
 	public Notification getNotiById(int id) {
 		return repo.findById(id).get();
 	}
+
+	@Override
+	public void deleteByNoti(Notification noti) {
+		repo.deleteById(noti.getId());
+	}
 }

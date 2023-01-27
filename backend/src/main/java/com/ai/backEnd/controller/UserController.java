@@ -2,6 +2,7 @@ package com.ai.backEnd.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -24,12 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import com.ai.backEnd.dto.ChangePasswordModel;
 import com.ai.backEnd.model.Appointment;
+import com.ai.backEnd.model.Notification;
 import com.ai.backEnd.model.Schedule;
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.dto.UserDetail;
 import com.ai.backEnd.dto.UserDetailForUpdate;
 import com.ai.backEnd.model.UserRole;
 import com.ai.backEnd.service.AppointmentService;
+import com.ai.backEnd.service.NotificationService;
 import com.ai.backEnd.service.UserService;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -42,6 +45,9 @@ public class UserController {
 	
 	@Autowired
 	private AppointmentService appointmentService;
+	
+	@Autowired
+	private NotificationService notiService;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -75,10 +81,20 @@ public class UserController {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Admin can't be deleted");
 		} else {
 			deleteUserAppointmentRecords(employee_id);
+			deleteNotiRecords(employee_id);
 			userService.deleteUserById(employee_id);
 			Map<String, Boolean> response = new HashMap<>();
 			response.put("deleted", Boolean.TRUE);
 			return ResponseEntity.ok(response);
+		}
+	}
+	
+	private void deleteNotiRecords(String employee_id) {
+		List<String> user = new ArrayList<>(List.of(employee_id));
+		List<Notification> notis = notiService.getNotiByUser(user);
+		
+		for (Notification notification : notis) {
+			notification.setUser(null);
 		}
 	}
 	

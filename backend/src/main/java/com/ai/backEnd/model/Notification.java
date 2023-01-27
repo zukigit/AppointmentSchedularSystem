@@ -37,10 +37,6 @@ public class Notification implements Serializable
     @JoinColumn(name="appointment_id")
     private Appointment Appointment;
     
-
-	
-
-	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}

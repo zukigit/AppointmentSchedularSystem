@@ -14,5 +14,7 @@ public interface NotificationService {
 	
 	List<Notification> getUnreadNoti(List<String> user_ids);
 	
+	void deleteByNoti(Notification noti);
+	
 	Notification getNotiById(int id);
 }
