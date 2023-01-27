@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { AppointmentRegister } from 'app/model/appointment-register';
 import { AppointmentService } from 'app/services/appointment.service';
 import { UserService } from 'app/services/user.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
@@ -20,6 +21,7 @@ export class AppointmentDetailViewComponent implements OnInit {
   employee = [];
   urls = [];
   loginId: string;
+  app:any = new AppointmentRegister();
 
   constructor(private route: ActivatedRoute,private appService:AppointmentService, private userService:UserService, private router: Router) { }
 
@@ -54,17 +56,37 @@ export class AppointmentDetailViewComponent implements OnInit {
 
   //update
   updateApp() {
-      this.router.navigate(['admin/update-app',this.id])
+      this.appService.viewOnlyAppointmentById(this.id).subscribe(
+        data=>{
+          this.app = data
+          if (this.app.createUser.employee_id != this.loginId) {
+            alert("can't update other user")
+          }else{
+            this.router.navigate(['admin/update-app',this.id])
+          }
+        }
+      )
+      
   }
    
   //delete
   deleteApp(){
-    this.appService.deleteApp(this.id).subscribe(
-      data => {Swal.fire('Appointment Delete!!', 'Appointment Delete succesfully!', 'success');
-      this.router.navigate(['admin/dashboard'])
-    },
-      error => console.log("fail delete")
+    this.appService.viewOnlyAppointmentById(this.id).subscribe(
+      data=>{
+        this.app = data
+        if (this.app.createUser.employee_id != this.loginId) {
+          alert("can't delete other user")
+        }else{
+          this.appService.deleteApp(this.id).subscribe(
+            data => {Swal.fire('Appointment Delete!!', 'Appointment Delete succesfully!', 'success');
+            this.router.navigate(['admin/dashboard'])
+          },
+            error => console.log("fail delete")
+          )
+        }
+      }
     )
+    
   }
 
   downloadFile(file) {      
