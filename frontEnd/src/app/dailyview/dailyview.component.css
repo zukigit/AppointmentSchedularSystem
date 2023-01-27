@@ -81,7 +81,7 @@ h2 {
     padding: 5px;
     border-radius: 5px 0 0 5px;
     outline: none;
-    color: #9DBFAF;
+    color: rgb(0 0 0 / 87%);;
   }
   .sb-example-1 .searchTerm:focus{
     border: 5px solid #435d7d;
