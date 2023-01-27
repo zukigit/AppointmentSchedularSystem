@@ -146,7 +146,7 @@ export class WeeklyviewbytraineeComponent implements OnInit {
             this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
               (data: any) => {
                 if (data) {
-                  this.router.navigate(['/trainee/appointment_detail_view', id]);
+                  this.router.navigate(['/trainee/appointment_detail_view_bytrainee', id]);
                 }
               }, error => {
                 // alert("this appointment is private and you are not in there");
@@ -166,7 +166,7 @@ export class WeeklyviewbytraineeComponent implements OnInit {
                 text: 'Schedule are finished, Can not edit!!!',   
               }) 
             } else {
-              this.router.navigate(['/trainee/appointment_detail_view', id]);
+              this.router.navigate(['/trainee/appointment_detail_view_bytrainee', id]);
             }
             //this.router.navigate(['/view_only_appointment', id])
           }
@@ -226,7 +226,7 @@ export class WeeklyviewbytraineeComponent implements OnInit {
             this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
               (data: any) => {
                 if (data) {
-                  this.router.navigate(['/trainee/appointment_detail_view', id]);
+                  this.router.navigate(['/trainee/appointment_detail_view_bytrainee', id]);
                 }
               }, error => {
                 // alert("this appointment is private and you are not in there")
@@ -246,7 +246,7 @@ export class WeeklyviewbytraineeComponent implements OnInit {
                 text: 'Schedule are finished, Can not edit!!!',   
               }) 
             } else {
-              this.router.navigate(['/trainee/appointment_detail_view', id]);
+              this.router.navigate(['/trainee/appointment_detail_view_bytrainee', id]);
             }
             //this.router.navigate(['/view_only_appointment', id])
           }
