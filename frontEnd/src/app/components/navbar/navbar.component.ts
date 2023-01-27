@@ -7,7 +7,7 @@ import { ShowAppointment } from 'app/model/show-appointment';
 import { User } from 'app/model/user';
 import { Subject, Subscription, switchMap, timer } from 'rxjs';
 import { NotiModel } from 'app/model/noti-model';
-import { data } from 'jquery';
+import { UserService } from 'app/services/user.service';
 // import { NotiModel } from 'app/model/noti-model';
 
 
@@ -45,7 +45,8 @@ export class NavbarComponent implements OnInit {
 
     // notificationCount$ = this.notiService.notificationCount$;
 
-    constructor(location: Location, private element: ElementRef, private router: Router, private notiService: NotiService) {
+    constructor(location: Location, private element: ElementRef, private router: Router
+        , private notiService: NotiService , private userService : UserService) {
         this.location = location;
         this.sidebarVisible = false;
 
@@ -56,7 +57,7 @@ export class NavbarComponent implements OnInit {
     Notis: any
     notiArray: any[];
     loginId: string;
-    user: User = new User();
+    user !: User;
     text: string;
     showNoti: any[] = [];
 
