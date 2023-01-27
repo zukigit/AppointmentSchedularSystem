@@ -103,7 +103,7 @@ export class NavbarComponent implements OnInit {
             error=> console.log("error " + error.message)
         );
         this.checkNotiCounts();
-        this.router.navigate(['/admin/appointment_detail_view', appId]).then (() => window.location.reload()),10000;;
+        this.router.navigate(['/admin/appointment_detail_view', appId]);
     }
 
     realTimeData() {
