@@ -76,8 +76,6 @@ export class NavbarComponent implements OnInit {
         }, 1000);
         this.realTimeData();
 
-        console.log(this.bindData)
-
         this.listTitles = ROUTES.filter(listTitle => listTitle);
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
@@ -99,10 +97,10 @@ export class NavbarComponent implements OnInit {
         this.notiService.makeNotiReaded(notiId).subscribe(
             data=>{
                 this.getNoti();
+                this.checkNotiCounts();
             },
             error=> console.log("error " + error.message)
         );
-        this.checkNotiCounts();
         this.router.navigate(['/admin/appointment_detail_view', appId]);
     }
 

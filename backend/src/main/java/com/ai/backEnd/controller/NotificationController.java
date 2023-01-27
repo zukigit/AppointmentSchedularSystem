@@ -75,7 +75,7 @@ public class NotificationController {
 		return unreadNoti.size();
 	}
 	
-	@PutMapping("/makeReaded/{notiId}")
+	@GetMapping("/makeReaded/{notiId}")
 	public void makeReaded(@PathVariable int notiId) {
 		System.out.println("controller make readed is called");
 		Notification notification = notiService.getNotiById(notiId);
