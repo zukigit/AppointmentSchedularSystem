@@ -105,15 +105,15 @@ export class NavbarComponent implements OnInit {
     }
 
     realTimeData() {
-        // this.realTimeDataSubscription$ = timer(0, 100)
-        //     .pipe(switchMap(_ => this.notiService.getNoti(this.loginId)))
-        //     .subscribe(res => {
-        //         this.temData = res;
-        //         if (this.temData.length > this.readedNoti) {
-        //             this.checkNotiCounts();
-        //             this.changeNotiText(res);
-        //         }
-        //     });
+        this.realTimeDataSubscription$ = timer(0, 100)
+            .pipe(switchMap(_ => this.notiService.getNoti(this.loginId)))
+            .subscribe(res => {
+                this.temData = res;
+                if (this.temData.length > this.readedNoti) {
+                    this.checkNotiCounts();
+                    this.changeNotiText(res);
+                }
+            });
     }
 
     checkNotiCounts() {
