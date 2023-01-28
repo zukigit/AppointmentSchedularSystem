@@ -69,8 +69,11 @@ public class AppointmentImpl implements AppointmentService {
 	public void updateAppointment(Appointment app) {
 		repo.save(app);
 	}
+
 	@Override
 	public void deleteAppointmentById(Integer appointment_id)  {
 		repo.deleteById(appointment_id);
 	}
+
+	
 }

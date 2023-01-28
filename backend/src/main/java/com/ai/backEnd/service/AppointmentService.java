@@ -1,5 +1,6 @@
 package com.ai.backEnd.service;
 
+
 import java.util.List;
 
 import com.ai.backEnd.model.Appointment;
@@ -22,4 +23,5 @@ public interface AppointmentService {
     void updateAppointment(Appointment app);
 
     void deleteAppointmentById(Integer appointment_id);
+
 }

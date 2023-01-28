@@ -1,5 +1,6 @@
 package com.ai.backEnd.serviceImpl;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,5 +30,12 @@ public class ScheduleImpl implements ScheduleService{
     public Schedule getScheduleById(Integer id) {
         return repo.findById(id).get();
     }
+
+    @Override
+    public void deleteScheduleById(Integer id) {
+        repo.deleteById(id);
+        
+    }
+
     
 }

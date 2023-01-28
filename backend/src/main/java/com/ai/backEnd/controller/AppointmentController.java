@@ -3,10 +3,13 @@ package com.ai.backEnd.controller;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Schedules;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +29,7 @@ import com.ai.backEnd.model.Schedule;
 import com.ai.backEnd.model.User;
 import com.ai.backEnd.serviceImpl.AppointmentImpl;
 import com.ai.backEnd.serviceImpl.NotificationImpl;
+import com.ai.backEnd.serviceImpl.ScheduleImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -38,6 +42,9 @@ public class AppointmentController {
     
     @Autowired
     private NotificationImpl notiService;
+
+	@Autowired
+	private ScheduleImpl scheduleService;
     
 
 	@GetMapping("/getApp")
@@ -191,6 +198,30 @@ public class AppointmentController {
 		}
 
 	}
+
+	@DeleteMapping("/deleteAppByDate")
+	public void deleteAppByDate(@RequestParam String appointment_id,@RequestParam String date){
+		LocalDate localDate = LocalDate.parse(date);
+		Appointment appointment = appointmentService.getAppById(Integer.parseInt(appointment_id));
+		List<Schedule> schedules = appointment.getSchedules();
+        Iterator<Schedule> list = schedules.iterator();
+		List<Integer> deleteScheudleIds = new ArrayList<>();
+		while(list.hasNext()){
+			Schedule schedule = list.next();
+			if(localDate.equals(schedule.getDate())){
+				deleteScheudleIds.add(schedule.getId());
+				list.remove();
+			}
+		}
+
+		appointment.setSchedules(schedules);
+		appointmentService.saveAppointment(appointment);
+		for (Integer integer : deleteScheudleIds) {
+			scheduleService.deleteScheduleById(integer);
+		}
+
+	}
+	
 
 	public void postNotification(User user,Appointment appointment,NotificationType notiType){
 		Notification noti = new Notification();
