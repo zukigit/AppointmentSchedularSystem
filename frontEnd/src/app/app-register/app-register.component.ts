@@ -89,6 +89,8 @@ export class AppRegisterComponent implements OnInit {
   sourceLeft = true;
   files:File[] = [];
   schedules: Schdule[] = [];
+  teamId: string;
+  departmentId: string;
   format: any = { add: 'Add Selected Member', remove: 'Remove Selected Member', all: 'Select All', none: 'Unselect All', direction: 'right-to-left', draggable: true, locale: undefined };
   
   constructor(private userServices: UserService, private datePipe: DatePipe, private appService: AppointmentService,private router: Router ,) { }
@@ -103,18 +105,9 @@ export class AppRegisterComponent implements OnInit {
           this.team = data;
         }
       });
-
-    // this.userServices.getUserDetails().subscribe(
-    //   {
-    //     next: (data) => {
-    //       this.user = data;
-    //     }
-    //   }
-    // )
   }
 
   isOptionDisabled(value: string): boolean {   
-    // return this.startHour>value ;
     if(this.startMinute === "45"){
       return this.startHour >= value
     }
@@ -143,6 +136,14 @@ export class AppRegisterComponent implements OnInit {
   onSelectTeam(team) {
     this.AssignDevice = this.user.filter(f => {
       return f.team_id == team.target.value
+    });
+    this.doReset();
+  }
+
+  onSelectNewTeam(teamId) {
+    console.log("team id" + teamId)
+    this.AssignDevice = this.user.filter(f => {
+      return f.team_id == teamId
     });
     this.doReset();
   }
@@ -237,17 +238,12 @@ export class AppRegisterComponent implements OnInit {
 
     const start_date = new Date(this.app.start_date);
     const end_date = new Date(this.app.end_date);
-    const startHour = this.startHour;
-    const endHour = this.endHour;
-    const startMinute = this.startMinute;
-    const endMinute = this.endMinute;
-    let schedule : Schdule;
-
+    
     for (let d = start_date; d <= end_date; d.setDate(d.getDate() + 1)) {
-      schedule = new Schdule();
+      let schedule = new Schdule();
       schedule.date = this.datePipe.transform(d, 'MM/dd/yyyy');
-      schedule.start_time = startHour + ":" + startMinute;
-      schedule.end_time = endHour + ":" + endMinute;
+      schedule.start_time = this.startHour + ":" + this.startMinute;
+      schedule.end_time = this.endHour + ":" + this.endMinute;
       this.schedules.push(schedule);
     }
   }
@@ -258,8 +254,9 @@ export class AppRegisterComponent implements OnInit {
     this.userServices.getAvaliables(this.schedules).subscribe(
       {
         next: (data) => {
-          this.schedules.length = 0;
           this.user = data;
+          this.schedules.length = 0;
+          this.onSelectNewTeam(this.teamId);
           this.showUserLength = "+ Avaliable Employee : " + `${this.user.length}`;
           console.log("user size" + this.user.length);
         }
