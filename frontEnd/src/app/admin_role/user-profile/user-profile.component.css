@@ -143,9 +143,7 @@ color: #ffcc33;
 
 
 body{
-    margin-top: 10%;
     color: #1a202c;
-    text-align: left;
     background-color: #5b7da7;    
     font-family: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
     font-size: 875rem;
@@ -163,7 +161,7 @@ body{
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #fff;
+    background-color: #5b7da7;
     background-clip: border-box;
     border: 0 solid rgba(0,0,0,.125);
     border-radius: .25rem;
