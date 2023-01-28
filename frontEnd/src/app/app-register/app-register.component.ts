@@ -251,11 +251,13 @@ export class AppRegisterComponent implements OnInit {
 
   getAvaliables() {
     this.user.length = 0;
+    this.UnassignDevice.length = 0;
     this.generateSchedules();
     this.userServices.getAvaliables(this.schedules).subscribe(
       {
         next: (data) => {
           this.user = data;
+          
           this.schedules.length = 0;
           this.onSelectNewTeam(this.teamId);
           this.showUserLength = "+ Avaliable Employee : " + `${this.user.length}`;

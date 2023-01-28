@@ -72,6 +72,8 @@ export class UpdateAppComponent implements OnInit {
   temStartHour: string;
   temStartMinute: string;
 
+  appUsers : any = []
+
   temEndHour: string;
   temEndMinute: string;
   id:string;
@@ -104,6 +106,8 @@ export class UpdateAppComponent implements OnInit {
 
     this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
 
+    this.alreadyIn();
+
     this.userServices.getTeam().subscribe(
       {
         next: (data) => {
@@ -118,6 +122,14 @@ export class UpdateAppComponent implements OnInit {
     //     }
     //   }
     // )
+  }
+
+  alreadyIn(){
+    this.appService.getAppointmentById(this.id).subscribe(
+      data => this.UnassignDevice =data
+    )
+    // this.UnassignDevice = this.appUsers
+    console.log(this.UnassignDevice)
   }
 
   isOptionDisabled(value: string): boolean {
@@ -159,6 +171,7 @@ export class UpdateAppComponent implements OnInit {
     this.display = 'name';
     this.keepSorted = true;
     this.source = this.AssignDevice;
+   
     this.confirmedUsers = this.UnassignDevice;
     this.confirmed = this.confirmedUsers;
     console.log("source: " + JSON.stringify(this.source));
