@@ -80,7 +80,7 @@ export class AppRegisterComponent implements OnInit {
   tab = 1;
   keepSorted = true;
   key: string;
-  display: string;
+  display: any=[];
   filter = false;
   source: AssignedDeviceCode[] = [];
   confirmed: UnAssignedDeviceCode[] = [];
@@ -148,8 +148,9 @@ export class AppRegisterComponent implements OnInit {
   }
 
   private populateList() {
-    this.key = 'employee_id';
-    this.display = 'name';
+    this.key = 'employee_id'
+    this.display = ['name','department_name','team_name']
+
     this.keepSorted = true;
     this.source = this.AssignDevice;
     this.confirmedUsers = this.UnassignDevice;
