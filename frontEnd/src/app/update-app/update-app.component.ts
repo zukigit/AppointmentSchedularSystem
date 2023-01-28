@@ -72,11 +72,11 @@ export class UpdateAppComponent implements OnInit {
   temStartHour: string;
   temStartMinute: string;
 
-  appUsers : any = []
+  appUsers: any = []
 
   temEndHour: string;
   temEndMinute: string;
-  id:string;
+  id: string;
   name = 'Angular';
   private sourceDevice: AssignedDeviceCode[] = [];
   private confirmedUsers: Array<any>;
@@ -94,13 +94,17 @@ export class UpdateAppComponent implements OnInit {
   schedules: Schdule[] = [];
   format: any = { add: 'Add Selected Member', remove: 'Remove Selected Member', all: 'Select All', none: 'Unselect All', direction: 'right-to-left', draggable: true, locale: undefined };
 
-  constructor(private userServices: UserService,private route:ActivatedRoute, private datePipe: DatePipe, private appService: AppointmentService, private router: Router,) { }
+  constructor(private userServices: UserService, private route: ActivatedRoute, private datePipe: DatePipe, private appService: AppointmentService, private router: Router,) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.appService.viewOnlyAppointmentById(this.id).subscribe(
-      (res : any) => {
-       this.app = res
+      (res: any) => {
+        this.app = res
+        this.UnassignDevice = this.app.employee
+        this.confirmedUsers = this.UnassignDevice
+        this.doReset()
+        console.log("fdafd " + this.confirmedUsers)
       },
       error => console.log("get app error " + error));
 
@@ -124,9 +128,9 @@ export class UpdateAppComponent implements OnInit {
     // )
   }
 
-  alreadyIn(){
+  alreadyIn() {
     this.appService.getAppointmentById(this.id).subscribe(
-      data => this.UnassignDevice =data
+      data => this.UnassignDevice = data
     )
     // this.UnassignDevice = this.appUsers
     console.log(this.UnassignDevice)
@@ -166,47 +170,53 @@ export class UpdateAppComponent implements OnInit {
     this.doReset();
   }
 
-  private populateList() {
-    this.key = 'employee_id';
-    this.display = 'name';
-    this.keepSorted = true;
-    this.source = this.AssignDevice;
-   
-    this.confirmedUsers = this.UnassignDevice;
-    this.confirmed = this.confirmedUsers;
-    console.log("source: " + JSON.stringify(this.source));
-    console.log("confirmed: " + JSON.stringify(this.confirmed));
-  }
-
   doReset() {
 
     this.sourceDevice = JSON.parse(JSON.stringify(this.AssignDevice));
-    this.confirmedUsers = JSON.parse(JSON.stringify(this.UnassignDevice));
+    this.confirmed = JSON.parse(JSON.stringify(this.UnassignDevice));
     localStorage.setItem("listbox", this.confirmedUsers.forEach.toString())
     console.log(this.confirmedUsers);
     this.populateList();
 
   }
+  private populateList() {
+    this.key = 'employee_id';
+    this.display = 'name';
+    this.keepSorted = true;
+    this.confirmedUsers = this.UnassignDevice;
+    this.confirmed = this.confirmedUsers;
+    this.source = [...this.sourceDevice, ...this.confirmed];
+    
+    console.log("populate lsit confirm user " + this.confirmedUsers)
+    
+    console.log("source: " + JSON.stringify(this.source));
+    console.log("confirmed: " + JSON.stringify(this.confirmed));
+  }
 
+  
+
+  //update
   updateAppointment() {
     this.generateSchedules();
     this.app.created_date = this.datePipe.transform(this.currentDate, 'MM/dd/yyyy');
     this.app.schedules = this.schedules
     this.app.employee = this.confirmedUsers;
+    console.log("confirmedUsers " + this.confirmedUsers)
+
     this.app.employee_id = Number(this.id)
     this.app.title = this.app.title
     this.app.description = this.app.description
     this.app.createUser = { employee_id: this.loginId }
 
-    this.appService.updateApp(this.app).subscribe(
-      data => {
-        // this.uploadFiles(data);
-        Swal.fire('Appointment Update!!', 'Appointment Update succesfully!', 'success');
-        this.router.navigate(['admin/appointment_detail_view',this.id]);
-      },
-      error => console.log("Error appointment responseee ")
-    )
-  }
+  //   this.appService.updateApp(this.app).subscribe(
+  //     data => {
+  //       // this.uploadFiles(data);
+  //       Swal.fire('Appointment Update!!', 'Appointment Update succesfully!', 'success');
+  //       this.router.navigate(['admin/appointment_detail_view', this.id]);
+  //     },
+  //     error => console.log("Error appointment responseee ")
+  //   )
+   }
   //date
   onSelect(event) {
     this.sDate = new Date(this.app.start_date)
