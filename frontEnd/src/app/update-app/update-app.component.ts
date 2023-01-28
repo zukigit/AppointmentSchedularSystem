@@ -118,26 +118,16 @@ export class UpdateAppComponent implements OnInit {
           this.team = data;
         }
       });
-
-    // this.userServices.getUserDetails().subscribe(
-    //   {
-    //     next: (data) => {
-    //       this.user = data;
-    //     }
-    //   }
-    // )
   }
 
   alreadyIn() {
     this.appService.getAppointmentById(this.id).subscribe(
       data => this.UnassignDevice = data
     )
-    // this.UnassignDevice = this.appUsers
     console.log(this.UnassignDevice)
   }
 
   isOptionDisabled(value: string): boolean {
-    // return this.startHour>value ;
     if (this.startMinute === "45") {
       return this.startHour >= value
     }
@@ -207,20 +197,10 @@ export class UpdateAppComponent implements OnInit {
     this.app.title = this.app.title
     this.app.description = this.app.description
     this.app.createUser = { employee_id: this.loginId }
-
-  //   this.appService.updateApp(this.app).subscribe(
-  //     data => {
-  //       // this.uploadFiles(data);
-  //       Swal.fire('Appointment Update!!', 'Appointment Update succesfully!', 'success');
-  //       this.router.navigate(['admin/appointment_detail_view', this.id]);
-  //     },
-  //     error => console.log("Error appointment responseee ")
-  //   )
    }
   //date
   onSelect(event) {
     this.sDate = new Date(this.app.start_date)
-    // do something with the selected text here
   }
 
   checkFiles(event) {
@@ -265,6 +245,15 @@ export class UpdateAppComponent implements OnInit {
       schedule.start_time = this.app.start_time
       schedule.end_time = this.app.end_time
       this.schedules.push(schedule);
+    }
+  }
+
+  removeFile(fileId:number) {
+    console.log("remove file is called")
+    for(let i = 0; i < this.app.files.length; i++) {
+      if(this.app.files[i].file_id == fileId) {
+        this.app.files.splice(i, 1);
+      }
     }
   }
 

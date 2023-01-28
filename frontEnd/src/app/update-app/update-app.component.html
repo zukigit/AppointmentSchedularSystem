@@ -112,6 +112,11 @@
 
             </div>
           </div>
+          <div class="input-box" *ngFor="let file of app.files">
+            <a style=" font-weight:500; ">
+              {{file.file_name}} 
+              <i (click)="removeFile(file.file_id)" class="material-icons" style="cursor: pointer;color: #435d7d;">cancel</i></a>
+          </div>
           <div class="input-box">
             <span class="details" style="font-weight: 650; margin-top: 4%;">Attached File</span>
             <input type="file" multiple [(ngModel)]="files" (change)="checkFiles($event)" name="attachedfile"

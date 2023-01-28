@@ -105,7 +105,7 @@ export class NavbarComponent implements OnInit {
     }
 
     realTimeData() {
-        this.realTimeDataSubscription$ = timer(0, 100)
+        this.realTimeDataSubscription$ = timer(0, 1000)
             .pipe(switchMap(_ => this.notiService.getNoti(this.loginId)))
             .subscribe(res => {
                 this.temData = res;
