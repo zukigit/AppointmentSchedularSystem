@@ -102,9 +102,12 @@
           <p>Attached File</p>
         </div>
 
-        <tr class="col-lg-5" style="margin-top:0%;">
+        <tr class="col-lg-5" style="margin-top:0%; ">
           <div *ngFor="let file of files">
-            <a style="text-decoration: underline;text-decoration-color: blue; text-underline-offset: 5%; font-weight:500;" (click)="downloadFile(file)">{{file.file_name}}</a>
+            
+            <a style=" font-weight:500; " (click)="downloadFile(file)">
+              {{file.file_name}} 
+              <i class="material-icons" style="cursor: pointer;color: #435d7d;">download</i></a>
           </div>
         </tr>
 
