@@ -48,7 +48,6 @@ export class AppRegisterComponent implements OnInit {
   department: any = [];
   team: any = [];
   user: any = [];
-  showUserLength : string = "+ Avaliable Employee : " + `${this.user.length}`;
   startTime: string;
   endTime: string;
 
@@ -257,11 +256,8 @@ export class AppRegisterComponent implements OnInit {
       {
         next: (data) => {
           this.user = data;
-          
           this.schedules.length = 0;
           this.onSelectNewTeam(this.teamId);
-          this.showUserLength = "+ Avaliable Employee : " + `${this.user.length}`;
-          console.log("user size" + this.user.length);
         }
       }
     );

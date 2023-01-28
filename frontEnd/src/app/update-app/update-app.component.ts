@@ -103,15 +103,12 @@ export class UpdateAppComponent implements OnInit {
         this.app = res
         this.UnassignDevice = this.app.employee
         this.confirmedUsers = this.UnassignDevice
+        this.getAvaliables();
         this.doReset()
-        console.log("fdafd " + this.confirmedUsers)
       },
       error => console.log("get app error " + error));
-
     this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
-
     this.alreadyIn();
-
     this.userServices.getTeam().subscribe(
       {
         next: (data) => {
@@ -259,14 +256,13 @@ export class UpdateAppComponent implements OnInit {
 
   getAvaliables() {
     this.user.length = 0;
+    this.UnassignDevice.length = 0;
     this.generateSchedules();
     this.userServices.getAvaliables(this.schedules).subscribe(
       {
         next: (data) => {
-          this.schedules.length = 0;
           this.user = data;
-          this.showUserLength = "+ Avaliable Employee : " + `${this.user.length}`;
-          console.log("user size" + this.user.length);
+          this.schedules.length = 0;
         }
       }
     );
