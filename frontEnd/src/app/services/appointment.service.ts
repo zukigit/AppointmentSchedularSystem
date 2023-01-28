@@ -59,8 +59,9 @@ export class AppointmentService {
   }
 
   //delete
-  deleteApp(id: string): Observable<Object> {
-    return this.http.delete(`${this.baseUrl}/deleteAppById/${id}`, this.header);
+  deleteApp(id: string,date:string): Observable<Object> {
+    console.log("delete service")
+    return this.http.delete(`${this.baseUrl}/deleteAppByDate?appointment_id=${id}&date=${date}`, this.header);
   }
 
 }

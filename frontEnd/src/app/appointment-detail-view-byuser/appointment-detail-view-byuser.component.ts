@@ -59,12 +59,12 @@ export class AppointmentDetailViewByuserComponent implements OnInit {
    
   delete
   deleteApp(){
-    this.appService.deleteApp(this.id).subscribe(
-      data => {Swal.fire('Appointment Delete!!', 'Appointment Delete succesfully!', 'success');
-      this.router.navigate(['user/dashboard'])
-    },
-      error => console.log("fail delete")
-    )
+    // this.appService.deleteApp(this.id).subscribe(
+    //   data => {Swal.fire('Appointment Delete!!', 'Appointment Delete succesfully!', 'success');
+    //   this.router.navigate(['user/dashboard'])
+    // },
+    //   error => console.log("fail delete")
+    // )
   }
 
   downloadFile(file) {      

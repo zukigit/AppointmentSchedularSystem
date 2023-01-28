@@ -22,15 +22,15 @@ export class AppointmentDetailViewComponent implements OnInit {
   urls = [];
   loginId: string;
   app:any = new AppointmentRegister();
-  eventClickDate:string;
+  date:string;
 
   constructor(private route: ActivatedRoute,private appService:AppointmentService, private userService:UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.loginId = localStorage.getItem("loggedInUserId");
-    this.eventClickDate = localStorage.getItem("eventClickDate")
-    console.log(this.eventClickDate)
+    this.date = localStorage.getItem("eventClickDate")
+    console.log(this.date)
     this.appService.viewOnlyAppointmentById(this.id).subscribe(
       (res : any) => {
         if(res.type != "PUBLIC") {
@@ -80,7 +80,7 @@ export class AppointmentDetailViewComponent implements OnInit {
         if (this.app.createUser.employee_id != this.loginId) {
           alert("can't delete other user")
         }else{
-          this.appService.deleteApp(this.id).subscribe(
+          this.appService.deleteApp(this.id,this.date).subscribe(
             data => {Swal.fire('Appointment Delete!!', 'Appointment Delete succesfully!', 'success');
             this.router.navigate(['admin/dashboard'])
           },

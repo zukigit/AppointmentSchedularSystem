@@ -103,8 +103,9 @@ export class UpdateAppComponent implements OnInit {
         this.app = res
         this.UnassignDevice = this.app.employee
         this.confirmedUsers = this.UnassignDevice
-        this.getAvaliables();
         this.doReset()
+        this.getAvaliables();
+        
       },
       error => console.log("get app error " + error));
     this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
@@ -171,8 +172,8 @@ export class UpdateAppComponent implements OnInit {
     this.display = 'name';
     this.keepSorted = true;
     this.confirmedUsers = this.UnassignDevice;
-    this.confirmed = this.confirmedUsers;
-    this.source = [...this.sourceDevice, ...this.confirmed];
+    // this.confirmed = this.confirmedUsers;
+    this.source = [...this.AssignDevice, ...this.confirmed];  
     
     console.log("populate lsit confirm user " + this.confirmedUsers)
     
