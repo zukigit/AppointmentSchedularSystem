@@ -7,18 +7,22 @@
                <div class="form-group">
                 <label> Unhide <span class="eyeicon" (click)="viewpass()"> <i
                     [ngClass]="visible?'fa fa-eye': 'fa fa-eye-slash'"
-                    style="color: #8092a8;"></i></span></label>
-                  <input type="password" class="form-control" placeholder="Your Password"
+                    style="color: #8092a8;"></i></span></label><br>
+
+                <div class="label" style="float: left;">Old Password</div>
+                  <input type="password" class="form-control" placeholder="Your Current Password"
                   [(ngModel)]="changePass.oldPassword" [type]="changetype?'password':'text'"
                                 style="cursor: pointer;" id="password" name="password" type="password"
                                  required>
-                                 
-                <input type="password" class="form-control" placeholder="New Password"
+
+                                 <div class="label" style="float: left;">New Password</div>             
+                <input type="password" class="form-control" placeholder="At least 8 charaters"
                 [(ngModel)]="changePass.newPassword" [type]="changetype?'password':'text'"
                                 style="cursor: pointer;" id="password" name="password"  type="password"
                             required>
-                  
-                <input type="password" class="form-control" placeholder="Confirm Password"
+
+                            <div class="label" style="float: left;">Confirm Password</div>
+                <input type="password" class="form-control" placeholder="At least 8 charaters"
                 [(ngModel)]="changePass.conPassword" [type]="changetype?'password':'text'" style="cursor: pointer;" id="conPassword"
                                 name="password" type="password"
                             required>
@@ -27,7 +31,7 @@
 
                <div class="w3-show-inline-block">
                 <div class="w3-bar">
-                  <button type="" (click)="goToDashboard()" class="w3-btn" style="background-color: #7c020c; color:white; border-radius: 3px; margin-right: 15px;">Cancle</button>
+                  <button type="" (click)="goToDashboard()" class="w3-btn" style="background-color: #f44336; color:white; border-radius: 3px; margin-right: 15px;">Cancle</button>
                     <button type="submit" class="w3-btn" style="background-color: #435d7d; color:white; border-radius: 3px;">Confirm</button>
                 </div>
               </div>

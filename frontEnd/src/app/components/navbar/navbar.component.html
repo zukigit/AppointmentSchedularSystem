@@ -34,6 +34,7 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink" style="margin-left:10px; margin-top:10px;">
                         
                     <table style="display: block;
+                    
                     height: 140px;
                     overflow-y: scroll;">
                         <thead>
@@ -41,9 +42,9 @@
                         </thead>
                         <span *ngIf="showNoti != null || showNoti != undefined" >
                         <tbody *ngFor="let data of showNoti" >
-                            <td>
-                                <button (click)="goAppDetailWithMakeRead(data.appId, data.notiId)" *ngIf="data.isReaded == false" style="background-color: yellow" class="dropdown-item">{{data.message}} </button>
-                                <button (click)="goAppDetail(data.appId, data.notiId)" *ngIf="data.isReaded == true" class="dropdown-item">{{data.message}} </button>
+                            <td >
+                                <button (click)="goAppDetailWithMakeRead(data.appId, data.notiId)" *ngIf="data.isReaded == false" style="background-color: #abc6e7;min-width: 300px;max-width: 300px;" class="dropdown-item">{{data.message}} </button>
+                                <button (click)="goAppDetail(data.appId, data.notiId)" *ngIf="data.isReaded == true" class="dropdown-item" style="min-width: 300px; max-width: 300px;">{{data.message}} </button>
                             </td>
                         </tbody>
                         </span>
