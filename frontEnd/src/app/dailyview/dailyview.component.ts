@@ -181,7 +181,10 @@ export class DailyviewComponent implements OnInit {
   searchAppByUserId(userId: string) {
    
     if(userId ==null){
-      alert("can't blank")
+      Swal.fire({  
+        title: 'No ID Insert',  
+        text: 'Please Inter Employee ID',   
+      }) 
     }else{
       this.isLoad = true;
       this.userService.getUserById(userId).subscribe(
