@@ -23,6 +23,7 @@ export class AppointmentDetailViewComponent implements OnInit {
   loginId: string;
   app:any = new AppointmentRegister();
   date:string;
+  isCreateUser:boolean = false;
 
   constructor(private route: ActivatedRoute,private appService:AppointmentService, private userService:UserService, private router: Router) { }
 
@@ -30,9 +31,11 @@ export class AppointmentDetailViewComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.loginId = localStorage.getItem("loggedInUserId");
     this.date = localStorage.getItem("eventClickDate")
-    console.log(this.date)
     this.appService.viewOnlyAppointmentById(this.id).subscribe(
       (res : any) => {
+        if(res.createUser.employee_id == this.loginId) {
+          this.isCreateUser = true;
+        }
         if(res.type != "PUBLIC") {
           this.appService.checkUserInclude(this.loginId, res.appointment_id).subscribe(
             (data: any) => {
@@ -74,22 +77,12 @@ export class AppointmentDetailViewComponent implements OnInit {
    
   //delete
   deleteApp(){
-    this.appService.viewOnlyAppointmentById(this.id).subscribe(
-      data=>{
-        this.app = data
-        if (this.app.createUser.employee_id != this.loginId) {
-          alert("can't delete other user")
-        }else{
-          this.appService.deleteApp(this.id,this.date).subscribe(
-            data => {Swal.fire('Appointment Delete!!', 'Appointment Delete succesfully!', 'success');
-            this.router.navigate(['admin/dashboard'])
-          },
-            error => console.log("fail delete")
-          )
-        }
-      }
+    this.appService.deleteApp(this.id,this.date).subscribe(
+      data => {Swal.fire('Appointment Delete!!', 'Appointment Delete succesfully!', 'success');
+      this.router.navigate(['admin/dashboard'])
+    },
+      error => console.log("fail delete")
     )
-    
   }
 
   downloadFile(file) {      
