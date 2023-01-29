@@ -97,6 +97,9 @@ export class UpdateAppComponent implements OnInit {
   constructor(private userServices: UserService, private route: ActivatedRoute, private datePipe: DatePipe, private appService: AppointmentService, private router: Router,) { }
 
   ngOnInit(): void {
+    
+    this.getAvaliables();
+    this.alreadyIn();
     this.id = this.route.snapshot.params['id'];
     this.appService.viewOnlyAppointmentById(this.id).subscribe(
       (res: any) => {
@@ -109,7 +112,7 @@ export class UpdateAppComponent implements OnInit {
       },
       error => console.log("get app error " + error));
     this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
-    this.alreadyIn();
+    // this.alreadyIn();
     this.userServices.getTeam().subscribe(
       {
         next: (data) => {
@@ -171,9 +174,9 @@ export class UpdateAppComponent implements OnInit {
     this.key = 'employee_id';
     this.display = 'name';
     this.keepSorted = true;
-    this.confirmedUsers = this.UnassignDevice;
-    // this.confirmed = this.confirmedUsers;
-    this.source = [...this.AssignDevice, ...this.confirmed];  
+    this.confirmed = this.UnassignDevice;
+    this.confirmedUsers = this.confirmed;
+    this.source = [...this.AssignDevice, ...this.confirmed,...this.UnassignDevice];  
     
     console.log("populate lsit confirm user " + this.confirmedUsers)
     
@@ -256,14 +259,14 @@ export class UpdateAppComponent implements OnInit {
   }
 
   getAvaliables() {
-    this.user.length = 0;
-    this.UnassignDevice.length = 0;
+    //this.user.length = 0;
+    // this.UnassignDevice.length = 0;
     this.generateSchedules();
     this.userServices.getAvaliables(this.schedules).subscribe(
       {
         next: (data) => {
           this.user = data;
-          this.schedules.length = 0;
+          // this.schedules.length = 0;
         }
       }
     );

@@ -244,7 +244,7 @@ export class DailyviewComponent implements OnInit {
                       this.eventClickDate=localStorage.setItem("eventClickDate",start)
                       this.router.navigate(['/admin/appointment_detail_view', id]);
                     }
-                    //this.router.navigate(['/view_only_appointment', id])
+                    
                   }
                 },
               });
