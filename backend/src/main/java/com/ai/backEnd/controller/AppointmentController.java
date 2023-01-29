@@ -137,6 +137,7 @@ public class AppointmentController {
 		showAppointment.setFiles(appointment.getFiles());
 		showAppointment.setStart_time(schedules.get(0).getStart_time());
 		showAppointment.setEnd_time(schedules.get(0).getEnd_time());
+		showAppointment.setSchedules(schedules);
 		return new ResponseEntity<ShowAppointment>(showAppointment, HttpStatus.OK);
 	}
 
@@ -197,11 +198,11 @@ public class AppointmentController {
 		for (User user : deletedUsers) {
 			postNotification(user, savedAppointment, NotificationType.DELETE_APP);
 		}
+
 	}
 
 	@DeleteMapping("/deleteAppByDate")
 	public void deleteAppByDate(@RequestParam String appointment_id,@RequestParam String date){
-	
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 		LocalDate localDate = LocalDate.parse(date,formatter);
 		Appointment appointment = appointmentService.getAppById(Integer.parseInt(appointment_id));
@@ -217,11 +218,7 @@ public class AppointmentController {
 		}
 
 		appointment.setSchedules(schedules);
-		Appointment savedAppointment = appointmentService.saveAppointment(appointment);
-		List<User> deletedUsers = appointment.getEmployee();
-		for (User user : deletedUsers) {
-			postNotification(user, savedAppointment, NotificationType.DELETE_APP);
-		}
+		appointmentService.saveAppointment(appointment);
 		for (Integer integer : deleteScheudleIds) {
 			scheduleService.deleteScheduleById(integer);
 		}
@@ -237,6 +234,8 @@ public class AppointmentController {
 			noti.setNoti_type(notiType);
 			notiService.addNoti(noti);
 	}
+
+
 
 }
 
