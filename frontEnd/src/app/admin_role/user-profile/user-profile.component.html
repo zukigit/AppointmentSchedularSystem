@@ -11,13 +11,14 @@
           margin-right: 30px;
           margin-left: 30px;">
               <div class="card">
-                  <div class="card-header card-header-warning">
+                  <div class="card-header card-header-warning" style="background: linear-gradient(6deg, #435f81, #435d7d);box-shadow: 0 4px 20px 0px rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(48 47 98 / 40%);">
                       <h4 class="card-title" style="
                       display: inline-block;
                       font-weight: 600;
-                      padding-top: 10px;">{{user.name}} - {{user.employee_id}}</h4>
-                      <input (click)="checkChanges()" style="float: right;" type="submit" value="Submit Changes"
-                        class="btn btn-primary">
+                      padding-top: 10px;
+                      color: #fff;">{{user.name}} - {{user.employee_id}}</h4>
+                      <input (click)="checkChanges()" style="float: right;background-color: #1a375a;" type="submit" value="Submit Changes"
+                        class="btn btn-primary" >
                   </div>
                   <div class="card-body table-responsive">
 

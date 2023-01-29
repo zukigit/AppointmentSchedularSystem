@@ -64,7 +64,10 @@ export class AppointmentDetailViewBytraineeComponent implements OnInit {
         }
       },
       error => {
-        alert("this appointment is deleted"),
+        // alert("this appointment is deleted"),
+        Swal.fire({   
+          title: 'This Appointment was already deleted ', 
+        })
         this.router.navigate(['trainee/dashboard'])
       });
   }
