@@ -12,6 +12,10 @@ import { Subject, Subscription, switchMap, timer } from 'rxjs';
 import { constrainPoint } from '@fullcalendar/core/internal';
 //import React from 'react';
 // import { NotiModel } from 'app/model/noti-model';
+import { UserService } from 'app/services/user.service';
+// import { NotiModel } from 'app/model/noti-model';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+
 
 
 
@@ -48,7 +52,8 @@ export class UsernavbarComponent implements OnInit {
 
     // notificationCount$ = this.notiService.notificationCount$;
 
-    constructor(location: Location, private element: ElementRef, private router: Router, private notiService: NotiService) {
+    constructor(location: Location, private element: ElementRef, private router: Router
+        , private notiService: NotiService , private userService : UserService) {
         this.location = location;
         this.sidebarVisible = false;
 
@@ -59,9 +64,9 @@ export class UsernavbarComponent implements OnInit {
     Notis: any
     notiArray: any[];
     loginId: string;
-    user: User = new User();
+    user !: User;
     text: string;
-    showData: any[] = [];
+    showNoti: any[] = [];
 
     unreadNoti: number;
 
@@ -69,22 +74,14 @@ export class UsernavbarComponent implements OnInit {
 
 
     ngOnInit() {
-        this.unreadNoti = Number(localStorage.getItem("unreadNoti"));
         this.loginId = localStorage.getItem("loggedInUserId");
-        this.readedNoti = Number(localStorage.getItem("totalNoti"));
-        setTimeout(() => {
-            this.getNotiFirstTime();
-
-        }, 1200);
+        this.getNoti();
+        this.checkNotiCounts();
 
         setTimeout(() => {
             this.realTimeData();
         }, 1000);
-        this.getNotiFirstTime();
         this.realTimeData();
-        //  this.getNotiByType();
-
-        console.log(this.bindData)
 
         this.listTitles = ROUTES.filter(listTitle => listTitle);
         const navbar: HTMLElement = this.element.nativeElement;
@@ -99,67 +96,79 @@ export class UsernavbarComponent implements OnInit {
         });
     }
 
-    removeReadCount() {
-        localStorage.setItem("unreadNoti", '0');
-        this.unreadNoti = 0;
+    goAppDetail(appId:Number, notiId:number, type:string, deletedDate:string, title:string) {
+        if(type == "DELETE_APP") {
+            // alert("deleted date" + deletedDate + " title:" + title)
+            Swal.fire({  
+                icon: 'error',  
+                title: 'Appointed was Deleted ',  
+                text: "Deleted date" + deletedDate + " Title:" + title,   
+              })
+        } else {
+            this.router.navigate(['/user/appointment_detail_view_byuser', appId]).then (() => window.location.reload()),10000;
+        }
+    }
 
-        this.getNotiFirstTime()
+    goAppDetailWithMakeRead(appId:Number, notiId:number, type:string, deletedDate:string, title:string) {
+        this.notiService.makeNotiReaded(notiId).subscribe(
+            data=>{
+                this.getNoti();
+                this.checkNotiCounts();
+            },
+            error=> console.log("error " + error.message)
+        );
+        if(type == "DELETE_APP") {
+            // alert("deleted date" + deletedDate + " title:" + title)
+            Swal.fire({  
+                icon: 'error',  
+                title: 'Appointed was Deleted ',  
+                text: "Deleted date" + deletedDate + " Title:" + title,   
+              })
+        } else {
+            this.router.navigate(['/user/appointment_detail_view_byuser', appId]);
+        }
     }
 
     realTimeData() {
-        this.realTimeDataSubscription$ = timer(0, 100)
+        this.realTimeDataSubscription$ = timer(0, 1000)
             .pipe(switchMap(_ => this.notiService.getNoti(this.loginId)))
             .subscribe(res => {
                 this.temData = res;
                 if (this.temData.length > this.readedNoti) {
-                    this.unreadNoti = this.temData.length - this.readedNoti;
-                    this.bindData.push(res);
-                    this.readedNoti = this.temData.length;
-                    localStorage.setItem("unreadNoti", `${this.unreadNoti}`);
-                    localStorage.setItem("totalNoti", `${this.readedNoti}`);
+                    this.checkNotiCounts();
+                    this.changeNotiText(res);
                 }
             });
     }
 
-    getNotiFirstTime() {
-        this.notiService.getNoti(this.loginId).subscribe(
-            (data) => {
-                let mydata;
-
-                console.log("data" + data);
-                // mydata=
-                mydata = data;
-                // mydata=data
-                for (var noti of mydata) {
-                    if
-                        (noti.notiType == "CREATE_APP") {
-                        this.showData.push(noti.createUser.name + " created the appointment :" + noti.title)
-                        // console.log("create app " + this.showData)
-                    }
-                    else if (noti.notiType == "EDIT_APP") {
-                        this.showData.push(noti.createUser.name + " edited the appointment :" + noti.title );
-                    }
-                    else if (noti.notiType == "DELETE_APP") {
-                        this.showData.push(noti.createUser.name + " deleted the appointment :" + noti.title);
-                    }
-                    else if(noti.notiType == "USER_REMOVED" && noti.employee_id == this.loginId){
-                        this.showData.push("You are removed from the appointment!");
-                    }
-                    else if(noti.notiType == "USER_ADD" && noti.employee_id == this.loginId){
-                        this.showData.push("You are added the appointment :" + noti.title);
-                    }
-                }
-                for (let x of this.bindData) {
-                    // console.log(x + "data")
-                    // x = this.bindData
-
-                }
-                this.bindData.push(this.showData)
-                this.bindData = this.showData.map(data=>data)
-               
-                // console.log(this.bindData.length + "length")
-            }
+    checkNotiCounts() {
+        this.notiService.getTotalNotiCount(this.loginId).subscribe(
+            data => this.readedNoti = Number(data)
         )
+        this.notiService.getUnreadedNotiCount(this.loginId).subscribe(
+            data => this.unreadNoti = Number(data)
+        )
+    }
+    getNoti() {
+        this.notiService.getNoti(this.loginId).subscribe(
+            data => this.changeNotiText(data)
+        )
+    }
+    changeNotiText(res : any) {
+        this.showNoti.length = 0;
+        for(var noti of res) {
+            if(noti.notiType == "CREATE_APP") {
+                this.showNoti.push({"message" : noti.createUser.name + " created the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded, "type" : "CREATE_APP", "deletedDate" : "", "title" : ""})
+            } else if(noti.notiType == "EDIT_APP") {
+                this.showNoti.push({"message" : noti.createUser.name + " edited the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded, "type" : "CREATE_APP", "deletedDate" : "", "title" : ""})
+            } else if(noti.notiType == "DELETE_APP") {
+                this.showNoti.push({"message" : noti.createUser.name + " deleted the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded, "type" : "DELETE_APP", "deletedDate" : noti.deletedDate, "title" : noti.title})
+            } else if(noti.notiType == "USER_REMOVED" && noti.employee_id == this.loginId) {
+                this.showNoti.push({"message" : "You are removed from the " + noti.title + " appointment", "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded, "type" : "CREATE_APP", "deletedDate" : "", "title" : ""})
+            } else if(noti.notiType == "USER_ADD" && noti.employee_id == this.loginId) {
+                this.showNoti.push({"message" : "You are added the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded, "type" : "CREATE_APP", "deletedDate" : "", "title" : ""})
+            }
+        }
     }
 
     goToDashboard() {

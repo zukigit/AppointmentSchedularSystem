@@ -38,6 +38,18 @@
         </div>
       </div>
 
+      <!--   -->
+      <div class="row mb-3" style="margin-bottom: 30px;">
+        <div class="col-lg-2" style="margin-left:7%;">
+          <p>
+            Create User
+          </p>
+        </div>
+        <div class="col-lg-5">
+          <span class="ss">{{res.createUser.name}} - {{res.createUser.employee_id}}</span>
+        </div>
+      </div>
+
       <!-- Start Time&End Time -->
 
       <div class="row mb-3" style="margin-bottom: 30px;">
@@ -49,8 +61,6 @@
         </div>
 
       </div>
-
-
       <div class="row mb-3" style="margin-bottom: 30px;">
         <div class="col-lg-2" style="margin-left:7%;">
           <p>End Time</p>
@@ -67,23 +77,15 @@
 
       <div class="row mb-3">
         <div class="col-lg-2" style="margin-left:7%;">
-          <p>Start Date</p>
+          <p>Date</p>
         </div>
-        <div class="col-lg-5">
-          <span class="ss">{{res.start_date}}</span>
-        </div>
-
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-lg-2" style="margin-left:7%;">
-          <p>End Date</p>
-        </div>
-        <div class="col-lg-5">
-          <span class="ss">{{res.end_date}}</span>
+        <div *ngFor="let data of res.schedules" class="col-lg-5">
+          <span *ngIf="data.date == date" style="color: darkblue;" class="ss">{{data.date}}</span>
+          <span *ngIf="data.date != date" class="ss">{{data.date}}</span>
         </div>
 
       </div>
+
       <!-- Privacy -->
 
       <div class="row mb-3">
@@ -102,9 +104,12 @@
           <p>Attached File</p>
         </div>
 
-        <tr class="col-lg-5" style="margin-top:0%;">
+        <tr class="col-lg-5" style="margin-top:0%; ">
           <div *ngFor="let file of files">
-            <a style="text-decoration: underline;text-decoration-color: blue; text-underline-offset: 5%; font-weight:500;" (click)="downloadFile(file)">{{file.file_name}}</a>
+            
+            <a style=" font-weight:500; ">
+              {{file.file_name}} 
+              <i  (click)="downloadFile(file)" class="material-icons" style="cursor: pointer;color: #435d7d;">download</i></a>
           </div>
         </tr>
 
@@ -155,15 +160,14 @@
       <!-- button -->
        <!-- <div *ngFor="let x of res.employee"> -->
         <div style="text-align: center;">
-
-
-        <a class="btn" style="  background-color:#d42c34;color: white; text-align: center;margin-right:20px;margin-bottom: 3%;">
-          <span (click)="deleteApp()">Delete Appointment</span>
-        </a>
+        <span *ngIf="isCreateUser">
+          <a class="btn" style="  background-color:#d42c34;color: white; text-align: center;margin-right:20px;margin-bottom: 3%;">
+            <span (click)="deleteApp()">Delete Appointment</span>
+          </a>
           <a class="btn" style="  background-color: #435d7d; text-align: right; color: white; text-align: center;margin-bottom: 3%;">
             <span (click)="updateApp()">Update Appointment</span>
           </a>
-
+        </span>
       </div>
 
       <!-- <button type="button" class="btn btn-custom btn-lg btn-block">Send Now</button> -->

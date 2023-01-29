@@ -21,7 +21,8 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
   templateUrl: './dailyviewbyuser.component.html',
   styleUrls: ['./dailyviewbyuser.component.scss']
 })
-export class DailyviewbyuserComponent implements OnInit {Events: any[] = [];
+export class DailyviewbyuserComponent implements OnInit {
+  Events: any[] = [];
   calEvent: any[] = [];
   startDate = new Date();
   loginId: string;
@@ -34,7 +35,7 @@ export class DailyviewbyuserComponent implements OnInit {Events: any[] = [];
   searchedUserId: string;
   loginUser: User;
   currentDate: Date = new Date();
-  todayDate: Date = new Date("01/23/2023");
+  eventClickDate:any;
 
 
 
@@ -111,14 +112,13 @@ export class DailyviewbyuserComponent implements OnInit {Events: any[] = [];
         eventClick: (arg) => {
           let id = arg.event.id;
           let appType = arg.event.groupId;
-          console.log("event click date is " + arg.event.end)
-          console.log("current click date is " + this.currentDate)
+          let start = this.datePipe.transform(arg.event.start, 'MM/dd/yyyy');
 
           if (appType != "PUBLIC") {
             this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
               (data: any) => {
                 if (data) {
-                  this.router.navigate(['/user/appointment_detail_view_byuser', id]);
+                  this.router.navigate(['/user/appointment_detail_view_byuser', id], { queryParams: { data: JSON.stringify(start)}});
                 }
               }, error => {
                 Swal.fire({  
@@ -138,7 +138,7 @@ export class DailyviewbyuserComponent implements OnInit {Events: any[] = [];
                 text: 'Appointment is over, Can not edit!!!',   
               }) 
             } else {
-              this.router.navigate(['/user/appointment_detail_view_byuser', id]);
+              this.router.navigate(['/user/appointment_detail_view_byuser', id], { queryParams: { data: JSON.stringify(start)}});
             }
 
             //this.router.navigate(['/view_only_appointment',id])
@@ -171,108 +171,129 @@ export class DailyviewbyuserComponent implements OnInit {Events: any[] = [];
 
 
   searchAppByUserId(userId: string) {
-    this.isLoad = true;
-    this.userService.getUserById(userId).subscribe(
-      (data: any) => {
-        if (data != null) {
-          this.searchedUser = data;
-          var calendarEl2 = this.calendar2.nativeElement;
-          setTimeout(() => {
-            var calendar2 = new Calendar(calendarEl2, {
-              initialView: 'timeGridDay',
-              plugins: [timeGridPlugin],
-              views: {
-                timeGridDay: {
-                  type: 'timeGridDay',
-                  allDaySlot: false,
-                  slotMinTime: "07:00:00",
-                  slotMaxTime: "20:00:00",
-                  contentHeight: 550,
-                  selectable: true,
-                  slotLabelFormat: { hour: 'numeric', minute: '2-digit', hour12: false }
-                }
-              },
-              events: this.calEvent,
-
-              eventClick: (arg) => {
-                let id = arg.event.id;
-                let appType = arg.event.groupId;
-
-                if (appType != "PUBLIC") {
-                  this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
-                    (data: any) => {
-                      if (data) {
-                        this.router.navigate(['/user/appointment_detail_view_byuser', id]);
+   
+    if(userId ==null){
+      Swal.fire({  
+        title: 'No ID Insert',  
+        text: 'Please Inter Employee ID',   
+      }) 
+    }else{
+      this.isLoad = true;
+      this.userService.getUserById(userId).subscribe(
+        (data: any) => {
+          if (data != null) {
+            this.searchedUser = data;
+            var calendarEl2 = this.calendar2.nativeElement;
+            setTimeout(() => {
+              var calendar2 = new Calendar(calendarEl2, {
+                initialView: 'timeGridDay',
+                plugins: [timeGridPlugin],
+                views: {
+                  timeGridDay: {
+                    type: 'timeGridDay',
+                    allDaySlot: false,
+                    slotMinTime: "07:00:00",
+                    slotMaxTime: "20:00:00",
+                    contentHeight: 550,
+                    selectable: true,
+                    slotLabelFormat: { hour: 'numeric', minute: '2-digit', hour12: false }
+                  }
+                },
+                events: this.calEvent,
+  
+                eventClick: (arg) => {
+                  let id = arg.event.id;
+                  let appType = arg.event.groupId;
+                  let start = this.datePipe.transform(arg.event.start, 'MM/dd/yyyy');
+                  console.log("event click date " + arg.event.start)
+  
+  
+                  if (appType != "PUBLIC") {
+                    this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
+                      (data: any) => {
+                        if (data) {
+                          this.eventClickDate=localStorage.setItem("eventClickDate",start)
+                          this.router.navigate(['/user/appointment_detail_view_byuser', id]);
+                        }
+                      }, error => {
+                        //alert("this appointment is private and you are not in there")
+                        Swal.fire({  
+                          icon: 'error',  
+                          title: 'Assess Denied',  
+                          text: 'This appointment is private and you are not in there.',   
+                        }) 
                       }
-                    }, error => {
-                      //alert("this appointment is private and you are not in there")
+                    );
+                  } else {
+                    if (arg.event.end <= this.currentDate) {
+                      //alert("Schedule are finished,can't edit!!!");
                       Swal.fire({  
                         icon: 'error',  
                         title: 'Assess Denied',  
-                        text: 'This appointment is private and you are not in there.',   
+                        text: 'Appointment is over. Can not edit!!!',   
                       }) 
+                    } else {
+                      this.eventClickDate=localStorage.setItem("eventClickDate",start)
+                      this.router.navigate(['/user/appointment_detail_view_byuser', id]);
                     }
-                  );
-                } else {
-                  if (arg.event.end <= this.currentDate) {
-                    //alert("Schedule are finished,can't edit!!!");
+                    
+                  }
+                },
+              });
+              calendar2.render()
+              this.searchedUserName = this.searchedUser.name;
+              this.isLoad = false;
+            }, 1500);
+  
+            setTimeout(() => {
+              this.appService.getAppointmentById(userId).subscribe(
+                (appData: any) => {
+                  if (appData == null) {
+                    // alert("this user has no appointments");
                     Swal.fire({  
                       icon: 'error',  
-                      title: 'Assess Denied',  
-                      text: 'Appointment is over. Can not edit!!!',   
-                    }) 
+                      title: 'No Appointment',  
+                      text: 'This user has no appointment.',   
+                    })
                   } else {
-                    this.router.navigate(['/user/appointment_detail_view_byuser', id]);
-                  }
-                  //this.router.navigate(['/view_only_appointment', id])
-                }
-              },
-            });
-            calendar2.render()
-            this.searchedUserName = this.searchedUser.name;
-            this.isLoad = false;
-          }, 1500);
-
-          setTimeout(() => {
-            this.appService.getAppointmentById(userId).subscribe(
-              (appData: any) => {
-                if (appData == null) {
-                  // alert("this user has no appointments");
-                  Swal.fire({  
-                    icon: 'error',  
-                    title: 'No Appointment',  
-                    text: 'This user has no appointment.',   
-                  })
-                } else {
-                  this.searchedApp = appData;
-                  for (let result of this.searchedApp) {
-                    for (let r of result.schedules) {
-                      console.log("date " + r.date)
-                      let dateStr: string = r.date + " " + r.start_time + ":00";
-                      let myDate = new Date(dateStr);
-                      let dateStr2: string = r.date + " " + r.end_time + ":00";
-                      let myDate2 = new Date(dateStr2);
-                      console.log("title searc is " + myDate);
-                      if (myDate2 <= this.currentDate) {
-                        //alert("Schedule are finished,can't edit!!!");
-                        this.calEvent.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type,color:"#6e6b6c" })
-                      } else {
-                        this.calEvent.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type, })
+                    this.searchedApp = appData;
+                    for (let result of this.searchedApp) {
+                      for (let r of result.schedules) {
+                        console.log("date " + r.date)
+                        let dateStr: string = r.date + " " + r.start_time + ":00";
+                        let myDate = new Date(dateStr);
+                        let dateStr2: string = r.date + " " + r.end_time + ":00";
+                        let myDate2 = new Date(dateStr2);
+                        console.log("title searc is " + myDate);
+                        if (myDate2 <= this.currentDate) {
+                          //alert("Schedule are finished,can't edit!!!");
+                          this.calEvent.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type,color:"#6e6b6c" })
+                        } else {
+                          this.calEvent.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type, })
+                        }
+                        
                       }
-                      
                     }
+                
                   }
-              
+                  console.log(this.calEvent);
                 }
-                console.log(this.calEvent);
-              }
-            )
-
-          }, 1000);
-        } else {
-          this.searchedUser = new User();
-          this.searchedUser.name = "";
-          //alert("user not exist");
+              )
+  
+            }, 1000);
+          } else {
+            this.searchedUser = new User();
+            this.searchedUser.name = "";
+            //alert("user not exist");
+            Swal.fire({  
+              icon: 'error',  
+              title: 'No User',  
+              text: 'User does not exist',   
+            })
+            this.isLoad = false;
+          }
+        }, error => {
+          // alert("user doesn't exist");
           Swal.fire({  
             icon: 'error',  
             title: 'No User',  
@@ -280,16 +301,10 @@ export class DailyviewbyuserComponent implements OnInit {Events: any[] = [];
           })
           this.isLoad = false;
         }
-      }, error => {
-        // alert("user doesn't exist");
-        Swal.fire({  
-          icon: 'error',  
-          title: 'No User',  
-          text: 'User does not exist',   
-        })
-        this.isLoad = false;
-      }
-    );
+      );
+
+    }
+   
     this.afterClick()
     
 
@@ -306,9 +321,10 @@ export class DailyviewbyuserComponent implements OnInit {Events: any[] = [];
 
 
   goToAppRegister() {
-    this.router.navigate(['/user/app-register'])
+    this.router.navigate(['/admin/app-register'])
   }
 }
 function beforeClick() {
   throw new Error('Function not implemented.');
 }
+

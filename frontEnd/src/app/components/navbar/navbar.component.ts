@@ -9,7 +9,7 @@ import { Subject, Subscription, switchMap, timer } from 'rxjs';
 import { NotiModel } from 'app/model/noti-model';
 import { UserService } from 'app/services/user.service';
 // import { NotiModel } from 'app/model/noti-model';
-
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 
 declare interface RouteInfo {
@@ -91,7 +91,11 @@ export class NavbarComponent implements OnInit {
 
     goAppDetail(appId:Number, notiId:number, type:string, deletedDate:string, title:string) {
         if(type == "DELETE_APP") {
-            alert("deleted date" + deletedDate + " title:" + title)
+            // alert("deleted date" + deletedDate + " title:" + title)
+            Swal.fire({   
+                title: 'This Appointment was deleted ',  
+                text: "Deleted in " + deletedDate +' and Title was ' + title, 
+              })
         } else {
             this.router.navigate(['/admin/appointment_detail_view', appId]).then (() => window.location.reload()),10000;
         }
@@ -106,7 +110,11 @@ export class NavbarComponent implements OnInit {
             error=> console.log("error " + error.message)
         );
         if(type == "DELETE_APP") {
-            alert("deleted date" + deletedDate + " title:" + title)
+            // alert("deleted date" + deletedDate + " title:" + title)
+            Swal.fire({   
+                title: 'This Appointment was deleted ',  
+                text: "Deleted in " + deletedDate +' and Title was ' + title, 
+              })
         } else {
             this.router.navigate(['/admin/appointment_detail_view', appId]);
         }

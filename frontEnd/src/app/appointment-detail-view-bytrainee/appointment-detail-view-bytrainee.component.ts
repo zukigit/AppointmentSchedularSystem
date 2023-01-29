@@ -1,29 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { AppointmentRegister } from 'app/model/appointment-register';
 import { AppointmentService } from 'app/services/appointment.service';
 import { UserService } from 'app/services/user.service';
-import { data } from 'jquery';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+
 
 @Component({
   selector: 'app-appointment-detail-view-bytrainee',
   templateUrl: './appointment-detail-view-bytrainee.component.html',
   styleUrls: ['./appointment-detail-view-bytrainee.component.scss']
 })
-export class AppointmentDetailViewBytraineeComponent implements OnInit {res:any;
+export class AppointmentDetailViewBytraineeComponent implements OnInit {
+  res:any = {
+    "title" : ""
+  };
   id:string;
   files = [];
   employee = [];
   urls = [];
   loginId: string;
+  app:any = new AppointmentRegister();
+  date:string;
+  isCreateUser:boolean = false;
 
   constructor(private route: ActivatedRoute,private appService:AppointmentService, private userService:UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.loginId = localStorage.getItem("loggedInUserId");
+    this.route.queryParams.subscribe(params => {
+      this.date = JSON.parse(params.data);
+    });
     this.appService.viewOnlyAppointmentById(this.id).subscribe(
       (res : any) => {
+        if(res.createUser.employee_id == this.loginId) {
+          this.isCreateUser = true;
+        }
         if(res.type != "PUBLIC") {
           this.appService.checkUserInclude(this.loginId, res.appointment_id).subscribe(
             (data: any) => {
@@ -34,7 +47,12 @@ export class AppointmentDetailViewBytraineeComponent implements OnInit {res:any;
                 this.generatePhotos();
               }
             }, error => {
-              alert("this appointment is private and you are not in there")
+              // alert("this appointment is private and you are not in there")
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Access Denied',  
+                text: 'This appointment is private and you are not in there',   
+              })
               this.router.navigate(['/trainee/dashboard']);
             }
           );
@@ -45,23 +63,51 @@ export class AppointmentDetailViewBytraineeComponent implements OnInit {res:any;
           this.generatePhotos();
         }
       },
-      error => console.log("get app error " + error));
+      error => {
+        alert("this appointment is deleted"),
+        this.router.navigate(['trainee/dashboard'])
+      });
   }
 
   //update
-  // updateApp() {
-  //     this.router.navigate(['admin/update-app',this.id])
-  // }
+  updateApp() {
+    this.router.navigate(['trainee/update-app',this.id])
+  }
    
-  // //delete
+  //delete
   // deleteApp(){
-  //   this.appService.deleteApp(this.id).subscribe(
-  //     data => {Swal.fire('Appointment Delete!!', 'Appointment Delete succesfully!', 'success');
+  //   this.appService.deleteApp(this.id,this.date).subscribe(
+  //     data => {
+  //       Swal.fire('Appointment Delete!!', 'Appointment Delete succesfully!', 'success');
   //     this.router.navigate(['admin/dashboard'])
   //   },
   //     error => console.log("fail delete")
   //   )
   // }
+
+  deleteApp(){
+    Swal.fire({
+      title: "Are you sure want to delete?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.value) {this.appService.deleteApp(this.id,this.date).subscribe(
+          data => {
+            this.router.navigate(['trainee/dashboard'])
+            Swal.fire({
+              title: "Successfully Deleted",
+              text: "Appointment is deleted",
+              icon: "success",
+          });
+        },
+          // error => console.log("fail delete")
+        )
+    }
+})
+    
+    
+  }
 
   downloadFile(file) {      
     this.appService.fileDownload(file.file_id).subscribe(
@@ -98,4 +144,3 @@ export class AppointmentDetailViewBytraineeComponent implements OnInit {res:any;
     }
   }
 }
-
