@@ -30,7 +30,9 @@ export class AppointmentDetailViewComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.loginId = localStorage.getItem("loggedInUserId");
-    this.date = localStorage.getItem("eventClickDate")
+    this.route.queryParams.subscribe(params => {
+      this.date = JSON.parse(params.data);
+    });
     this.appService.viewOnlyAppointmentById(this.id).subscribe(
       (res : any) => {
         if(res.createUser.employee_id == this.loginId) {

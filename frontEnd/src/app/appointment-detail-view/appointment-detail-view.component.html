@@ -61,8 +61,6 @@
         </div>
 
       </div>
-
-
       <div class="row mb-3" style="margin-bottom: 30px;">
         <div class="col-lg-2" style="margin-left:7%;">
           <p>End Time</p>
@@ -81,8 +79,9 @@
         <div class="col-lg-2" style="margin-left:7%;">
           <p>Date</p>
         </div>
-        <div class="col-lg-5">
-          <span class="ss">{{date}}</span>
+        <div *ngFor="let data of res.schedules" class="col-lg-5">
+          <span *ngIf="data.date == date" style="color: darkblue;" class="ss">{{data.date}}</span>
+          <span *ngIf="data.date != date" class="ss">{{data.date}}</span>
         </div>
 
       </div>
@@ -108,9 +107,9 @@
         <tr class="col-lg-5" style="margin-top:0%; ">
           <div *ngFor="let file of files">
             
-            <a style=" font-weight:500; " (click)="downloadFile(file)">
+            <a style=" font-weight:500; ">
               {{file.file_name}} 
-              <i class="material-icons" style="cursor: pointer;color: #435d7d;">download</i></a>
+              <i  (click)="downloadFile(file)" class="material-icons" style="cursor: pointer;color: #435d7d;">download</i></a>
           </div>
         </tr>
 
