@@ -46,7 +46,12 @@ export class AppointmentDetailViewComponent implements OnInit {
                 this.generatePhotos();
               }
             }, error => {
-              alert("this appointment is private and you are not in there")
+              // alert("this appointment is private and you are not in there")
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Access Denied',  
+                text: 'This appointment is private and you are not in there',   
+              })
               this.router.navigate(['/admin/dashboard']);
             }
           );
@@ -66,13 +71,38 @@ export class AppointmentDetailViewComponent implements OnInit {
   }
    
   //delete
+  // deleteApp(){
+  //   this.appService.deleteApp(this.id,this.date).subscribe(
+  //     data => {
+  //       Swal.fire('Appointment Delete!!', 'Appointment Delete succesfully!', 'success');
+  //     this.router.navigate(['admin/dashboard'])
+  //   },
+  //     error => console.log("fail delete")
+  //   )
+  // }
+
   deleteApp(){
-    this.appService.deleteApp(this.id,this.date).subscribe(
-      data => {Swal.fire('Appointment Delete!!', 'Appointment Delete succesfully!', 'success');
-      this.router.navigate(['admin/dashboard'])
-    },
-      error => console.log("fail delete")
-    )
+    Swal.fire({
+      title: "Are you sure want to delete?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.value) {this.appService.deleteApp(this.id,this.date).subscribe(
+          data => {
+            this.router.navigate(['admin/dashboard'])
+            Swal.fire({
+              title: "Successfully Deleted",
+              text: "Appointment is deleted",
+              icon: "success",
+          });
+        },
+          // error => console.log("fail delete")
+        )
+    }
+})
+    
+    
   }
 
   downloadFile(file) {      
