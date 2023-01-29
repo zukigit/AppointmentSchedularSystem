@@ -1,6 +1,7 @@
 package com.ai.backEnd.controller;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -201,7 +202,8 @@ public class AppointmentController {
 
 	@DeleteMapping("/deleteAppByDate")
 	public void deleteAppByDate(@RequestParam String appointment_id,@RequestParam String date){
-		LocalDate localDate = LocalDate.parse(date);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+		LocalDate localDate = LocalDate.parse(date,formatter);
 		Appointment appointment = appointmentService.getAppById(Integer.parseInt(appointment_id));
 		List<Schedule> schedules = appointment.getSchedules();
         Iterator<Schedule> list = schedules.iterator();
