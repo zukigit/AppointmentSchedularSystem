@@ -116,6 +116,11 @@ export class UpdateAppComponent implements OnInit {
     this.appService.viewOnlyAppointmentById(this.id).subscribe(
       (res: any) => {
         this.app = res
+        this.app.schedules = res.schedules
+
+        // for(let x of res.schdule) {
+          console.log("dd " + this.app.schedules)
+        // }
         this.UnassignDevice = this.app.employee
         this.confirmedUsers = this.UnassignDevice
         this.doReset()

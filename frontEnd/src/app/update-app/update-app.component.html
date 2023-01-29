@@ -38,15 +38,16 @@
 
 
 
-          <div class="input-box">
-            <span class="details" style="font-weight: 650;">Start Date</span>
+          <div *ngFor="let a of app.schedules">
+            <!-- <span class="details" style="font-weight: 650;">Start Date</span>
             <input disabled="" type="" (change)="onSelect($event)" min="{{currentDate | date:'yyyy-MM-dd'}}"
-              [(ngModel)]="app.start_date" name="start_date" required>
+               name="start_date" required> -->
+               <p> {{a.date}} </p>
           </div>
-          <div class="input-box">
+          <!-- <div class="input-box">
             <span class="details" style="font-weight: 650;">End Date</span>
             <input disabled="" type=""  min="{{sDate | date:'yyyy-MM-dd'}}" [(ngModel)]="app.end_date" name="end_date" required>
-          </div>
+          </div> -->
 
 
 
