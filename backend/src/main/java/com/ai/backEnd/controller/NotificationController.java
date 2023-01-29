@@ -54,6 +54,7 @@ public class NotificationController {
 			nf.setCreateUser(createUser);
 			nf.setNotiType(notification.getNoti_type());
 			nf.setIsReaded(notification.isReaded());
+			nf.setDeletedDate(notification.getDeletedDate());
 			notify.add(nf);
 		}
 		return new ResponseEntity<List<NotificationDTO>>(notify, HttpStatus.OK);

@@ -62,7 +62,10 @@ export class AppointmentDetailViewComponent implements OnInit {
           this.generatePhotos();
         }
       },
-      error => console.log("get app error " + error));
+      error => {
+        alert("this appointment is deleted"),
+        this.router.navigate(['admin/dashboard'])
+      });
   }
 
   //update

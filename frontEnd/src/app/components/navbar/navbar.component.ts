@@ -89,11 +89,15 @@ export class NavbarComponent implements OnInit {
         });
     }
 
-    goAppDetail(appId:Number, notiId:number) {
-        this.router.navigate(['/admin/appointment_detail_view', appId]).then (() => window.location.reload()),10000;;
+    goAppDetail(appId:Number, notiId:number, type:string, deletedDate:string, title:string) {
+        if(type == "DELETE_APP") {
+            alert("deleted date" + deletedDate + " title:" + title)
+        } else {
+            this.router.navigate(['/admin/appointment_detail_view', appId]).then (() => window.location.reload()),10000;
+        }
     }
 
-    goAppDetailWithMakeRead(appId:Number, notiId:number) {
+    goAppDetailWithMakeRead(appId:Number, notiId:number, type:string, deletedDate:string, title:string) {
         this.notiService.makeNotiReaded(notiId).subscribe(
             data=>{
                 this.getNoti();
@@ -101,7 +105,11 @@ export class NavbarComponent implements OnInit {
             },
             error=> console.log("error " + error.message)
         );
-        this.router.navigate(['/admin/appointment_detail_view', appId]);
+        if(type == "DELETE_APP") {
+            alert("deleted date" + deletedDate + " title:" + title)
+        } else {
+            this.router.navigate(['/admin/appointment_detail_view', appId]);
+        }
     }
 
     realTimeData() {
@@ -133,15 +141,15 @@ export class NavbarComponent implements OnInit {
         this.showNoti.length = 0;
         for(var noti of res) {
             if(noti.notiType == "CREATE_APP") {
-                this.showNoti.push({"message" : noti.createUser.name + " created the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded})
+                this.showNoti.push({"message" : noti.createUser.name + " created the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded, "type" : "CREATE_APP", "deletedDate" : "", "title" : ""})
             } else if(noti.notiType == "EDIT_APP") {
-                this.showNoti.push({"message" : noti.createUser.name + " edited the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded})
+                this.showNoti.push({"message" : noti.createUser.name + " edited the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded, "type" : "CREATE_APP", "deletedDate" : "", "title" : ""})
             } else if(noti.notiType == "DELETE_APP") {
-                this.showNoti.push({"message" : noti.createUser.name + " deleted the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded})
+                this.showNoti.push({"message" : noti.createUser.name + " deleted the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded, "type" : "DELETE_APP", "deletedDate" : noti.deletedDate, "title" : noti.title})
             } else if(noti.notiType == "USER_REMOVED" && noti.employee_id == this.loginId) {
-                this.showNoti.push({"message" : "You are removed from the " + noti.title + " appointment", "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded})
+                this.showNoti.push({"message" : "You are removed from the " + noti.title + " appointment", "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded, "type" : "CREATE_APP", "deletedDate" : "", "title" : ""})
             } else if(noti.notiType == "USER_ADD" && noti.employee_id == this.loginId) {
-                this.showNoti.push({"message" : "You are added the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded})
+                this.showNoti.push({"message" : "You are added the appointment :" + noti.title, "appId" : noti.appointment_id, "notiId" : noti.id, "isReaded" : noti.isReaded, "type" : "CREATE_APP", "deletedDate" : "", "title" : ""})
             }
         }
     }
