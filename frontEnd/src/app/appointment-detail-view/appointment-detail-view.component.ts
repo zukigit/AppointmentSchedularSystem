@@ -62,17 +62,7 @@ export class AppointmentDetailViewComponent implements OnInit {
 
   //update
   updateApp() {
-      this.appService.viewOnlyAppointmentById(this.id).subscribe(
-        data=>{
-          this.app = data
-          if (this.app.createUser.employee_id != this.loginId) {
-            alert("can't update other user")
-          }else{
-            this.router.navigate(['admin/update-app',this.id])
-          }
-        }
-      )
-      
+    this.router.navigate(['admin/update-app',this.id])
   }
    
   //delete
