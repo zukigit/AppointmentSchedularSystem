@@ -6,6 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,9 @@ public class UserImageController {
 	private UserImageService userImageService;
 	
 	@PostMapping("/uploadImage")
+	@PreAuthorize("hasRole('ADMIN') "
+			+ "|| hasRole('USER') "
+			+ "|| hasRole('TRAINEE')")
 	public ResponseEntity<byte[]> saveImage(@RequestParam("image") MultipartFile image, @RequestParam("userId") String userId) throws IOException {
 		User user = userService.getUserById(userId);
 		UserImage oldImage = null;
@@ -56,6 +60,9 @@ public class UserImageController {
 	}
 	
 	@GetMapping("/images")
+	@PreAuthorize("hasRole('ADMIN') "
+			+ "|| hasRole('USER') "
+			+ "|| hasRole('TRAINEE')")
 	public ResponseEntity<byte[]> getImage(@RequestParam String userId) throws IOException{
 		
 		UserImage userImage = userService.getUserById(userId).getUserImage();
@@ -69,6 +76,9 @@ public class UserImageController {
 	}
 	
 	@DeleteMapping("/images/{userId}")
+	@PreAuthorize("hasRole('ADMIN') "
+			+ "|| hasRole('USER') "
+			+ "|| hasRole('TRAINEE')")
 	public ResponseEntity<String> deletImage(@PathVariable String userId){
 		User user = userService.getUserById(userId);
 		UserImage userImage = user.getUserImage();
