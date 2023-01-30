@@ -9,6 +9,7 @@ import * as Chartist from 'chartist';
 import { data } from 'jquery';
 import { DatePipe } from '@angular/common';
 import * as e from 'express';
+import { ReportService } from 'app/services/report.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +18,7 @@ import * as e from 'express';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(private router: Router, private userServices : UserService , private appService : AppointmentService,
+  constructor(private router: Router, private userServices : UserService , private appService : AppointmentService,private reportService : ReportService,
     private datePipe : DatePipe) { }
 
   departmentAndTeam : any ;
@@ -202,5 +203,15 @@ export class DashboardComponent implements OnInit {
           console.log(this.showDataApp.length+"app date");
     
   }
+
+  getAllApp(){
+
+    this.reportService.getAllApp().subscribe(data =>
+      console.log(data)
+     );
+
+
+
+}
 
 }

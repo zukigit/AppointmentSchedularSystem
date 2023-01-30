@@ -7,6 +7,7 @@ import { Team } from 'app/model/team';
 import { User } from 'app/model/user';
 import { AppointmentService } from 'app/services/appointment.service';
 import { UserService } from 'app/services/user.service';
+import { throwIfEmpty } from 'rxjs';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
@@ -101,9 +102,17 @@ export class UpdateAppComponent implements OnInit {
   ngOnInit(): void {
     
     this.getAvaliables();
-    this.alreadyIn();
     this.id = this.route.snapshot.params['id'];
-    this.getAppDetails()
+    
+    setTimeout(() => {
+      this.getAppDetails();
+    }, 1000);
+
+    setTimeout(() => {
+      this.doReset()
+    }, 1500);
+    
+    this.populateList();
     this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
     // this.alreadyIn();
     this.userServices.getTeam().subscribe(
@@ -124,22 +133,17 @@ export class UpdateAppComponent implements OnInit {
         this.app = res
         this.app.schedules = res.schedules
 
-        // for(let x of res.schdule) {
-          console.log("dd " + this.app.schedules)
-        // }
-        this.UnassignDevice = this.app.employee
-        this.confirmedUsers = this.UnassignDevice
-        this.doReset()
+        console.log("emp length" + this.app.employee.length)
+        for(let i = 0; i < this.app.employee.length; i++) {
+          this.UnassignDevice.push({"name" : this.app.employee[i].name, "department_name": this.app.employee[i].team.department.department_name,"team_name": this.app.employee[i].team.team_name})
+          
+        }
+        console.log("datat " + this.UnassignDevice)
+       
         this.getAvaliables();
       },
       error => console.log("get app error " + error));
-  }
-
-  alreadyIn() {
-    this.appService.getAppointmentById(this.id).subscribe(
-      data => this.UnassignDevice = data
-    )
-    console.log(this.UnassignDevice)
+      
   }
 
   isOptionDisabled(value: string): boolean {
@@ -186,13 +190,14 @@ export class UpdateAppComponent implements OnInit {
   }
   private populateList() {
     this.key = 'employee_id';
-    this.display = ['name','department_name','team_name'];
+    this.display = ['name','department_name','team_name']
     this.keepSorted = true;
     this.confirmed = this.UnassignDevice;
     this.confirmedUsers = this.confirmed;
-    this.source = [...this.AssignDevice, ...this.confirmed,...this.UnassignDevice];  
+    this.source = [...this.AssignDevice, ...this.confirmed, ...this.UnassignDevice, ...this.confirmedUsers];
+    console.log(this.confirmed + "source")
 
-    this.user.push(this.AssignDevice)
+    // this.user.push(this.AssignDevice)
     
     console.log("populate lsit confirm user " + this.confirmedUsers)
     

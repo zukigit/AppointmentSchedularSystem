@@ -135,12 +135,15 @@ public class UserController {
 	}
 
 	@GetMapping("/userDetail")
+	@PreAuthorize("hasRole('ADMIN')")
 	public List<UserDetail> userDetail() {
 		return userService.userDetail();
 	}
 
 	@GetMapping("/updatePhoneNumber")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') "
+			+ "|| hasRole('USER') "
+			+ "|| hasRole('TRAINEE')")
 	public String updatePhone(@RequestParam String userId, @RequestParam String newPhoneNumber) {
 
 		User user = userService.getUserById(userId);
@@ -150,7 +153,9 @@ public class UserController {
 	}
 
 	@PostMapping("/changePassword")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') "
+			+ "|| hasRole('USER') "
+			+ "|| hasRole('TRAINEE')")
 	public ResponseEntity<Boolean> changePassword(@RequestBody ChangePasswordModel changePasswordModel) {
 		User user = userService.getUserById(changePasswordModel.getUserId());
 		if (passwordEncoder.matches(changePasswordModel.getOldPassword(), user.getPassword())) {
@@ -163,6 +168,9 @@ public class UserController {
 	}
 
 	@PostMapping("/getAvaliableEmployees")
+	@PreAuthorize("hasRole('ADMIN') "
+			+ "|| hasRole('USER') "
+			+ "|| hasRole('TRAINEE')")
 	public List<UserDetail> getAvaliableEmployee(@RequestBody List<Schedule> schedules) {
 		List<Appointment> appointments = appointmentService.getByScheduleList(schedules);
 		List<User> unavaliUsers = new ArrayList<>();

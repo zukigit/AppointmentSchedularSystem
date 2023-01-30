@@ -125,7 +125,7 @@ export class UsernavbarComponent implements OnInit {
                 text: "Deleted date" + deletedDate + " Title:" + title,   
               })
         } else {
-            this.router.navigate(['/user/appointment_detail_view_byuser', appId]);
+            this.router.navigate(['/user/appointment_detail_view_byuser', appId]).then (() => window.location.reload()),10000;
         }
     }
 

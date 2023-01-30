@@ -77,7 +77,7 @@ export class DailyviewbyuserComponent implements OnInit {
 
               let dateStr2: string = r.date + " " + r.end_time + ":00";
               let myDate2 = new Date(dateStr2);
-              if (myDate2 <= this.currentDate) {
+              if (myDate <= this.currentDate) {
                 //alert("Schedule are finished,can't edit!!!");
                 this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type,color:"#6e6b6c" })
               } else {
@@ -265,7 +265,7 @@ export class DailyviewbyuserComponent implements OnInit {
                         let dateStr2: string = r.date + " " + r.end_time + ":00";
                         let myDate2 = new Date(dateStr2);
                         console.log("title searc is " + myDate);
-                        if (myDate2 <= this.currentDate) {
+                        if (myDate <= this.currentDate) {
                           //alert("Schedule are finished,can't edit!!!");
                           this.calEvent.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type,color:"#6e6b6c" })
                         } else {

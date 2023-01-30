@@ -192,7 +192,9 @@ export class AppRegisterComponent implements OnInit {
 
     this.appService.createAppointment(this.app).subscribe(
       data => {
-        this.uploadFiles(data);
+        if(this.files.length != 0) {
+          this.uploadFiles(data);
+        }
         Swal.fire('Appointment Created!!', 'Appointment added succesfully!', 'success');
         this.router.navigate(['admin/dashboard']);
       },

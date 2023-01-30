@@ -118,7 +118,7 @@ export const ROUTES = [
                 text: "Deleted date" + deletedDate + " Title:" + title,   
               })
         } else {
-            this.router.navigate(['/admin/appointment_detail_view', appId]);
+            this.router.navigate(['/admin/appointment_detail_view', appId]).then (() => window.location.reload()),10000;
         }
     }
 

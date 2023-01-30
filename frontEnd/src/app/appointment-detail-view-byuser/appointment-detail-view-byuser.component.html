@@ -79,11 +79,12 @@
         <div class="col-lg-2" style="margin-left:7%;">
           <p>Date</p>
         </div>
-        <div *ngFor="let data of res.schedules" class="col-lg-5">
-          <span *ngIf="data.date == date" style="color: darkblue;" class="ss">{{data.date}}</span>
-          <span *ngIf="data.date != date" class="ss">{{data.date}}</span>
+        <div class="col-lg-5">
+        <div *ngFor="let data of res.schedules"  style="display: inline;" >
+          <span *ngIf="data.date == date" style="color: darkblue;" class="ss">{{data.date}}, </span>
+          <span *ngIf="data.date != date" class="ss">{{data.date}}, </span>
         </div>
-
+        </div>
       </div>
 
       <!-- Privacy -->

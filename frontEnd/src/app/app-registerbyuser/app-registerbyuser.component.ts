@@ -21,10 +21,11 @@ export class AppRegisterbyuserComponent implements OnInit {
   app: AppointmentRegister = new AppointmentRegister()
   schedule: Schdule;
   currentDate: any = new Date();
-  sDate: any = new Date()
-  sTime:any = new Date();
   todayDate = new Date();
   currentHour = this.todayDate.getHours().toString();
+
+  sDate: any = new Date()
+  sTime:any = new Date();
   options = [
     { value: '07', label: '07' },
     { value: '08', label: '08' },
@@ -53,7 +54,6 @@ export class AppRegisterbyuserComponent implements OnInit {
   department: any = [];
   team: any = [];
   user: any = [];
-
   startTime: string;
   endTime: string;
 
@@ -73,13 +73,19 @@ export class AppRegisterbyuserComponent implements OnInit {
   endHour: string;
   endMinute: string;
 
+  temStartHour: string;
+  temStartMinute: string;
+
+  temEndHour: string;
+  temEndMinute: string;
+
   name = 'Angular';
   private sourceDevice: AssignedDeviceCode[] = [];
   private confirmedUsers: Array<any>;
   tab = 1;
   keepSorted = true;
   key: string;
-  display: string;
+  display: any=[];
   filter = false;
   source: AssignedDeviceCode[] = [];
   confirmed: UnAssignedDeviceCode[] = [];
@@ -88,12 +94,14 @@ export class AppRegisterbyuserComponent implements OnInit {
   sourceLeft = true;
   files:File[] = [];
   schedules: Schdule[] = [];
+  teamId: string;
+  departmentId: string;
   format: any = { add: 'Add Selected Member', remove: 'Remove Selected Member', all: 'Select All', none: 'Unselect All', direction: 'right-to-left', draggable: true, locale: undefined };
   
   constructor(private userServices: UserService, private datePipe: DatePipe, private appService: AppointmentService,private router: Router ,) { }
 
   ngOnInit(): void {
-
+   
     this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
 
     this.userServices.getTeam().subscribe(
@@ -103,23 +111,18 @@ export class AppRegisterbyuserComponent implements OnInit {
         }
       });
 
-    // this.userServices.getUserDetails().subscribe(
-    //   {
-    //     next: (data) => {
-    //       this.user = data;
-    //     }
-    //   }
-    // )
-  }
+
+      
+    }
 
   isOptionDisabled(value: string): boolean {   
-    // return this.startHour>value ;
     if(this.startMinute === "45"){
       return this.startHour >= value
     }
     else{
       return this.startHour > value
     }
+    
   }
 
   minuteDisable (value: string):boolean{
@@ -138,28 +141,37 @@ export class AppRegisterbyuserComponent implements OnInit {
     });
 
   }
-  //cancel
-  cancel(){
-    this.router.navigate(['admin/dashboard'])
-  }
 
   onSelectTeam(team) {
     this.AssignDevice = this.user.filter(f => {
       return f.team_id == team.target.value
     });
-    console.log(this.AssignDevice);
+    this.doReset();
+  }
+
+  onSelectNewTeam(teamId) {
+    console.log("team id" + teamId)
+    this.AssignDevice = this.user.filter(f => {
+      return f.team_id == teamId
+    });
     this.doReset();
   }
 
   private populateList() {
-    this.key = 'employee_id';
-    this.display = 'name';
+    this.key = 'employee_id'
+    this.display = ['name','department_name','team_name']
+
     this.keepSorted = true;
     this.source = this.AssignDevice;
     this.confirmedUsers = this.UnassignDevice;
     this.confirmed = this.confirmedUsers;
     console.log("source: " + JSON.stringify(this.source));
     console.log("confirmed: " + JSON.stringify(this.confirmed));
+  }
+
+  //cancel
+  cancel(){
+    this.router.navigate(['user/dashboard'])
   }
 
   doReset() {
@@ -172,11 +184,6 @@ export class AppRegisterbyuserComponent implements OnInit {
 
   }
 
-
-  private showLabel(item: any) {
-    return item.deviceCode;
-  }
-
   addAppointment() {
     this.generateSchedules();
     this.app.created_date = this.datePipe.transform(this.currentDate, 'MM/dd/yyyy');
@@ -186,7 +193,9 @@ export class AppRegisterbyuserComponent implements OnInit {
 
     this.appService.createAppointment(this.app).subscribe(
       data => {
-        this.uploadFiles(data);
+        if(this.files.length != 0) {
+          this.uploadFiles(data);
+        }
         Swal.fire('Appointment Created!!', 'Appointment added succesfully!', 'success');
         this.router.navigate(['user/dashboard']);
       },
@@ -222,7 +231,14 @@ export class AppRegisterbyuserComponent implements OnInit {
       if (checkFiles[i].size > sizeLimit) {
           // Display error message to user
           console.log("File too large: " + checkFiles[i].name);
-          alert('File size should be less than 5MB!!');
+          //alert('File size should be less than 5MB!!');
+          
+          Swal.fire({  
+            icon: 'error',  
+            title: 'Failed ',  
+            text: 'File size should be less than 5MB!!',   
+          })
+          
       } else {
           this.files.push(checkFiles[i]);
       }
@@ -240,7 +256,12 @@ export class AppRegisterbyuserComponent implements OnInit {
         // Swal.fire('Added Appointment!!', 'Appointment Added Succesfully!', 'success');
       },
       error=>{
-        Swal.fire('Failed!!', 'Appointment Added Was Failed!', 'fail');
+        //Swal.fire('Failed!!', 'Appointment Added Was Failed!', 'fail');
+        Swal.fire({  
+          icon: 'error',  
+          title: 'Failed ',  
+          text: 'Appointment Added Was Failed!',   
+        })
       }
     );
   }
@@ -249,27 +270,26 @@ export class AppRegisterbyuserComponent implements OnInit {
 
     const start_date = new Date(this.app.start_date);
     const end_date = new Date(this.app.end_date);
-
+    
     for (let d = start_date; d <= end_date; d.setDate(d.getDate() + 1)) {
-      this.schedule = new Schdule();
-      this.schedule.date = this.datePipe.transform(d, 'MM/dd/yyyy');
-      this.app.start_time = this.startHour + ":" + this.startMinute;
-      this.app.end_time = this.endHour + ":" + this.endMinute;
-      this.schedule.start_time = this.app.start_time;
-      this.schedule.end_time = this.app.end_time;
-      this.schedules.push(this.schedule);
+      let schedule = new Schdule();
+      schedule.date = this.datePipe.transform(d, 'MM/dd/yyyy');
+      schedule.start_time = this.startHour + ":" + this.startMinute;
+      schedule.end_time = this.endHour + ":" + this.endMinute;
+      this.schedules.push(schedule);
     }
   }
 
   getAvaliables() {
     this.user.length = 0;
+    this.UnassignDevice.length = 0;
     this.generateSchedules();
     this.userServices.getAvaliables(this.schedules).subscribe(
       {
         next: (data) => {
-          this.schedules.length = 0;
           this.user = data;
-          console.log("user size" + this.user.length);
+          this.schedules.length = 0;
+          this.onSelectNewTeam(this.teamId);
         }
       }
     );
