@@ -13,36 +13,36 @@
         <div class="user-details">
 
           <div class="input-box">
-            <span class="details" style="width: calc(100% /2  - 20px); font-weight: 650;">Title</span>
-            <textarea name="comments" [(ngModel)]="app.title" id="comments"
-              style="font-family:sans-serif;font-size: 15px; font-weight: 600;">
+            <span class="details" style="width: calc(100% /2  - 20px); font-weight: 650;" p>Title</span>
+            <textarea name="comments" [(ngModel)]="app.title" id="comments" 
+              style="font-family:sans-serif;font-size: 15px; font-weight: 400;" >
             </textarea>
           </div>
+          
           <div class="input-box">
-            <span class="details" style="width: calc(100% /2  - 20px); font-weight: 650;">Description</span>
+            <span class="details" style="width: calc(100% /2  - 20px); font-weight: 650;" >Description</span>
             <textarea name="comments" [(ngModel)]="app.description" id="comments"
-              style="font-family:sans-serif;font-size: 15px; font-weight: 600;">
+              style="font-family:sans-serif;font-size: 15px; font-weight: 400;">
             </textarea>
+          </div>
+
+          <div class="input-box">
+            <span class="details" style="font-weight: 650;">Start Date</span>
+            <input type="date" (change)="onSelect($event)" min="{{currentDate | date:'yyyy-MM-dd'}}"
+              [(ngModel)]="app.start_date" name="date" equired>
+          </div>
+          <div class="input-box">
+            <span class="details" style="font-weight: 650;">End Date</span>
+            <input type="date" min="{{sDate | date:'yyyy-MM-dd'}}" [(ngModel)]="app.end_date" name="date" required>
           </div>
 
           <div class="input-box">
             <span class="details" style="width: calc(100% /2  - 20px); font-weight: 650;">Start Time</span>
 
             <select [(ngModel)]="startHour" style="width: calc(100% /2  );">
-              <option selected disabled> hour </option>
-              <option value="07">07</option>
-              <option value="08">08</option>
-              <option value="09">09</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
-              <option value="13">13</option>
-              <option value="14">14</option>
-              <option value="15">15</option>
-              <option value="16">16</option>
-              <option value="17">17</option>
-              <option value="18">18</option>
-              <option value="19">19</option>
+              <option selected="true" disabled>Select start hour</option>
+              <option *ngFor="let option of options" [value]="option.value" >
+                {{ option.label }}</option>
             </select>
 
             <select style="width: calc(100% /2  );" [(ngModel)]="startMinute">
@@ -65,11 +65,7 @@
             </select>
 
             <select style="width: calc(100% /2  );" [(ngModel)]="endMinute">
-              <!-- <option selected disabled> minutes </option>
-              <option value="00">00</option>
-              <option value="15">15</option>
-              <option value="30">30</option>
-              <option value="45">45</option> -->
+             
               <option *ngFor="let option of minutesOptions" [value]="option.value"
                 [disabled]="minuteDisable(option.value)">{{ option.label }}</option>
             </select>
@@ -77,30 +73,26 @@
           </div>
 
 
-          <div class="input-box">
-            <span class="details" style="font-weight: 650;">Start Date</span>
-            <input type="date" (change)="onSelect($event)" min="{{currentDate | date:'yyyy-MM-dd'}}"
-              [(ngModel)]="app.start_date" name="date" required>
-          </div>
-          <div class="input-box">
-            <span class="details" style="font-weight: 650;">End Date</span>
-            <input type="date" min="{{sDate | date:'yyyy-MM-dd'}}" [(ngModel)]="app.end_date" name="date" required>
-          </div>
+          
 
 
 
 
           <div class="w3-show-inline-block"
-            style="display: inline; margin-bottom: 20px; float:right;margin-left:36px;width: calc(100%  - 20px);">
-            <div class="w3-bar">
-              <input type="button" (click)="getAvaliables()" class="w3-btn " value="Check Avaliable Employee"
-                style="background-color: #435d7d; color:white; border-radius: 3px; width:250px;">
-                <p class="details" style="display: inline; margin-bottom: 30px"> Available Employee Count - 0</p>
-            </div>
+            style="display: inline; margin-bottom: 20px;margin-left:0.5%;width: calc(100%  - 20px);">
+            <!-- <div class="w3-bar"> -->
+              <!-- <input type="button" (click)="getAvaliables()" class="w3-btn " value="Check Avaliable Employee"
+                style="background-color: #435d7d; color:white; border-radius: 3px; width:250px;"> -->
+
+
+
+            <!-- </div> -->
+            <p class="button1" (click)="getAvaliables()">Check Available Employee</p> 
+            <p class="details" style="display: inline; margin-bottom: 30px"> Available Employee Count - {{user.length}}</p>
           </div>
+          
 
-
-
+          
           <div class="input-box">
             <span class="details" style="font-weight: 650; margin-top: 4%;">Department</span>
             <select class="selectDept" (change)="onSelectDept($event)">
@@ -111,7 +103,7 @@
           </div>
           <div class="input-box">
             <span class="details" style="font-weight: 650; margin-top: 4%;">Team</span>
-            <select [(ngModel)]="user.team_id" class="selectTeam" (change)="onSelectTeam($event)">
+            <select class="selectTeam" (change)="onSelectTeam($event)">
               <option selected>Select Team</option>
               <option *ngFor="let teams of tempTeam" value="{{teams.team_id}}" selected="false">{{teams.team_name}}
               </option>
@@ -136,7 +128,7 @@
           </dual-list>
 
           <div class="form-item" style="width: calc(100%  - 20px);">
-            <label class="details" for="gender" style="font-weight: 600; margin-top: 4%;">Set Privacy:</label>
+            <label class="details" for="gender" style="font-weight: 650; margin-top: 4%; font-size: 15px;">Set Privacy:</label>
             <div class="genders">
               <input type="radio" [(ngModel)]="app.type"
                 name="gender" id="gender" value="PUBLIC" style="margin: 10px;
@@ -187,10 +179,10 @@
             <!-- <input type="submit" class="w3-btn" value="Add"> -->
             <!-- <input type="submit" class="register" value="Add">
         <input type="button" class="cancel" data-dismiss="modal" value="Cancel"> -->
-            <input type="button" (click)="getAvaliables()" class="w3-btn w3-red" value="Cancel"
-              style=" border-radius: 3px; margin-right: 10px; width:250px;">
+            <input type="button" class="w3-btn w3-red" value="Cancel"
+              style=" border-radius: 10px; margin-right: 10px; width:250px; font-weight: bold;">
             <input type="submit" class="w3-btn " value="Add"
-              style="background-color: #435d7d; color:white; border-radius: 3px; width:250px;">
+              style="background-color: #435d7d; color:white; border-radius: 10px; width:250px;font-weight:bold;">
           </div>
         </div>
       </form>

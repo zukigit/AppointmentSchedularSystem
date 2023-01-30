@@ -23,6 +23,8 @@ export class AppRegisterbyuserComponent implements OnInit {
   currentDate: any = new Date();
   sDate: any = new Date()
   sTime:any = new Date();
+  todayDate = new Date();
+  currentHour = this.todayDate.getHours().toString();
   options = [
     { value: '07', label: '07' },
     { value: '08', label: '08' },
@@ -191,6 +193,21 @@ export class AppRegisterbyuserComponent implements OnInit {
   onSelect(event) {
     this.sDate = new Date(this.app.start_date)
     // do something with the selected text here
+  //  console.log(this.app.start_date+"  "+this.currentDate +" " + this.sDate);
+
+    let tDate  = this.datePipe.transform(this.currentDate, 'yyyy/MM/dd');
+    this.sDate = this.datePipe.transform(this.app.start_date,'yyyy/MM/dd')
+
+    console.log(this.sDate)
+    console.log(tDate)
+    if(this.sDate==tDate){
+      console.log("filter")
+      this.options=this.options.filter((obj)=>{
+        return obj.value >= this.currentHour
+      });
+      
+    }
+    console.log(this.options);
   }
 
   checkFiles(event) {

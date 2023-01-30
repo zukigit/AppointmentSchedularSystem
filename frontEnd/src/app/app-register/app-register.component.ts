@@ -8,6 +8,8 @@ import { AppointmentService } from 'app/services/appointment.service';
 import { UserService } from 'app/services/user.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { Route, Router } from '@angular/router';
+import { retry } from 'rxjs';
+
 
 @Component({
   selector: 'app-app-register',
@@ -18,6 +20,9 @@ export class AppRegisterComponent implements OnInit {
   app: AppointmentRegister = new AppointmentRegister()
   schedule: Schdule;
   currentDate: any = new Date();
+  todayDate = new Date();
+  currentHour = this.todayDate.getHours().toString();
+
   sDate: any = new Date()
   sTime:any = new Date();
   options = [
@@ -95,7 +100,7 @@ export class AppRegisterComponent implements OnInit {
   constructor(private userServices: UserService, private datePipe: DatePipe, private appService: AppointmentService,private router: Router ,) { }
 
   ngOnInit(): void {
-
+   
     this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
 
     this.userServices.getTeam().subscribe(
@@ -104,7 +109,10 @@ export class AppRegisterComponent implements OnInit {
           this.team = data;
         }
       });
-  }
+
+
+      
+    }
 
   isOptionDisabled(value: string): boolean {   
     if(this.startMinute === "45"){
@@ -113,6 +121,7 @@ export class AppRegisterComponent implements OnInit {
     else{
       return this.startHour > value
     }
+    
   }
 
   minuteDisable (value: string):boolean{
@@ -189,6 +198,21 @@ export class AppRegisterComponent implements OnInit {
   onSelect(event) {
     this.sDate = new Date(this.app.start_date)
     // do something with the selected text here
+  //  console.log(this.app.start_date+"  "+this.currentDate +" " + this.sDate);
+
+    let tDate  = this.datePipe.transform(this.currentDate, 'yyyy/MM/dd');
+    this.sDate = this.datePipe.transform(this.app.start_date,'yyyy/MM/dd')
+
+    console.log(this.sDate)
+    console.log(tDate)
+    if(this.sDate==tDate){
+      console.log("filter")
+      this.options=this.options.filter((obj)=>{
+        return obj.value >= this.currentHour
+      });
+      
+    }
+    console.log(this.options);
   }
 
   checkFiles(event) {
