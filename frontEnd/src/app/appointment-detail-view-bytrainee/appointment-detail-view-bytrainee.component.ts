@@ -73,9 +73,9 @@ export class AppointmentDetailViewBytraineeComponent implements OnInit {
   }
 
   //update
-  updateApp() {
-    this.router.navigate(['trainee/update-app',this.id])
-  }
+  // updateApp() {
+  //   this.router.navigate(['trainee/update-app',this.id])
+  // }
    
   //delete
   // deleteApp(){
@@ -88,29 +88,29 @@ export class AppointmentDetailViewBytraineeComponent implements OnInit {
   //   )
   // }
 
-  deleteApp(){
-    Swal.fire({
-      title: "Are you sure want to delete?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, delete it!"
-  }).then((result) => {
-    if (result.value) {this.appService.deleteApp(this.id,this.date).subscribe(
-          data => {
-            this.router.navigate(['trainee/dashboard'])
-            Swal.fire({
-              title: "Successfully Deleted",
-              text: "Appointment is deleted",
-              icon: "success",
-          });
-        },
-          // error => console.log("fail delete")
-        )
-    }
-})
+//   deleteApp(){
+//     Swal.fire({
+//       title: "Are you sure want to delete appointment from " + this.date + " ? ",
+//       icon: "warning",
+//       showCancelButton: true,
+//       confirmButtonText: "Yes, delete it!"
+//   }).then((result) => {
+//     if (result.value) {this.appService.deleteApp(this.id,this.date).subscribe(
+//           data => {
+//             this.router.navigate(['trainee/dashboard'])
+//             Swal.fire({
+//               title: "Successfully Deleted",
+//               text: "Appointment is deleted",
+//               icon: "success",
+//           });
+//         },
+//           // error => console.log("fail delete")
+//         )
+//     }
+// })
     
     
-  }
+//   }
 
   downloadFile(file) {      
     this.appService.fileDownload(file.file_id).subscribe(

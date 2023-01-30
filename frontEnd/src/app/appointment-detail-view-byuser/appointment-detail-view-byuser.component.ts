@@ -94,7 +94,7 @@ export class AppointmentDetailViewByuserComponent implements OnInit {
 
   deleteApp(){
     Swal.fire({
-      title: "Are you sure want to delete?",
+      title: "Are you sure want to delete appointment from " + this.date + " ? ",
       icon: "warning",
       showCancelButton: true,
       confirmButtonText: "Yes, delete it!"

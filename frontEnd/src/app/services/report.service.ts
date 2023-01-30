@@ -31,9 +31,13 @@ export class ReportService {
     return this.http.get('http://localhost:8080/api/v1/todayAppointment', this.header);
   }
 
-  getAllApp(){
-    alert("report User Service ok")
-    return this.http.get('http://localhost:8080/api/v1/getAll', this.header);
-  }
+  // getAllApp(){
+  //   alert("report User Service ok")
+  //   return this.http.get('http://localhost:8080/api/v1/getAll', this.header);
+  // }
  
+  getAllApp(){
+    alert("Saved on Desktop ok")
+    return this.http.get('http://localhost:8080/api/v1/getAllApp', this.header);
+  }
 }
