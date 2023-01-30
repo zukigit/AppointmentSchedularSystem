@@ -113,6 +113,10 @@ export class UpdateAppComponent implements OnInit {
         }
       });
   }
+  //cancel
+  cancel(){
+    this.router.navigate(['admin/appointment_detail_view',this.id])
+  }
 
   getAppDetails(){
     this.appService.viewOnlyAppointmentById(this.id).subscribe(

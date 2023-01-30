@@ -150,9 +150,9 @@
             <!-- <input type="submit" class="w3-btn" value="Add"> -->
             <!-- <input type="submit" class="register" value="Add">
         <input type="button" class="cancel" data-dismiss="modal" value="Cancel"> -->
-            <input type="button" class="w3-btn w3-red" value="Cancel"
+            <input type="button" (click)="cancel()" class="w3-btn w3-red" value="Cancel"
               style=" border-radius: 10px; margin-right: 10px; width:250px; font-weight: bold;">
-            <input type="submit" [disabled]="form.invalid" class="w3-btn " value="Update"
+            <input type="submit" [disabled]="form.invalid" class="w3-btn " value="Upd ate"
               style="background-color: #435d7d; color:white; border-radius: 10px; width:250px;font-weight:bold;">
           </div>
         </div>

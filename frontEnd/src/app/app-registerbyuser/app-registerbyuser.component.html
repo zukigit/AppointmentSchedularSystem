@@ -14,16 +14,20 @@
 
           <div class="input-box">
             <span class="details" style="width: calc(100% /2  - 20px); font-weight: 650;" p>Title</span>
-            <textarea name="comments" [(ngModel)]="app.title" id="comments" 
+            <textarea required name="title" [(ngModel)]="app.title" id="title" 
               style="font-family:sans-serif;font-size: 15px; font-weight: 400;" >
             </textarea>
+            <span
+            *ngIf="form.controls['title'].invalid && (form.controls['title'].dirty || form.controls['title'].touched)"></span>
           </div>
           
           <div class="input-box">
             <span class="details" style="width: calc(100% /2  - 20px); font-weight: 650;" >Description</span>
-            <textarea name="comments" [(ngModel)]="app.description" id="comments"
+            <textarea required name="description" [(ngModel)]="app.description" id="description"
               style="font-family:sans-serif;font-size: 15px; font-weight: 400;">
             </textarea>
+            <span
+            *ngIf="form.controls['description'].invalid && (form.controls['description'].dirty || form.controls['description'].touched)"></span>
           </div>
 
           <div class="input-box">
@@ -40,7 +44,7 @@
             <span class="details" style="width: calc(100% /2  - 20px); font-weight: 650;">Start Time</span>
 
             <select [(ngModel)]="startHour" style="width: calc(100% /2  );">
-              <option selected="true" disabled>Select start hour</option>
+              <option >Select start hour</option>
               <option *ngFor="let option of options" [value]="option.value" >
                 {{ option.label }}</option>
             </select>
@@ -59,7 +63,7 @@
             <span class="details" style="width: calc(100% /2  - 20px); font-weight: 650;">End Time</span>
 
             <select style="width: calc(100% /2  );" [(ngModel)]="endHour">
-              <option selected="true" disabled>Select end hour</option>
+              <option >Select end hour</option>
               <option *ngFor="let option of options" [value]="option.value" [disabled]="isOptionDisabled(option.value)">
                 {{ option.label }}</option>
             </select>
@@ -122,7 +126,7 @@
 
 
 
-          <dual-list [sort]="keepSorted" [source]="source" [key]="key" [display]="display" [filter]="filter"
+          <dual-list required  [sort]="keepSorted" [source]="source" [key]="key" [display]="display" [filter]="filter"
             [destination]="confirmed" style=" color: balck;font-weight: bold;font-display: #435d7d;  width:100%"
             [format]="format" [disabled]="disabled">
           </dual-list>
@@ -179,9 +183,9 @@
             <!-- <input type="submit" class="w3-btn" value="Add"> -->
             <!-- <input type="submit" class="register" value="Add">
         <input type="button" class="cancel" data-dismiss="modal" value="Cancel"> -->
-            <input type="button" class="w3-btn w3-red" value="Cancel"
+            <input (click)="cancel()" type="button" class="w3-btn w3-red" value="Cancel"
               style=" border-radius: 10px; margin-right: 10px; width:250px; font-weight: bold;">
-            <input type="submit" class="w3-btn " value="Add"
+            <input type="submit" [disabled]="form.invalid" class="w3-btn " value="Add"
               style="background-color: #435d7d; color:white; border-radius: 10px; width:250px;font-weight:bold;">
           </div>
         </div>
