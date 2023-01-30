@@ -45,7 +45,7 @@ export class AppointmentDetailViewComponent implements OnInit {
         if(res.type != "PUBLIC") {
           this.appService.checkUserInclude(this.loginId, res.appointment_id).subscribe(
             (data: any) => {
-              if (data) {
+              if (data || this.isCreateUser) {
                 this.res = res;
                 this.files = res.files;
                 this.employee = res.employee;
