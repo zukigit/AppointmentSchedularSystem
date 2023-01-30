@@ -145,33 +145,14 @@ export class WeeklyviewComponent implements OnInit {
           let appType = arg.event.groupId;
           let start = this.datePipe.transform(arg.event.start, 'MM/dd/yyyy');
 
-          if (appType != "PUBLIC") {
-            this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
-              (data: any) => {
-                if (data) {
-                  this.router.navigate(['/admin/appointment_detail_view', id], { queryParams: { data: JSON.stringify(start)}});
-                }
-              }, error => {
-                // alert("this appointment is private and you are not in there");
-                Swal.fire({  
-                  icon: 'error',  
-                  title: 'Assess Denied',  
-                  text: 'This appointment is private and you are not in there',   
-                }) 
-              }
-            );
+          if (arg.event.start <= this.currentDate) {
+            Swal.fire({  
+              icon: 'error',  
+              title: 'Assess Denied',  
+              text: 'Appointment is over. Can not edit!!!',   
+            }) 
           } else {
-            if (arg.event.end <= this.currentDate) {
-              // alert("Schedule are finished,can't edit!!!");
-              Swal.fire({  
-                icon: 'error',  
-                title: 'Assess Denied',  
-                text: 'Schedule are finished, Can not edit!!!',   
-              }) 
-            } else {
-              this.router.navigate(['/admin/appointment_detail_view', id], { queryParams: { data: JSON.stringify(start)}});
-            }
-            //this.router.navigate(['/view_only_appointment', id])
+            this.router.navigate(['/admin/appointment_detail_view', id], { queryParams: { data: JSON.stringify(start)}});
           }
         },
 
@@ -226,33 +207,14 @@ export class WeeklyviewComponent implements OnInit {
           let appType = arg.event.groupId;
           let start = this.datePipe.transform(arg.event.start, 'MM/dd/yyyy');
 
-          if (appType != "PUBLIC") {
-            this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
-              (data: any) => {
-                if (data) {
-                  this.router.navigate(['/admin/appointment_detail_view', id], { queryParams: { data: JSON.stringify(start)}});
-                }
-              }, error => {
-                // alert("this appointment is private and you are not in there")
-                Swal.fire({  
-                  icon: 'error',  
-                  title: 'Assess Denied',  
-                  text: 'This appointment is private and you are not in there',   
-                }) 
-              }
-            );
+          if (arg.event.start <= this.currentDate) {
+            Swal.fire({  
+              icon: 'error',  
+              title: 'Assess Denied',  
+              text: 'Appointment is over. Can not edit!!!',   
+            }) 
           } else {
-            if (arg.event.end <= this.currentDate) {
-              // alert("Schedule are finished,can't edit!!!");
-              Swal.fire({  
-                icon: 'error',  
-                title: 'Assess Denied',  
-                text: 'Schedule are finished, Can not edit!!!',   
-              }) 
-            } else {
-              this.router.navigate(['/admin/appointment_detail_view', id], { queryParams: { data: JSON.stringify(start)}});
-            }
-            //this.router.navigate(['/view_only_appointment', id])
+            this.router.navigate(['/admin/appointment_detail_view', id], { queryParams: { data: JSON.stringify(start)}});
           }
         },
 
