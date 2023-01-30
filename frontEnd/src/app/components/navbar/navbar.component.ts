@@ -116,7 +116,7 @@ export class NavbarComponent implements OnInit {
                 text: "Deleted in " + deletedDate +' and Title was ' + title, 
               })
         } else {
-            this.router.navigate(['/admin/appointment_detail_view', appId]);
+            this.router.navigate(['/admin/appointment_detail_view', appId]).then (() => window.location.reload()),10000;
         }
     }
 
