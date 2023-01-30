@@ -157,7 +157,7 @@ export class WeeklyviewbyuserComponent implements OnInit {
               }
             );
           } else {
-            if (arg.event.end <= this.currentDate) {
+            if (arg.event.start <= this.currentDate) {
               // alert("Schedule are finished,can't edit!!!");
               Swal.fire({  
                 icon: 'error',  
@@ -237,7 +237,7 @@ export class WeeklyviewbyuserComponent implements OnInit {
               }
             );
           } else {
-            if (arg.event.end <= this.currentDate) {
+            if (arg.event.start <= this.currentDate) {
               // alert("Schedule are finished,can't edit!!!");
               Swal.fire({  
                 icon: 'error',  

@@ -145,7 +145,7 @@ export class WeeklyviewComponent implements OnInit {
           let appType = arg.event.groupId;
           let start = this.datePipe.transform(arg.event.start, 'MM/dd/yyyy');
 
-          if (arg.event.end <= this.currentDate) {
+          if (arg.event.start <= this.currentDate) {
             Swal.fire({  
               icon: 'error',  
               title: 'Assess Denied',  
@@ -207,7 +207,7 @@ export class WeeklyviewComponent implements OnInit {
           let appType = arg.event.groupId;
           let start = this.datePipe.transform(arg.event.start, 'MM/dd/yyyy');
 
-          if (arg.event.end <= this.currentDate) {
+          if (arg.event.start <= this.currentDate) {
             Swal.fire({  
               icon: 'error',  
               title: 'Assess Denied',  
