@@ -136,7 +136,7 @@ export class DailyviewComponent implements OnInit {
               }
             );
           } else {
-            if (arg.event.end <= this.currentDate) {
+            if (arg.event.start <= this.currentDate) {
               //alert("Schedule are finished,can't edit!!!");
               Swal.fire({  
                 icon: 'error',  
@@ -211,7 +211,7 @@ export class DailyviewComponent implements OnInit {
                   let id = arg.event.id;
                   let appType = arg.event.groupId;
                   let start = this.datePipe.transform(arg.event.start, 'MM/dd/yyyy');
-                  if (arg.event.end <= this.currentDate) {
+                  if (arg.event.start <= this.currentDate) {
                     Swal.fire({  
                       icon: 'error',  
                       title: 'Assess Denied',  
