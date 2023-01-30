@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ThirdPartyDraggable } from '@fullcalendar/interaction';
 import { AppointmentRegister } from 'app/model/appointment-register';
 import { Schdule } from 'app/model/schdule';
 import { Team } from 'app/model/team';
@@ -84,7 +85,7 @@ export class UpdateAppComponent implements OnInit {
   tab = 1;
   keepSorted = true;
   key: string;
-  display: any =[];
+  display: any = [];
   filter = false;
   source: AssignedDeviceCode[] = [];
   confirmed: UnAssignedDeviceCode[] = [];
@@ -100,18 +101,13 @@ export class UpdateAppComponent implements OnInit {
   constructor(private userServices: UserService, private route: ActivatedRoute, private datePipe: DatePipe, private appService: AppointmentService, private router: Router,) { }
 
   ngOnInit(): void {
-    
+
     this.getAvaliables();
     this.id = this.route.snapshot.params['id'];
-    
-    setTimeout(() => {
       this.getAppDetails();
-    }, 1000);
-
     setTimeout(() => {
-      this.doReset()
+      
     }, 1500);
-    
     this.populateList();
     this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
     // this.alreadyIn();
@@ -123,27 +119,39 @@ export class UpdateAppComponent implements OnInit {
       });
   }
   //cancel
-  cancel(){
-    this.router.navigate(['admin/appointment_detail_view',this.id])
+  cancel() {
+    this.router.navigate(['admin/appointment_detail_view', this.id])
   }
 
-  getAppDetails(){
+  getAppDetails() {
     this.appService.viewOnlyAppointmentById(this.id).subscribe(
       (res: any) => {
         this.app = res
         this.app.schedules = res.schedules
 
         console.log("emp length" + this.app.employee.length)
-        for(let i = 0; i < this.app.employee.length; i++) {
-          this.UnassignDevice.push({"name" : this.app.employee[i].name, "department_name": this.app.employee[i].team.department.department_name,"team_name": this.app.employee[i].team.team_name})
-          
+      setTimeout(() => {
+        // for (let i = 0; i < this.app.employee.length; i++) {
+        //   this.UnassignDevice.push({ "name": this.app.employee[i].name, "department_name": this.app.employee[i].team.department.department_name, "team_name": this.app.employee[i].team.team_name })
+
+        // }
+        for(let x of this.app.employee){
+          this.UnassignDevice.push(x)
+          this.confirmed = JSON.parse(JSON.stringify(this.UnassignDevice));
+          console.log("confirmed loop data " + this.confirmed)
         }
+        console.log("user name " + this.user.name)
         console.log("datat " + this.UnassignDevice)
-       
+      }, 1000);
+      
+        setTimeout(() => {
+          this.doReset()
+          
+        }, 1500);
         this.getAvaliables();
       },
       error => console.log("get app error " + error));
-      
+
   }
 
   isOptionDisabled(value: string): boolean {
@@ -184,28 +192,28 @@ export class UpdateAppComponent implements OnInit {
     this.sourceDevice = JSON.parse(JSON.stringify(this.AssignDevice));
     this.confirmed = JSON.parse(JSON.stringify(this.UnassignDevice));
     localStorage.setItem("listbox", this.confirmedUsers.forEach.toString())
-    console.log(this.confirmedUsers);
+    console.log(this.AssignDevice);
     this.populateList();
 
   }
   private populateList() {
     this.key = 'employee_id';
-    this.display = ['name','department_name','team_name']
+    this.display = ['name', 'department_name', 'team_name']
     this.keepSorted = true;
     this.confirmed = this.UnassignDevice;
     this.confirmedUsers = this.confirmed;
-    this.source = [...this.AssignDevice, ...this.confirmed, ...this.UnassignDevice, ...this.confirmedUsers];
+    this.source = [...this.AssignDevice, ...this.UnassignDevice];
     console.log(this.confirmed + "source")
 
     // this.user.push(this.AssignDevice)
-    
+
     console.log("populate lsit confirm user " + this.confirmedUsers)
-    
-    console.log("source: " + JSON.stringify(this.source));
+
+    console.log("source: " +JSON.parse(JSON.stringify(this.source)));
     console.log("confirmed: " + JSON.stringify(this.confirmed));
   }
 
-  
+
 
   //update
   updateAppointment() {
@@ -219,10 +227,10 @@ export class UpdateAppComponent implements OnInit {
       data => {
         this.getAppDetails()
         alert("update success")
-      },error=>console.log("error update")
-      
+      }, error => console.log("error update")
+
     )
-   }
+  }
   //date
   onSelect(event) {
     this.sDate = new Date(this.app.start_date)
@@ -259,10 +267,10 @@ export class UpdateAppComponent implements OnInit {
     );
   }
 
-  removeFile(fileId:number) {
+  removeFile(fileId: number) {
     console.log("remove file is called")
-    for(let i = 0; i < this.app.files.length; i++) {
-      if(this.app.files[i].file_id == fileId) {
+    for (let i = 0; i < this.app.files.length; i++) {
+      if (this.app.files[i].file_id == fileId) {
         this.app.files.splice(i, 1);
       }
     }
