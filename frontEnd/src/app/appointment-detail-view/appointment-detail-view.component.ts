@@ -52,7 +52,6 @@ export class AppointmentDetailViewComponent implements OnInit {
                 this.generatePhotos();
               }
             }, error => {
-              // alert("this appointment is private and you are not in there")
               Swal.fire({  
                 icon: 'error',  
                 title: 'Access Denied',  
