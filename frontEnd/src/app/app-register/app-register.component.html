@@ -99,7 +99,7 @@
           
           <div class="input-box">
             <span class="details" style="font-weight: 650; margin-top: 4%;">Department</span>
-            <select class="selectDept" (change)="onSelectDept($event)">
+            <select [(ngModel)]="departmentId" class="selectDept" (change)="onSelectDept($event)">
               <option selected="true" disabled>Select Department</option>
               <option *ngFor="let departments of department" value="{{departments.department_id}}">
                 {{departments.department_name}}</option>
@@ -107,7 +107,7 @@
           </div>
           <div class="input-box">
             <span class="details" style="font-weight: 650; margin-top: 4%;">Team</span>
-            <select class="selectTeam" (change)="onSelectTeam($event)">
+            <select [(ngModel)]="teamId" class="selectTeam" (change)="onSelectTeam($event)">
               <option selected>Select Team</option>
               <option *ngFor="let teams of tempTeam" value="{{teams.team_id}}" selected="false">{{teams.team_name}}
               </option>
