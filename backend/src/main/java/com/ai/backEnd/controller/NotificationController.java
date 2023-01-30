@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,7 +38,6 @@ public class NotificationController {
 		List<NotificationDTO> notify = new ArrayList<NotificationDTO>();
 		List<String> user_ids = new ArrayList<>(List.of(employee_id));
 		List<Notification> noti = notiService.getNotiByUser(user_ids);
-		
 		for(Notification notification : noti) {
 			NotificationDTO nf = new NotificationDTO();
 			User createUser = new User();
@@ -56,6 +54,7 @@ public class NotificationController {
 			nf.setCreateUser(createUser);
 			nf.setNotiType(notification.getNoti_type());
 			nf.setIsReaded(notification.isReaded());
+			nf.setDeletedDate(notification.getDeletedDate());
 			notify.add(nf);
 		}
 		return new ResponseEntity<List<NotificationDTO>>(notify, HttpStatus.OK);

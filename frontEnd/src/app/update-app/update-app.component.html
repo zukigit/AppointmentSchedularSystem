@@ -14,7 +14,7 @@
 
           <div class="input-box">
             <span class="details" style="width: calc(100% /2  - 20px); font-weight: 650;">Title</span>
-            <textarea name="comments" name="title" [(ngModel)]="app.title" id="comments"
+            <textarea name="comments" required name="title" [(ngModel)]="app.title" id="comments"
               style="font-family:sans-serif;font-size: 15px; font-weight: 600;">
             </textarea>
           </div>
@@ -38,15 +38,16 @@
 
 
 
-          <div class="input-box">
-            <span class="details" style="font-weight: 650;">Start Date</span>
+          <div *ngFor="let a of app.schedules">
+            <!-- <span class="details" style="font-weight: 650;">Start Date</span>
             <input disabled="" type="" (change)="onSelect($event)" min="{{currentDate | date:'yyyy-MM-dd'}}"
-              [(ngModel)]="app.start_date" name="start_date" required>
+               name="start_date" required> -->
+               <p> {{a.date}} </p>
           </div>
-          <div class="input-box">
+          <!-- <div class="input-box">
             <span class="details" style="font-weight: 650;">End Date</span>
             <input disabled="" type=""  min="{{sDate | date:'yyyy-MM-dd'}}" [(ngModel)]="app.end_date" name="end_date" required>
-          </div>
+          </div> -->
 
 
 
@@ -60,7 +61,7 @@
           
           <div class="input-box">
             <span class="details" style="font-weight: 650; margin-top: 4%;">Department</span>
-            <select class="selectDept" (change)="onSelectDept($event)">
+            <select  class="selectDept" (change)="onSelectDept($event)">
               <option selected="true" disabled>Select Department</option>
               <option *ngFor="let departments of department" value="{{departments.department_id}}">
                 {{departments.department_name}}</option>
@@ -68,7 +69,7 @@
           </div>
           <div class="input-box">
             <span class="details" style="font-weight: 650; margin-top: 4%;">Team</span>
-            <select [(ngModel)]="user.team_id" class="selectTeam" (change)="onSelectTeam($event)">
+            <select  [(ngModel)]="user.team_id" class="selectTeam" (change)="onSelectTeam($event)">
               <option selected>Select Team</option>
               <option *ngFor="let teams of tempTeam" value="{{teams.team_id}}" selected="false">{{teams.team_name}}
               </option>
@@ -110,9 +111,9 @@
               <i (click)="removeFile(file.file_id)" class="material-icons" style="cursor: pointer;color: #435d7d;">cancel</i></a>
           </div>
           <div class="input-box">
-            <span class="details" style="font-weight: 650; margin-top: 4%;">Attached File</span>
-            <input type="file" multiple [(ngModel)]="files" (change)="checkFiles($event)" name="attachedfile"
-              id="attachedfile" style="width: 75%; font-size: 14px;" required multiple>
+            <span class="details"  style="font-weight: 650; margin-top: 4%;">Attached File</span>
+            <input type="file" multiple  [(ngModel)]="files" (change)="checkFiles($event)" name="attachedfile"
+              id="attachedfile" style="width: 75%; font-size: 14px;"  multiple>
             <p><b style="font-size: 13px; font-weight: bold;">(Maximum File Size: 5 Mb)</b></p>
           </div>
 
@@ -151,7 +152,7 @@
         <input type="button" class="cancel" data-dismiss="modal" value="Cancel"> -->
             <input type="button" class="w3-btn w3-red" value="Cancel"
               style=" border-radius: 10px; margin-right: 10px; width:250px; font-weight: bold;">
-            <input type="submit" class="w3-btn " value="Update"
+            <input type="submit" [disabled]="form.invalid" class="w3-btn " value="Update"
               style="background-color: #435d7d; color:white; border-radius: 10px; width:250px;font-weight:bold;">
           </div>
         </div>

@@ -2,7 +2,6 @@ package com.ai.backEnd.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -112,7 +111,9 @@ public class UserController {
 
 	// GetById
 	@GetMapping("/getById/{employee_id}")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') "
+			+ "|| hasRole('USER') "
+			+ "|| hasRole('TRAINEE')")
 	public UserDetailForUpdate getUserById(@PathVariable String employee_id) {
 		return userService.searchById(employee_id);
 	}

@@ -7,10 +7,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Schedules;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,7 +62,6 @@ public class AppointmentController {
 			noti.setAppointment(appointment);
 			noti.setUser(user);
 			noti.setDescription(appointment.getDescription());
-			
 			noti.setNoti_type(NotificationType.CREATE_APP);
 			notiService.addNoti(noti);
 		}
@@ -100,7 +97,6 @@ public class AppointmentController {
 	@GetMapping("/getAppById/{appointment_id}")
 	public ResponseEntity<Appointment> getShowAppById(@PathVariable String appointment_id) {
 		Appointment appointment = appointmentService.getAppById(Integer.parseInt(appointment_id));
-		
 		return new ResponseEntity<Appointment>(appointment, HttpStatus.OK);
 	}
 	
@@ -137,6 +133,7 @@ public class AppointmentController {
 		showAppointment.setFiles(appointment.getFiles());
 		showAppointment.setStart_time(schedules.get(0).getStart_time());
 		showAppointment.setEnd_time(schedules.get(0).getEnd_time());
+		showAppointment.setSchedules(schedules);
 		return new ResponseEntity<ShowAppointment>(showAppointment, HttpStatus.OK);
 	}
 
@@ -159,7 +156,6 @@ public class AppointmentController {
 		}
 		Appointment savedAppointment = appointmentService.saveAppointment(appointment);
 		List<User> newSaveUsers = appointment.getEmployee();
-
 		for (User user : deletedUsers) {
 			postNotification(user, savedAppointment, NotificationType.USER_REMOVED);
 		}
@@ -184,7 +180,6 @@ public class AppointmentController {
 				postNotification(user, savedAppointment, NotificationType.EDIT_APP);
 			}
 		}
-
 		return savedAppointment;
 	}
 
@@ -197,11 +192,11 @@ public class AppointmentController {
 		for (User user : deletedUsers) {
 			postNotification(user, savedAppointment, NotificationType.DELETE_APP);
 		}
+
 	}
 
 	@DeleteMapping("/deleteAppByDate")
 	public void deleteAppByDate(@RequestParam String appointment_id,@RequestParam String date){
-	
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 		LocalDate localDate = LocalDate.parse(date,formatter);
 		Appointment appointment = appointmentService.getAppById(Integer.parseInt(appointment_id));
@@ -213,14 +208,17 @@ public class AppointmentController {
 			if(localDate.equals(schedule.getDate())){
 				deleteScheudleIds.add(schedule.getId());
 				list.remove();
+				
 			}
 		}
-
+		if(schedules.size() == 0){
+             appointment.setDeleted(true);
+		}
 		appointment.setSchedules(schedules);
 		Appointment savedAppointment = appointmentService.saveAppointment(appointment);
 		List<User> deletedUsers = appointment.getEmployee();
 		for (User user : deletedUsers) {
-			postNotification(user, savedAppointment, NotificationType.DELETE_APP);
+			postNotification(user, savedAppointment, NotificationType.DELETE_APP,localDate);
 		}
 		for (Integer integer : deleteScheudleIds) {
 			scheduleService.deleteScheduleById(integer);
@@ -228,7 +226,6 @@ public class AppointmentController {
 
 	}
 	
-
 	public void postNotification(User user,Appointment appointment,NotificationType notiType){
 		Notification noti = new Notification();
 			noti.setAppointment(appointment);
@@ -238,6 +235,15 @@ public class AppointmentController {
 			notiService.addNoti(noti);
 	}
 
+	public void postNotification(User user,Appointment appointment,NotificationType notiType, LocalDate deletedDate){
+		Notification noti = new Notification();
+			noti.setAppointment(appointment);
+			noti.setUser(user);
+			noti.setDescription(appointment.getDescription());
+			noti.setNoti_type(notiType);
+			noti.setDeletedDate(deletedDate);
+			notiService.addNoti(noti);
+	}
 }
 
 

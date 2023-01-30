@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { AppointmentRegister } from 'app/model/appointment-register';
 import { AppointmentService } from 'app/services/appointment.service';
 import { UserService } from 'app/services/user.service';
-import { data } from 'jquery';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-
 
 @Component({
   selector: 'app-appointment-detail-view-byuser',
@@ -14,20 +12,31 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 })
 export class AppointmentDetailViewByuserComponent implements OnInit {
 
-  res:any;
+  res:any = {
+    "title" : ""
+  };
   id:string;
   files = [];
   employee = [];
   urls = [];
   loginId: string;
+  app:any = new AppointmentRegister();
+  date:string;
+  isCreateUser:boolean = false;
 
   constructor(private route: ActivatedRoute,private appService:AppointmentService, private userService:UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.loginId = localStorage.getItem("loggedInUserId");
+    this.route.queryParams.subscribe(params => {
+      this.date = JSON.parse(params.data);
+    });
     this.appService.viewOnlyAppointmentById(this.id).subscribe(
       (res : any) => {
+        if(res.createUser.employee_id == this.loginId) {
+          this.isCreateUser = true;
+        }
         if(res.type != "PUBLIC") {
           this.appService.checkUserInclude(this.loginId, res.appointment_id).subscribe(
             (data: any) => {
@@ -38,8 +47,13 @@ export class AppointmentDetailViewByuserComponent implements OnInit {
                 this.generatePhotos();
               }
             }, error => {
-              alert("this appointment is private and you are not in there")
-              this.router.navigate(['/trainee/dashboard']);
+              // alert("this appointment is private and you are not in there")
+              Swal.fire({  
+                icon: 'error',  
+                title: 'Access Denied',  
+                text: 'This appointment is private and you are not in there',   
+              })
+              this.router.navigate(['/user/dashboard']);
             }
           );
         } else {
@@ -49,22 +63,53 @@ export class AppointmentDetailViewByuserComponent implements OnInit {
           this.generatePhotos();
         }
       },
-      error => console.log("get app error " + error));
+      error => {
+        // alert("this appointment is deleted"),
+        Swal.fire({   
+          title: 'This Appointment was already deleted ', 
+        })
+        this.router.navigate(['user/dashboard'])
+      });
   }
 
-  update
+  //update
   updateApp() {
-      this.router.navigate(['user/update-app',this.id])
+    this.router.navigate(['user/update-app',this.id])
   }
    
-  delete
+  //delete
+  // deleteApp(){
+  //   this.appService.deleteApp(this.id,this.date).subscribe(
+  //     data => {
+  //       Swal.fire('Appointment Delete!!', 'Appointment Delete succesfully!', 'success');
+  //     this.router.navigate(['admin/dashboard'])
+  //   },
+  //     error => console.log("fail delete")
+  //   )
+  // }
+
   deleteApp(){
-    // this.appService.deleteApp(this.id).subscribe(
-    //   data => {Swal.fire('Appointment Delete!!', 'Appointment Delete succesfully!', 'success');
-    //   this.router.navigate(['user/dashboard'])
-    // },
-    //   error => console.log("fail delete")
-    // )
+    Swal.fire({
+      title: "Are you sure want to delete?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.value) {this.appService.deleteApp(this.id,this.date).subscribe(
+          data => {
+            this.router.navigate(['user/dashboard'])
+            Swal.fire({
+              title: "Successfully Deleted",
+              text: "Appointment is deleted",
+              icon: "success",
+          });
+        },
+          // error => console.log("fail delete")
+        )
+    }
+})
+    
+    
   }
 
   downloadFile(file) {      

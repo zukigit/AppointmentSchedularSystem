@@ -1,6 +1,7 @@
 package com.ai.backEnd.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +14,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 public class Notification implements Serializable
@@ -36,6 +39,9 @@ public class Notification implements Serializable
 	@ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="appointment_id")
     private Appointment Appointment;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
+	private LocalDate deletedDate;
     
 	public static long getSerialversionuid() {
 		return serialVersionUID;
@@ -99,6 +105,15 @@ public class Notification implements Serializable
 	public void setReaded(boolean isReaded) {
 		this.isReaded = isReaded;
 	}
+
+	public LocalDate getDeletedDate() {
+		return deletedDate;
+	}
+
+	public void setDeletedDate(LocalDate deletedDate) {
+		this.deletedDate = deletedDate;
+	}
+	
 	
 	
 }

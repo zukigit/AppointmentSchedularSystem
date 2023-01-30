@@ -101,16 +101,7 @@ export class UpdateAppComponent implements OnInit {
     this.getAvaliables();
     this.alreadyIn();
     this.id = this.route.snapshot.params['id'];
-    this.appService.viewOnlyAppointmentById(this.id).subscribe(
-      (res: any) => {
-        this.app = res
-        this.UnassignDevice = this.app.employee
-        this.confirmedUsers = this.UnassignDevice
-        this.doReset()
-        this.getAvaliables();
-        
-      },
-      error => console.log("get app error " + error));
+    this.getAppDetails()
     this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
     // this.alreadyIn();
     this.userServices.getTeam().subscribe(
@@ -119,6 +110,23 @@ export class UpdateAppComponent implements OnInit {
           this.team = data;
         }
       });
+  }
+
+  getAppDetails(){
+    this.appService.viewOnlyAppointmentById(this.id).subscribe(
+      (res: any) => {
+        this.app = res
+        this.app.schedules = res.schedules
+
+        // for(let x of res.schdule) {
+          console.log("dd " + this.app.schedules)
+        // }
+        this.UnassignDevice = this.app.employee
+        this.confirmedUsers = this.UnassignDevice
+        this.doReset()
+        this.getAvaliables();
+      },
+      error => console.log("get app error " + error));
   }
 
   alreadyIn() {
@@ -188,16 +196,19 @@ export class UpdateAppComponent implements OnInit {
 
   //update
   updateAppointment() {
-    this.generateSchedules();
-    this.app.created_date = this.datePipe.transform(this.currentDate, 'MM/dd/yyyy');
-    this.app.schedules = this.schedules
     this.app.employee = this.confirmedUsers;
-    console.log("confirmedUsers " + this.confirmedUsers)
 
-    this.app.employee_id = Number(this.id)
     this.app.title = this.app.title
     this.app.description = this.app.description
-    this.app.createUser = { employee_id: this.loginId }
+
+
+    this.appService.updateApp(this.app).subscribe(
+      data => {
+        this.getAppDetails()
+        alert("update success")
+      },error=>console.log("error update")
+      
+    )
    }
   //date
   onSelect(event) {
@@ -235,20 +246,6 @@ export class UpdateAppComponent implements OnInit {
     );
   }
 
-  generateSchedules() {
-    const start_date = new Date(this.app.start_date);
-    const end_date = new Date(this.app.end_date);
-    let schedule: Schdule;
-
-    for (let d = start_date; d <= end_date; d.setDate(d.getDate() + 1)) {
-      schedule = new Schdule();
-      schedule.date = this.datePipe.transform(d, 'MM/dd/yyyy');
-      schedule.start_time = this.app.start_time
-      schedule.end_time = this.app.end_time
-      this.schedules.push(schedule);
-    }
-  }
-
   removeFile(fileId:number) {
     console.log("remove file is called")
     for(let i = 0; i < this.app.files.length; i++) {
@@ -259,10 +256,7 @@ export class UpdateAppComponent implements OnInit {
   }
 
   getAvaliables() {
-    //this.user.length = 0;
-    // this.UnassignDevice.length = 0;
-    this.generateSchedules();
-    this.userServices.getAvaliables(this.schedules).subscribe(
+    this.userServices.getAvaliables(this.app.schedules).subscribe(
       {
         next: (data) => {
           this.user = data;

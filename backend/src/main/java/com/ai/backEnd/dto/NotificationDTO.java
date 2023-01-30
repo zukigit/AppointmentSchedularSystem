@@ -1,7 +1,10 @@
 package com.ai.backEnd.dto;
 
+import java.time.LocalDate;
+
 import com.ai.backEnd.model.NotificationType;
 import com.ai.backEnd.model.User;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class NotificationDTO {
 	
@@ -12,7 +15,15 @@ public class NotificationDTO {
     private User removeUser;
     private int appointment_id;
     private Boolean isReaded;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy")
+	private LocalDate deletedDate;
     
+	public LocalDate getDeletedDate() {
+		return deletedDate;
+	}
+	public void setDeletedDate(LocalDate deletedDate) {
+		this.deletedDate = deletedDate;
+	}
 	public int getAppointment_id() {
 		return appointment_id;
 	}
