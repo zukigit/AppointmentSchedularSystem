@@ -10,7 +10,9 @@ import { User } from 'app/model/user';
 import { UserService } from 'app/services/user.service';
 import { AppointmentService } from 'app/services/appointment.service';
 import { ShowAppointment } from 'app/model/show-appointment';
+//import { INITIAL_EVENTS, createEventId } from './event-utils';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-weeklyviewbyuser',
@@ -36,8 +38,9 @@ export class WeeklyviewbyuserComponent implements OnInit {
   showApp: ShowAppointment[];
   Events: any[] = []
   currentDate:Date = new Date()
+  eventClickDate:any;
 
-  constructor(private changeDetector: ChangeDetectorRef, private router: Router, private userService: UserService, private appService: AppointmentService) {
+  constructor(private changeDetector: ChangeDetectorRef,private datePipe: DatePipe, private router: Router, private userService: UserService, private appService: AppointmentService) {
     this.header = {
       left: 'prev,next today',
       center: 'title',
@@ -88,7 +91,7 @@ export class WeeklyviewbyuserComponent implements OnInit {
               let myDate2 = new Date(dateStr2);
               //myDate.setHours(result.start_date.getHours());
 
-              if (myDate <= this.currentDate) {
+              if (myDate<= this.currentDate) {
                 //alert("Schedule are finished,can't edit!!!");
                 this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type,color:"#6e6b6c" })
               } else {
@@ -140,34 +143,16 @@ export class WeeklyviewbyuserComponent implements OnInit {
         eventClick: (arg) => {
           let id = arg.event.id;
           let appType = arg.event.groupId;
+          let start = this.datePipe.transform(arg.event.start, 'MM/dd/yyyy');
 
-          if (appType != "PUBLIC") {
-            this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
-              (data: any) => {
-                if (data) {
-                  this.router.navigate(['/user/appointment_detail_view_byuser', id]);
-                }
-              }, error => {
-                // alert("this appointment is private and you are not in there");
-                Swal.fire({  
-                  icon: 'error',  
-                  title: 'Assess Denied',  
-                  text: 'This appointment is private and you are not in there',   
-                }) 
-              }
-            );
+          if (arg.event.start <= this.currentDate) {
+            Swal.fire({  
+              icon: 'error',  
+              title: 'Assess Denied',  
+              text: 'Appointment is over. Can not edit!!!',   
+            }) 
           } else {
-            if (arg.event.start <= this.currentDate) {
-              // alert("Schedule are finished,can't edit!!!");
-              Swal.fire({  
-                icon: 'error',  
-                title: 'Assess Denied',  
-                text: 'Schedule are finished, Can not edit!!!',   
-              }) 
-            } else {
-              this.router.navigate(['/user/appointment_detail_view_byuser', id]);
-            }
-            //this.router.navigate(['/view_only_appointment', id])
+            this.router.navigate(['/user/appointment_detail_view_byuser', id], { queryParams: { data: JSON.stringify(start)}});
           }
         },
 
@@ -220,34 +205,16 @@ export class WeeklyviewbyuserComponent implements OnInit {
         eventClick: (arg) => {
           let id = arg.event.id;
           let appType = arg.event.groupId;
+          let start = this.datePipe.transform(arg.event.start, 'MM/dd/yyyy');
 
-          if (appType != "PUBLIC") {
-            this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
-              (data: any) => {
-                if (data) {
-                  this.router.navigate(['/user/appointment_detail_view_byuser', id]);
-                }
-              }, error => {
-                // alert("this appointment is private and you are not in there")
-                Swal.fire({  
-                  icon: 'error',  
-                  title: 'Assess Denied',  
-                  text: 'This appointment is private and you are not in there',   
-                }) 
-              }
-            );
+          if (arg.event.start <= this.currentDate) {
+            Swal.fire({  
+              icon: 'error',  
+              title: 'Assess Denied',  
+              text: 'Appointment is over. Can not edit!!!',   
+            }) 
           } else {
-            if (arg.event.start <= this.currentDate) {
-              // alert("Schedule are finished,can't edit!!!");
-              Swal.fire({  
-                icon: 'error',  
-                title: 'Assess Denied',  
-                text: 'Schedule are finished, Can not edit!!!',   
-              }) 
-            } else {
-              this.router.navigate(['/user/appointment_detail_view_byuser', id]);
-            }
-            //this.router.navigate(['/view_only_appointment', id])
+            this.router.navigate(['/user/appointment_detail_view_byuser', id], { queryParams: { data: JSON.stringify(start)}});
           }
         },
 
@@ -348,5 +315,3 @@ export class WeeklyviewbyuserComponent implements OnInit {
 
 }
 
-  
-  
