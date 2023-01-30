@@ -218,8 +218,7 @@ export class DailyviewComponent implements OnInit {
                     this.appService.checkUserInclude(this.loginId, Number(id)).subscribe(
                       (data: any) => {
                         if (data) {
-                          this.eventClickDate=localStorage.setItem("eventClickDate",start)
-                          this.router.navigate(['/admin/appointment_detail_view', id]);
+                          this.router.navigate(['/admin/appointment_detail_view', id], { queryParams: { data: JSON.stringify(start)}});
                         }
                       }, error => {
                         //alert("this appointment is private and you are not in there")
@@ -239,8 +238,7 @@ export class DailyviewComponent implements OnInit {
                         text: 'Appointment is over. Can not edit!!!',   
                       }) 
                     } else {
-                      this.eventClickDate=localStorage.setItem("eventClickDate",start)
-                      this.router.navigate(['/admin/appointment_detail_view', id]);
+                      this.router.navigate(['/admin/appointment_detail_view', id], { queryParams: { data: JSON.stringify(start)}});
                     }
                     
                   }
