@@ -35,7 +35,7 @@
                         
                     <table style="display: block;
                     height: 140px;
-                    width: 300px;
+                    width: 350px;
                     overflow-y: scroll;
                     overflow-x: scroll">
                         <thead>
@@ -44,8 +44,8 @@
                         <span *ngIf="showNoti != null || showNoti != undefined" >
                         <tbody *ngFor="let data of showNoti" >
                             <td >
-                                <button (click)="goAppDetailWithMakeRead(data.appId, data.notiId, data.type, data.deletedDate, data.title)" *ngIf="data.isReaded == false" style="background-color: #abc6e7; max-width: 350;min-width: 350px;" class="dropdown-item">{{data.message}} </button>
-                                <button (click)="goAppDetail(data.appId, data.notiId, data.type, data.deletedDate, data.title)" *ngIf="data.isReaded == true" class="dropdown-item" style=" max-width: 350;min-width: 350px;">{{data.message}} </button>
+                                <button (click)="goAppDetailWithMakeRead(data.appId, data.notiId, data.type, data.deletedDate, data.title)" *ngIf="data.isReaded == false" style="background-color: #abc6e7; max-width: 350px;min-width: 350px;" class="dropdown-item">{{data.message}} </button>
+                                <button (click)="goAppDetail(data.appId, data.notiId, data.type, data.deletedDate, data.title)" *ngIf="data.isReaded == true" class="dropdown-item" style=" max-width: 350px;min-width: 350px;">{{data.message}} </button>
                             </td>
                         </tbody>
                         </span>

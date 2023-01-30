@@ -144,7 +144,7 @@ color: #ffcc33;
 
 body{
     color: #1a202c;
-    background-color: #5b7da7;    
+    background-color: #99b6db;    
     font-family: 400 14px/20px Roboto, "Helvetica Neue", sans-serif;
     font-size: 875rem;
 }
@@ -161,7 +161,7 @@ body{
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #5b7da7;
+    background-color: #99b6db;
     background-clip: border-box;
     border: 0 solid rgba(0,0,0,.125);
     border-radius: .25rem;
