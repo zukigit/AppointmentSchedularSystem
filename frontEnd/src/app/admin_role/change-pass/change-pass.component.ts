@@ -3,6 +3,7 @@ import { ChangePass } from 'app/model/change-pass';
 import { UserService } from 'app/services/user.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-change-pass',
@@ -71,6 +72,10 @@ export class ChangePassComponent implements OnInit {
         }))
     }
   }
+  passwordFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(6)
+  ]);
 
 
 }
