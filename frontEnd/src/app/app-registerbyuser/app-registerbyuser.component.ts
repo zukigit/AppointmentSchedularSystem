@@ -138,6 +138,10 @@ export class AppRegisterbyuserComponent implements OnInit {
     });
 
   }
+  //cancel
+  cancel(){
+    this.router.navigate(['admin/dashboard'])
+  }
 
   onSelectTeam(team) {
     this.AssignDevice = this.user.filter(f => {

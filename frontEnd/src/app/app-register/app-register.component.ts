@@ -168,6 +168,11 @@ export class AppRegisterComponent implements OnInit {
     console.log("confirmed: " + JSON.stringify(this.confirmed));
   }
 
+  //cancel
+  cancel(){
+    this.router.navigate(['admin/dashboard'])
+  }
+
   doReset() {
 
     this.sourceDevice = JSON.parse(JSON.stringify(this.AssignDevice));
