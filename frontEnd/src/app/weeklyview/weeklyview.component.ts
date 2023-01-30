@@ -91,7 +91,7 @@ export class WeeklyviewComponent implements OnInit {
               let myDate2 = new Date(dateStr2);
               //myDate.setHours(result.start_date.getHours());
 
-              if (myDate2 <= this.currentDate) {
+              if (myDate<= this.currentDate) {
                 //alert("Schedule are finished,can't edit!!!");
                 this.Events.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type,color:"#6e6b6c" })
               } else {
@@ -251,7 +251,7 @@ export class WeeklyviewComponent implements OnInit {
                       //myDate.setHours(result.start_date.getHours());
                       console.log("title searc is " + myDate)
 
-                      if (myDate2 <= this.currentDate) {
+                      if (myDate <= this.currentDate) {
                         //alert("Schedule are finished,can't edit!!!");
                         this.calEvent.push({ title: result.title, start: myDate, end: myDate2, id: result.appointment_id, groupId: result.type,color:"#6e6b6c" })
                       } else {
