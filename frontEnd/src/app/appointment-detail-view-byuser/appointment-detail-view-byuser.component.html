@@ -160,7 +160,7 @@
       <!-- button -->
        <!-- <div *ngFor="let x of res.employee"> -->
         <div style="text-align: center;">
-        <span *ngIf="isCreateUser">
+        <span *ngIf="isCreateUser == true && isFromNoti == false">
           <a class="btn" style="  background-color:#d42c34;color: white; text-align: center;margin-right:20px;margin-bottom: 3%;">
             <span (click)="deleteApp()">Delete Appointment</span>
           </a>

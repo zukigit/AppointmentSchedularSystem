@@ -24,6 +24,7 @@ export class AppointmentDetailViewComponent implements OnInit {
   app:any = new AppointmentRegister();
   date:string;
   isCreateUser:boolean = false;
+  isFromNoti = false;
 
   constructor(private route: ActivatedRoute,private appService:AppointmentService, private userService:UserService, private router: Router) { }
 
@@ -33,6 +34,9 @@ export class AppointmentDetailViewComponent implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.date = JSON.parse(params.data);
     });
+    if(this.date == null || this.date == undefined) {
+      this.isFromNoti = true;
+    }
     this.appService.viewOnlyAppointmentById(this.id).subscribe(
       (res : any) => {
         if(res.createUser.employee_id == this.loginId) {
