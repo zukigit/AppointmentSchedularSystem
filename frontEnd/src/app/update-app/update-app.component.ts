@@ -83,7 +83,7 @@ export class UpdateAppComponent implements OnInit {
   tab = 1;
   keepSorted = true;
   key: string;
-  display: string;
+  display: any =[];
   filter = false;
   source: AssignedDeviceCode[] = [];
   confirmed: UnAssignedDeviceCode[] = [];
@@ -92,6 +92,8 @@ export class UpdateAppComponent implements OnInit {
   sourceLeft = true;
   files: File[] = [];
   schedules: Schdule[] = [];
+  teamId: string;
+  departmentId: string;
   format: any = { add: 'Add Selected Member', remove: 'Remove Selected Member', all: 'Select All', none: 'Unselect All', direction: 'right-to-left', draggable: true, locale: undefined };
 
   constructor(private userServices: UserService, private route: ActivatedRoute, private datePipe: DatePipe, private appService: AppointmentService, private router: Router,) { }
@@ -180,11 +182,13 @@ export class UpdateAppComponent implements OnInit {
   }
   private populateList() {
     this.key = 'employee_id';
-    this.display = 'name';
+    this.display = ['name','department_name','team_name'];
     this.keepSorted = true;
     this.confirmed = this.UnassignDevice;
     this.confirmedUsers = this.confirmed;
     this.source = [...this.AssignDevice, ...this.confirmed,...this.UnassignDevice];  
+
+    this.user.push(this.AssignDevice)
     
     console.log("populate lsit confirm user " + this.confirmedUsers)
     
