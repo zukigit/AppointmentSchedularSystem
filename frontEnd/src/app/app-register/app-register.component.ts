@@ -234,8 +234,8 @@ export class AppRegisterComponent implements OnInit {
           //alert('File size should be less than 5MB!!');
           
           Swal.fire({  
-            icon: 'error',  
-            title: 'Failed ',  
+            icon: 'warning',  
+            title: 'Please. Check File Size ',  
             text: 'File size should be less than 5MB!!',   
           })
           

@@ -223,7 +223,13 @@ export class UpdateAppComponent implements OnInit {
     this.appService.updateApp(this.app).subscribe(
       data => {
         this.getAppDetails()
-        alert("update success")
+        // alert("update success")
+        Swal.fire({  
+          icon: 'success',  
+          title: 'Successfully Updated',  
+          text: 'Your appointment is successfully updated',   
+        });
+        // this.router.navigate(['/admin/appointment_detail_view', id], { queryParams: { data: JSON.stringify(start)}});
       }, error => console.log("error update")
 
     )
@@ -241,7 +247,12 @@ export class UpdateAppComponent implements OnInit {
       if (checkFiles[i].size > sizeLimit) {
         // Display error message to user
         console.log("File too large: " + checkFiles[i].name);
-        alert('File size should be less than 5MB!!');
+        // alert('File size should be less than 5MB!!');
+        Swal.fire({  
+          icon: 'warning',  
+          title: 'Please. Check File Size',  
+          text: 'File size should be less than 5MB!!',   
+        })
       } else {
         this.files.push(checkFiles[i]);
       }

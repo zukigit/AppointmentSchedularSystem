@@ -208,8 +208,8 @@ export class DashboardComponent implements OnInit {
 
   getAllApp(){
 
-    this.reportService.getAllApp().subscribe(data =>
-      console.log(data)
+    this.reportService.getAllApp(this.loginId).subscribe(data =>
+      console.log("report data"+data)
      );
 
 
