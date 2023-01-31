@@ -216,7 +216,7 @@ export class AppRegisterComponent implements OnInit {
     if(this.sDate==tDate){
       console.log("filter")
       this.options=this.options.filter((obj)=>{
-        return obj.value >= this.currentHour
+        return obj.value > this.currentHour
       });
       
     }
