@@ -41,6 +41,7 @@ export class DashboardComponent implements OnInit {
 
 
   userDataDetails : any ;
+  count : any;
 
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
@@ -200,6 +201,7 @@ export class DashboardComponent implements OnInit {
         this.appService.getAppointmentById(this.loginId).subscribe(data => 
           this.showDataApp = data);
     
+          this.count = +1;
           console.log(this.showDataApp.length+"app date");
     
   }
