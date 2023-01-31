@@ -91,14 +91,14 @@
 				<text><![CDATA[Description]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="440" y="10" width="104" height="30" uuid="c0e86d1c-de53-4e97-923a-5f3b1c3505bb"/>
+				<reportElement x="460" y="10" width="84" height="30" uuid="c0e86d1c-de53-4e97-923a-5f3b1c3505bb"/>
 				<textElement>
 					<font size="18" isBold="true"/>
 				</textElement>
 				<text><![CDATA[End Time]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="350" y="10" width="65" height="30" uuid="1a8aedc0-76bf-423d-9a1e-143e74fba214"/>
+				<reportElement x="350" y="10" width="100" height="30" uuid="1a8aedc0-76bf-423d-9a1e-143e74fba214"/>
 				<textElement>
 					<font size="18" isBold="true"/>
 				</textElement>
