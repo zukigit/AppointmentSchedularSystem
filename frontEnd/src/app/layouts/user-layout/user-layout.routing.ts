@@ -26,6 +26,7 @@ import { AppointmentDetailViewComponent } from 'app/appointment-detail-view/appo
 import { WeeklyviewbyuserComponent } from 'app/weeklyviewbyuser/weeklyviewbyuser.component';
 import { AppointmentDetailViewByuserComponent } from 'app/appointment-detail-view-byuser/appointment-detail-view-byuser.component';
 import { UpdateAppComponent } from 'app/update-app/update-app.component';
+import { UpdateAppByuserComponent } from 'app/update-app-byuser/update-app-byuser.component';
 
 export const UserLayoutRoutes: Routes = [
             { path: 'dashboard', component: DashboardComponent, canActivate:[UserAuthGuard]},
@@ -37,5 +38,6 @@ export const UserLayoutRoutes: Routes = [
             { path: 'weeklyviewbyuser', component: WeeklyviewbyuserComponent,canActivate:[UserAuthGuard]},
             { path: 'appointment_detail_view_byuser/:id', component:AppointmentDetailViewByuserComponent,canActivate:[UserAuthGuard]},
             //{ path: 'test', component: UserComponent, canActivate:[UserAuthGuard]},
-            {path: 'update-app/:id', component:UpdateAppComponent,canActivate:[UserAuthGuard]}
+            {path: 'update-app-byuser/:id', component:UpdateAppByuserComponent,canActivate:[UserAuthGuard]},
+            
 ];

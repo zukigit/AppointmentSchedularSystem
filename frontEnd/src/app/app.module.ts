@@ -46,6 +46,7 @@ import { WeeklyviewbytraineeComponent } from './weeklyviewbytrainee/weeklyviewby
 import { AppointmentDetailViewByuserComponent } from './appointment-detail-view-byuser/appointment-detail-view-byuser.component';
 import { AppointmentDetailViewBytraineeComponent } from './appointment-detail-view-bytrainee/appointment-detail-view-bytrainee.component';
 import { UpdateAppComponent } from './update-app/update-app.component';
+import { UpdateAppByuserComponent } from './update-app-byuser/update-app-byuser.component';
 
 
 
@@ -99,6 +100,7 @@ import { UpdateAppComponent } from './update-app/update-app.component';
     AppointmentDetailViewByuserComponent,
     AppointmentDetailViewBytraineeComponent,
     UpdateAppComponent,
+    UpdateAppByuserComponent,
   ],
   providers: [AdminAuthGuard, DatePipe, UserAuthGuard, TraineeAuthGuard],
   bootstrap: [AppComponent]
