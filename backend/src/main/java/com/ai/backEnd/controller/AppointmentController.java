@@ -1,6 +1,7 @@
 package com.ai.backEnd.controller;
 
 import java.time.LocalDate;
+
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+
+import com.ai.backEnd.dto.ReportDTO;
 import com.ai.backEnd.dto.ShowAppointment;
 import com.ai.backEnd.model.Appointment;
 import com.ai.backEnd.model.Notification;
@@ -30,6 +33,10 @@ import com.ai.backEnd.serviceImpl.AppointmentImpl;
 import com.ai.backEnd.serviceImpl.NotificationImpl;
 import com.ai.backEnd.serviceImpl.ScheduleImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
+
+
+import com.ai.backEnd.dto.ReportDTO;
+import com.ai.backEnd.serviceImpl.ReportImpl;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
@@ -44,6 +51,9 @@ public class AppointmentController {
 
 	@Autowired
 	private ScheduleImpl scheduleService;
+	
+	 @Autowired
+	    private ReportImpl reportImpl;
     
 
 	@GetMapping("/getApp")
@@ -243,6 +253,27 @@ public class AppointmentController {
 			noti.setNoti_type(notiType);
 			noti.setDeletedDate(deletedDate);
 			notiService.addNoti(noti);
+	}
+	
+	@GetMapping("/getAllApp/{user_ids}")
+	public ResponseEntity<List<ReportDTO>>  getRepoByUserId(@PathVariable String user_ids){
+		List<ReportDTO>reportData=new ArrayList<ReportDTO>();
+		List<String> emp_id = new ArrayList<>(List.of(user_ids));
+		
+		List<Appointment> app =reportImpl.getRepoByUserId(emp_id);
+		for(Appointment a : app) {
+			ReportDTO obj=new ReportDTO();
+			obj.setName(a.getEmployee().get(0).getName().toString());
+			obj.setAppointment_id(a.getAppointment_id().toString());
+			obj.setDate(a.getSchedules().get(0).getDate().toString());
+			obj.setDescription(a.getDescription());
+			obj.setTitle(a.getTitle());
+			obj.setType(a.getType().toString());
+			obj.setStart_time(a.getSchedules().get(0).getStart_time());
+			obj.setEnd_time(a.getSchedules().get(0).getEnd_time());
+			reportData.add(obj);
+		}
+		return new ResponseEntity<List<ReportDTO>>(reportData, HttpStatus.OK);
 	}
 }
 
