@@ -12,11 +12,11 @@ import { throwIfEmpty } from 'rxjs';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
-  selector: 'app-update-app',
-  templateUrl: './update-app.component.html',
-  styleUrls: ['./update-app.component.scss']
+  selector: 'app-update-app-byuser',
+  templateUrl: './update-app-byuser.component.html',
+  styleUrls: ['./update-app-byuser.component.scss']
 })
-export class UpdateAppComponent implements OnInit {
+export class UpdateAppByuserComponent implements OnInit {
 
   app: AppointmentRegister = new AppointmentRegister()
   schedule: Schdule;
@@ -119,7 +119,7 @@ export class UpdateAppComponent implements OnInit {
   }
   //cancel
   cancel() {
-    this.router.navigate(['admin/appointment_detail_view', this.id])
+    this.router.navigate(['user/appointment_detail_view', this.id])
   }
 
   getAppDetails() {
@@ -229,8 +229,8 @@ export class UpdateAppComponent implements OnInit {
           title: 'Successfully Updated',  
           text: 'Your appointment is successfully updated',   
         });
-        // this.router.navigate(['/admin/appointment_detail_view', id], { queryParams: { data: JSON.stringify(start)}});
-        this.router.navigate(['admin/appointment_detail_view', this.id])
+        // this.router.navigate(['/user/appointment_detail_view', id], { queryParams: { data: JSON.stringify(start)}});
+        this.router.navigate(['user/appointment_detail_view', this.id])
       }, error => console.log("error update")
 
     )
