@@ -42,24 +42,32 @@ export class AppointmentDetailViewComponent implements OnInit {
         if(res.createUser.employee_id == this.loginId) {
           this.isCreateUser = true;
         }
+        console.log("is user log in" + this.isCreateUser)
         if(res.type != "PUBLIC") {
-          this.appService.checkUserInclude(this.loginId, res.appointment_id).subscribe(
-            (data: any) => {
-              if (data || this.isCreateUser) {
-                this.res = res;
-                this.files = res.files;
-                this.employee = res.employee;
-                this.generatePhotos();
+          if(this.isCreateUser) {
+              this.res = res;
+              this.files = res.files;
+              this.employee = res.employee;
+              this.generatePhotos();
+          } else {
+            this.appService.checkUserInclude(this.loginId, res.appointment_id).subscribe(
+              (data: any) => {
+                if (data) {
+                  this.res = res;
+                  this.files = res.files;
+                  this.employee = res.employee;
+                  this.generatePhotos();
+                }
+              }, error => {
+                Swal.fire({  
+                  icon: 'error',  
+                  title: 'Access Denied',  
+                  text: 'This appointment is private and you are not in there',   
+                })
+                this.router.navigate(['/admin/dashboard']);
               }
-            }, error => {
-              Swal.fire({  
-                icon: 'error',  
-                title: 'Access Denied',  
-                text: 'This appointment is private and you are not in there',   
-              })
-              this.router.navigate(['/admin/dashboard']);
-            }
-          );
+            );
+          }
         } else {
           this.res = res;
           this.files = res.files;
