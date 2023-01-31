@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, Validators } from '@angular/forms';
 import { User } from 'app/model/user';
 import { UserService } from 'app/services/user.service';
 import { HttpClient } from '@angular/common/http';
@@ -157,6 +157,11 @@ export class RegisterComponent implements OnInit {
       })
      
   }
+
+  passwordFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(6)
+  ]);
   // closeAlert(){
   //   this.alert=false;
   //     }

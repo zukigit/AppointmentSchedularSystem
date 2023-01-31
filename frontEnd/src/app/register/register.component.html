@@ -26,7 +26,10 @@
                 <span class="nav-sec-level" style="font-size: 11px;">Password must have atleast 6 words.
                 </span></a>
             </span>   
-            <input type="password" name="password" [(ngModel)]="user.password" id="pass" placeholder="Password" required minlength="6">
+            <input type="password" name="password" [(ngModel)]="user.password" name="password" id="password" placeholder="Password" required #password="ngModel" minlength="6">
+            <div *ngIf="password.errors?.['minlength']">
+              Password must be at least 6 characters long.
+            </div>
             
           </div>
           

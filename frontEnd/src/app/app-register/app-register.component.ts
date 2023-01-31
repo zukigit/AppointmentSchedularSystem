@@ -159,6 +159,7 @@ export class AppRegisterComponent implements OnInit {
   private populateList() {
     this.key = 'employee_id'
     this.display = ['name','department_name','team_name']
+    // console.log()
 
     this.keepSorted = true;
     this.source = this.AssignDevice;

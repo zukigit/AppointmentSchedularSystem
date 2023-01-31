@@ -28,7 +28,18 @@ export class UpdateComponent implements OnInit {
 
   loginRole:string;
   show:boolean=false;
+
+  validateNumber(event) {
+    const pattern = /[0-9]/;
+
+    let inputChar = String.fromCharCode(event.charCode);
+    if (!pattern.test(inputChar)) {
+      // invalid character, prevent input
+      event.preventDefault();
+    }
+  }
   ngOnInit() {
+    
     this.id = this.route.snapshot.params['id'];
     this.userServices.getUserById(this.id).subscribe(data => {
       this.loginRole = data.role;
@@ -50,6 +61,18 @@ export class UpdateComponent implements OnInit {
         }
       }
     )
+  }
+  isNumberKey(event) {
+    console.log('event', event);
+    if (
+      event.which != 46 &&
+      event.which != 45 &&
+      event.which != 46 &&
+      !(event.which >= 48 && event.which <= 57)
+    ) {
+      return false;
+    }
+    return true;
   }
 
   onSelect(department) {
@@ -91,6 +114,16 @@ export class UpdateComponent implements OnInit {
       text: 'Updating Employee Information is failed',   
     }) )
   }
+
+  pasteCallback(event) {
+    
+    let numberRegex = /[^\-?(\d+\.?\d*|\d*\.?\d+)$]/; // it allows integer & decimal
+    if (event.clipboardData.getData('Text').match(numberRegex)) {
+      console.log('clipboardData', event.clipboardData.getData('Text'));
+      event.preventDefault();
+    }
+  }
+
 
   goToUserDetails() {
     this.router.navigate(['admin/user-details']);

@@ -131,10 +131,7 @@ export class UpdateAppComponent implements OnInit {
 
         console.log("emp length" + this.app.employee.length)
       setTimeout(() => {
-        // for (let i = 0; i < this.app.employee.length; i++) {
-        //   this.UnassignDevice.push({ "name": this.app.employee[i].name, "department_name": this.app.employee[i].team.department.department_name, "team_name": this.app.employee[i].team.team_name })
-
-        // }
+       
         for(let x of this.app.employee){
           this.UnassignDevice.push(x)
           this.confirmed = JSON.parse(JSON.stringify(this.UnassignDevice));
@@ -197,17 +194,17 @@ export class UpdateAppComponent implements OnInit {
 
   }
   private populateList() {
+    // for(let x of this.UnassignDevice){
+    //   this.confirmedUsers.push(x)
+    //   this.confirmed = JSON.parse(JSON.stringify(this.confirmedUsers));
+    //   console.log("confirmed loop data " + this.confirmed)
+    // }
     this.key = 'employee_id';
-    this.display = ['name', 'department_name', 'team_name']
+    this.display = 'name'
     this.keepSorted = true;
     this.confirmed = this.UnassignDevice;
     this.confirmedUsers = this.confirmed;
     this.source = [...this.AssignDevice, ...this.UnassignDevice];
-    console.log(this.confirmed + "source")
-
-    // this.user.push(this.AssignDevice)
-
-    console.log("populate lsit confirm user " + this.confirmedUsers)
 
     console.log("source: " +JSON.parse(JSON.stringify(this.source)));
     console.log("confirmed: " + JSON.stringify(this.confirmed));
