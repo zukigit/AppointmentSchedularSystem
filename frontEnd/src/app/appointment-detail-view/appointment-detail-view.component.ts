@@ -86,7 +86,7 @@ export class AppointmentDetailViewComponent implements OnInit {
 
   //update
   updateApp() {
-    this.router.navigate(['admin/update-app',this.id])
+    this.router.navigate(['admin/update-app',this.id], { queryParams: { data: JSON.stringify(this.date)}});
   }
    
   //delete

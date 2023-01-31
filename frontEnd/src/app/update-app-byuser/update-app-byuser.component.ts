@@ -96,6 +96,7 @@ export class UpdateAppByuserComponent implements OnInit {
   schedules: Schdule[] = [];
   teamId: string;
   departmentId: string;
+  date:string;
   format: any = { add: 'Add Selected Member', remove: 'Remove Selected Member', all: 'Select All', none: 'Unselect All', direction: 'right-to-left', draggable: true, locale: undefined };
 
   constructor(private userServices: UserService, private route: ActivatedRoute, private datePipe: DatePipe, private appService: AppointmentService, private router: Router,) { }
@@ -103,10 +104,10 @@ export class UpdateAppByuserComponent implements OnInit {
   ngOnInit(): void {
 
     this.id = this.route.snapshot.params['id'];
-      this.getAppDetails();
-    setTimeout(() => {
-      
-    }, 1500);
+    this.route.queryParams.subscribe(params => {
+      this.date = JSON.parse(params.data);
+    });
+    this.getAppDetails();
     this.populateList();
     this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
     // this.alreadyIn();
@@ -214,26 +215,32 @@ export class UpdateAppByuserComponent implements OnInit {
 
   //update
   updateAppointment() {
-    this.app.employee = this.confirmedUsers;
+    if (!this.confirmedUsers || !this.confirmedUsers.length) {
+      alert("Please Check Attendes User")
+    } else {
+      this.app.employee = this.confirmedUsers;
+      this.app.title = this.app.title
+      this.app.description = this.app.description
 
-    this.app.title = this.app.title
-    this.app.description = this.app.description
 
+      this.appService.updateApp(this.app).subscribe(
+        data => {
+          if (this.files.length != 0) {
+            this.uploadFiles(this.app.appointment_id);
+          } else {
+            this.router.navigate(['user/appointment_detail_view', this.id], { queryParams: { data: JSON.stringify(this.date) } }).then(() => window.location.reload()), 10000
+            Swal.fire({
+              icon: 'success',
+              title: 'Successfully Updated',
+              text: 'Your appointment is successfully updated',
+            });
+          }
+        }, error => console.log("error update")
 
-    this.appService.updateApp(this.app).subscribe(
-      data => {
-        this.getAppDetails()
-        // alert("update success")
-        Swal.fire({  
-          icon: 'success',  
-          title: 'Successfully Updated',  
-          text: 'Your appointment is successfully updated',   
-        });
-        // this.router.navigate(['/user/appointment_detail_view', id], { queryParams: { data: JSON.stringify(start)}});
-        this.router.navigate(['user/appointment_detail_view', this.id])
-      }, error => console.log("error update")
+      )
+      
+    }
 
-    )
   }
   //date
   onSelect(event) {
@@ -260,18 +267,28 @@ export class UpdateAppByuserComponent implements OnInit {
     }
   }
 
-  uploadFiles(appointmentId: any) {
+  uploadFiles(appointmentId:any) {
     const formdata = new FormData();
     formdata.append("appointmentId", appointmentId);
-    for (let i = 0; i < this.files.length; i++) {
+    for(let i = 0; i < this.files.length; i++) {
       formdata.append("files", this.files[i]);
     }
     this.appService.uploadFiles(formdata).subscribe(
-      data => {
-        // Swal.fire('Added Appointment!!', 'Appointment Added Succesfully!', 'success');
+      data=>{
+        this.router.navigate(['user/appointment_detail_view', this.id], { queryParams: { data: JSON.stringify(this.date)}}).then (() => window.location.reload()),10000
+        Swal.fire({  
+          icon: 'success',  
+          title: 'Successfully Updated',  
+          text: 'Your appointment is successfully updated',   
+        });
       },
-      error => {
-        Swal.fire('Failed!!', 'Appointment Added Was Failed!', 'fail');
+      error=>{
+        //Swal.fire('Failed!!', 'Appointment Added Was Failed!', 'fail');
+        Swal.fire({  
+          icon: 'error',  
+          title: 'Failed ',  
+          text: 'Appointment Added Was Failed!',   
+        })
       }
     );
   }

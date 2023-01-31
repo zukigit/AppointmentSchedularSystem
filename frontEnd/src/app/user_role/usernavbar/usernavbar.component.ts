@@ -67,17 +67,22 @@ export class UsernavbarComponent implements OnInit {
     user !: User;
     text: string;
     showNoti: any[] = [];
-
     unreadNoti: number;
-
     realTimeDataSubscription$: Subscription;
-
+    loggedInUserName : string;
+    loggedInUserRole : string;
 
     ngOnInit() {
         this.loginId = localStorage.getItem("loggedInUserId");
         this.getNoti();
         this.checkNotiCounts();
+        this.userService.getUserById(this.loginId).subscribe(
+            data=> {
+                this.loggedInUserName = data.name;
+                this.loggedInUserRole = data.role;
+            }
 
+        )
         setTimeout(() => {
             this.realTimeData();
         }, 1000);

@@ -96,6 +96,7 @@ export class UpdateAppComponent implements OnInit {
   schedules: Schdule[] = [];
   teamId: string;
   departmentId: string;
+  date: string;
   format: any = { add: 'Add Selected Member', remove: 'Remove Selected Member', all: 'Select All', none: 'Unselect All', direction: 'right-to-left', draggable: true, locale: undefined };
 
   constructor(private userServices: UserService, private route: ActivatedRoute, private datePipe: DatePipe, private appService: AppointmentService, private router: Router,) { }
@@ -103,10 +104,10 @@ export class UpdateAppComponent implements OnInit {
   ngOnInit(): void {
 
     this.id = this.route.snapshot.params['id'];
-      this.getAppDetails();
-    setTimeout(() => {
-      
-    }, 1500);
+    this.route.queryParams.subscribe(params => {
+      this.date = JSON.parse(params.data);
+    });
+    this.getAppDetails();
     this.populateList();
     this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
     // this.alreadyIn();
@@ -130,20 +131,20 @@ export class UpdateAppComponent implements OnInit {
         this.getAvaliables();
 
         console.log("emp length" + this.app.employee.length)
-      setTimeout(() => {
-       
-        for(let x of this.app.employee){
-          this.UnassignDevice.push(x)
-          this.confirmed = JSON.parse(JSON.stringify(this.UnassignDevice));
-          console.log("confirmed loop data " + this.confirmed)
-        }
-        console.log("user name " + this.user.name)
-        console.log("datat " + this.UnassignDevice)
-      }, 1000);
-      
+        setTimeout(() => {
+
+          for (let x of this.app.employee) {
+            this.UnassignDevice.push(x)
+            this.confirmed = JSON.parse(JSON.stringify(this.UnassignDevice));
+            console.log("confirmed loop data " + this.confirmed)
+          }
+          console.log("user name " + this.user.name)
+          console.log("datat " + this.UnassignDevice)
+        }, 1000);
+
         setTimeout(() => {
           this.doReset()
-          
+
         }, 1500);
         this.getAvaliables();
       },
@@ -206,7 +207,7 @@ export class UpdateAppComponent implements OnInit {
     this.confirmedUsers = this.confirmed;
     this.source = [...this.AssignDevice, ...this.UnassignDevice];
 
-    console.log("source: " +JSON.parse(JSON.stringify(this.source)));
+    console.log("source: " + JSON.parse(JSON.stringify(this.source)));
     console.log("confirmed: " + JSON.stringify(this.confirmed));
   }
 
@@ -214,26 +215,32 @@ export class UpdateAppComponent implements OnInit {
 
   //update
   updateAppointment() {
-    this.app.employee = this.confirmedUsers;
+    if (!this.confirmedUsers || !this.confirmedUsers.length) {
+      alert("Please Check Attendes User")
+    } else {
+      this.app.employee = this.confirmedUsers;
+      this.app.title = this.app.title
+      this.app.description = this.app.description
 
-    this.app.title = this.app.title
-    this.app.description = this.app.description
 
+      this.appService.updateApp(this.app).subscribe(
+        data => {
+          if (this.files.length != 0) {
+            this.uploadFiles(this.app.appointment_id);
+          } else {
+            this.router.navigate(['admin/appointment_detail_view', this.id], { queryParams: { data: JSON.stringify(this.date) } }).then(() => window.location.reload()), 10000
+            Swal.fire({
+              icon: 'success',
+              title: 'Successfully Updated',
+              text: 'Your appointment is successfully updated',
+            });
+          }
+        }, error => console.log("error update")
 
-    this.appService.updateApp(this.app).subscribe(
-      data => {
-        this.getAppDetails()
-        // alert("update success")
-        Swal.fire({  
-          icon: 'success',  
-          title: 'Successfully Updated',  
-          text: 'Your appointment is successfully updated',   
-        });
-        // this.router.navigate(['/admin/appointment_detail_view', id], { queryParams: { data: JSON.stringify(start)}});
-        this.router.navigate(['admin/appointment_detail_view', this.id])
-      }, error => console.log("error update")
+      )
+      
+    }
 
-    )
   }
   //date
   onSelect(event) {
@@ -249,10 +256,10 @@ export class UpdateAppComponent implements OnInit {
         // Display error message to user
         console.log("File too large: " + checkFiles[i].name);
         // alert('File size should be less than 5MB!!');
-        Swal.fire({  
-          icon: 'warning',  
-          title: 'Please. Check File Size',  
-          text: 'File size should be less than 5MB!!',   
+        Swal.fire({
+          icon: 'warning',
+          title: 'Please. Check File Size',
+          text: 'File size should be less than 5MB!!',
         })
       } else {
         this.files.push(checkFiles[i]);
@@ -268,10 +275,20 @@ export class UpdateAppComponent implements OnInit {
     }
     this.appService.uploadFiles(formdata).subscribe(
       data => {
-        // Swal.fire('Added Appointment!!', 'Appointment Added Succesfully!', 'success');
+        this.router.navigate(['admin/appointment_detail_view', this.id], { queryParams: { data: JSON.stringify(this.date) } }).then(() => window.location.reload()), 10000
+        Swal.fire({
+          icon: 'success',
+          title: 'Successfully Updated',
+          text: 'Your appointment is successfully updated',
+        });
       },
       error => {
-        Swal.fire('Failed!!', 'Appointment Added Was Failed!', 'fail');
+        //Swal.fire('Failed!!', 'Appointment Added Was Failed!', 'fail');
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed ',
+          text: 'Appointment Added Was Failed!',
+        })
       }
     );
   }

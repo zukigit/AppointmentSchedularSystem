@@ -109,15 +109,14 @@ export class DashboardComponent implements OnInit {
     console.log("show data app "+this.showDataApp);
     console.log("today app are "+this.todayApp);
 
-   
+
     this.currentDate = this.datePipe.transform(this.currentDate, 'MM/dd/yyyy');
     // console.log("today date "+this.todayDate)
     console.log("current date "+this.currentDate)
 
-  
+
     this.getSchedulesById();
     
-  
       const dataDailySalesChart: any = {
           labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
           series: [
@@ -198,16 +197,18 @@ export class DashboardComponent implements OnInit {
   }
 
   getSchedulesById(){
-    
-        this.appService.getAppointmentById(this.loginId).subscribe((data) => {
+      this.appService.getAppointmentById(this.loginId).subscribe((data) => {
             this.showDataApp =data
       })
 
-    // if(this..schedules.date == this.currentDate){
-    // this.showDataApp.length = 0
-    // this.count = +1;
-    // }
-    }
+    
+
+        this.appService.getAppointmentById(this.loginId).subscribe(data =>
+          this.showDataApp = data);
+
+          console.log(this.showDataApp.length+"app date");
+
+  }
 
   getAllApp(){
 
