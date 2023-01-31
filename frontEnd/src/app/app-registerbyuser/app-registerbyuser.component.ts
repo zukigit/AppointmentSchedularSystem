@@ -281,6 +281,7 @@ export class AppRegisterbyuserComponent implements OnInit {
   }
 
   getAvaliables() {
+    this.schedules.length = 0;
     this.user.length = 0;
     this.UnassignDevice.length = 0;
     this.generateSchedules();
