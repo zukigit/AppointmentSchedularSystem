@@ -222,13 +222,15 @@ export class UpdateAppByuserComponent implements OnInit {
 
     this.appService.updateApp(this.app).subscribe(
       data => {
-        this.getAppDetails()
-        // alert("update success")
-        Swal.fire({  
-          icon: 'success',  
-          title: 'Successfully Updated',  
-          text: 'Your appointment is successfully updated',   
-        });
+        if(this.files.length != 0) {
+          this.uploadFiles(this.app.appointment_id);
+        } else {
+          Swal.fire({  
+            icon: 'success',  
+            title: 'Successfully Updated',  
+            text: 'Your appointment is successfully updated',   
+          });
+        }
         // this.router.navigate(['/user/appointment_detail_view', id], { queryParams: { data: JSON.stringify(start)}});
         this.router.navigate(['user/appointment_detail_view', this.id])
       }, error => console.log("error update")
@@ -260,18 +262,27 @@ export class UpdateAppByuserComponent implements OnInit {
     }
   }
 
-  uploadFiles(appointmentId: any) {
+  uploadFiles(appointmentId:any) {
     const formdata = new FormData();
     formdata.append("appointmentId", appointmentId);
-    for (let i = 0; i < this.files.length; i++) {
+    for(let i = 0; i < this.files.length; i++) {
       formdata.append("files", this.files[i]);
     }
     this.appService.uploadFiles(formdata).subscribe(
-      data => {
-        // Swal.fire('Added Appointment!!', 'Appointment Added Succesfully!', 'success');
+      data=>{
+        Swal.fire({  
+          icon: 'success',  
+          title: 'Successfully Updated',  
+          text: 'Your appointment is successfully updated',   
+        });
       },
-      error => {
-        Swal.fire('Failed!!', 'Appointment Added Was Failed!', 'fail');
+      error=>{
+        //Swal.fire('Failed!!', 'Appointment Added Was Failed!', 'fail');
+        Swal.fire({  
+          icon: 'error',  
+          title: 'Failed ',  
+          text: 'Appointment Added Was Failed!',   
+        })
       }
     );
   }
