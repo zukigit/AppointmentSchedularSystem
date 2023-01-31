@@ -10,6 +10,7 @@ import { NotiModel } from 'app/model/noti-model';
 import { UserService } from 'app/services/user.service';
 // import { NotiModel } from 'app/model/noti-model';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { data } from 'jquery';
 
 
 declare interface RouteInfo {
@@ -31,26 +32,22 @@ export const ROUTES = [
     styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-    // menuItems: any[];
     private listTitles: any[];
     location: Location;
     mobile_menu_visible: any = 0;
     private toggleButton: any;
     private sidebarVisible: boolean;
     appointment: ShowAppointment = new ShowAppointment();
-
     bindData: any[] = [];
     temData: any;
     readedNoti: number;
-
-    // notificationCount$ = this.notiService.notificationCount$;
+    loggedInUserName: string;
+    loggedInUserRole: string;
 
     constructor(location: Location, private element: ElementRef, private router: Router
         , private notiService: NotiService , private userService : UserService) {
         this.location = location;
         this.sidebarVisible = false;
-
-
     }
     notiModel: NotiModel;
     dataByNoti: any = [];
@@ -60,17 +57,20 @@ export class NavbarComponent implements OnInit {
     user !: User;
     text: string;
     showNoti: any[] = [];
-
     unreadNoti: number;
-
     realTimeDataSubscription$: Subscription;
-
 
     ngOnInit() {
         this.loginId = localStorage.getItem("loggedInUserId");
         this.getNoti();
         this.checkNotiCounts();
+        this.userService.getUserById(this.loginId).subscribe(
+            data=> {
+                this.loggedInUserName = data.name;
+                this.loggedInUserRole = data.role;
+            }
 
+        )
         setTimeout(() => {
             this.realTimeData();
         }, 1000);
