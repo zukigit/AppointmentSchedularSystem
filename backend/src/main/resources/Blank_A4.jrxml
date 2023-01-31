@@ -40,66 +40,103 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="104" splitType="Stretch"/>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="117" y="0" width="293" height="43" forecolor="#403ECF" uuid="e9bec6c0-46db-4024-95eb-ac3f771e18df"/>
+				<textElement>
+					<font size="26" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Today Appointment]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="410" y="16" width="150" height="30" uuid="d23d3ca7-a41b-4ce8-a4e1-087fc04afecc"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
 	</title>
 	<pageHeader>
-		<band height="35" splitType="Stretch"/>
-	</pageHeader>
-	<columnHeader>
-		<band height="92" splitType="Stretch">
+		<band height="36" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="47" width="40" height="30" forecolor="#030303" uuid="e300d3f7-4dc2-421c-b37f-684b8ed003fb"/>
-				<text><![CDATA[ID]]></text>
+				<reportElement x="308" y="3" width="90" height="30" uuid="1a8aedc0-76bf-423d-9a1e-143e74fba214"/>
+				<textElement>
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Start Time]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="210" y="47" width="80" height="30" uuid="a174fadb-bbcf-4cb7-93a7-652bb72c7a32"/>
+				<reportElement x="218" y="3" width="90" height="30" uuid="a174fadb-bbcf-4cb7-93a7-652bb72c7a32"/>
+				<textElement>
+					<font fontName="SansSerif" size="18" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Title]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="60" y="46" width="50" height="30" uuid="6e29b5b9-eb8b-4982-b340-b1834f80c8e3"/>
-				<text><![CDATA[Name]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="130" y="46" width="61" height="31" uuid="c66be799-69d4-4516-9f1d-d09d1e8e3860"/>
+				<reportElement x="100" y="3" width="81" height="31" uuid="c66be799-69d4-4516-9f1d-d09d1e8e3860"/>
+				<textElement>
+					<font fontName="SansSerif" size="18" isBold="true"/>
+				</textElement>
 				<text><![CDATA[Description]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="440" y="45" width="104" height="30" uuid="c0e86d1c-de53-4e97-923a-5f3b1c3505bb"/>
-				<text><![CDATA[End Time]]></text>
+				<reportElement x="10" y="6" width="80" height="30" uuid="6e29b5b9-eb8b-4982-b340-b1834f80c8e3"/>
+				<textElement>
+					<font fontName="SansSerif" size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Name]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="300" y="45" width="80" height="30" uuid="1a8aedc0-76bf-423d-9a1e-143e74fba214"/>
-				<text><![CDATA[Start Time]]></text>
+				<reportElement x="420" y="1" width="100" height="35" uuid="c0e86d1c-de53-4e97-923a-5f3b1c3505bb"/>
+				<textElement>
+					<font fontName="SansSerif" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[End Time]]></text>
 			</staticText>
 		</band>
-	</columnHeader>
-	<detail>
-		<band height="47" splitType="Stretch">
+	</pageHeader>
+	<columnHeader>
+		<band height="100" splitType="Stretch">
 			<textField>
-				<reportElement x="130" y="0" width="60" height="30" uuid="2ede4469-389e-46ee-87f9-fd924316cdef"/>
-				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="220" y="0" width="60" height="47" uuid="a4684811-9061-41ef-83d6-b0da33d9793f"/>
-				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="50" y="0" width="80" height="30" uuid="6b885a1d-1d57-40b2-8140-a5c0178f57aa"/>
-				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="1" y="0" width="49" height="30" uuid="98d0c9cb-ce29-47fa-85ee-5d0c221017fc"/>
-				<textFieldExpression><![CDATA[$F{appointment_id}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="290" y="0" width="100" height="47" uuid="39d32a2d-dbd5-42fe-906d-3d5a3bbb838a"/>
+				<reportElement x="308" y="45" width="80" height="47" uuid="39d32a2d-dbd5-42fe-906d-3d5a3bbb838a"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{start_time}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="440" y="7" width="117" height="30" uuid="2778ecb4-e5f6-44e6-a240-c8acbb78149a"/>
+				<reportElement x="210" y="45" width="80" height="47" uuid="a4684811-9061-41ef-83d6-b0da33d9793f"/>
+				<textElement>
+					<font size="18" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="45" width="100" height="50" uuid="2ede4469-389e-46ee-87f9-fd924316cdef"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="48" width="80" height="41" uuid="6b885a1d-1d57-40b2-8140-a5c0178f57aa"/>
+				<textElement>
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="45" width="100" height="47" uuid="2778ecb4-e5f6-44e6-a240-c8acbb78149a"/>
+				<textElement>
+					<font size="16"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{end_time}]]></textFieldExpression>
 			</textField>
 		</band>
+	</columnHeader>
+	<detail>
+		<band height="47" splitType="Stretch"/>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>
