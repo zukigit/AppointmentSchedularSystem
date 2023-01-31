@@ -78,7 +78,7 @@ export class AppointmentDetailViewByuserComponent implements OnInit {
 
   //update
   updateApp() {
-    this.router.navigate(['user/update-app-byuser',this.id])
+    this.router.navigate(['admin/update-app',this.id], { queryParams: { data: JSON.stringify(this.date)}});
   }
    
   //delete

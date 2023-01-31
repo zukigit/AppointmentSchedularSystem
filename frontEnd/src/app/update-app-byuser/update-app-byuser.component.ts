@@ -96,6 +96,7 @@ export class UpdateAppByuserComponent implements OnInit {
   schedules: Schdule[] = [];
   teamId: string;
   departmentId: string;
+  date:string;
   format: any = { add: 'Add Selected Member', remove: 'Remove Selected Member', all: 'Select All', none: 'Unselect All', direction: 'right-to-left', draggable: true, locale: undefined };
 
   constructor(private userServices: UserService, private route: ActivatedRoute, private datePipe: DatePipe, private appService: AppointmentService, private router: Router,) { }
@@ -103,10 +104,10 @@ export class UpdateAppByuserComponent implements OnInit {
   ngOnInit(): void {
 
     this.id = this.route.snapshot.params['id'];
-      this.getAppDetails();
-    setTimeout(() => {
-      
-    }, 1500);
+    this.route.queryParams.subscribe(params => {
+      this.date = JSON.parse(params.data);
+    });
+    this.getAppDetails();
     this.populateList();
     this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
     // this.alreadyIn();
@@ -225,14 +226,13 @@ export class UpdateAppByuserComponent implements OnInit {
         if(this.files.length != 0) {
           this.uploadFiles(this.app.appointment_id);
         } else {
+          this.router.navigate(['user/appointment_detail_view', this.id], { queryParams: { data: JSON.stringify(this.date)}}).then (() => window.location.reload()),10000
           Swal.fire({  
             icon: 'success',  
             title: 'Successfully Updated',  
             text: 'Your appointment is successfully updated',   
           });
         }
-        // this.router.navigate(['/user/appointment_detail_view', id], { queryParams: { data: JSON.stringify(start)}});
-        this.router.navigate(['user/appointment_detail_view', this.id])
       }, error => console.log("error update")
 
     )
@@ -270,6 +270,7 @@ export class UpdateAppByuserComponent implements OnInit {
     }
     this.appService.uploadFiles(formdata).subscribe(
       data=>{
+        this.router.navigate(['user/appointment_detail_view', this.id], { queryParams: { data: JSON.stringify(this.date)}}).then (() => window.location.reload()),10000
         Swal.fire({  
           icon: 'success',  
           title: 'Successfully Updated',  
