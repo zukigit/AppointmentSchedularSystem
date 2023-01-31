@@ -18,7 +18,7 @@
             [type]="changetype?'password':'text'" style="cursor: pointer;" id="npassword" name="npassword" type="password"
             required minlength="6" #npassword="ngModel">
             <div *ngIf="npassword.errors?.['minlength']">
-              Name must be at least 6 characters long.
+              Password must be at least 6 characters long.
             </div>
 
 
@@ -26,8 +26,11 @@
           <div class="label" style="float: left;">Confirm Password</div>
           <input type="password" class="form-control" placeholder="At least 6 charaters"
             [(ngModel)]="changePass.conPassword" [type]="changetype?'password':'text'" style="cursor: pointer;"
-            id="conPassword" name="password" type="password" required>
+            id="conPassword" name="password" type="password" required minlength="6" #password="ngModel">
         </div>
+         <div *ngIf="password.errors?.['minlength']">
+              Password must be at least 6 characters long.
+            </div>
 
 
         <div class="w3-show-inline-block">
