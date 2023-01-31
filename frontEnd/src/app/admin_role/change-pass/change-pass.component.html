@@ -3,7 +3,7 @@
     <div class="bg-white text-center p-5 mt-3 center" style="padding-bottom: 1px;">
       <h3>Change Password </h3>
       <form #form="ngForm" class="pb-3" id="passwordForm" (ngSubmit)="changePassword()">
-        <div class="form-group">
+        <div class="form-group" style="">
           <label> Unhide <span class="eyeicon" (click)="viewpass()"> <i
                 [ngClass]="visible?'fa fa-eye': 'fa fa-eye-slash'" style="color: #8092a8;"></i></span></label><br>
 
@@ -11,7 +11,7 @@
           <input type="password" class="form-control" placeholder="Your Current Password"
             [(ngModel)]="changePass.oldPassword" [type]="changetype?'password':'text'" style="cursor: pointer;"
             id="password" name="password" type="password" required>
-
+<div style="height: 20px;"></div>
           <div class="label" style="float: left;">New Password</div>
           <input type="password" class="form-control"
             placeholder="At least 6 charaters" [(ngModel)]="changePass.newPassword"
@@ -22,7 +22,7 @@
             </div>
 
 
-
+            <div style="height: 20px;"></div>
           <div class="label" style="float: left;">Confirm Password</div>
           <input type="password" class="form-control" placeholder="At least 6 charaters"
             [(ngModel)]="changePass.conPassword" [type]="changetype?'password':'text'" style="cursor: pointer;"
@@ -31,7 +31,7 @@
          <div *ngIf="password.errors?.['minlength']">
               Password must be at least 6 characters long.
             </div>
-
+            <div style="height: 20px;"></div>
 
         <div class="w3-show-inline-block">
           <div class="w3-bar">

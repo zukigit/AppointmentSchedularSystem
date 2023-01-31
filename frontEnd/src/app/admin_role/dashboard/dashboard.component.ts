@@ -41,6 +41,7 @@ export class DashboardComponent implements OnInit {
 
 
   userDataDetails : any ;
+  count : any;
 
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;

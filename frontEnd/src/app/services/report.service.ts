@@ -42,4 +42,6 @@ export class ReportService {
     alert("Saved on Desktop ok")
     return this.http.get(`${this.baseUrl}/getAllApp/${id}`, this.header);
     }
+
 }
+
