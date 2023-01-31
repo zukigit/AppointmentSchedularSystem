@@ -102,7 +102,6 @@ export class UpdateAppComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.getAvaliables();
     this.id = this.route.snapshot.params['id'];
       this.getAppDetails();
     setTimeout(() => {
@@ -128,6 +127,7 @@ export class UpdateAppComponent implements OnInit {
       (res: any) => {
         this.app = res
         this.app.schedules = res.schedules
+        this.getAvaliables();
 
         console.log("emp length" + this.app.employee.length)
       setTimeout(() => {
