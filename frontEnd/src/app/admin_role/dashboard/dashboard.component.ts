@@ -201,12 +201,8 @@ export class DashboardComponent implements OnInit {
             this.showDataApp =data
       })
 
-    
 
-        this.appService.getAppointmentById(this.loginId).subscribe(data =>
-          this.showDataApp = data);
-
-          console.log(this.showDataApp.length+"app date");
+     console.log(this.showDataApp.length+"app date");
 
   }
 
