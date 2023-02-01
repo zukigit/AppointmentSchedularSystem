@@ -228,12 +228,16 @@ export class UpdateAppByuserComponent implements OnInit {
           if (this.files.length != 0) {
             this.uploadFiles(this.app.appointment_id);
           } else {
-            this.router.navigate(['user/appointment_detail_view', this.id], { queryParams: { data: JSON.stringify(this.date) } }).then(() => window.location.reload()), 10000
             Swal.fire({
-              icon: 'success',
-              title: 'Successfully Updated',
-              text: 'Your appointment is successfully updated',
-            });
+              title: "Successfully Update",
+                      text: "Appointment is updated",
+                      icon: "success",
+              confirmButtonText: "Ok"
+          }).then((result) => {
+            if (result.value){
+                    this.router.navigate(['user/appointment_detail_view_byuser', this.id], { queryParams: { data: JSON.stringify(this.date) } }).then(() => window.location.reload()), 10000
+                }
+        })
           }
         }, error => console.log("error update")
 
