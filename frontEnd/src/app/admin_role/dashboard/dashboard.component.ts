@@ -11,6 +11,7 @@ import { DatePipe } from '@angular/common';
 import * as e from 'express';
 import { ReportService } from 'app/services/report.service';
 import { co } from '@fullcalendar/core/internal-common';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-dashboard',
@@ -116,7 +117,7 @@ export class DashboardComponent implements OnInit {
 
 
     this.getSchedulesById();
-    
+
       const dataDailySalesChart: any = {
           labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
           series: [
@@ -201,6 +202,10 @@ export class DashboardComponent implements OnInit {
             this.showDataApp =data
       })
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 184a3841043274993a23f377c1752c02798ba739
 
      console.log(this.showDataApp.length+"app date");
 
@@ -209,7 +214,13 @@ export class DashboardComponent implements OnInit {
   getAllApp(){
 
     this.reportService.getAllApp(this.loginId).subscribe(data =>
-      console.log("report data"+data)
+      console.log("report data"+data),
+      Swal.fire({
+        icon: 'success',
+        title: 'Successfully Saved ',
+        text: 'TodayAppointment is saved on Desktop',
+      })
+
      );
 
 
