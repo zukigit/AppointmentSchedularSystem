@@ -5,6 +5,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { RegisterationRequestModel } from 'app/model/registeration-request-model';
 import { Team } from 'app/model/team';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-update',
@@ -128,4 +129,11 @@ export class UpdateComponent implements OnInit {
   goToUserDetails() {
     this.router.navigate(['admin/user-details']);
   }
+
+  passwordFormControl = new FormControl('', [
+    Validators.required,
+    Validators.minLength(6)
+  ]);
+
+
 }

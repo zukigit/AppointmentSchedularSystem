@@ -24,8 +24,13 @@
                   let the blank to this field.
                 </span></a>
             </span>
-            <input type="password" [(ngModel)]="user.password" name="password" id="pass" placeholder="Password">
+            <input type="password" minlength="6" #password="ngModel" required [(ngModel)]="user.password" name="password"
+              id="password" placeholder="Password">
+              <div *ngIf="password.errors?.['minlength']">
+                Password must be at least 6 characters long.
+              </div>
           </div>
+         
           <div class="input-box">
             <span class="details">Phone Number</span>
             <input (keypress)="isNumberKey($event)" (paste)="pasteCallback($event)" type="number" maxlength="11"
