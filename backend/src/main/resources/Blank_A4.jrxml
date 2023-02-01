@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Jasper My File1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8b1dec0e-7109-4d5e-8525-b8eacdfbf592">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4sss" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="88a7e0a4-6495-4510-a9e9-6d9bf477ea9d">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Appointment(1)"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT u.name, a.title,a.description,s.start_time,s.end_time,a.appointment_id FROM User u join appointment_employee e on u.employee_id=e.employee_id join appointment a on a.appointment_id=e.appointment_id join appointment_schedules t on a.appointment_id = t.appointment_appointment_id join schedule s on t.schedules_id=s.id where s.date = CURDATE()]]>
+		<![CDATA[SELECT u.name, a.title,a.description,a.type,s.start_time,s.end_time,a.appointment_id FROM User u join appointment_employee e on u.employee_id=e.employee_id join appointment a on a.appointment_id=e.appointment_id join appointment_schedules t on a.appointment_id = t.appointment_appointment_id join schedule s on t.schedules_id=s.id]]>
 	</queryString>
 	<field name="name" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="name"/>
@@ -19,6 +19,11 @@
 	<field name="description" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="description"/>
 		<property name="com.jaspersoft.studio.field.label" value="description"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="appointment"/>
+	</field>
+	<field name="type" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="type"/>
+		<property name="com.jaspersoft.studio.field.label" value="type"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="appointment"/>
 	</field>
 	<field name="start_time" class="java.time.LocalTime">
@@ -40,97 +45,152 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="104" splitType="Stretch">
+		<band height="101" splitType="Stretch">
 			<staticText>
-				<reportElement x="60" y="20" width="279" height="71" forecolor="#0000FF" uuid="98159b81-2e8d-4685-b2cf-480c9dbad60a"/>
-				<textElement>
-					<font size="24" isBold="true"/>
+				<reportElement x="138" y="30" width="279" height="71" forecolor="#0000FF" uuid="a793ad5c-b4a9-4db5-877b-a139c754045d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="26" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Total Appointment]]></text>
+				<text><![CDATA[Today Appointment]]></text>
 			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="42" splitType="Stretch">
 			<textField pattern="MMMMM dd, yyyy">
-				<reportElement x="390" y="34" width="167" height="30" uuid="929be0ac-7900-4f68-9283-cbe0e96078d1"/>
-				<textElement>
+				<reportElement x="390" y="0" width="167" height="30" uuid="f3c90699-5875-4ad6-867e-beb5b3795e99"/>
+				<textElement textAlignment="Right">
 					<font size="16" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 		</band>
-	</title>
-	<pageHeader>
-		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="92" splitType="Stretch">
+		<band height="41" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="10" width="40" height="30" uuid="e300d3f7-4dc2-421c-b37f-684b8ed003fb"/>
-				<textElement>
-					<font size="18" isBold="true"/>
-				</textElement>
-				<text><![CDATA[ID]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="250" y="10" width="80" height="31" uuid="a174fadb-bbcf-4cb7-93a7-652bb72c7a32"/>
-				<textElement>
+				<reportElement x="0" y="5" width="100" height="36" uuid="fd10b194-6716-4c05-a51f-a2611057b77d"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="18" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Title]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="60" y="10" width="50" height="30" uuid="6e29b5b9-eb8b-4982-b340-b1834f80c8e3"/>
-				<textElement>
+				<reportElement x="320" y="5" width="140" height="36" uuid="0f058fa8-2ffe-470e-9c94-d3ff301bfe90"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="18" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Name]]></text>
+				<text><![CDATA[Start Time]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="130" y="10" width="100" height="31" uuid="c66be799-69d4-4516-9f1d-d09d1e8e3860"/>
-				<textElement>
+				<reportElement x="100" y="5" width="110" height="36" uuid="7d762b92-5416-4e31-9975-b7b5469e32a3"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="18" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Description]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="460" y="10" width="84" height="30" uuid="c0e86d1c-de53-4e97-923a-5f3b1c3505bb"/>
-				<textElement>
+				<reportElement x="460" y="5" width="84" height="36" uuid="708c08f2-9ab5-4c79-b79c-22caabe01db3"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="18" isBold="true"/>
 				</textElement>
 				<text><![CDATA[End Time]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="350" y="10" width="100" height="30" uuid="1a8aedc0-76bf-423d-9a1e-143e74fba214"/>
-				<textElement>
+				<reportElement x="210" y="5" width="110" height="36" uuid="5737db24-63b6-4ca5-80c4-ef0d31d9aa23"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="18" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Start Time]]></text>
+				<text><![CDATA[Privacy]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="47" splitType="Stretch">
+		<band height="31" splitType="Stretch">
 			<textField>
-				<reportElement x="150" y="0" width="60" height="30" uuid="2ede4469-389e-46ee-87f9-fd924316cdef"/>
-				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="260" y="0" width="60" height="47" uuid="a4684811-9061-41ef-83d6-b0da33d9793f"/>
-				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="60" y="-1" width="80" height="30" uuid="6b885a1d-1d57-40b2-8140-a5c0178f57aa"/>
-				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="1" y="0" width="49" height="30" uuid="98d0c9cb-ce29-47fa-85ee-5d0c221017fc"/>
-				<textFieldExpression><![CDATA[$F{appointment_id}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="360" y="0" width="90" height="47" uuid="39d32a2d-dbd5-42fe-906d-3d5a3bbb838a"/>
+				<reportElement x="320" y="0" width="140" height="30" uuid="3ba4d28f-cb48-4dab-8838-3903ce254903"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{start_time}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="470" y="0" width="87" height="30" uuid="2778ecb4-e5f6-44e6-a240-c8acbb78149a"/>
+				<reportElement x="460" y="0" width="84" height="30" uuid="658aa1bf-c990-4292-a315-2fa3a1b247d8"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{end_time}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="30" uuid="e65d1c78-65bd-4881-8ddf-65ca39356fb6"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="110" height="30" uuid="68c492e1-c4cc-451a-84d3-97d3f29f13d6"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="210" y="0" width="110" height="30" uuid="36d7dfad-16a2-4e31-babe-3a9568765ec2"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

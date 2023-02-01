@@ -128,6 +128,7 @@
                     <table class="table table-striped table-hover">
                         <thead>
                             <tr>
+                                <th>#</th>
                                 <th>Id</th>
                                 <th>Name</th>
                                 <th>Department</th>
@@ -136,8 +137,9 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody *ngFor="let user of userDataDetails">
+                        <tbody *ngFor="let user of userDataDetails;let i = index">
                             <tr>
+                                <td>{{i + 1}}</td>
                                 <td> {{ user.employee_id }} </td>
                                 <td> {{ user.name }} </td>
                                 <td> {{ user.department_name }} </td>

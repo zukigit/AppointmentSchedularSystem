@@ -128,7 +128,7 @@ public class ReportImpl implements ReportService {
 					jrBeanCollectionDataSource);
 
 			// Export the report to a PDF file
-			JasperExportManager.exportReportToPdfFile(jasperPrint, reportPath + "\\AllUser.pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint, reportPath + "\\TodayAppointment.pdf");
 
 			System.out.println("Done");
 

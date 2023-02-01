@@ -22,7 +22,7 @@ export class AppRegisterComponent implements OnInit {
   currentDate: any = new Date();
   todayDate = new Date();
   currentHour = this.todayDate.getHours().toString();
-
+ 
   sDate: any = new Date()
   sTime: any = new Date();
   options = [
@@ -110,7 +110,7 @@ export class AppRegisterComponent implements OnInit {
         }
       });
 
-
+      console.log(this.currentHour)
 
   }
 
@@ -220,16 +220,22 @@ export class AppRegisterComponent implements OnInit {
 
     let tDate = this.datePipe.transform(this.currentDate, 'yyyy/MM/dd');
     this.sDate = this.datePipe.transform(this.app.start_date, 'yyyy/MM/dd')
-
-    console.log(this.sDate)
-    console.log(tDate)
-    if (this.sDate == tDate) {
-      console.log("filter")
-      this.options = this.options.filter((obj) => {
+   
+    if (this.sDate == tDate) { 
+      console.log(this.currentHour.length);
+      if(this.currentHour.length ==1 ){
+        this.currentHour="0"+this.currentHour;
+      }     
+      this.options = this.options.filter((obj) => {       
         return obj.value > this.currentHour
       });
 
+   
+   
     }
+    // else if(this.sDate == tDate){
+
+    // }
     console.log(this.options);
   }
 
