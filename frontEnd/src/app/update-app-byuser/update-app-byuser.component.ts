@@ -215,27 +215,32 @@ export class UpdateAppByuserComponent implements OnInit {
 
   //update
   updateAppointment() {
-    this.app.employee = this.confirmedUsers;
+    if (!this.confirmedUsers || !this.confirmedUsers.length) {
+      alert("Please Check Attendes User")
+    } else {
+      this.app.employee = this.confirmedUsers;
+      this.app.title = this.app.title
+      this.app.description = this.app.description
 
-    this.app.title = this.app.title
-    this.app.description = this.app.description
 
+      this.appService.updateApp(this.app).subscribe(
+        data => {
+          if (this.files.length != 0) {
+            this.uploadFiles(this.app.appointment_id);
+          } else {
+            this.router.navigate(['user/appointment_detail_view', this.id], { queryParams: { data: JSON.stringify(this.date) } }).then(() => window.location.reload()), 10000
+            Swal.fire({
+              icon: 'success',
+              title: 'Successfully Updated',
+              text: 'Your appointment is successfully updated',
+            });
+          }
+        }, error => console.log("error update")
 
-    this.appService.updateApp(this.app).subscribe(
-      data => {
-        if(this.files.length != 0) {
-          this.uploadFiles(this.app.appointment_id);
-        } else {
-          this.router.navigate(['user/appointment_detail_view', this.id], { queryParams: { data: JSON.stringify(this.date)}}).then (() => window.location.reload()),10000
-          Swal.fire({  
-            icon: 'success',  
-            title: 'Successfully Updated',  
-            text: 'Your appointment is successfully updated',   
-          });
-        }
-      }, error => console.log("error update")
+      )
+      
+    }
 
-    )
   }
   //date
   onSelect(event) {

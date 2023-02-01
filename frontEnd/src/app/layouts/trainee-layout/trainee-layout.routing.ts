@@ -23,6 +23,7 @@ import { DailyviewbytraineeComponent } from 'app/dailyviewbytrainee/dailyviewbyt
 import { AppointmentDetailViewComponent } from 'app/appointment-detail-view/appointment-detail-view.component';
 import { AppointmentDetailViewBytraineeComponent } from 'app/appointment-detail-view-bytrainee/appointment-detail-view-bytrainee.component';
 import { WeeklyviewbytraineeComponent } from 'app/weeklyviewbytrainee/weeklyviewbytrainee.component';
+import { SearchUserComponent } from 'app/search-user/search-user.component';
 
 export const TraineeLayoutRoutes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate:[TraineeAuthGuard]},
@@ -31,6 +32,7 @@ export const TraineeLayoutRoutes: Routes = [
     { path: 'change_pass',component:ChangePassComponent, canActivate:[TraineeAuthGuard]},
     { path: 'dailyviewbytrainee', component: DailyviewbytraineeComponent,canActivate:[TraineeAuthGuard]},
     { path: 'weeklyviewbytrainee', component: WeeklyviewbytraineeComponent,canActivate:[TraineeAuthGuard]},
-    { path: 'appointment_detail_view_bytrainee/:id', component:AppointmentDetailViewBytraineeComponent,canActivate:[TraineeAuthGuard]}
+    { path: 'appointment_detail_view_bytrainee/:id', component:AppointmentDetailViewBytraineeComponent,canActivate:[TraineeAuthGuard]},
     //{ path: 'test', component: TraineeComponent, canActivate:[TraineeAuthGuard]},
+    {path: 'search-user',component:SearchUserComponent,canActivate:[TraineeAuthGuard]}
 ];

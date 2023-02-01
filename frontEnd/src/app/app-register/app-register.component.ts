@@ -24,7 +24,7 @@ export class AppRegisterComponent implements OnInit {
   currentHour = this.todayDate.getHours().toString();
 
   sDate: any = new Date()
-  sTime:any = new Date();
+  sTime: any = new Date();
   options = [
     { value: '07', label: '07' },
     { value: '08', label: '08' },
@@ -41,7 +41,7 @@ export class AppRegisterComponent implements OnInit {
     { value: '19', label: '19' },
   ];
 
-  minutesOptions =[
+  minutesOptions = [
     { value: '00', label: '00' },
     { value: '15', label: '15' },
     { value: '30', label: '30' },
@@ -84,23 +84,23 @@ export class AppRegisterComponent implements OnInit {
   tab = 1;
   keepSorted = true;
   key: string;
-  display: any=[];
+  display: any = [];
   filter = false;
   source: AssignedDeviceCode[] = [];
   confirmed: UnAssignedDeviceCode[] = [];
   userAdd = '';
   disabled = false;
   sourceLeft = true;
-  files:File[] = [];
+  files: File[] = [];
   schedules: Schdule[] = [];
   teamId: string;
   departmentId: string;
   format: any = { add: 'Add Selected Member', remove: 'Remove Selected Member', all: 'Select All', none: 'Unselect All', direction: 'right-to-left', draggable: true, locale: undefined };
-  
-  constructor(private userServices: UserService, private datePipe: DatePipe, private appService: AppointmentService,private router: Router ,) { }
+
+  constructor(private userServices: UserService, private datePipe: DatePipe, private appService: AppointmentService, private router: Router,) { }
 
   ngOnInit(): void {
-   
+
     this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
 
     this.userServices.getTeam().subscribe(
@@ -111,26 +111,26 @@ export class AppRegisterComponent implements OnInit {
       });
 
 
-      
-    }
 
-  isOptionDisabled(value: string): boolean {   
-    if(this.startMinute === "45"){
+  }
+
+  isOptionDisabled(value: string): boolean {
+    if (this.startMinute === "45") {
       return this.startHour >= value
     }
-    else{
+    else {
       return this.startHour > value
     }
-    
+
   }
 
-  minuteDisable (value: string):boolean{
-    if(this.startHour == this.endHour){
+  minuteDisable(value: string): boolean {
+    if (this.startHour == this.endHour) {
       return this.startMinute >= value;
     }
-    else{
-    return value != value;
-  }
+    else {
+      return value != value;
+    }
   }
 
   onSelectDept(department) {
@@ -158,7 +158,7 @@ export class AppRegisterComponent implements OnInit {
 
   private populateList() {
     this.key = 'employee_id'
-    this.display = ['name','department_name','team_name']
+    this.display = ['name', 'department_name', 'team_name']
     // console.log()
 
     this.keepSorted = true;
@@ -170,7 +170,7 @@ export class AppRegisterComponent implements OnInit {
   }
 
   //cancel
-  cancel(){
+  cancel() {
     this.router.navigate(['admin/dashboard'])
   }
 
@@ -186,39 +186,49 @@ export class AppRegisterComponent implements OnInit {
 
   addAppointment() {
     this.generateSchedules();
-    this.app.created_date = this.datePipe.transform(this.currentDate, 'MM/dd/yyyy');
-    this.app.schedules = this.schedules
-    this.app.employee = this.confirmedUsers;
-    this.app.createUser = {employee_id:this.loginId}
+    console.log("condieiton " + this.confirmedUsers)
 
-    this.appService.createAppointment(this.app).subscribe(
-      data => {
-        if(this.files.length != 0) {
-          this.uploadFiles(data);
-        }
-        Swal.fire('Appointment Created!!', 'Appointment added succesfully!', 'success');
-        this.router.navigate(['admin/dashboard']);
-      },
-      error => console.log("Error appointment responseee ")
-    )
+    if (!this.confirmedUsers || !this.confirmedUsers.length) {
+      alert("Please Check Attendes Users")
+     
+     
+    }else {
+      this.app.created_date = this.datePipe.transform(this.currentDate, 'MM/dd/yyyy');
+      this.app.schedules = this.schedules
+      this.app.employee = this.confirmedUsers;
+      this.app.createUser = { employee_id: this.loginId }
+
+      this.appService.createAppointment(this.app).subscribe(
+        data => {
+          if (this.files.length != 0) {
+            this.uploadFiles(data);
+          }
+          Swal.fire('Appointment Created!!', 'Appointment added succesfully!', 'success');
+          this.router.navigate(['admin/dashboard']);
+        },
+        error => console.log("Error appointment responseee ")
+      )
+      
+    }
+
   }
   //date
   onSelect(event) {
     this.sDate = new Date(this.app.start_date)
     // do something with the selected text here
-  //  console.log(this.app.start_date+"  "+this.currentDate +" " + this.sDate);
+    //  console.log(this.app.start_date+"  "+this.currentDate +" " + this.sDate);
 
-    let tDate  = this.datePipe.transform(this.currentDate, 'yyyy/MM/dd');
-    this.sDate = this.datePipe.transform(this.app.start_date,'yyyy/MM/dd')
+    let tDate = this.datePipe.transform(this.currentDate, 'yyyy/MM/dd');
+    this.sDate = this.datePipe.transform(this.app.start_date, 'yyyy/MM/dd')
 
     console.log(this.sDate)
     console.log(tDate)
-    if(this.sDate==tDate){
+    if (this.sDate == tDate) {
       console.log("filter")
-      this.options=this.options.filter((obj)=>{
+      this.options = this.options.filter((obj) => {
         return obj.value > this.currentHour
       });
-      
+
     }
     console.log(this.options);
   }
@@ -229,38 +239,38 @@ export class AppRegisterComponent implements OnInit {
     let sizeLimit = 5000000; // 5MB
     for (let i = 0; i < checkFiles.length; i++) {
       if (checkFiles[i].size > sizeLimit) {
-          // Display error message to user
-          console.log("File too large: " + checkFiles[i].name);
-          //alert('File size should be less than 5MB!!');
-          
-          Swal.fire({  
-            icon: 'warning',  
-            title: 'Please. Check File Size ',  
-            text: 'File size should be less than 5MB!!',   
-          })
-          
+        // Display error message to user
+        console.log("File too large: " + checkFiles[i].name);
+        //alert('File size should be less than 5MB!!');
+
+        Swal.fire({
+          icon: 'warning',
+          title: 'Please. Check File Size ',
+          text: 'File size should be less than 5MB!!',
+        })
+
       } else {
-          this.files.push(checkFiles[i]);
+        this.files.push(checkFiles[i]);
       }
     }
   }
 
-  uploadFiles(appointmentId:any) {
+  uploadFiles(appointmentId: any) {
     const formdata = new FormData();
     formdata.append("appointmentId", appointmentId);
-    for(let i = 0; i < this.files.length; i++) {
+    for (let i = 0; i < this.files.length; i++) {
       formdata.append("files", this.files[i]);
     }
     this.appService.uploadFiles(formdata).subscribe(
-      data=>{
+      data => {
         // Swal.fire('Added Appointment!!', 'Appointment Added Succesfully!', 'success');
       },
-      error=>{
+      error => {
         //Swal.fire('Failed!!', 'Appointment Added Was Failed!', 'fail');
-        Swal.fire({  
-          icon: 'error',  
-          title: 'Failed ',  
-          text: 'Appointment Added Was Failed!',   
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed ',
+          text: 'Appointment Added Was Failed!',
         })
       }
     );
@@ -270,7 +280,7 @@ export class AppRegisterComponent implements OnInit {
 
     const start_date = new Date(this.app.start_date);
     const end_date = new Date(this.app.end_date);
-    
+
     for (let d = start_date; d <= end_date; d.setDate(d.getDate() + 1)) {
       let schedule = new Schdule();
       schedule.date = this.datePipe.transform(d, 'MM/dd/yyyy');

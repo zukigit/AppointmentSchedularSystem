@@ -312,6 +312,9 @@ export class WeeklyviewbytraineeComponent implements OnInit {
       return res.name.toLocaleLowerCase().match(this.userSearch.toLocalLowerCase())
     })
   }
+  goToSearchUser(){
+    this.router.navigate(['trainee/search-user'])
+  }
 
 }
 

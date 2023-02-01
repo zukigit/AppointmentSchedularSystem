@@ -21,4 +21,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Intege
 	@Query("SELECT a FROM Appointment a JOIN a.schedules s WHERE s.date IN (:dates) AND a.isDeleted = 'false' ")
 	List<Appointment> getByScheduleList(List<LocalDate> dates);
 	
+	@Query("SELECT a FROM Appointment a JOIN a.employee e JOIN a.schedules s WHERE e.employee_id IN (:user_ids) and s.date =:currentDate")
+	List<Appointment> getRepoByUserId(List<String> user_ids, LocalDate currentDate);
+	
 }
