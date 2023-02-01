@@ -48,6 +48,7 @@ export class TableListComponent implements OnInit {
   }
   getUserDetails() {
     this.userDataDetails = this.userServices.getUserDetails().subscribe(data => this.userDataDetails = data);
+    console.log(this.userDataDetails.length)
   }
 
   onSelect(type) {
