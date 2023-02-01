@@ -20,7 +20,6 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./weeklyviewbytrainee.component.scss']
 })
 export class WeeklyviewbytraineeComponent implements OnInit {
-
   startDate = new Date();
   loginId: string;
   user!: User;
