@@ -69,13 +69,8 @@ export const ROUTES = [
         this.loginId = localStorage.getItem("loggedInUserId");
         this.getNoti();
         this.checkNotiCounts();
-        this.userService.getUserById(this.loginId).subscribe(
-            data=> {
-                this.loggedInUserName = data.name;
-                this.loggedInUserRole = data.role;
-            }
-
-        )
+        this.loggedInUserName = this.loginId;
+        this.loggedInUserRole = localStorage.getItem("loggedInUserRole");
         setTimeout(() => {
             this.realTimeData();
         }, 1000);

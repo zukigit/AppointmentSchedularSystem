@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -256,6 +257,9 @@ public class AppointmentController {
 	}
 	
 	@GetMapping("/getAllApp/{user_ids}")
+	@PreAuthorize("hasRole('ADMIN') "
+			+ "|| hasRole('USER') "
+			+ "|| hasRole('TRAINEE')")
 	public ResponseEntity<List<ReportDTO>>  getRepoByUserId(@PathVariable String user_ids){
 		List<ReportDTO>reportData=new ArrayList<ReportDTO>();
 		List<String> emp_id = new ArrayList<>(List.of(user_ids));

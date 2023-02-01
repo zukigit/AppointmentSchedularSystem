@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,11 +30,17 @@ public class NotificationController {
 	private NotificationImpl notiService;
 
 	@PostMapping("/SaveNoti")
+	@PreAuthorize("hasRole('ADMIN') "
+			+ "|| hasRole('USER') "
+			+ "|| hasRole('TRAINEE')")
 	public Notification addNoti(@RequestBody Notification noti){
 		 return notiService.addNoti(noti);
 	}
 
 	@GetMapping(value ="/getNoti/{employee_id}")
+	@PreAuthorize("hasRole('ADMIN') "
+			+ "|| hasRole('USER') "
+			+ "|| hasRole('TRAINEE')")
 	public ResponseEntity<List<NotificationDTO>> getNotiByEmpId(@PathVariable String employee_id)throws JsonProcessingException {
 		List<NotificationDTO> notify = new ArrayList<NotificationDTO>();
 		List<String> user_ids = new ArrayList<>(List.of(employee_id));
@@ -61,6 +68,9 @@ public class NotificationController {
 	}
 
 	@GetMapping("/getTotalNoti/{employee_id}")
+	@PreAuthorize("hasRole('ADMIN') "
+			+ "|| hasRole('USER') "
+			+ "|| hasRole('TRAINEE')")
 	public int totalNoti(@PathVariable String employee_id){
 		List<String> user_ids = new ArrayList<>(List.of(employee_id));
         List<Notification> totalNoti = notiService.getNotiByUser(user_ids);
@@ -68,6 +78,9 @@ public class NotificationController {
 	}
 
 	@GetMapping("/getUnreadNoti/{employee_id}")
+	@PreAuthorize("hasRole('ADMIN') "
+			+ "|| hasRole('USER') "
+			+ "|| hasRole('TRAINEE')")
 	public int unReadNoti(@PathVariable String employee_id){
 		List<String> user_ids = new ArrayList<>(List.of(employee_id));
         List<Notification> unreadNoti = notiService.getUnreadNoti(user_ids);
@@ -75,6 +88,9 @@ public class NotificationController {
 	}
 	
 	@GetMapping("/makeReaded/{notiId}")
+	@PreAuthorize("hasRole('ADMIN') "
+			+ "|| hasRole('USER') "
+			+ "|| hasRole('TRAINEE')")
 	public void makeReaded(@PathVariable int notiId) {
 		System.out.println("controller make readed is called");
 		Notification notification = notiService.getNotiById(notiId);
