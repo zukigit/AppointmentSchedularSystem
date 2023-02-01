@@ -8,7 +8,7 @@
             margin-left: 30px;">
             <div class="">
                 <a (click)="getAllApp()"
-                     class="btn btn-success" data-toggle="modal"><span>Report </span></a>
+                     class="btn btn-success" data-toggle="modal"><span>Save as PDF</span></a>
             </div>
                 <div class="card">
                     <div class="card-header card-header-warning">
@@ -18,7 +18,7 @@
                     <div class="card-body table-responsive">
                         <form (ngModel)="getSchedulesById()">
                         <table class="table table-hover" >
-                            
+
                             <thead class="text-warning">
                                 <th>#</th>
                                 <th>Title</th>
@@ -26,9 +26,9 @@
                                 <th>Start Time</th>
                                 <th>End Time</th>
                                 <th>Date</th>
-                             
+
                             </thead>
-                           
+
                             <tbody *ngFor="let data of showDataApp;let i = index" >
                                  <tr *ngFor="let d of data.schedules">
                                     <td *ngIf="d.date == currentDate">{{i - i }}</td>
@@ -37,11 +37,11 @@
                                     <td *ngIf="d.date == currentDate">{{d.start_time}}</td>
                                     <td *ngIf="d.date == currentDate">{{d.end_time}}</td>
                                     <td *ngIf="d.date == currentDate">{{d.date}}</td>
-                                
+
                                 </tr>
-                                
+
                             </tbody>
-                        
+
                         </table>
                     </form>
                     </div>
@@ -50,4 +50,3 @@
         </div>
     </div>
   </div>
-  
