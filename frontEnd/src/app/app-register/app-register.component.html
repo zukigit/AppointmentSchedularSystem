@@ -6,12 +6,19 @@
 <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700' rel='stylesheet' type='text/css'>
 
 <body>
+  
   <div class="container">
+    
     <div class="title">Appointment Registration Form</div>
+    
     <div class="content">
+      
       <form #form="ngForm" (submit)="addAppointment()">
+        <div  class="containerLoader">
+          <div class="loader"></div>
+        </div>
         <div class="user-details">
-
+          
           <div class="input-box">
             <span class="details" style="width: calc(100% /2  - 20px); font-weight: 650;" p>Title</span>
             <textarea required name="title" [(ngModel)]="app.title" id="title" 

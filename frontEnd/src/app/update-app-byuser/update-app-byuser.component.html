@@ -11,6 +11,9 @@
     <div class="content">
       <form #form="ngForm" (submit)="updateAppointment()">
         <div class="user-details">
+          <div  class="containerLoader">
+            <div class="loader"></div>
+          </div>
 
           <div class="input-box">
             <span class="details" style="width: calc(100% /2  - 20px); font-weight: 650;">Title</span>
