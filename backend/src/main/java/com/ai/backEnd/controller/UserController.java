@@ -135,7 +135,9 @@ public class UserController {
 	}
 
 	@GetMapping("/userDetail")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ADMIN') "
+			+ "|| hasRole('USER') "
+			+ "|| hasRole('TRAINEE')")
 	public List<UserDetail> userDetail() {
 		return userService.userDetail();
 	}
