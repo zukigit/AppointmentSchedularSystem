@@ -100,6 +100,9 @@ public class UserController {
 	private void deleteUserAppointmentRecords(String employee_id) {
 		List<Appointment> appointments = appointmentService.getByUserList(List.of(employee_id));
 		for(Appointment appointment : appointments) {
+			if(appointment.getCreateUser().getEmployee_id() == employee_id) {
+				appointment.setCreateUser(null);
+			}
 			ListIterator<User> usersItr = appointment.getEmployee().listIterator();
 			while(usersItr.hasNext()) {
 				if(usersItr.next().getEmployee_id() == employee_id) {
