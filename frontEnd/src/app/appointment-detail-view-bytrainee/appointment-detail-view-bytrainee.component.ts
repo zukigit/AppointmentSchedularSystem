@@ -23,10 +23,12 @@ export class AppointmentDetailViewBytraineeComponent implements OnInit {
   app:any = new AppointmentRegister();
   date:string;
   isCreateUser:boolean = false;
+  isLoad = false;
 
   constructor(private route: ActivatedRoute,private appService:AppointmentService, private userService:UserService, private router: Router) { }
 
   ngOnInit(): void {
+    this.isLoad = true;
     this.id = this.route.snapshot.params['id'];
     this.loginId = localStorage.getItem("loggedInUserId");
     this.route.queryParams.subscribe(params => {
@@ -34,6 +36,7 @@ export class AppointmentDetailViewBytraineeComponent implements OnInit {
     });
     this.appService.viewOnlyAppointmentById(this.id).subscribe(
       (res : any) => {
+        this.isLoad = false;
         if(res.createUser.employee_id == this.loginId) {
           this.isCreateUser = true;
         }
