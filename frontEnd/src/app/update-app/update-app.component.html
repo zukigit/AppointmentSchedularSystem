@@ -11,7 +11,7 @@
     <div class="content">
       <form #form="ngForm" (submit)="updateAppointment()">
         <div class="user-details">
-          <div  class="containerLoader">
+          <div *ngIf="isLoad" class="containerLoader">
             <div class="loader"></div>
           </div>
 

@@ -23,6 +23,7 @@ export class UpdateAppComponent implements OnInit {
   currentDate: any = new Date();
   sDate: any = new Date()
   sTime: any = new Date();
+  isLoad:boolean = false;
   options = [
     { value: '07', label: '07' },
     { value: '08', label: '08' },
@@ -215,6 +216,7 @@ export class UpdateAppComponent implements OnInit {
 
   //update
   updateAppointment() {
+    this.isLoad = true;
     if (!this.confirmedUsers || !this.confirmedUsers.length) {
       // alert("Please Check Attendes User")
       Swal.fire({
@@ -233,7 +235,7 @@ export class UpdateAppComponent implements OnInit {
           if (this.files.length != 0) {
             this.uploadFiles(this.app.appointment_id);
           } else {
-            
+            this.isLoad = false;
             Swal.fire({
               title: "Successfully Update",
                       text: "Appointment is updated",
@@ -245,7 +247,10 @@ export class UpdateAppComponent implements OnInit {
                 }
         })
           }
-        }, error => console.log("error update")
+        }, error => {
+          console.log("error update");
+          this.isLoad = false;
+        }
 
       )
       
@@ -285,6 +290,7 @@ export class UpdateAppComponent implements OnInit {
     }
     this.appService.uploadFiles(formdata).subscribe(
       data => {
+        this.isLoad = false;
         Swal.fire({
           title: "Successfully Update",
                   text: "Appointment is updated",
@@ -297,6 +303,7 @@ export class UpdateAppComponent implements OnInit {
     })
       },
       error => {
+        this.isLoad = false;
         //Swal.fire('Failed!!', 'Appointment Added Was Failed!', 'fail');
         Swal.fire({
           icon: 'error',
