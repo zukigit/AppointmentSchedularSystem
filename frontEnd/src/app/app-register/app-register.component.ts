@@ -25,6 +25,7 @@ export class AppRegisterComponent implements OnInit {
  
   sDate: any = new Date()
   sTime: any = new Date();
+  isLoad: boolean = false;
   options = [
     { value: '07', label: '07' },
     { value: '08', label: '08' },
@@ -116,7 +117,6 @@ export class AppRegisterComponent implements OnInit {
   constructor(private userServices: UserService, private datePipe: DatePipe, private appService: AppointmentService, private router: Router,) { }
 
   ngOnInit(): void {
-
     this.department = this.userServices.getDepartment().subscribe(data => this.department = data);
 
     this.userServices.getTeam().subscribe(
@@ -201,6 +201,7 @@ export class AppRegisterComponent implements OnInit {
   }
 
   addAppointment() {
+    this.isLoad = true;
     this.generateSchedules();
     console.log("condieiton " + this.confirmedUsers)
 
@@ -218,9 +219,11 @@ export class AppRegisterComponent implements OnInit {
         data => {
           if (this.files.length != 0) {
             this.uploadFiles(data);
+          }else {
+            this.isLoad = false;
+            Swal.fire('Appointment Created!!', 'Appointment added succesfully!', 'success');
+            this.router.navigate(['admin/dashboard']);
           }
-          Swal.fire('Appointment Created!!', 'Appointment added succesfully!', 'success');
-          this.router.navigate(['admin/dashboard']);
         },
         error => console.log("Error appointment responseee ")
       )
@@ -284,7 +287,9 @@ export class AppRegisterComponent implements OnInit {
     }
     this.appService.uploadFiles(formdata).subscribe(
       data => {
-        // Swal.fire('Added Appointment!!', 'Appointment Added Succesfully!', 'success');
+        this.isLoad = false;
+        Swal.fire('Appointment Created!!', 'Appointment added succesfully!', 'success');
+        this.router.navigate(['admin/dashboard']);
       },
       error => {
         //Swal.fire('Failed!!', 'Appointment Added Was Failed!', 'fail');
