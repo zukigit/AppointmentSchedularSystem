@@ -216,7 +216,12 @@ export class UpdateAppComponent implements OnInit {
   //update
   updateAppointment() {
     if (!this.confirmedUsers || !this.confirmedUsers.length) {
-      alert("Please Check Attendes User")
+      // alert("Please Check Attendes User")
+      Swal.fire({
+        title: "No Attendes",
+                text: "Please Check Attendes User",
+                icon: "warning",
+    })
     } else {
       this.app.employee = this.confirmedUsers;
       this.app.title = this.app.title
@@ -280,12 +285,16 @@ export class UpdateAppComponent implements OnInit {
     }
     this.appService.uploadFiles(formdata).subscribe(
       data => {
-        this.router.navigate(['admin/appointment_detail_view', this.id], { queryParams: { data: JSON.stringify(this.date) } }).then(() => window.location.reload()), 10000
         Swal.fire({
-          icon: 'success',
-          title: 'Successfully Updated',
-          text: 'Your appointment is successfully updated',
-        });
+          title: "Successfully Update",
+                  text: "Appointment is updated",
+                  icon: "success",
+          confirmButtonText: "Ok"
+      }).then((result) => {
+        if (result.value){
+                this.router.navigate(['admin/appointment_detail_view', this.id], { queryParams: { data: JSON.stringify(this.date) } }).then(() => window.location.reload()), 10000
+            }
+    })
       },
       error => {
         //Swal.fire('Failed!!', 'Appointment Added Was Failed!', 'fail');
