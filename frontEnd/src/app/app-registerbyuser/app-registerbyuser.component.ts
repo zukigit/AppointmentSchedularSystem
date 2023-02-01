@@ -219,7 +219,7 @@ export class AppRegisterbyuserComponent implements OnInit {
           }else {
             this.isLoad = false;
             Swal.fire('Appointment Created!!', 'Appointment added succesfully!', 'success');
-            this.router.navigate(['admin/dashboard']);
+            this.router.navigate(['user/dashboard']);
           }
         },
         error => {
@@ -285,7 +285,7 @@ export class AppRegisterbyuserComponent implements OnInit {
       data => {
         this.isLoad = false;
         Swal.fire('Appointment Created!!', 'Appointment added succesfully!', 'success');
-        this.router.navigate(['admin/dashboard']);
+        this.router.navigate(['user/dashboard']);
       },
       error => {
         this.isLoad = false;
