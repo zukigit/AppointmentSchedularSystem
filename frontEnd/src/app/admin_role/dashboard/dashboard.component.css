@@ -1,0 +1,7 @@
+.counter::before {
+    counter-increment: section;
+    content: counter(section) " ";
+}
+.mainTable{
+    counter-reset: section;
+}

@@ -17,7 +17,7 @@
                     </div>
                     <div class="card-body table-responsive">
                         <form (ngModel)="getSchedulesById()">
-                        <table class="table table-hover" >
+                        <table class="table table-hover mainTable" >
 
                             <thead class="text-warning">
                                 <th>#</th>
@@ -29,9 +29,9 @@
 
                             </thead>
 
-                            <tbody *ngFor="let data of showDataApp;let i = index" >
+                            <tbody *ngFor="let data of showDataApp" >
                                  <tr *ngFor="let d of data.schedules">
-                                    <td *ngIf="d.date == currentDate">{{ i + 1 }}</td>
+                                    <td *ngIf="d.date == currentDate" class="counter"></td>
                                     <td *ngIf="d.date == currentDate">{{data.title}}</td>
                                     <td *ngIf="d.date == currentDate">{{data.description}}</td>
                                     <td *ngIf="d.date == currentDate">{{d.start_time}}</td>

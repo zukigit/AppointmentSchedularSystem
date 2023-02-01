@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit {
 
 
   userDataDetails : any ;
-  count : number ;
+  count : 0 ;
 
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
@@ -202,10 +202,6 @@ export class DashboardComponent implements OnInit {
             this.showDataApp =data
       })
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 184a3841043274993a23f377c1752c02798ba739
 
      console.log(this.showDataApp.length+"app date");
 
