@@ -218,6 +218,7 @@ export class UpdateAppComponent implements OnInit {
   updateAppointment() {
     this.isLoad = true;
     if (!this.confirmedUsers || !this.confirmedUsers.length) {
+      this.isLoad = false;
       // alert("Please Check Attendes User")
       Swal.fire({
         title: "No Attendes",

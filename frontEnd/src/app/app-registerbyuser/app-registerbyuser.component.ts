@@ -205,6 +205,7 @@ export class AppRegisterbyuserComponent implements OnInit {
 
     if (!this.confirmedUsers || !this.confirmedUsers.length) {
       alert("Please Check Attendes Users")
+      this.isLoad = false;
     } else {
       this.app.created_date = this.datePipe.transform(this.currentDate, 'MM/dd/yyyy');
       this.app.schedules = this.schedules
