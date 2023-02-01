@@ -322,6 +322,9 @@ export class DailyviewbytraineeComponent implements OnInit {
   // goToAppRegister() {
   //   this.router.navigate(['/admin/app-register'])
   // }
+  goToSearchUser(){
+    this.router.navigate(['trainee/search-user'])
+  }
 }
 function beforeClick() {
   throw new Error('Function not implemented.');

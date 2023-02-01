@@ -4,7 +4,7 @@
           <a class="navbar-brand" href="javascript:void(0)">Appointment Schedular System</a>
         </div>
         <div class="navbar-wrapper">
-            <a class="navbar-brand" href="javascript:void(0)">{{loggedInUserName}} - {{loggedInUserRole}}</a>
+            
         </div>
         <button mat-raised-button class="navbar-toggler" type="button" (click)="sidebarToggle()">
             <span class="sr-only">Toggle navigation</span>
@@ -13,7 +13,16 @@
             <span class="navbar-toggler-icon icon-bar"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navigation" >
-            
+            <a class="navbar-brand" href="javascript:void(0)"
+            style="    position: relative;
+            color: #fff;
+            height: 50px;
+            font-size: 1rem;
+            line-height: 30px;
+            padding: 0.625rem 0;
+            font-weight: 400;
+            margin-left: 1rem;"
+            >Name - {{loggedInUserName}}({{loggedInUserRole}})</a>
             <ul class="navbar-nav" >
                 <li class="nav-item">
                     <a class="nav-link" [routerLink]="['dashboard']">

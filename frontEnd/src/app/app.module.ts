@@ -47,6 +47,7 @@ import { AppointmentDetailViewByuserComponent } from './appointment-detail-view-
 import { AppointmentDetailViewBytraineeComponent } from './appointment-detail-view-bytrainee/appointment-detail-view-bytrainee.component';
 import { UpdateAppComponent } from './update-app/update-app.component';
 import { UpdateAppByuserComponent } from './update-app-byuser/update-app-byuser.component';
+import { SearchUserComponent } from './search-user/search-user.component';
 
 
 
@@ -101,6 +102,7 @@ import { UpdateAppByuserComponent } from './update-app-byuser/update-app-byuser.
     AppointmentDetailViewBytraineeComponent,
     UpdateAppComponent,
     UpdateAppByuserComponent,
+    SearchUserComponent,
   ],
   providers: [AdminAuthGuard, DatePipe, UserAuthGuard, TraineeAuthGuard],
   bootstrap: [AppComponent]
