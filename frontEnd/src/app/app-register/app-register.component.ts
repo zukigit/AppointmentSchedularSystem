@@ -225,7 +225,10 @@ export class AppRegisterComponent implements OnInit {
             this.router.navigate(['admin/dashboard']);
           }
         },
-        error => console.log("Error appointment responseee ")
+        error => {
+          console.log("Error appointment responseee ");
+          this.isLoad = false;
+        }
       )
       
     }
@@ -292,6 +295,7 @@ export class AppRegisterComponent implements OnInit {
         this.router.navigate(['admin/dashboard']);
       },
       error => {
+        this.isLoad = false;
         //Swal.fire('Failed!!', 'Appointment Added Was Failed!', 'fail');
         Swal.fire({
           icon: 'error',

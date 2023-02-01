@@ -23,6 +23,7 @@ export class AppRegisterbyuserComponent implements OnInit {
   currentDate: any = new Date();
   todayDate = new Date();
   currentHour = this.todayDate.getHours().toString();
+  isLoad:boolean = false;
 
   sDate: any = new Date()
   sTime: any = new Date();
@@ -199,6 +200,7 @@ export class AppRegisterbyuserComponent implements OnInit {
   }
 
   addAppointment() {
+    this.isLoad = true;
     this.generateSchedules();
 
     if (!this.confirmedUsers || !this.confirmedUsers.length) {
@@ -213,11 +215,16 @@ export class AppRegisterbyuserComponent implements OnInit {
         data => {
           if (this.files.length != 0) {
             this.uploadFiles(data);
+          }else {
+            this.isLoad = false;
+            Swal.fire('Appointment Created!!', 'Appointment added succesfully!', 'success');
+            this.router.navigate(['admin/dashboard']);
           }
-          Swal.fire('Appointment Created!!', 'Appointment added succesfully!', 'success');
-          this.router.navigate(['user/dashboard']);
         },
-        error => console.log("Error appointment responseee ")
+        error => {
+          console.log("Error appointment responseee "),
+          this.isLoad = false;
+        }
       )
     }
 
@@ -275,9 +282,12 @@ export class AppRegisterbyuserComponent implements OnInit {
     }
     this.appService.uploadFiles(formdata).subscribe(
       data => {
-        // Swal.fire('Added Appointment!!', 'Appointment Added Succesfully!', 'success');
+        this.isLoad = false;
+        Swal.fire('Appointment Created!!', 'Appointment added succesfully!', 'success');
+        this.router.navigate(['admin/dashboard']);
       },
       error => {
+        this.isLoad = false;
         //Swal.fire('Failed!!', 'Appointment Added Was Failed!', 'fail');
         Swal.fire({
           icon: 'error',
